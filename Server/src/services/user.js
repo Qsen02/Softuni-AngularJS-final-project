@@ -59,6 +59,11 @@ async function checkUserId(userId) {
     return false;
 }
 
+function searchUsers(username) {
+    const user = Users.find({ username: new RegExp(username, "i") });
+    return user;
+}
+
 module.exports = {
     register, login, changePassword, updateUser, getUserById, checkUserId
 }
