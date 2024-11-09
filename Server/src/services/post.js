@@ -7,7 +7,7 @@ function getAllPosts() {
 }
 
 function getPostById(postId) {
-    const post = Posts.findById(postId);
+    const post = Posts.findById(postId).populate("comments");
     return post;
 }
 

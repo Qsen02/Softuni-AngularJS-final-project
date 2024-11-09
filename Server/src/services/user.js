@@ -65,5 +65,5 @@ function searchUsers(username) {
 }
 
 module.exports = {
-    register, login, changePassword, updateUser, getUserById, checkUserId
+    register, login, changePassword, updateUser, getUserById, checkUserId,searchUsers
 }
