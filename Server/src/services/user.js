@@ -38,7 +38,8 @@ async function changePassword(userId, newPassword) {
     if (isOldPassword) {
         throw new Error("Old password can't be new password!");
     }
-    await Users.findByIdAndUpdate(userId, { $set: { password: await bcrypt.hash(newPassword,10) } });
+    const hashedPassword = await bcrypt.hash(newPassword, 10);
+    await Users.findByIdAndUpdate(userId, { $set: { password: hashedPassword } });
 }
 
 async function updateUser(userId, data) {
@@ -65,5 +66,5 @@ function searchUsers(username) {
 }
 
 module.exports = {
-    register, login, changePassword, updateUser, getUserById, checkUserId,searchUsers
+    register, login, changePassword, updateUser, getUserById, checkUserId, searchUsers
 }
