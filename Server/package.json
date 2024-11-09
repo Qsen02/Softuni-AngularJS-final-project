@@ -4,19 +4,20 @@
     "express": "^4.21.1",
     "express-validator": "^7.2.0",
     "jsonwebtoken": "^9.0.2",
-    "mongoose": "^8.8.1",
-    "nodemon": "^3.1.7"
+    "mongoose": "^8.8.1"
   },
   "name": "server",
   "version": "1.0.0",
   "main": "index.js",
-  "devDependencies": {},
   "scripts": {
-    "start":"node ./src/server.js",
-    "debug":"nodemon ./src/server.js"
+    "start": "node ./src/server.js",
+    "debug": "nodemon ./src/server.js"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
-  "description": ""
+  "description": "",
+  "devDependencies": {
+    "nodemon": "^3.1.7"
+  }
 }
