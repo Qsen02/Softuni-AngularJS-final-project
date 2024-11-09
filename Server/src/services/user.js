@@ -38,7 +38,7 @@ async function changePassword(userId, newPassword) {
     if (isOldPassword) {
         throw new Error("Old password can't be new password!");
     }
-    await Users.findByIdAndUpdate(userId, { $set: { password: newPassword } });
+    await Users.findByIdAndUpdate(userId, { $set: { password: await bcrypt.hash(newPassword,10) } });
 }
 
 async function updateUser(userId, data) {
