@@ -1,5 +1,6 @@
 const mongoose=require("mongoose");
-const {User}=require("../models/user");
+const {Users}=require("../models/user");
+const {Posts}=require("../models/post");
 
 const localDB="mongodb://127.0.0.1:27017/Social-media";
 
