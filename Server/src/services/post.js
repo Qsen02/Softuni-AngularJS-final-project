@@ -2,12 +2,12 @@ const { Comments } = require("../models/comment");
 const { Posts } = require("../models/post");
 
 function getAllPosts() {
-    const posts = Posts.find();
+    const posts = Posts.find().populate("comments").populate("ownerId");
     return posts;
 }
 
 function getPostById(postId) {
-    const post = Posts.findById(postId).populate("comments");
+    const post = Posts.findById(postId).populate("comments").populate("ownerId");
     return post;
 }
 

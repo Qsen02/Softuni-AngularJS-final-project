@@ -21,7 +21,7 @@ postRouter.get("/:postId", async (req, res) => {
 })
 
 postRouter.post("/", isUser(),
-    body("description").isLength({ max: 300 }),
+    body("description").isLength({min:2, max: 300 }),
     body("imageUrl").matches(/^https?:\/\//),
     async (req, res) => {
         const fields = req.body;
@@ -50,7 +50,7 @@ postRouter.delete("/:postId", isUser(), async (req, res) => {
 
 postRouter.put("/:postId",
     isUser(),
-    body("description").isLength({ max: 300 }),
+    body("description").isLength({mih:2, max: 300 }),
     body("imageUrl").matches(/^https?:\/\//),
     async (req, res) => {
         const fields = req.body;
@@ -71,7 +71,7 @@ postRouter.put("/:postId",
         }
     })
 
-postRouter.post("/:postId/like", async (req, res) => {
+postRouter.post("/:postId/like",isUser(), async (req, res) => {
     const postId = req.params.postId;
     const isValid = await checkPostId(postId);
     const user = req.user;
@@ -82,7 +82,7 @@ postRouter.post("/:postId/like", async (req, res) => {
     res.json({ message: "Post liked successfully!" });
 })
 
-postRouter.post("/:postId/unlike", async (req, res) => {
+postRouter.post("/:postId/unlike",isUser(), async (req, res) => {
     const postId = req.params.postId;
     const isValid = await checkPostId(postId);
     const user = req.user;

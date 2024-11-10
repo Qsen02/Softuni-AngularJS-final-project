@@ -2,7 +2,7 @@ const { Comments } = require("../models/comment");
 const { Posts } = require("../models/post");
 
 function getCommentById(commentId) {
-    const comment = Comments.findById(commentId);
+    const comment = Comments.findById(commentId).populate("ownerId").populate("likes");
     return comment;
 }
 
@@ -23,11 +23,19 @@ async function deleteComment(commentId, postId) {
 }
 
 async function editComment(commentId, data) {
-    await Comments.findByIdAndUpdate(commentId, { $set:  data  });
+    await Comments.findByIdAndUpdate(commentId, { $set: data });
+}
+
+async function likeComment(commentId, user) {
+    await Comments.findByIdAndUpdate(commentId, { $push: { likes: user._id } });
+}
+
+async function unlikeComment(commentId, user) {
+    await Comments.findByIdAndUpdate(commentId, { $pull: { likes: user._id } });
 }
 
 async function checkCommentId(commentId) {
-    const comments = await Users.find().lean();
+    const comments = await Comments.find().lean();
     const isValid = comments.find(el => el._id.toString() == commentId);
     if (isValid) {
         return true;
@@ -36,5 +44,5 @@ async function checkCommentId(commentId) {
 }
 
 module.exports = {
-    getCommentById, createComment, deleteComment, editComment, checkCommentId
+    getCommentById, createComment, deleteComment, editComment, checkCommentId,likeComment,unlikeComment
 }
