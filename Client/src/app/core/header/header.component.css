@@ -1,0 +1,91 @@
+header {
+    width: 100%;
+    padding: 30px;
+    background-color: rgb(40, 40, 40);
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    align-items: center;
+}
+
+.search-form {
+    flex: 0 0 70%;
+}
+
+.search-form input {
+    width: 250px;
+    height: 35px;
+    border-radius: 20px;
+    background-color: grey;
+    border: none;
+    color: lightgray;
+    padding-left: 7px;
+    font-size: 12pt;
+}
+
+.search-form input::placeholder {
+    color: lightgray;
+    font-size: 12pt;
+}
+
+.search-form div {
+    position: relative;
+    width: 210px;
+}
+
+.search-form button{
+    position: absolute;
+    top: 2px;
+    right: -30px;
+    font-size: 14pt;
+    cursor: pointer;
+    padding: 5px 10px 5px 5px;
+    background-color: grey;
+    border: none;
+    overflow: hidden;
+}
+
+.search-form button:hover{
+   color: lightgray;
+}
+
+.navigation{
+    flex:0 0 25%;
+}
+
+.navigation ul{
+    display: flex;
+    gap:20px;
+    flex-wrap: wrap;
+}
+
+.navigation ul li a{
+    padding: 30px;
+    color: lightgray;
+    font-weight: bold;
+    font-size: 16pt;
+}
+
+.navigation ul li a:hover{
+    color: white;
+}
+
+@media(max-width:1750px){
+    .search-form{
+        flex: 0 0 50%;
+    }
+    .navigation{
+        flex: 0 0 40%;
+    }
+}
+@media(max-width:1150px){
+    .navigation ul{
+        flex-direction: column;
+    }
+}
+@media(max-width:650px){
+    header{
+        flex-direction: column;
+        justify-content: center;
+    }
+}

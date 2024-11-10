@@ -1,0 +1,15 @@
+<header>
+    <form class="search-form">
+        <div>
+            <input type="text" name="username" placeholder="Search for users..." />
+            <button type="submit"><i class="fa-solid fa-magnifying-glass"></i></button>
+        </div>
+    </form>
+    <nav class="navigation">
+        <ul>
+            @for (nav of guestNav; track $index) {
+            <li><a href={{nav.link}}>{{nav.name}}</a></li>
+            }
+        </ul>
+    </nav>
+</header>
