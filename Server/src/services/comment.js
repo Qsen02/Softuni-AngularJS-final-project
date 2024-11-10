@@ -23,7 +23,7 @@ async function deleteComment(commentId, postId) {
 }
 
 async function editComment(commentId, data) {
-    await Comments.findByIdAndUpdate(commentId, { $set: { data } });
+    await Comments.findByIdAndUpdate(commentId, { $set:  data  });
 }
 
 async function checkCommentId(commentId) {

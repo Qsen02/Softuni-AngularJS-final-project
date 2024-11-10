@@ -30,7 +30,7 @@ async function deletePost(postId) {
 }
 
 async function editPost(postId, data) {
-    await Posts.findByIdAndUpdate(postId, { $set: { data } });
+    await Posts.findByIdAndUpdate(postId, { $set:  data  });
 }
 
 async function likePost(user, postId) {

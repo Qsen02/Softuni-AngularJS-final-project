@@ -2,11 +2,11 @@ const { Users } = require("../models/user");
 const bcrypt = require("bcrypt");
 
 async function register(username, email, password) {
-    const userUsername = await Users.findOne(username).lean();
+    const userUsername = await Users.findOne({username}).lean();
     if (userUsername) {
         throw new Error("User with this username already exist!");
     }
-    const userEmail = await Users.findOne(email).lean();
+    const userEmail = await Users.findOne({email}).lean();
     if (userEmail) {
         throw new Error("User with this email already exist!");
     }
@@ -20,7 +20,7 @@ async function register(username, email, password) {
 }
 
 async function login(username, password) {
-    const user = await Users.findOne(username).lean();
+    const user = await Users.findOne({username}).lean();
     if (!user) {
         throw new Error("Username or password don't match!");
     }
@@ -43,7 +43,7 @@ async function changePassword(userId, newPassword) {
 }
 
 async function updateUser(userId, data) {
-    await Users.findByIdAndUpdate(userId, { $set: { data } });
+    await Users.findByIdAndUpdate(userId, { $set:  data  });
 }
 
 function getUserById(userId) {
