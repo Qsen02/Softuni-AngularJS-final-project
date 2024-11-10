@@ -11,13 +11,13 @@ function getPostById(postId) {
     return post;
 }
 
-function createPost(description, imageUrl, user) {
+async function createPost(description, imageUrl, user) {
     const newPost = new Posts({
         description: description,
         imageUrl: imageUrl
     })
-    newPost.userId = user._id;
-    newPost.save();
+    newPost.ownerId = user._id;
+    await newPost.save();
     return newPost;
 }
 
@@ -42,7 +42,7 @@ async function unlikePost(user, postId) {
 }
 
 async function checkPostId(postId){
-    const posts = await Users.find().lean();
+    const posts = await Posts.find().lean();
     const isValid = posts.find(el => el._id.toString() == postId);
     if (isValid) {
         return true;

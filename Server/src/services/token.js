@@ -4,6 +4,7 @@ const secret = "my super secrect json web token";
 
 function setToken(user) {
     const payload = {
+        _id:user._id,
         username: user.username,
         email: user.email,
         profileImage: user.profileImage
