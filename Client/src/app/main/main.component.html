@@ -1,1 +1,8 @@
-<p>main works!</p>
+<main>
+    <h1>All posts</h1>
+    <section class="post-wrapper">
+        @for (post of posts; track $index) {
+            <app-main-posts [postProp]=post />
+        }
+    </section>
+</main>
