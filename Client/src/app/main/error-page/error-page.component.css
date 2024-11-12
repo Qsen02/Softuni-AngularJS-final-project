@@ -1,6 +1,6 @@
 .error {
     width: 50%;
-    padding: 20px;
+    padding: 30px;
     border-radius: 20px;
     margin: 30px auto;
     background-color: rgb(40, 40, 40);
@@ -14,11 +14,12 @@
 }
 
 .error a {
-    color: lightgray;
+    color: darkgray;
+    font-weight: bold;
 }
 
 .error a:hover {
-    color: white;
+    color: lightgray;
 }
 
 @media(max-width:1200px){
