@@ -1,13 +1,10 @@
-main {
-    width: 100%;
-    padding: 30px;
+.wrapper {
     display: flex;
     flex-direction: column;
     gap:30px;
     align-items: center;
     color:lightgray;
 }
-
 .post-wrapper{
     width: 60%;
     padding: 30px;

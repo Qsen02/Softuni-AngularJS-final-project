@@ -8,7 +8,7 @@
     <nav class="navigation">
         <ul>
             @for (nav of guestNav; track $index) {
-            <li><a href={{nav.link}}>{{nav.name}}</a></li>
+            <li><a [routerLink]=nav.link>{{nav.name}}</a></li>
             }
         </ul>
     </nav>

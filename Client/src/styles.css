@@ -19,3 +19,8 @@ a{
 ul{
     list-style: none;
 }
+
+main{
+    width: 100%;
+    padding: 30px;
+}
