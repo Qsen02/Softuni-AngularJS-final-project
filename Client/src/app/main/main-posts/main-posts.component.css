@@ -36,6 +36,7 @@
     width: 100%;
     border-radius:7px ;
     object-fit: cover;
+    cursor: pointer;;
 }
 
 .post-body-main {
