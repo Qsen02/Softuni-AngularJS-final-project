@@ -1,0 +1,40 @@
+.error {
+    width: 50%;
+    padding: 20px;
+    border-radius: 20px;
+    margin: 30px auto;
+    background-color: rgb(40, 40, 40);
+    color: white;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+    font-size: 16pt;
+    text-align: center;
+}
+
+.error a {
+    color: lightgray;
+}
+
+.error a:hover {
+    color: white;
+}
+
+@media(max-width:1200px){
+    .error{
+        font-size: 14pt;
+    }
+}
+
+@media(max-width:720px){
+    .error{
+        font-size: 12pt;
+    }
+}
+
+@media(max-width:400px){
+    .error{
+        font-size: 10pt;
+    }
+}

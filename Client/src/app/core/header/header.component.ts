@@ -11,12 +11,12 @@ import { RouterLink } from '@angular/router';
 })
 export class HeaderComponent {
   guestNav: Nav[] = [
-    { link: "/", name: "Home" },
+    { link: "/home", name: "Home" },
     { link: "/login", name: "Login" },
     { link: "/register", name: "Register" },
   ]
   userNav:Nav[]=[
-    { link: "/", name: "home" },
+    { link: "/home", name: "home" },
     { link: "/create", name: "Create" },
     { link: "/profile", name: "Profile" },
     { link: "/logout", name: "Logout" },
