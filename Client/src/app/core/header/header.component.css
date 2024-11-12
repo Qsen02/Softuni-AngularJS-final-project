@@ -55,12 +55,12 @@ header {
 
 .navigation ul{
     display: flex;
-    gap:20px;
+    gap:10px;
     flex-wrap: wrap;
 }
 
 .navigation ul li a{
-    padding: 30px;
+    padding: 20px;
     color: lightgray;
     font-weight: bold;
     font-size: 16pt;

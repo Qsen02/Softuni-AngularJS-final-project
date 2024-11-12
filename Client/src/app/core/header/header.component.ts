@@ -16,7 +16,7 @@ export class HeaderComponent {
     { link: "/register", name: "Register" },
   ]
   userNav:Nav[]=[
-    { link: "/home", name: "home" },
+    { link: "/home", name: "Home" },
     { link: "/create", name: "Create" },
     { link: "/profile", name: "Profile" },
     { link: "/logout", name: "Logout" },
