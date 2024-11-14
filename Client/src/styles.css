@@ -6,21 +6,63 @@
     box-sizing: border-box;
 }
 
-body{
+body {
     font-family: Arial, Helvetica, sans-serif;
     background-color: rgb(62, 62, 62);
 }
 
-a{
+a {
     color: inherit;
     text-decoration: none;
 }
 
-ul{
+ul {
     list-style: none;
 }
 
-main{
+main {
     width: 100%;
     padding: 30px;
+}
+
+.message {
+    width: 60%;
+    background-color: rgb(40, 40, 40);
+    font-size: 14pt;
+    color: lightgray;
+    margin: 30 auto;
+    padding: 20px;
+    border-radius: 20px;
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    justify-content: center;
+    text-align: center;
+}
+
+.loader {
+    width: 70px;
+    height: 70px;
+    border: 5px solid lightgray;
+    border-bottom-color: transparent;
+    border-radius: 50%;
+    display: inline-block;
+    box-sizing: border-box;
+    animation: rotation 1s linear infinite;
+}
+
+@keyframes rotation {
+    0% {
+        transform: rotate(0deg);
+    }
+
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+@media(max-width:620px) {
+    .message {
+        font-size: 10pt;
+    }
 }
