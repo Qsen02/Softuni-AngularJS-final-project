@@ -1,7 +1,7 @@
 import { Routes } from '@angular/router';
-import { MainComponent } from './main/main.component';
-import { ErrorPageComponent } from './main/error-page/error-page.component';
-import { RegisterComponent } from './main/register/register.component';
+import { MainComponent } from './posts/posts.component';
+import { ErrorPageComponent } from './error-page/error-page.component';
+import { RegisterComponent } from './user/register/register.component';
 
 export const routes: Routes = [
     { path: "", redirectTo: "home", pathMatch: "full" },

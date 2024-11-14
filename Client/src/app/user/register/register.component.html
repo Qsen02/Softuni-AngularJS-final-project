@@ -10,12 +10,20 @@
     </p>
     <p class="input">
         <label for="password">Password</label>
-        <i class="fa-regular fa-eye" (click)="changeVisability($event)"></i>
+        @if(isVisiblePass){
+            <i class="fa-regular fa-eye" (click)="changeVisability($event)"></i>
+        }@else{
+            <i class="fa-regular fa-eye-slash" (click)="changeVisability($event)"></i>
+        }
         <input type="password" id="password" name="password">
     </p>
     <p class="input">
         <label for="repass">Repeat password</label>
-        <i class="fa-regular fa-eye" (click)="changeVisability($event)"></i>
+        @if(isVisibleRepass){
+            <i class="fa-regular fa-eye" (click)="changeVisability($event)"></i>
+        }@else{
+            <i class="fa-regular fa-eye-slash" (click)="changeVisability($event)"></i>
+        }
         <input type="password" id="repass" name="repass">
     </p>
     <button type="submit">Submit</button>
