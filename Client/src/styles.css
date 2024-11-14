@@ -20,11 +20,6 @@ ul {
     list-style: none;
 }
 
-main {
-    width: 100%;
-    padding: 30px;
-}
-
 .message {
     width: 60%;
     background-color: rgb(40, 40, 40);
@@ -52,7 +47,7 @@ main {
 }
 
 .form{
-    width: 25%;
+    width: 35%;
     margin: 30px auto;
     padding: 20px;
     background-color: rgb(40, 40, 40);
@@ -125,8 +120,12 @@ main {
     }
 }
 
-@media(max-width:620px) {
+@media(max-width:1000px) {
     .message {
         font-size: 10pt;
+    }
+
+    .form{
+        width: 70%;
     }
 }
