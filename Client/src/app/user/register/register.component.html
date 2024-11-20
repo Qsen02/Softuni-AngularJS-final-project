@@ -11,21 +11,21 @@
     <p class="input">
         <label for="password">Password</label>
         @if(isVisiblePass){
-            <i class="fa-regular fa-eye" (click)="changeVisability($event)"></i>
+            <i class="fa-regular fa-eye" appChangeVisability (click)="onChangePass()"></i>
         }@else{
-            <i class="fa-regular fa-eye-slash" (click)="changeVisability($event)"></i>
+            <i class="fa-regular fa-eye-slash" appChangeVisability (click)="onChangePass()"></i>
         }
         <input type="password" id="password" name="password">
     </p>
     <p class="input">
         <label for="repass">Repeat password</label>
         @if(isVisibleRepass){
-            <i class="fa-regular fa-eye" (click)="changeVisability($event)"></i>
+            <i class="fa-regular fa-eye" appChangeVisability (click)="onChangeRepass()"></i>
         }@else{
-            <i class="fa-regular fa-eye-slash" (click)="changeVisability($event)"></i>
+            <i class="fa-regular fa-eye-slash" appChangeVisability (click)="onChangeRepass()"></i>
         }
         <input type="password" id="repass" name="repass">
     </p>
-    <button type="submit">Submit</button>
+    <button>Submit</button>
     <p>You have account? <a routerLink="/login">Login here.</a></p>
 </form>

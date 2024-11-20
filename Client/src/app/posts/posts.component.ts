@@ -26,7 +26,6 @@ export class MainComponent implements OnInit {
 			},
 			error: err => {
 				this.isError.set(true);
-				console.log(this.isError());
 			}
 		});
 	}
