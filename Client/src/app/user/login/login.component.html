@@ -1,8 +1,8 @@
-<form class="form">
+<form class="form" [formGroup]="loginForm" (ngSubmit)="onLogin()">
     <h2>Log in here</h2>
     <p class="input">
         <label for="username">Username</label>
-        <input type="text" id="username" name="username">
+        <input type="text" id="username" name="username" formControlName="username">
     </p>
     <p class="input">
         <label for="password">Password</label>
@@ -11,7 +11,7 @@
         }@else{
             <i class="fa-regular fa-eye-slash" appChangeVisability (click)="onChange()"></i>
         }
-        <input type="password" id="password" name="password">
+        <input type="password" id="password" name="password" formControlName="password">
     </p>
     <button>Submit</button>
     <p>You don't have account yet? <a routerLink="/register">Register here.</a></p>

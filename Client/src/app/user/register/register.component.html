@@ -1,12 +1,12 @@
-<form class="form">
+<form class="form" [formGroup]="registerForm" (ngSubmit)="onRegister()">
     <h2>Register here</h2>
     <p class="input">
         <label for="username">Username</label>
-        <input type="text" id="username" name="username">
+        <input type="text" id="username" name="username" formControlName="username">
     </p>
     <p class="input">
         <label for="email">Email</label>
-        <input type="text" id="email" name="email">
+        <input type="text" id="email" name="email" formControlName="email">
     </p>
     <p class="input">
         <label for="password">Password</label>
@@ -15,7 +15,7 @@
         }@else{
             <i class="fa-regular fa-eye-slash" appChangeVisability (click)="onChangePass()"></i>
         }
-        <input type="password" id="password" name="password">
+        <input type="password" id="password" name="password" formControlName="password">
     </p>
     <p class="input">
         <label for="repass">Repeat password</label>
@@ -24,7 +24,7 @@
         }@else{
             <i class="fa-regular fa-eye-slash" appChangeVisability (click)="onChangeRepass()"></i>
         }
-        <input type="password" id="repass" name="repass">
+        <input type="password" id="repass" name="repass" formControlName="repass">
     </p>
     <button>Submit</button>
     <p>You have account? <a routerLink="/login">Login here.</a></p>
