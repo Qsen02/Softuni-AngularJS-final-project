@@ -123,6 +123,11 @@ ul {
     z-index: 1000;
 }
 
+.error{
+    color:red;
+    text-align: center;
+}
+
 @keyframes rotation {
     0% {
         transform: rotate(0deg);

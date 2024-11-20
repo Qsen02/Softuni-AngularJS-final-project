@@ -1,9 +1,22 @@
 <form class="form" [formGroup]="loginForm" (ngSubmit)="onLogin()">
     <h2>Log in here</h2>
+    @if(isError){
+        <p class="error">{{errorMessage}}</p>
+    }
     <p class="input">
         <label for="username">Username</label>
         <input type="text" id="username" name="username" formControlName="username">
     </p>
+    @if(loginForm.get('username')?.touched){
+        <div>
+            @if(loginForm.get("username")?.errors?.["required"]){
+                <p class="error">Username is required!</p>
+            }
+            @if(loginForm.get("username")?.errors?.["minlength"]){
+                <p class="error">Username must be at least 2 characters!</p>
+            }
+        </div>
+    }
     <p class="input">
         <label for="password">Password</label>
         @if(isVisible){
@@ -13,6 +26,16 @@
         }
         <input type="password" id="password" name="password" formControlName="password">
     </p>
+    @if(loginForm.get('password')?.touched){
+        <div>
+            @if(loginForm.get("password")?.errors?.["required"]){
+                <p class="error">Password is required!</p>
+            }
+            @if(loginForm.get("password")?.errors?.["pattern"]){
+                <p class="error">Username or password don't match!</p>
+            }
+        </div>
+    }
     <button>Submit</button>
     <p>You don't have account yet? <a routerLink="/register">Register here.</a></p>
 </form>
