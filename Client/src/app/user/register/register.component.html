@@ -49,7 +49,7 @@
                 <p class="error">Password is required!</p>
             }
             @if(registerForm.get("password")?.errors?.["pattern"]){
-                <p class="error">Password must be at least 6 symbols long and must contain capital letter,letters,numbers and special symbol!</p>
+                <p class="error">Password must be at least 6 symbols long with capital letter,letters,numbers and special symbol!</p>
             }
         </div>
     }
@@ -68,7 +68,7 @@
                 <p class="error">Repeat password is required!</p>
             }
             @if(registerForm.get("password")?.errors?.["pattern"]){
-                <p class="error">Repeat password must be at least 6 symbols long and must contain capital letter,letters,numbers and special symbol!</p>
+                <p class="error">Repeat password must be at least 6 symbols long with capital letter,letters,numbers and special symbol!</p>
             }
             @if(registerForm.errors?.["passwordDontMatch"]){
                 <p class="error">Password must macth!</p>
