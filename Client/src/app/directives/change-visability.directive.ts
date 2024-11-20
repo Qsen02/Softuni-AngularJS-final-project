@@ -13,9 +13,8 @@ export class ChangeVisabilityDirective implements OnInit, OnDestroy {
         this.unsubArray.push(changeHandler);
     }
 
-    change(event:Event) {
-        const target=event.target as HTMLElement
-        const inputRef = target?.parentElement?.children[2] as HTMLInputElement;
+    change() {
+        const inputRef:HTMLInputElement = this.elRef.nativeElement.parentElement.children[2];
         if (inputRef.type == "password") {
             inputRef.type = "text";
         } else {
