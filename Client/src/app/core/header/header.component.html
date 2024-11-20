@@ -7,14 +7,15 @@
     </form>
     <nav class="navigation">
         <ul>
-            @if(isUser){
-                @for (nav of userNav; track $index) {
-                    <li><a [routerLink]=nav.link>{{nav.name}}</a></li>
-                }
+            @if(!isUser){
+                <li><a routerLink="/home">Home</a></li>
+                <li><a routerLink="/login">Login</a></li>
+                <li><a routerLink="/register">Register</a></li>
             }@else{
-                @for (nav of guestNav; track $index) {
-                    <li><a [routerLink]=nav.link>{{nav.name}}</a></li>
-                }
+                <li><a routerLink="/home">Home</a></li>
+                <li><a routerLink="/create">Create</a></li>
+                <li><a routerLink="/profile">Profile</a></li>
+                <li><a routerLink="/logout">Logout</a></li>
             }
         </ul>
     </nav>

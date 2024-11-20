@@ -31,9 +31,8 @@ export class UserService {
     }
 
     logout(): void {
-        this.http.get(`${enviroment.apiUrl}/users/logout`).subscribe(() => {
-            localStorage.removeItem(this.USER_TOKEN);
-        });
+        localStorage.removeItem(this.USER_TOKEN);
+        this.user = null;
     }
 
     register(
@@ -42,9 +41,13 @@ export class UserService {
         password: string | null | undefined,
         repass: string | null | undefined
     ): void {
-        this.http.post<AuthUser>(`${enviroment.apiUrl}/users/register`, { username,email, password,repass }).subscribe((user) => {
+        this.http.post<AuthUser>(`${enviroment.apiUrl}/users/register`, { username, email, password, repass }).subscribe((user) => {
             this.user = user;
             localStorage.setItem(this.USER_TOKEN, JSON.stringify(this.user));
         })
+    }
+
+    getUser(): AuthUser | null {
+        return this.user;
     }
 }

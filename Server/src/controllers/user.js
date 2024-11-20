@@ -57,6 +57,7 @@ userRouter.post("/login",
     })
 
 userRouter.get("/logout", isUser(), (req, res) => {
+    console.log(req);
     res.json({ message: "Logout was successfull!" });
 })
 
