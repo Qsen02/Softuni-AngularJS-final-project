@@ -4,7 +4,7 @@
         <h2>User likes list</h2>
         <section class="likes-wrapper">
             @for (like of likes; track $index) {
-                <article [class.your-like]="like._id==user?._id">
+                <article [class]="like._id==user?._id?'your-like':''">
                     <img src={{like.profileImage}} alt={{like.username}} />
                     <p>{{like.username}}</p>
                 </article>

@@ -36,6 +36,6 @@
             }
         </div>
     }
-    <button>Submit</button>
+    <button [disabled]="loginForm.invalid">Submit</button>
     <p>You don't have account yet? <a routerLink="/register">Register here.</a></p>
 </form>

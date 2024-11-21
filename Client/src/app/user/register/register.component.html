@@ -62,12 +62,12 @@
         }
         <input type="password" id="repass" name="repass" formControlName="repass">
     </p>
-    @if(registerForm.get('password')?.touched){
+    @if(registerForm.get("repass")?.touched){
         <div>
-            @if(registerForm.get("password")?.errors?.["required"]){
+            @if(registerForm.get("repass")?.errors?.["required"]){
                 <p class="error">Repeat password is required!</p>
             }
-            @if(registerForm.get("password")?.errors?.["pattern"]){
+            @if(registerForm.get("repass")?.errors?.["pattern"]){
                 <p class="error">Repeat password must be at least 6 symbols long with capital letter,letters,numbers and special symbol!</p>
             }
             @if(registerForm.errors?.["passwordDontMatch"]){
@@ -75,6 +75,6 @@
             }
         </div>
     }
-    <button>Submit</button>
+    <button [disabled]="registerForm.invalid">Submit</button>
     <p>You have account? <a routerLink="/login">Login here.</a></p>
 </form>
