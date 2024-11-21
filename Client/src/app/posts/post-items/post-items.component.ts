@@ -2,13 +2,13 @@ import { Component, Input, OnInit } from '@angular/core';
 import { Post } from '../../types/post';
 import { UserService } from '../../services/user.service';
 import { AuthUser } from '../../types/user';
-import { JsonPipe } from '@angular/common';
 import { PostsService } from '../../services/posts.service';
+import { RouterLink } from '@angular/router';
 
 @Component({
     selector: 'app-main-posts',
     standalone: true,
-    imports: [],
+    imports: [RouterLink],
     templateUrl: './post-items.component.html',
     styleUrl: './post-items.component.css'
 })

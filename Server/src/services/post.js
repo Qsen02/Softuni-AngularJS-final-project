@@ -7,7 +7,7 @@ function getAllPosts() {
 }
 
 function getPostById(postId) {
-    const post = Posts.findById(postId).populate("comments").populate("ownerId");
+    const post = Posts.findById(postId).populate("comments").populate("ownerId").populate("likes");
     return post;
 }
 

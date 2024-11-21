@@ -14,19 +14,19 @@
                 @if(isLiked){
                     <div class="post-likes">
                         <i class="fa-solid fa-thumbs-up" (click)="unlike()"></i>
-                        <p>{{post?.likes?.length}}</p>
+                        <p [routerLink]="['/home','posts',post?._id,'likes']">{{post?.likes?.length}}</p>
                     </div>
                 }@else {
                     <div class="post-likes">
                         <i class="fa-regular fa-thumbs-up" (click)="like()"></i>
-                        <p>{{post?.likes?.length}}</p>
+                        <p [routerLink]="['/home','posts',post?._id,'likes']">{{post?.likes?.length}}</p>
                     </div>
                 }
             </div>
             }@else if(!isUser || isOwner){
                 <div class="post-likes">
                     <i class="fa-solid fa-thumbs-up" id="not-user"></i>
-                    <p>{{post?.likes?.length}}</p>
+                    <p [routerLink]="['/home','posts',post?._id,'likes']">{{post?.likes?.length}}</p>
                 </div>
             }
             <div class="post-comments">
