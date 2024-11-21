@@ -3,13 +3,20 @@
         <button (click)="onBack()">X</button>
         <h2>User likes list</h2>
         <section class="likes-wrapper">
+            @if(isLoading){
+                <span class="loader"></span>
+            }
             @for (like of likes; track $index) {
-                <article [class]="like._id==user?._id?'your-like':''">
+                <article [class]="like._id==user?._id?'your-like':'other-like'">
                     <img src={{like.profileImage}} alt={{like.username}} />
                     <p>{{like.username}}</p>
                 </article>
             }@empty {
-                <p>No likes yet.</p>
+                @if(!isLoading){
+                    <p>No likes yet.</p>
+                }@else{
+                    <p>likes loading...</p>
+                }
             }
         </section>
     </section>

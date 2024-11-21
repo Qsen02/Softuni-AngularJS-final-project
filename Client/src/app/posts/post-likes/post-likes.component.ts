@@ -14,7 +14,8 @@ import { UserService } from '../../services/user.service';
 export class PostLikesComponent implements OnInit {
     likes: User[] = [];
     user: AuthUser | null = null;
-    
+    isLoading=false;
+
     constructor(private postService: PostsService,
         private route: ActivatedRoute,
         private router: Router,
@@ -22,10 +23,12 @@ export class PostLikesComponent implements OnInit {
     ) { }
 
     ngOnInit(): void {
+        this.isLoading=true;
         const postId = this.route.snapshot.params['postId'];
         this.user=this.userService.getUser();
         this.postService.getPostById(postId).subscribe((post) => {
             this.likes = post.likes;
+            this.isLoading=false;
         })
     }
 

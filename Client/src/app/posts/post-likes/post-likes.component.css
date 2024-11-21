@@ -51,14 +51,18 @@
     justify-content: center;
     align-items: center;
     gap:100px;
-    background-color: rgb(80,80,80);
     border-radius: 10px;
     padding: 10px;
     font-size: 20pt;
 }
 
 .your-like{
-    background-color: rgb(131, 220, 255);
+    background-color: rgb(57, 199, 255);
+    color: white;
+}
+
+.other-like{
+    background-color: rgb(80,80,80);
 }
 
 @media(max-width:620px){
