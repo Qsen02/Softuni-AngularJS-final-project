@@ -48,6 +48,9 @@ export class UserService {
     }
 
     getUser(): AuthUser | null {
+        if(typeof(this.user)=="string"){
+            this.user=JSON.parse(this.user);
+        }
         return this.user;
     }
 }

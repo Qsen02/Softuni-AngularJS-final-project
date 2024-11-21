@@ -2,7 +2,7 @@ const { Comments } = require("../models/comment");
 const { Posts } = require("../models/post");
 
 function getAllPosts() {
-    const posts = Posts.find().populate("comments").populate("ownerId");
+    const posts = Posts.find().populate("comments").populate("ownerId").populate("likes");
     return posts;
 }
 

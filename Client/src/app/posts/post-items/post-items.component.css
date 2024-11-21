@@ -79,6 +79,18 @@
     color:white;
 }
 
+.post-likes p{
+    cursor: pointer;
+}
+
+#not-user{
+    cursor: default;
+}
+
+#not-user:hover{
+    color: lightgray;
+}
+
 @media(max-width:950px){
     .post-item{
         width: 500px;
