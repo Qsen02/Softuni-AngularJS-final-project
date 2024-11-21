@@ -3,6 +3,7 @@ import { Router, RouterLink } from '@angular/router';
 import { ChangeVisabilityDirective } from '../../directives/change-visability.directive';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { UserService } from '../../services/user.service';
+import { passwordPattern } from '../../utils/passRegexp';
 
 @Component({
     selector: 'app-login',
@@ -15,11 +16,10 @@ export class LoginComponent {
     isError = false;
     errorMessage = "";
     isVisible = false;
-    validationPass = /^(?=.*[A-Z])(?=.*[a-z])(?=.*\d)(?=.*[+!@#$%^&*])[A-Za-z\d+!@#$%^&*]{6,}$/;
 
     loginForm = new FormGroup({
         username: new FormControl("", [Validators.required,Validators.minLength(2)]),
-        password: new FormControl("", [Validators.required, Validators.pattern(this.validationPass)])
+        password: new FormControl("", [Validators.required, Validators.pattern(passwordPattern)])
     })
 
     constructor(private userService: UserService, private router: Router) { }

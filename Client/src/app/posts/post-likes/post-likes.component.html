@@ -1,17 +1,15 @@
 <div class="modal">
-    <section>
+    <section class="wrapper">
         <button (click)="onBack()">X</button>
         <h2>User likes list</h2>
         <section class="likes-wrapper">
-            @if(likes.length>0){
-                @for (like of likes; track $index) {
-                    <article>
-                        <img src={{like.profileImage}} alt={{like.username}} />
-                        <p>{{like.username}}</p>
-                    </article>
-                }
-            }@else{
-               <p>No likes yet.</p>
+            @for (like of likes; track $index) {
+                <article [class.your-like]="like._id==user?._id">
+                    <img src={{like.profileImage}} alt={{like.username}} />
+                    <p>{{like.username}}</p>
+                </article>
+            }@empty {
+                <p>No likes yet.</p>
             }
         </section>
     </section>

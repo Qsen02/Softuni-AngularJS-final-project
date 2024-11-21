@@ -1,0 +1,79 @@
+.wrapper {
+    position: relative;
+    margin: 0 auto;
+    width: 60vw;
+    background-color: rgb(40, 40, 40);
+    border-radius: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    overflow: auto;
+    align-items: center;
+    color: lightgray;
+    padding: 20px;
+}
+
+.wrapper button {
+    position: absolute;
+    top: 10px;
+    right: 20px;
+    font-size: 20pt;
+    color: grey;
+    cursor: pointer;
+    background-color: rgb(40, 40, 40);
+    border: none;
+}
+
+.wrapper button:hover{
+    color: lightgrey;
+} 
+
+.wrapper img {
+    cursor: pointer;
+    width: 70px;
+    height: 70px;
+    border-radius: 50%;
+}
+
+.likes-wrapper{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap:10px;
+}
+
+.likes-wrapper article{
+    width: 90%;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    gap:100px;
+    background-color: rgb(80,80,80);
+    border-radius: 10px;
+    padding: 10px;
+    font-size: 20pt;
+}
+
+.your-like{
+    background-color: rgb(131, 220, 255);
+}
+
+@media(max-width:620px){
+    .wrapper{
+        width: 80vw;
+    }
+    .wrapper img{
+        width: 50px;
+        height: 50px;
+    }
+    .likes-wrapper article{
+        font-size: 14pt;
+        gap:50px;
+    }
+    .wrapper button {
+        font-size: 16pt;
+    }
+}

@@ -3,6 +3,7 @@ import { Router, RouterLink } from '@angular/router';
 import { ChangeVisabilityDirective } from '../../directives/change-visability.directive';
 import { UserService } from '../../services/user.service';
 import { AbstractControl, FormControl, FormGroup, ReactiveFormsModule, ValidationErrors, ValidatorFn, Validators } from '@angular/forms';
+import { passwordPattern } from '../../utils/passRegexp';
 
 @Component({
     selector: 'app-register',
@@ -16,15 +17,14 @@ export class RegisterComponent {
     isVisibleRepass = false;
     isError = false;
     errorMessage = "";
-    validationPass = /^(?=.*[A-Z])(?=.*[a-z])(?=.*\d)(?=.*[+!@#$%^&*])[A-Za-z\d+!@#$%^&*]{6,}$/;
 
     registerForm = new FormGroup({
         username: new FormControl("", [Validators.required, Validators.minLength(2)]),
         email: new FormControl("", [Validators.required, Validators.minLength(2), Validators.email]),
-        password: new FormControl("", [Validators.required, Validators.pattern(this.validationPass)]),
+        password: new FormControl("", [Validators.required, Validators.pattern(passwordPattern)]),
         repass: new FormControl("", [Validators.required])
-    },{
-        validators:this.matchPassword()
+    }, {
+        validators: this.matchPassword()
     })
 
     matchPassword(): ValidatorFn {

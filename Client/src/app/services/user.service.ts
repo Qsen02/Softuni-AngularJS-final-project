@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { AuthUser } from '../types/user';
 import { enviroment } from '../enviroment/app.enviroment';
@@ -24,10 +24,16 @@ export class UserService {
     }
 
     login(username: string | null | undefined, password: string | null | undefined): void {
-        this.http.post<AuthUser>(`${enviroment.apiUrl}/users/login`, { username, password }).subscribe((user) => {
-            this.user = user;
-            localStorage.setItem(this.USER_TOKEN, JSON.stringify(this.user));
-        })
+        try {
+            this.http.post<AuthUser>(`${enviroment.apiUrl}/users/login`, { username, password }).subscribe((user) => {
+                this.user = user;
+                localStorage.setItem(this.USER_TOKEN, JSON.stringify(this.user));
+            })
+        } catch (err) {
+            if (err instanceof HttpErrorResponse) {
+                throw new Error(err.error.message);
+            }
+        }
     }
 
     logout(): void {
@@ -48,8 +54,8 @@ export class UserService {
     }
 
     getUser(): AuthUser | null {
-        if(typeof(this.user)=="string"){
-            this.user=JSON.parse(this.user);
+        if (typeof (this.user) == "string") {
+            this.user = JSON.parse(this.user);
         }
         return this.user;
     }
