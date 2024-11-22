@@ -6,15 +6,20 @@
             @if(isLoading){
                 <span class="loader"></span>
             }
+            @if(!isLoading && isError){
+                <div class="message">
+                    <p>Something went wrong, please try again later.</p>
+                </div>
+            }
             @for (like of likes; track $index) {
                 <article [class]="like._id==user?._id?'your-like':'other-like'">
                     <img src={{like.profileImage}} alt={{like.username}} />
                     <p>{{like.username}}</p>
                 </article>
             }@empty {
-                @if(!isLoading){
+                @if(!isLoading && !isError){
                     <p>No likes yet.</p>
-                }@else{
+                }@else if(!isError && isLoading){
                     <p>likes loading...</p>
                 }
             }

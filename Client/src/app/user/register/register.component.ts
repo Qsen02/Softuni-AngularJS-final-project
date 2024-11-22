@@ -32,6 +32,14 @@ export class RegisterComponent {
 
     constructor(private userService: UserService, private router: Router) { }
 
+    get getPassword(){
+        return this.registerForm.get("passGroup")?.get("password");
+    }
+
+    get getRepass(){
+        return this.registerForm.get("passGroup")?.get("repass");
+    }
+
     onChangePass() {
         if (this.isVisiblePass == false) {
             this.isVisiblePass = true;
