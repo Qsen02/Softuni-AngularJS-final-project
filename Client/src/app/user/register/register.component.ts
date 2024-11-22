@@ -2,8 +2,9 @@ import { Component } from '@angular/core';
 import { Router, RouterLink } from '@angular/router';
 import { ChangeVisabilityDirective } from '../../directives/change-visability.directive';
 import { UserService } from '../../services/user.service';
-import { AbstractControl, FormControl, FormGroup, ReactiveFormsModule, ValidationErrors, ValidatorFn, Validators } from '@angular/forms';
+import { FormControl, FormGroup, ReactiveFormsModule,Validators } from '@angular/forms';
 import { passwordPattern } from '../../utils/passRegexp';
+import { matchPassword } from '../../utils/matchPassword.validator';
 
 @Component({
     selector: 'app-register',
@@ -21,19 +22,13 @@ export class RegisterComponent {
     registerForm = new FormGroup({
         username: new FormControl("", [Validators.required, Validators.minLength(2)]),
         email: new FormControl("", [Validators.required, Validators.minLength(2), Validators.email]),
-        password: new FormControl("", [Validators.required, Validators.pattern(passwordPattern)]),
-        repass: new FormControl("", [Validators.required])
-    }, {
-        validators: this.matchPassword()
-    })
-
-    matchPassword(): ValidatorFn {
-        return (formGroup: AbstractControl): ValidationErrors | null => {
-            const password = formGroup.get("password")?.value;
-            const repass = formGroup.get("repass")?.value;
-            return password == repass ? null : { passwordDontMatch: true };
-        }
-    }
+        passGroup:new FormGroup({
+            password: new FormControl("", [Validators.required, Validators.pattern(passwordPattern)]),
+            repass: new FormControl("", Validators.required)
+        },{
+            validators:[matchPassword("password","repass")]
+        }),
+    });
 
     constructor(private userService: UserService, private router: Router) { }
 
@@ -56,9 +51,10 @@ export class RegisterComponent {
     onRegister(): void {
         try {
             const username = this.registerForm.value.username;
-            const email = this.registerForm.value.email;
-            const password = this.registerForm.value.password;
-            const repass = this.registerForm.value.repass;
+            const email =this.registerForm.value.email;
+            const password = this.registerForm.value.passGroup?.repass;
+            const repass = this.registerForm.value.passGroup?.repass;
+            console.log(this.registerForm.value);
             if (!username || !email || !password || !repass) {
                 throw new Error("All fields required!");
             }

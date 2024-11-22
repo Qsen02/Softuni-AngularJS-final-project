@@ -110,6 +110,13 @@ ul {
 .form button:hover{
     background-color: rgb(131, 220, 255);
 }
+.form>div{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap:20px;
+}
 
 .modal {
     position: fixed;

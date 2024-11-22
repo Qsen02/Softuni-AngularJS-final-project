@@ -1,80 +1,80 @@
 <form class="form" [formGroup]="registerForm" (ngSubmit)="onRegister()">
     <h2>Register here</h2>
     @if(isError){
-        <p class="error">{{errorMessage}}</p>
+    <p class="error">{{errorMessage}}</p>
     }
     <p class="input">
         <label for="username">Username</label>
         <input type="text" id="username" name="username" formControlName="username">
     </p>
     @if(registerForm.get('username')?.touched){
-        <div>
-            @if(registerForm.get("username")?.errors?.["required"]){
-                <p class="error">Username is required!</p>
-            }
-            @if(registerForm.get("username")?.errors?.["minlength"]){
-                <p class="error">Username must be at least 2 characters!</p>
-            }
-        </div>
+    <div>
+        @if(registerForm.get("username")?.errors?.["required"]){
+        <p class="error">Username is required!</p>
+        }
+        @if(registerForm.get("username")?.errors?.["minlength"]){
+        <p class="error">Username must be at least 2 characters!</p>
+        }
+    </div>
     }
     <p class="input">
         <label for="email">Email</label>
         <input type="text" id="email" name="email" formControlName="email">
     </p>
     @if(registerForm.get('email')?.touched){
-        <div>
-            @if(registerForm.get("email")?.errors?.["required"]){
-                <p class="error">Email is required!</p>
-            }
-            @if(registerForm.get("email")?.errors?.["email"]){
-                <p class="error">Email must be valid email!</p>
-            }
-            @if(registerForm.get("email")?.errors?.["minlength"]){
-                <p class="error">Email must be at least 2 characters long!</p>
-            }
-        </div>
+    <div>
+        @if(registerForm.get("email")?.errors?.["required"]){
+        <p class="error">Email is required!</p>
+        }
+        @if(registerForm.get("email")?.errors?.["email"]){
+        <p class="error">Email must be valid email!</p>
+        }
+        @if(registerForm.get("email")?.errors?.["minlength"]){
+        <p class="error">Email must be at least 2 characters long!</p>
+        }
+    </div>
     }
-    <p class="input">
-        <label for="password">Password</label>
-        @if(isVisiblePass){
+    <div formGroupName="passGroup">
+        <p class="input">
+            <label for="password">Password</label>
+            @if(isVisiblePass){
             <i class="fa-regular fa-eye" appChangeVisability (click)="onChangePass()"></i>
-        }@else{
+            }@else{
             <i class="fa-regular fa-eye-slash" appChangeVisability (click)="onChangePass()"></i>
-        }
-        <input type="password" id="password" name="password" formControlName="password">
-    </p>
-    @if(registerForm.get('password')?.touched){
-        <div>
-            @if(registerForm.get("password")?.errors?.["required"]){
-                <p class="error">Password is required!</p>
             }
-            @if(registerForm.get("password")?.errors?.["pattern"]){
-                <p class="error">Password must be at least 6 symbols long with capital letter,letters,numbers and special symbol!</p>
+            <input type="password" id="password" name="password" formControlName="password">
+        </p>
+        @if(registerForm.get("passGroup")?.get("password")?.touched){
+        <div>
+            @if(registerForm.get("passGroup")?.get("password")?.errors?.["required"]){
+            <p class="error">Password is required!</p>
+            }
+            @if(registerForm.get("passGroup")?.get("password")?.errors?.["pattern"]){
+            <p class="error">Password must be at least 6 symbols long with capital letter,letters,numbers and special
+                symbol!</p>
             }
         </div>
-    }
-    <p class="input">
-        <label for="repass">Repeat password</label>
-        @if(isVisibleRepass){
+        }
+        <p class="input">
+            <label for="repass">Repeat password</label>
+            @if(isVisibleRepass){
             <i class="fa-regular fa-eye" appChangeVisability (click)="onChangeRepass()"></i>
-        }@else{
+            }@else{
             <i class="fa-regular fa-eye-slash" appChangeVisability (click)="onChangeRepass()"></i>
-        }
-        <input type="password" id="repass" name="repass" formControlName="repass">
-    </p>
-    @if(registerForm.get("repass")?.touched){
+            }
+            <input type="password" id="repass" name="repass" formControlName="repass">
+        </p>
+        @if(registerForm.get("passGroup")?.get("repass")?.touched){
         <div>
-            @if(registerForm.get("repass")?.errors?.["required"]){
-                <p class="error">Repeat password is required!</p>
+            @if(registerForm.get("passGroup")?.get("repass")?.errors?.["required"]){
+            <p class="error">Repeat password is required!</p>
             }
-            @if(registerForm.get("repass")?.errors?.["pattern"]){
-                <p class="error">Repeat password must be at least 6 symbols long with capital letter,letters,numbers and special symbol!</p>
-            }
-            @if(registerForm.errors?.["passwordDontMatch"]){
-                <p class="error">Password must macth!</p>
+            @if(registerForm.get("passGroup")?.errors?.["passwordDontMatch"]){
+            <p class="error">Password must macth!</p>
             }
         </div>
-    }
+        }
+    </div>
     <button [disabled]="registerForm.invalid">Submit</button>
     <p>You have account? <a routerLink="/login">Login here.</a></p>
 </form>
