@@ -1,7 +1,27 @@
-<article class="comment-item-wrapper">
+<article class="comment-item-wrapper" [class]="owner?._id==curUser?._id?'owner':''">
     <div class="comment-header">
         <img src={{owner?.profileImage}} alt={{owner?.username}}>
         <h2>{{owner?.username}}</h2>
+        @if(owner?._id==curUser._id && isUser){
+        <i class="fa-solid fa-pen-to-square"></i>
+        <i class="fa-solid fa-trash"></i>
+        }
+        <div class="comment-header-buttons">
+            @if(isUser){
+                @if(owner?._id!=curUser._id){
+                    @if(comment?.likes?.includes(curUser._id)){
+                    <i class="fa-solid fa-thumbs-up"></i>
+                    <p>{{comment?.likes?.length}}</p>
+                    }@else{
+                    <i class="fa-regular fa-thumbs-up"></i>
+                    <p>{{comment?.likes?.length}}</p>
+                    }
+                }@else{
+                <i class="fa-solid fa-thumbs-up" id="owner"></i>
+                <p>{{comment?.likes?.length}}</p>
+                }
+            }
+        </div>
     </div>
     <div class="comment-body">
         <p>{{comment?.content}}</p>

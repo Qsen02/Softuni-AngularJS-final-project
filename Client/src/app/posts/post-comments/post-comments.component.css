@@ -1,4 +1,5 @@
 .comment-wrapper{
+    position: relative;
     width: 60vw;
     margin: -300px auto;
     background-color: rgb(40,40,40);
@@ -54,4 +55,19 @@
     display: flex;
     flex-direction: column;
     gap:20px;
+}
+
+.comment-wrapper>button {
+    position: absolute;
+    top: 10px;
+    right: 20px;
+    font-size: 20pt;
+    color: grey;
+    cursor: pointer;
+    background-color: rgb(40, 40, 40);
+    border: none;
+}
+
+.comment-wrapper>button:hover{
+    color: lightgray;
 }

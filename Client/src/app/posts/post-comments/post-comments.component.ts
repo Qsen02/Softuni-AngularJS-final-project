@@ -2,7 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { PostCommentsItemComponent } from './post-comments-item/post-comments-item.component';
 import { PostsService } from '../../services/posts.service';
 import { Comment } from '../../types/comment';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
+import { UserService } from '../../services/user.service';
 
 @Component({
     selector: 'app-post-comments',
@@ -16,7 +17,12 @@ export class PostCommentsComponent implements OnInit {
     isLoading = false;
     isError = false;
     postOwner = "";
-    constructor(private postService: PostsService, private route: ActivatedRoute) { }
+    isUser=false;
+    constructor(private postService: PostsService, 
+        private route: ActivatedRoute,
+        private userService:UserService,
+        private router:Router
+    ) { }
 
     ngOnInit(): void {
         this.isLoading = true;
@@ -25,6 +31,7 @@ export class PostCommentsComponent implements OnInit {
             next: (post) => {
                 this.comments = post.comments;
                 this.postOwner=post.ownerId.username;
+                this.isUser=this.userService.isLogged;
                 this.isLoading = false;
             },
             error: (err) => {
@@ -32,5 +39,9 @@ export class PostCommentsComponent implements OnInit {
                 this.isLoading = false;
             }
         })
+    }
+
+    onBack():void{
+        this.router.navigate(["/home"]);
     }
 }

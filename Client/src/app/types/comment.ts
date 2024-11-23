@@ -6,5 +6,5 @@ export interface Comment{
     content:string,
     ownerId:User,
     postId:Post,
-    likes:User[]
+    likes:string[]
 }

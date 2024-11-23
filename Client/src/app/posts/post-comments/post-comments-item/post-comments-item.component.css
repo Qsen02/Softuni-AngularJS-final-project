@@ -1,21 +1,31 @@
-.comment-item-wrapper{
+.comment-item-wrapper {
     margin: 0 auto;
-    background-color: rgb(80,80,80);
+    background-color: rgb(80, 80, 80);
     width: 80%;
     border-radius: 10px;
     display: flex;
     flex-direction: column;
-    gap:20px;
+    gap: 20px;
     align-items: flex-start;
     text-align: left;
     padding: 20px;
 }
 
 .comment-header {
+    position: relative;
+    width: 100%;
     display: flex;
     flex-wrap: wrap;
     align-items: center;
-    gap:20px;
+    gap: 10px;
+}
+.comment-header i{
+    font-size: 16pt;
+    cursor: pointer;
+}
+
+.comment-header i:hover{
+    color: white;
 }
 
 .comment-header img {
@@ -24,13 +34,39 @@
     border-radius: 50%;
 }
 
-.comment-body{
+.comment-body {
     width: 100%;
     display: flex;
     flex-wrap: wrap;
 }
 
-.comment-body p{
+.comment-body p {
     width: 100%;
     word-wrap: break-word;
+}
+
+.comment-header-buttons {
+    width: 100px;
+    position: absolute;
+    top:18px;
+    right: 0;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    gap:5px;
+    font-size: 16pt;
+    cursor: pointer;
+}
+
+#owner{
+    cursor: default;
+}
+
+#owner:hover{
+    color: lightgrey;
+}
+
+.owner{
+    background-color: rgb(0, 182, 254);
 }

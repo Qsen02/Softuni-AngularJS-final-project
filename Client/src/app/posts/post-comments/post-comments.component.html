@@ -1,15 +1,18 @@
 <div class="modal">
     <section class="comment-wrapper">
+        <button (click)="onBack()">X</button>
         <h2>Comments to {{postOwner}}'s post</h2>
+        @if(isUser){
         <form>
             <input type="text" name="content" placeholder="Write comment...">
             <button>Submit</button>
         </form>
+        }
         <section class="comment-section">
             @for (comment of comments; track $index) {
             <app-post-comments-item [commentProp]="comment" />
             }@empty {
-                <h2>No comments yet, be the first one!</h2>
+            <h2>No comments yet, be the first one!</h2>
             }
         </section>
     </section>
