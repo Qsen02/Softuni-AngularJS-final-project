@@ -57,6 +57,10 @@
     gap:20px;
 }
 
+.comment-section h2 {
+    margin-top: 80px;
+}
+
 .comment-wrapper>button {
     position: absolute;
     top: 10px;
@@ -70,4 +74,10 @@
 
 .comment-wrapper>button:hover{
     color: lightgray;
+}
+
+.loader{
+    position: absolute;
+    left:47%;
+    top:40%;
 }

@@ -9,10 +9,18 @@
         </form>
         }
         <section class="comment-section">
+            @if(isLoading && !isError){
+                <span class="loader"></span>
+                <h2>Comments loading...</h2>
+            }
             @for (comment of comments; track $index) {
             <app-post-comments-item [commentProp]="comment" />
             }@empty {
-            <h2>No comments yet, be the first one!</h2>
+                @if(!isLoading && !isError){
+                <h2>No comments yet, be the first one!</h2>
+                }@else if(!isLoading && isError){
+                    <h2>Something went wrong, please try again later.</h2>
+                }
             }
         </section>
     </section>
