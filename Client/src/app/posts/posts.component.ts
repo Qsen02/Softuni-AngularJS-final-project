@@ -12,20 +12,20 @@ import { MainPostsComponent } from './post-items/post-items.component';
 })
 export class MainComponent implements OnInit {
 	posts: Post[] = [];
-	isLoading = signal(false);
-	isError = signal(false);
+	isLoading = false;
+	isError = false;
 
 	constructor(private postApi: PostsService) { }
 
 	ngOnInit(): void {
-		this.isLoading.set(true);
+		this.isLoading=true;
 		this.postApi.getAllPosts().subscribe({
 			next: (posts) => {
 				this.posts = posts;
-				this.isLoading.set(false);
+				this.isLoading=false;
 			},
 			error: err => {
-				this.isError.set(true);
+				this.isError=true;
 			}
 		});
 	}

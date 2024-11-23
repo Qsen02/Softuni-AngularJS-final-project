@@ -7,13 +7,15 @@ import { LogoutComponent } from './user/logout/logout.component';
 import { guestGuard } from '../guards/guest.guard';
 import { userGuard } from '../guards/user.guard';
 import { PostLikesComponent } from './posts/post-likes/post-likes.component';
+import { PostCommentsComponent } from './posts/post-comments/post-comments.component';
 
 export const routes: Routes = [
     { path: "", redirectTo: "home", pathMatch: "full" },
     {
         path: "home", children: [
             { path: "", component: MainComponent },
-            { path: "posts/:postId/likes", component: PostLikesComponent }
+            { path: "posts/:postId/likes", component: PostLikesComponent },
+            { path: "posts/:postId/comments", component: PostCommentsComponent }
         ]
     },
     { path: "register", component: RegisterComponent, canActivate: [guestGuard] },

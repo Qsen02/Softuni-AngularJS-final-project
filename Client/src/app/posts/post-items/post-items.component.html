@@ -30,7 +30,7 @@
                 </div>
             }
             <div class="post-comments">
-                <i class="fa-regular fa-comment"></i>
+                <i class="fa-regular fa-comment" [routerLink]="['/home','posts',post?._id,'comments']"></i>
                 <p>{{post?.comments?.length}}</p>
             </div>
         </article>

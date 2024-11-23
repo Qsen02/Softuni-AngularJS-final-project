@@ -1,7 +1,8 @@
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { AuthUser } from '../types/user';
+import { AuthUser, User } from '../types/user';
 import { enviroment } from '../enviroment/app.enviroment';
+import { Observable } from 'rxjs';
 
 @Injectable({
     providedIn: 'root',
@@ -58,5 +59,9 @@ export class UserService {
             this.user = JSON.parse(this.user);
         }
         return this.user;
+    }
+
+    getUserById(userId:User|undefined):Observable<User>{
+        return this.http.get<User>(`${enviroment.apiUrl}/users/${userId}`);
     }
 }

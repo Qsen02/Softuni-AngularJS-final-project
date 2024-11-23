@@ -1,0 +1,14 @@
+<div class="modal">
+    <section class="comment-wrapper">
+        <h2>Comments to {{postOwner}}'s post</h2>
+        <form>
+            <input type="text" name="content" placeholder="Write comment...">
+            <button>Submit</button>
+        </form>
+        <section class="comment-section">
+            @for (comment of comments; track $index) {
+            <app-post-comments-item [commentProp]="comment" />
+            }
+        </section>
+    </section>
+</div>
