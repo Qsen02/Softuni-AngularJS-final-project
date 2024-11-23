@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { enviroment } from '../enviroment/app.enviroment';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import { Comment } from '../types/comment';
 
 @Injectable({
     providedIn: 'root'

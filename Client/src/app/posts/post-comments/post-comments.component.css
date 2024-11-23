@@ -81,3 +81,27 @@
     left:47%;
     top:40%;
 }
+
+@media(max-width:750px){
+    .comment-wrapper{
+        width: 90vw;
+        font-size: 10pt;
+    }
+
+    .comment-wrapper form input{
+        font-size: 10pt;
+        height: 30px;
+    }
+    .comment-wrapper form input::placeholder{
+        font-size: 10pt;
+    }
+
+    .comment-wrapper form button{
+        padding: 5px 10px 5px 10px;
+        font-size: 12pt;
+    }
+
+    .comment-wrapper>button {
+        font-size: 14pt;
+    }
+}

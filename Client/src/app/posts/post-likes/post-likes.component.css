@@ -66,18 +66,18 @@
 }
 
 @media(max-width:620px){
-    .wrapper{
-        width: 80vw;
+    .wrapper {
+        width: 90vw;
     }
-    .wrapper img{
+    .wrapper  img{
         width: 50px;
         height: 50px;
     }
-    .likes-wrapper article{
-        font-size: 14pt;
-        gap:50px;
+    .wrapper article{
+        font-size: 12pt;
+        gap:30px;
     }
-    .wrapper button {
-        font-size: 16pt;
+    .wrapper  button {
+        font-size: 12pt;
     }
 }

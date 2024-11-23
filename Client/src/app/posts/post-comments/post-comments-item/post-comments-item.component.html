@@ -9,7 +9,7 @@
         <div class="comment-header-buttons">
             @if(isUser && curUserId){
                 @if(owner?._id!=curUserId){
-                    @if(comment?.likes?.includes(curUserId)){
+                    @if(commentLikes.includes(curUserId)){
                     <i class="fa-solid fa-thumbs-up"></i>
                     <p [routerLink]="['/home','posts',comment?.postId,'comments',comment?._id,'likes']">{{comment?.likes?.length}}</p>
                     }@else{

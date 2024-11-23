@@ -1,0 +1,83 @@
+.comment-likes-wrapper {
+    position: relative;
+    margin: -330px auto;
+    width: 60vw;
+    background-color: rgb(40, 40, 40);
+    border-radius: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    overflow: auto;
+    align-items: center;
+    color: lightgray;
+    padding: 20px;
+}
+
+.comment-likes-wrapper button {
+    position: absolute;
+    top: 10px;
+    right: 20px;
+    font-size: 20pt;
+    color: grey;
+    cursor: pointer;
+    background-color: rgb(40, 40, 40);
+    border: none;
+}
+
+.comment-likes-wrapper button:hover{
+    color: lightgrey;
+} 
+
+.comment-likes-wrapper img {
+    cursor: pointer;
+    width: 70px;
+    height: 70px;
+    border-radius: 50%;
+}
+
+.likes-wrapper{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap:10px;
+}
+
+.likes-wrapper article{
+    width: 90%;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    gap:100px;
+    border-radius: 10px;
+    padding: 10px;
+    font-size: 20pt;
+}
+
+.your-like{
+    background-color: rgb(57, 199, 255);
+    color: white;
+}
+
+.other-like{
+    background-color: rgb(80,80,80);
+}
+
+@media(max-width:620px){
+    .comment-likes-wrapper {
+        width: 90vw;
+    }
+    .comment-likes-wrapper  img{
+        width: 50px;
+        height: 50px;
+    }
+    .comment-likes-wrapper  article{
+        font-size: 12pt;
+        gap:30px;
+    }
+    .comment-likes-wrapper  button {
+        font-size: 12pt;
+    }
+}

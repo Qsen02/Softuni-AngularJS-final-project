@@ -1,1 +1,28 @@
-<p>post-comment-likes works!</p>
+<div class="modal">
+    <section class="comment-likes-wrapper">
+        <button (click)="onBack()">X</button>
+        <h2>Comment likes</h2>
+        <section class="likes-wrapper">
+            @if(isLoading){
+                <span class="loader"></span>
+            }
+            @if(!isLoading && isError){
+                <div class="message">
+                    <p>Something went wrong, please try again later.</p>
+                </div>
+            }
+            @for (like of likes; track $index) {
+            <article [class]="like._id==curUser?._id?'your-like':'other-like'">
+                <img src={{like.profileImage}} alt={{like.username}}>
+                <h3>{{like.username}}</h3>
+            </article>
+            }@empty {
+                @if(!isLoading && !isError){
+                    <p>No likes yet.</p>
+                }@else if(!isError && isLoading){
+                    <p>likes loading...</p>
+                }
+            }
+        </section>
+    </section>
+</div>

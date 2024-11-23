@@ -16,12 +16,14 @@ export class PostCommentsItemComponent implements OnInit {
     owner: User | null = null;
     isUser = false;
     curUserId: string | undefined = "";
+    commentLikes:string[]=[]
     constructor(private userService: UserService) { }
 
     ngOnInit(): void {
         this.userService.getUserById(this.comment?.ownerId).subscribe((user) => {
             this.owner = user;
             this.isUser = this.userService.isLogged;
+            this.commentLikes=this.comment?.likes as string[];
             this.curUserId = this.userService.getUser()?._id;
         })
     }

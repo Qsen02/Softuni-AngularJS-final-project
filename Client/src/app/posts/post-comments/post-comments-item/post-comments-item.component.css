@@ -70,3 +70,22 @@
 .owner{
     background-color: rgb(0, 182, 254);
 }
+
+@media(max-width:750px) {
+    .comment-header i{
+        font-size: 12pt;
+    }
+
+    .comment-header img{
+        width: 40px;
+        height: 40px;
+    }
+    .comment-item-wrapper{
+        width: 95%;
+    }
+    .comment-header-buttons{
+        width: 30px;
+        top:10px;
+        font-size: 10pt;
+    }
+}
