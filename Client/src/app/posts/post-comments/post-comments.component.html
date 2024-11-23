@@ -8,6 +8,8 @@
         <section class="comment-section">
             @for (comment of comments; track $index) {
             <app-post-comments-item [commentProp]="comment" />
+            }@empty {
+                <h2>No comments yet, be the first one!</h2>
             }
         </section>
     </section>

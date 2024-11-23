@@ -1,5 +1,36 @@
+.comment-item-wrapper{
+    margin: 0 auto;
+    background-color: rgb(80,80,80);
+    width: 80%;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    gap:20px;
+    align-items: flex-start;
+    text-align: left;
+    padding: 20px;
+}
+
+.comment-header {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap:20px;
+}
+
 .comment-header img {
     width: 70px;
     height: 70px;
     border-radius: 50%;
+}
+
+.comment-body{
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.comment-body p{
+    width: 100%;
+    word-wrap: break-word;
 }
