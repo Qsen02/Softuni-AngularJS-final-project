@@ -1,3 +1,4 @@
+const { Posts } = require("../models/post");
 const { Users } = require("../models/user");
 const bcrypt = require("bcrypt");
 
@@ -65,6 +66,11 @@ function searchUsers(username) {
     return user;
 }
 
+function getUserPublications(userId){
+    const publications=Posts.find({_id:userId});
+    return publications;
+}
+
 module.exports = {
-    register, login, changePassword, updateUser, getUserById, checkUserId, searchUsers
+    register, login, changePassword, updateUser, getUserById, checkUserId, searchUsers,getUserPublications
 }

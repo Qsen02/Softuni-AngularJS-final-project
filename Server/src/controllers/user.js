@@ -1,6 +1,6 @@
 const { Router } = require("express");
 const { body, validationResult } = require("express-validator");
-const { register, login, checkUserId, changePassword, getUserById, updateUser, searchUsers } = require("../services/user");
+const { register, login, checkUserId, changePassword, getUserById, updateUser, searchUsers, getUserPublications } = require("../services/user");
 const { setToken } = require("../services/token");
 const { isUser } = require("../middlewares.js/guard");
 
@@ -109,6 +109,16 @@ userRouter.get("/search/:query", async (req, res) => {
     const query = req.params.query;
     const users = await searchUsers(query).lean();
     res.json(users);
+})
+
+userRouter.get("/:userId/posts",async(req,res)=>{
+    const userId = req.params.userId;
+    const isValid = await checkUserId(userId);
+    if (!isValid) {
+        res.status(404).json({ message: "Resource not found!" });
+    }
+    const posts=await getUserPublications(userId).lean();
+    res.json(posts);
 })
 
 userRouter.get("/:userId", async (req, res) => {

@@ -9,6 +9,7 @@ import { userGuard } from '../guards/user.guard';
 import { PostLikesComponent } from './posts/post-likes/post-likes.component';
 import { PostCommentsComponent } from './posts/post-comments/post-comments.component';
 import { PostCommentLikesComponent } from './posts/post-comments/post-comment-likes/post-comment-likes.component';
+import { ProfileComponent } from './user/profile/profile.component';
 
 export const routes: Routes = [
     { path: "", redirectTo: "home", pathMatch: "full" },
@@ -20,6 +21,7 @@ export const routes: Routes = [
             { path: "posts/:postId/comments/:commentId/likes", component: PostCommentLikesComponent }
         ]
     },
+    { path: "profile/:userId", component: ProfileComponent },
     { path: "register", component: RegisterComponent, canActivate: [guestGuard] },
     { path: "login", component: LoginComponent, canActivate: [guestGuard] },
     { path: "logout", component: LogoutComponent, canActivate: [userGuard] },
