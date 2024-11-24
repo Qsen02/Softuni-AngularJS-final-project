@@ -1,1 +1,27 @@
-<p>profile works!</p>
+<section class="profile-header">
+    <section>
+        <div class="profile-names">
+            <img src={{userProfile?.profileImage}} alt={{userProfile?.username}} (error)="onError($event)">
+            <h2>{{userProfile?.username}}</h2>
+            <p>{{userProfile?.email}}</p>
+        </div>
+        <div class="more-info">
+            <p>{{posts.length}}</p>
+            <p>Publications count</p>
+        </div>
+    </section>
+    @if(curUser?._id==userProfile?._id){
+    <section class="profile-buttons">
+        <button>Edit profile</button>
+        <button>Change password</button>
+    </section>
+    }
+</section>
+<section class="profile-body">
+    <h2>All publications</h2>
+    <section class="publication-section">
+        @for (post of posts; track $index) {
+        <img src={{post.imageUrl}} alt="User post">
+        }
+    </section>
+</section>

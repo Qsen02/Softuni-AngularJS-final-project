@@ -67,7 +67,7 @@ function searchUsers(username) {
 }
 
 function getUserPublications(userId){
-    const publications=Posts.find({_id:userId});
+    const publications=Posts.find({ownerId:userId});
     return publications;
 }
 

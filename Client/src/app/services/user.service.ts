@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { AuthUser, User } from '../types/user';
 import { enviroment } from '../enviroment/app.enviroment';
 import { Observable } from 'rxjs';
+import { Post } from '../types/post';
 
 @Injectable({
     providedIn: 'root',
@@ -65,7 +66,7 @@ export class UserService {
         return this.http.get<User>(`${enviroment.apiUrl}/users/${userId}`);
     }
 
-    getUserPosts(userId:string):Observable<User[]>{
-        return this.http.get<User[]>(`${enviroment.apiUrl}/users/${userId}/posts`);
+    getUserPosts(userId:string):Observable<Post[]>{
+        return this.http.get<Post[]>(`${enviroment.apiUrl}/users/${userId}/posts`);
     }
 }
