@@ -1,13 +1,14 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthUser, User } from '../../types/user';
 import { PostsService } from '../../services/posts.service';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { UserService } from '../../services/user.service';
+import { imageProfileErrorHandler } from '../../utils/imageErrorHandlers';
 
 @Component({
     selector: 'app-post-likes',
     standalone: true,
-    imports: [],
+    imports: [RouterLink],
     templateUrl: './post-likes.component.html',
     styleUrl: './post-likes.component.css'
 })
@@ -33,7 +34,7 @@ export class PostLikesComponent implements OnInit {
                 this.isLoading = false;
             },
             error: err => {
-                this.isLoading=false;
+                this.isLoading = false;
                 this.isError = true;
             }
         })
@@ -41,5 +42,10 @@ export class PostLikesComponent implements OnInit {
 
     onBack() {
         this.router.navigate(['/home']);
+    }
+
+    onError(event: Event) {
+        const imgRef = event.target as HTMLImageElement;
+        imageProfileErrorHandler(imgRef);
     }
 }

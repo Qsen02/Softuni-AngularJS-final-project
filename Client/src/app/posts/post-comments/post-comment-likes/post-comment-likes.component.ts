@@ -1,13 +1,14 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthUser, User } from '../../../types/user';
 import { CommentService } from '../../../services/comment.service';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { UserService } from '../../../services/user.service';
+import { imageProfileErrorHandler } from '../../../utils/imageErrorHandlers';
 
 @Component({
     selector: 'app-post-comment-likes',
     standalone: true,
-    imports: [],
+    imports: [RouterLink],
     templateUrl: './post-comment-likes.component.html',
     styleUrl: './post-comment-likes.component.css'
 })
@@ -42,5 +43,10 @@ export class PostCommentLikesComponent implements OnInit {
     onBack():void{
        const postId=this.route.snapshot.params['postId'];
        this.router.navigate([`/home/posts/${postId}/comments`])
+    }
+
+    onError(event: Event) {
+        const imgRef = event.target as HTMLImageElement;
+        imageProfileErrorHandler(imgRef);
     }
 }

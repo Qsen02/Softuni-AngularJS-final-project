@@ -13,7 +13,8 @@
             }
             @for (like of likes; track $index) {
             <article [class]="like._id==curUser?._id?'your-like':'other-like'">
-                <img src={{like.profileImage}} alt={{like.username}}>
+                <img src={{like.profileImage}} alt={{like.username}} (error)="onError($event)"
+                [routerLink]="['/profile',like._id]">
                 <h3>{{like.username}}</h3>
             </article>
             }@empty {
