@@ -1,6 +1,9 @@
 <section class="profile-header">
     <section class="profile-header-names">
         <div class="profile-names">
+            @if(isLoadingProfile && !isError){
+                <span class="loader"></span>
+            }
             <img src={{userProfile?.profileImage}} alt={{userProfile?.username}} (error)="onError($event)">
             <h2>{{userProfile?.username}}</h2>
             <p>{{userProfile?.email}}</p>
@@ -20,10 +23,18 @@
 <section class="profile-body">
     <h2>All publications</h2>
     <section class="publication-section">
+        @if(isLoadingPosts && !isError){
+        <span class="loader"></span>
+        <h2>Posts loading...</h2>
+        }
         @for (post of posts; track $index) {
         <img src={{post.imageUrl}} alt="User post">
         }@empty {
-            <h2>No publications yet.</h2>
+        @if(!isLoadingPosts && !isError){
+        <h2>No publications yet.</h2>
+        }@else if(!isLoadingPosts && isError){
+        <h2>Something went wrong, please try again later!</h2>
+        }
         }
     </section>
 </section>

@@ -14,7 +14,8 @@ import { imageProfileErrorHandler } from '../../utils/imageErrorHandlers';
 })
 export class ProfileComponent implements OnInit {
     posts: Post[] = [];
-    isLoading = false;
+    isLoadingPosts = false;
+    isLoadingProfile = false;
     isError = false;
     userProfile: User | null = null;
     curUser: AuthUser | null = null;
@@ -22,27 +23,28 @@ export class ProfileComponent implements OnInit {
     constructor(private route: ActivatedRoute, private userService: UserService) { }
 
     ngOnInit(): void {
-        this.isLoading = true;
+        this.isLoadingProfile = true;
         const userId = this.route.snapshot.params['userId'];
         this.userService.getUserPosts(userId).subscribe({
             next: (posts) => {
                 this.posts = posts;
+                this.isLoadingProfile=false;
             },
             error: (err) => {
                 this.isError = true;
-                this.isLoading = false;
+                this.isLoadingProfile = false;
             }
         })
-
+        this.isLoadingPosts = true;
         this.userService.getUserById(userId).subscribe({
             next: (user) => {
                 this.userProfile = user;
                 this.curUser = this.userService.getUser();
-                this.isLoading = false;
+                this.isLoadingPosts = false;
             },
             error: (err) => {
                 this.isError = true;
-                this.isLoading = false;
+                this.isLoadingPosts = false;
             }
         })
     }
