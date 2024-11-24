@@ -64,4 +64,8 @@ export class UserService {
     getUserById(userId:User|undefined):Observable<User>{
         return this.http.get<User>(`${enviroment.apiUrl}/users/${userId}`);
     }
+
+    getUserPosts(userId:string):Observable<User[]>{
+        return this.http.get<User[]>(`${enviroment.apiUrl}/users/${userId}/posts`);
+    }
 }
