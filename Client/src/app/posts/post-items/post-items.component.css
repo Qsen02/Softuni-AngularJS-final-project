@@ -8,6 +8,8 @@
     display: flex;
     flex-direction: column;
     gap: 10px;
+    border: none;
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
 }
 
 .post-header {
@@ -61,6 +63,15 @@
     gap:5px;
 }
 
+.post-likes-wrapper {
+    flex: 0 0 25%;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap:5px;
+}
+
+
 .post-comments {
     flex: 0 0 25%;
     display: flex;
@@ -99,5 +110,15 @@
 @media(max-width:600px){
     .post-item{
         width: 300px;
+    }
+
+    .buttons {
+        font-size: 12pt;
+    }
+    .buttons i{
+        font-size: 14pt;
+    }
+    .post-likes{
+        flex: 0 0 45%;
     }
 }

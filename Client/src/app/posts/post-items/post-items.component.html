@@ -10,7 +10,7 @@
         </div>
         <article class="buttons">
             @if(isUser && !isOwner){
-            <div class="post-likes">
+            <div class="post-likes-wrapper">
                 @if(isLiked){
                     <div class="post-likes">
                         <i class="fa-solid fa-thumbs-up" (click)="unlike()"></i>

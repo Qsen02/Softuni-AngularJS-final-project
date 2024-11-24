@@ -1,7 +1,9 @@
-import { Component, OnChanges, OnInit } from '@angular/core';
+import { Component, OnChanges, OnInit, Renderer2 } from '@angular/core';
 import { Nav } from '../../types/navigation';
 import { RouterLink } from '@angular/router';
 import { UserService } from '../../services/user.service';
+import { AuthUser } from '../../types/user';
+import { imageProfileErrorHandler } from '../../utils/imageErrorHandlers';
 
 @Component({
     selector: 'app-header',
@@ -11,10 +13,15 @@ import { UserService } from '../../services/user.service';
     styleUrl: './header.component.css'
 })
 export class HeaderComponent implements OnInit {
-    isUser=false;
+    curUser:AuthUser|null=null;
     constructor(private userService:UserService){}
 
     ngOnInit(): void {
-        this.isUser=this.userService.isLogged;
+        this.curUser=this.userService.getUser();
+    }
+
+    onError(event:Event){
+        const imageRef=event.target as HTMLImageElement;
+        imageProfileErrorHandler(imageRef);
     }
 }
