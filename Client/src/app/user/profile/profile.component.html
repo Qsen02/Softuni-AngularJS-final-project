@@ -1,5 +1,5 @@
 <section class="profile-header">
-    <section>
+    <section class="profile-header-names">
         <div class="profile-names">
             <img src={{userProfile?.profileImage}} alt={{userProfile?.username}} (error)="onError($event)">
             <h2>{{userProfile?.username}}</h2>
@@ -22,6 +22,8 @@
     <section class="publication-section">
         @for (post of posts; track $index) {
         <img src={{post.imageUrl}} alt="User post">
+        }@empty {
+            <h2>No publications yet.</h2>
         }
     </section>
 </section>

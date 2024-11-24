@@ -1,6 +1,6 @@
 <article class="post-item">
     <div class="post-header">
-        <img src={{post?.ownerId?.profileImage}} alt="profile image">
+        <img src={{post?.ownerId?.profileImage}} alt={{post?.ownerId?.username}} [routerLink]="['/profile',post?.ownerId?._id]">
         <h2>{{post?.ownerId?.username}}</h2>
     </div>
     <div class="post-body">
