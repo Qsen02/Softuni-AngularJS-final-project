@@ -50,6 +50,10 @@
     gap:20px;
 }
 
+.comment-wrapper h2{
+    text-align: center;
+}
+
 @media (max-width:600px){
     .comment-section form input{
         width: 60%;

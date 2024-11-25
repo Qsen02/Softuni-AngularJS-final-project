@@ -78,6 +78,15 @@
     color: lightgray;
 }
 
+.loader {
+    display: block;
+    margin: 30px auto;
+}
+
+.details-body {
+    text-align: center;
+}
+
 @media(max-width:900px) {
     .details-wrapper {
         flex-direction: column;
