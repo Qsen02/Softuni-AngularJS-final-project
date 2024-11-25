@@ -4,7 +4,8 @@
             @if(isLoadingProfile && !isError){
                 <span class="loader"></span>
             }
-            <img src={{userProfile?.profileImage}} alt={{userProfile?.username}} (error)="onError($event)">
+            <img src={{userProfile?.profileImage}} alt={{userProfile?.username}} (error)="onError($event)" 
+            [routerLink]="['/profile',userProfile?._id,'image']">
             <h2>{{userProfile?.username}}</h2>
             <p>{{userProfile?.email}}</p>
         </div>

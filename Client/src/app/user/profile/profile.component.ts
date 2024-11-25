@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Post } from '../../types/post';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, RouterLink } from '@angular/router';
 import { UserService } from '../../services/user.service';
 import { AuthUser, User } from '../../types/user';
 import { imageProfileErrorHandler } from '../../utils/imageErrorHandlers';
@@ -8,7 +8,7 @@ import { imageProfileErrorHandler } from '../../utils/imageErrorHandlers';
 @Component({
     selector: 'app-profile',
     standalone: true,
-    imports: [],
+    imports: [RouterLink],
     templateUrl: './profile.component.html',
     styleUrl: './profile.component.css'
 })

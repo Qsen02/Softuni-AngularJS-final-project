@@ -1,0 +1,12 @@
+<div class="modal">
+    <section>
+        <button (click)="onBack()">X</button>
+        @if(isLoading && !isError){
+        <span class="loader"></span>
+        }@else if(!isLoading && isError){
+        <h2>Something went wrong, please try again later!</h2>
+        }@else{
+        <img src={{user?.profileImage}} alt={{user?.username}}>
+        }
+    </section>
+</div>
