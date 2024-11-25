@@ -1,12 +1,12 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { ProfilePostCommentItemComponent } from './profile-post-comment-item/profile-post-comment-item.component';
 import { Comment } from '../../../../types/comment';
 import { UserService } from '../../../../services/user.service';
+import { PostCommentsItemComponent } from '../../../../posts/post-comments/post-comments-item/post-comments-item.component';
 
 @Component({
     selector: 'app-profile-post-comments',
     standalone: true,
-    imports: [ProfilePostCommentItemComponent],
+    imports: [PostCommentsItemComponent],
     templateUrl: './profile-post-comments.component.html',
     styleUrl: './profile-post-comments.component.css'
 })

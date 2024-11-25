@@ -8,7 +8,7 @@
     }
     <section class="comment-wrapper">
         @for (comment of comments; track $index) {
-            <app-profile-post-comment-item [commentProp]="comment" />
+            <app-post-comments-item [commentProp]="comment" />
         }@empty {
             <h2>No comments yet, be the first one!</h2>
         }

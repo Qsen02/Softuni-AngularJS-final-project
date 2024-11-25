@@ -84,7 +84,7 @@
 .publication-section {
     width: 100%;
     padding: 20px;
-    border-top: solid 2px black;
+    border-top: solid 2px grey;
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
