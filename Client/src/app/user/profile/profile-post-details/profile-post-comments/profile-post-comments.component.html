@@ -1,16 +1,24 @@
 <section class="comment-section">
     <h2>Comments</h2>
-    @if(isUser){
+    @if(curUser){
     <form>
         <input type="text" name="content" placeholder="Write comment...">
         <button>Submit</button>
     </form>
     }
     <section class="comment-wrapper">
+        @if(loading && !error){
+        <span class="loader"></span>
+        <p>Comment loading...</p>
+        }
         @for (comment of comments; track $index) {
-            <app-post-comments-item [commentProp]="comment" />
+        <app-post-comments-item [commentProp]="comment" />
         }@empty {
+            @if(!loading && error){
+
+            }@else if(!loading && !error){
             <h2>No comments yet, be the first one!</h2>
+            }
         }
     </section>
 </section>

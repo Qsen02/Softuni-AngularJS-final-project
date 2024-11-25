@@ -103,13 +103,14 @@ ul {
     color: white;
     font-size: 14pt;
     border: none;
-    border-radius: 20px;
+    border-radius: 30px;
     cursor: pointer;
 }
 
 .form button:hover{
     background-color: rgb(131, 220, 255);
 }
+
 .form>div{
     width: 100%;
     display: flex;

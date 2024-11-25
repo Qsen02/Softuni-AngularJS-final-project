@@ -23,7 +23,8 @@
                 </div>
             </article>
             }
-            <app-profile-post-comments [commentsProp]="post?.comments" />
+            <app-profile-post-comments [loadingProp]="isLoading" [userProp]="curUser" [errorProp]="isError"
+                [commentsProp]="post?.comments" />
         </section>
     </section>
 </div>

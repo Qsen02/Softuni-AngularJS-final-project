@@ -1,7 +1,8 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, input, Input, OnInit } from '@angular/core';
 import { Comment } from '../../../../types/comment';
 import { UserService } from '../../../../services/user.service';
 import { PostCommentsItemComponent } from '../../../../posts/post-comments/post-comments-item/post-comments-item.component';
+import { AuthUser } from '../../../../types/user';
 
 @Component({
     selector: 'app-profile-post-comments',
@@ -10,12 +11,9 @@ import { PostCommentsItemComponent } from '../../../../posts/post-comments/post-
     templateUrl: './profile-post-comments.component.html',
     styleUrl: './profile-post-comments.component.css'
 })
-export class ProfilePostCommentsComponent implements OnInit {
+export class ProfilePostCommentsComponent {
     @Input("commentsProp") comments: Comment[] | undefined = [];
-    isUser = false;
-    constructor(private userService: UserService) { }
-
-    ngOnInit(): void {
-        this.isUser = this.userService.isLogged;
-    }
+    @Input("errorProp") error=false;
+    @Input("userProp") curUser:AuthUser|null=null;
+    @Input("loadingProp") loading=false;
 }

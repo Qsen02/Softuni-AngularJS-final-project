@@ -1,7 +1,14 @@
 <article class="post-item">
     <div class="post-header">
-        <img src={{post?.ownerId?.profileImage}} alt={{post?.ownerId?.username}} [routerLink]="['/profile',post?.ownerId?._id]">
+        <img src={{post?.ownerId?.profileImage}} alt={{post?.ownerId?.username}}
+            [routerLink]="['/profile',post?.ownerId?._id]">
         <h2>{{post?.ownerId?.username}}</h2>
+        @if(user?._id==post?.ownerId?._id){
+        <div class="header-buttons">
+            <button>Edit</button>
+            <button>Delete</button>
+        </div>
+        }
     </div>
     <div class="post-body">
         <div class="post-body-main">
@@ -12,22 +19,22 @@
             @if(isUser && !isOwner){
             <div class="post-likes-wrapper">
                 @if(isLiked){
-                    <div class="post-likes">
-                        <i class="fa-solid fa-thumbs-up" (click)="unlike()"></i>
-                        <p [routerLink]="['/home','posts',post?._id,'likes']">{{post?.likes?.length}}</p>
-                    </div>
+                <div class="post-likes">
+                    <i class="fa-solid fa-thumbs-up" (click)="unlike()"></i>
+                    <p [routerLink]="['/home','posts',post?._id,'likes']">{{post?.likes?.length}}</p>
+                </div>
                 }@else {
-                    <div class="post-likes">
-                        <i class="fa-regular fa-thumbs-up" (click)="like()"></i>
-                        <p [routerLink]="['/home','posts',post?._id,'likes']">{{post?.likes?.length}}</p>
-                    </div>
+                <div class="post-likes">
+                    <i class="fa-regular fa-thumbs-up" (click)="like()"></i>
+                    <p [routerLink]="['/home','posts',post?._id,'likes']">{{post?.likes?.length}}</p>
+                </div>
                 }
             </div>
             }@else if(!isUser || isOwner){
-                <div class="post-likes">
-                    <i class="fa-solid fa-thumbs-up" id="not-user"></i>
-                    <p [routerLink]="['/home','posts',post?._id,'likes']">{{post?.likes?.length}}</p>
-                </div>
+            <div class="post-likes">
+                <i class="fa-solid fa-thumbs-up" id="not-user"></i>
+                <p [routerLink]="['/home','posts',post?._id,'likes']">{{post?.likes?.length}}</p>
+            </div>
             }
             <div class="post-comments">
                 <i class="fa-regular fa-comment" [routerLink]="['/home','posts',post?._id,'comments']"></i>

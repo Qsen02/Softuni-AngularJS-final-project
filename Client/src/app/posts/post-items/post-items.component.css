@@ -13,6 +13,7 @@
 }
 
 .post-header {
+    position: relative;
     padding: 10px;
     display: flex;
     flex-wrap: wrap;
@@ -32,6 +33,28 @@
     display: flex;
     flex-direction: column;
     gap: 10px;
+}
+
+.header-buttons{
+    position: absolute;
+    top:15px;
+    right: 10px;
+    display: flex;
+    gap:20px;
+}
+
+.header-buttons button{
+    padding: 10px 20px 10px 20px;
+    background-color: rgb(57, 199, 255);
+    color: white;
+    font-size: 14pt;
+    border: none;
+    border-radius: 30px;
+    cursor: pointer;
+}
+
+.header-buttons   button:hover{
+    background-color: rgb(131, 220, 255);
 }
 
 .post-body img{
@@ -110,6 +133,16 @@
 @media(max-width:600px){
     .post-item{
         width: 300px;
+    }
+
+    .header-buttons{
+        position: static;
+        margin: 0 auto;
+    }
+
+    .header-buttons  button{
+        padding: 5px 10px 5px 10px;
+        font-size: 12pt;
     }
 
     .buttons {
