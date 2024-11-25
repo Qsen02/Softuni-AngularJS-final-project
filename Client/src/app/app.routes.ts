@@ -12,6 +12,7 @@ import { PostCommentLikesComponent } from './posts/post-comments/post-comment-li
 import { ProfileComponent } from './user/profile/profile.component';
 import { PostImageComponent } from './posts/post-image/post-image.component';
 import { ProfileImageComponent } from './user/profile/profile-image/profile-image.component';
+import { ProfilePostDetailsComponent } from './user/profile/profile-post-details/profile-post-details.component';
 
 export const routes: Routes = [
     { path: "", redirectTo: "home", pathMatch: "full" },
@@ -27,7 +28,8 @@ export const routes: Routes = [
     {
         path: "profile", children: [
             { path: ":userId", component: ProfileComponent },
-            { path: ":userId/image", component: ProfileImageComponent }
+            { path: ":userId/image", component: ProfileImageComponent },
+            { path: ":userId/post/:postId/details", component: ProfilePostDetailsComponent }
         ]
     },
     { path: "register", component: RegisterComponent, canActivate: [guestGuard] },

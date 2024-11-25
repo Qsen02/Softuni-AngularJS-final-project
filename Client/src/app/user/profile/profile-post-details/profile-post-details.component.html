@@ -1,0 +1,20 @@
+<div class="modal">
+    <section class="details-wrapper">
+        <section class="details-image">
+            <img src={{post?.imageUrl}} alt={{post?.description}}>
+        </section>
+        <section class="details-body">
+            <article class="post-header">
+                <div class="title">
+                    <h2>{{post?.ownerId?.username}}</h2>
+                    <button>Edit</button>
+                    <button>Delete</button>
+                    <button (click)="onBack()">X</button>
+                </div>
+                <div class="description">
+                    <p>{{post?.description}}</p>
+                </div>
+            </article>
+        </section>
+    </section>
+</div>

@@ -29,7 +29,7 @@
         <h2>Posts loading...</h2>
         }
         @for (post of posts; track $index) {
-        <img src={{post.imageUrl}} alt="User post">
+        <img src={{post.imageUrl}} alt="User post" [routerLink]="['/profile',userProfile?._id,'post',post._id,'details']">
         }@empty {
         @if(!isLoadingPosts && !isError){
         <h2>No publications yet.</h2>
