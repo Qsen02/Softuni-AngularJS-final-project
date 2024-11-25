@@ -1,0 +1,67 @@
+.comment-section{
+    width: 100%;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap:20px;
+}
+
+.comment-section form{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    gap:10px;
+}
+.comment-section form input{
+    width: 50%;
+    height: 40px;
+    border-radius: 20px;
+    background-color:grey;
+    color: lightgray;
+    font-size: 12pt;
+    padding-left: 10px;
+    border: none;
+}
+
+.comment-section form input::placeholder{
+    color: lightgray;
+}
+
+.comment-section form button{
+    padding: 10px 20px 10px 20px;
+    background-color: rgb(57, 199, 255);
+    color: white;
+    font-size: 14pt;
+    border: none;
+    border-radius: 20px;
+    cursor: pointer;
+}
+
+.comment-section form button:hover{
+    background-color: rgb(131, 220, 255);
+}
+
+.comment-wrapper{
+    width: 100%;
+    padding-top: 20px;
+    display: flex;
+    flex-direction: column;
+    gap:20px;
+}
+
+@media (max-width:600px){
+    .comment-section form input{
+        width: 60%;
+        height: 30px;
+        font-size: 12pt;
+    }
+    .comment-section form input::placeholder{
+        font-size: 12pt;
+    }
+
+    .comment-section form button{
+        font-size: 12pt;
+        padding: 5px 10px 5px 10px;
+    }
+}

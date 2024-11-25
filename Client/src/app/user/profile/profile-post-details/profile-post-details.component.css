@@ -1,46 +1,46 @@
-.details-wrapper{
+.details-wrapper {
     width: 80vw;
     height: 80vh;
     border-radius: 20px;
-    background-color: rgb(40,40,40);
+    background-color: rgb(40, 40, 40);
     display: flex;
     flex-wrap: wrap;
     overflow: hidden;
     color: lightgray;
 }
 
-.details-image{
+.details-image {
     flex: 0 0 50%;
 }
 
-.details-image img{
+.details-image img {
     width: 100%;
     height: 100%;
     object-fit: cover;
 }
 
-.details-body{
-    flex:0 0 50%;
+.details-body {
+    flex: 0 0 50%;
     padding: 20px;
 }
 
-.post-header{
+.post-header {
     position: relative;
     display: flex;
     flex-direction: column;
     align-items: flex-start;
-    gap:20px;
+    gap: 20px;
     border-bottom: solid 2px grey;
 }
 
-.title{
+.title {
     display: flex;
     justify-content: space-around;
     align-items: center;
-    gap:30px;
+    gap: 30px;
 }
 
-.title button{
+.title button {
     padding: 10px 20px 10px 20px;
     background-color: rgb(57, 199, 255);
     color: white;
@@ -50,25 +50,55 @@
     cursor: pointer;
 }
 
-.title button:hover{
+.title button:hover {
     background-color: rgb(131, 220, 255);
 }
 
-.description{
+.description {
     padding-bottom: 20px;
 }
 
-#back{
+.description p {
+    width: 100%;
+    word-wrap: break-word;
+}
+
+#back {
     position: absolute;
-    top:-10px;
+    top: -10px;
     right: -10px;
     font-size: 20pt;
-    background-color: rgb(40,40,40);
+    background-color: rgb(40, 40, 40);
     color: grey;
     border: none;
     cursor: pointer;
 }
 
-#back:hover{
+#back:hover {
     color: lightgray;
+}
+
+@media(max-width:900px) {
+    .details-wrapper {
+        flex-direction: column;
+    }
+}
+
+@media (max-width:600px) {
+    .details-wrapper {
+        width: 100vw;
+    }
+
+    #back {
+        font-size: 14pt;
+    }
+
+    .title {
+        gap: 10px;
+    }
+
+    .title button {
+        padding: 5px 10px 5px 10px;
+        font-size: 12pt;
+    }
 }
