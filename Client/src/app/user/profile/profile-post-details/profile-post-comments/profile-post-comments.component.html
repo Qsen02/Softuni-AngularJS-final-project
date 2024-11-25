@@ -1,0 +1,16 @@
+<section class="comment-section">
+    <h2>Comments</h2>
+    @if(isUser){
+    <form>
+        <input type="text" name="content" placeholder="Write comment...">
+        <button>Submit</button>
+    </form>
+    }
+    <section class="comment-wrapper">
+        @for (comment of comments; track $index) {
+            <app-profile-post-comment-item [commentProp]="comment" />
+        }@empty {
+            <h2>No comments yet, be the first one!</h2>
+        }
+    </section>
+</section>

@@ -2,11 +2,12 @@ import { Component, OnInit } from '@angular/core';
 import { Post } from '../../../types/post';
 import { PostsService } from '../../../services/posts.service';
 import { ActivatedRoute, Router } from '@angular/router';
+import { ProfilePostCommentsComponent } from './profile-post-comments/profile-post-comments.component';
 
 @Component({
     selector: 'app-profile-post-details',
     standalone: true,
-    imports: [],
+    imports: [ProfilePostCommentsComponent],
     templateUrl: './profile-post-details.component.html',
     styleUrl: './profile-post-details.component.css'
 })
