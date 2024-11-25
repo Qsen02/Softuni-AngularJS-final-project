@@ -1,0 +1,44 @@
+section {
+    position: relative;
+    color: white;
+    text-align: center;
+}
+
+section img {
+    width: 70vw;
+    height: 70vh;
+    border-radius: 10px;
+}
+
+section button {
+    position: absolute;
+    top: -90px;
+    right: -90px;
+    background-color: rgb(80,80,80);
+    color: lightgray;
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+    cursor: pointer;
+    border: none;
+    font-size: 16pt;
+}
+
+section button:hover{
+    color: white;
+}
+
+@media(max-width:650px){
+    section img {
+        width: 60vw;
+        height:30vh;
+    }
+
+    section button{
+        width: 30px;
+        height: 30px;
+        font-size: 12pt;
+        top: -50px;
+        right: -50px;
+    }
+}

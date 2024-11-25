@@ -10,6 +10,7 @@ import { PostLikesComponent } from './posts/post-likes/post-likes.component';
 import { PostCommentsComponent } from './posts/post-comments/post-comments.component';
 import { PostCommentLikesComponent } from './posts/post-comments/post-comment-likes/post-comment-likes.component';
 import { ProfileComponent } from './user/profile/profile.component';
+import { PostImageComponent } from './posts/post-image/post-image.component';
 
 export const routes: Routes = [
     { path: "", redirectTo: "home", pathMatch: "full" },
@@ -18,7 +19,8 @@ export const routes: Routes = [
             { path: "", component: MainComponent },
             { path: "posts/:postId/likes", component: PostLikesComponent },
             { path: "posts/:postId/comments", component: PostCommentsComponent },
-            { path: "posts/:postId/comments/:commentId/likes", component: PostCommentLikesComponent }
+            { path: "posts/:postId/comments/:commentId/likes", component: PostCommentLikesComponent },
+            { path: "posts/:postId/image", component: PostImageComponent }
         ]
     },
     { path: "profile/:userId", component: ProfileComponent },

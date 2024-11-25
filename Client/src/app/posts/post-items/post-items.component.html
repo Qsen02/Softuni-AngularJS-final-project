@@ -6,7 +6,7 @@
     <div class="post-body">
         <div class="post-body-main">
             <p>{{post?.description}}</p>
-            <img src={{post?.imageUrl}} alt="post image">
+            <img src={{post?.imageUrl}} alt="post image" [routerLink]="['/home','posts',post?._id,'image']">
         </div>
         <article class="buttons">
             @if(isUser && !isOwner){
