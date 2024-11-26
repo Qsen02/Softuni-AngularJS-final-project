@@ -21,7 +21,7 @@ userRouter.post("/register",
             const user = await register(fields.username, fields.email, fields.password);
             const token = setToken(user);
             res.json({
-                _id:user._id,
+                _id: user._id,
                 username: user.username,
                 email: user.email,
                 profileImage: user.profileImage,
@@ -45,7 +45,7 @@ userRouter.post("/login",
             const user = await login(fields.username, fields.password);
             const token = setToken(user);
             res.json({
-                _id:user._id,
+                _id: user._id,
                 username: user.username,
                 email: user.email,
                 profileImage: user.profileImage,
@@ -106,18 +106,21 @@ userRouter.put("/update/:userId", isUser(),
     })
 
 userRouter.get("/search/:query", async (req, res) => {
-    const query = req.params.query;
+    let query = req.params.query;
+    if (query == "No value") {
+        query = "";
+    }
     const users = await searchUsers(query).lean();
     res.json(users);
 })
 
-userRouter.get("/:userId/posts",async(req,res)=>{
+userRouter.get("/:userId/posts", async (req, res) => {
     const userId = req.params.userId;
     const isValid = await checkUserId(userId);
     if (!isValid) {
         res.status(404).json({ message: "Resource not found!" });
     }
-    const posts=await getUserPublications(userId).lean();
+    const posts = await getUserPublications(userId).lean();
     res.json(posts);
 })
 

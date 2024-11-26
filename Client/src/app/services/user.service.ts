@@ -70,7 +70,7 @@ export class UserService {
         return this.http.get<Post[]>(`${enviroment.apiUrl}/users/${userId}/posts`);
     }
 
-    searchUsers(query:string):Observable<User[]>{
+    searchUsers(query:string|null|undefined):Observable<User[]>{
         return this.http.get<User[]>(`${enviroment.apiUrl}/users/search/${query}`);
     }
 }

@@ -9,7 +9,7 @@ import { HeaderComponent } from '../../core/header/header.component';
 @Component({
     selector: 'app-main-posts',
     standalone: true,
-    imports: [RouterLink,HeaderComponent],
+    imports: [RouterLink],
     templateUrl: './post-items.component.html',
     styleUrl: './post-items.component.css'
 })
