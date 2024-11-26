@@ -69,4 +69,8 @@ export class UserService {
     getUserPosts(userId:string):Observable<Post[]>{
         return this.http.get<Post[]>(`${enviroment.apiUrl}/users/${userId}/posts`);
     }
+
+    searchUsers(query:string):Observable<User[]>{
+        return this.http.get<User[]>(`${enviroment.apiUrl}/users/search/${query}`);
+    }
 }

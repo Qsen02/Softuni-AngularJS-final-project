@@ -1,22 +1,18 @@
 <header>
-    <img src={{curUser?.profileImage}} alt={{curUser?.username}} (error)="onError($event)">
-    <form class="search-form">
-        <div>
-            <input type="text" name="username" placeholder="Search for users..." />
-            <button type="submit"><i class="fa-solid fa-magnifying-glass"></i></button>
-        </div>
-    </form>
+    <div class="image-wrapper">
+        <img src={{curUser?.profileImage}} alt={{curUser?.username}} (error)="onError($event)">
+    </div>
     <nav class="navigation">
         <ul>
             @if(!curUser){
-                <li><a routerLink="/home">Home</a></li>
-                <li><a routerLink="/login">Login</a></li>
-                <li><a routerLink="/register">Register</a></li>
+            <li><a routerLink="/home">Home</a></li>
+            <li><a routerLink="/login">Login</a></li>
+            <li><a routerLink="/register">Register</a></li>
             }@else{
-                <li><a routerLink="/home">Home</a></li>
-                <li><a routerLink="/create">Create</a></li>
-                <li><a [routerLink]="['/profile',curUser._id]">Profile</a></li>
-                <li><a routerLink="/logout">Logout</a></li>
+            <li><a routerLink="/home">Home</a></li>
+            <li><a routerLink="/create">Create</a></li>
+            <li><a [routerLink]="['/profile',curUser._id]">Profile</a></li>
+            <li><a routerLink="/logout">Logout</a></li>
             }
         </ul>
     </nav>

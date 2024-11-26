@@ -14,6 +14,7 @@ export class MainComponent implements OnInit {
 	posts: Post[] = [];
 	isLoading = false;
 	isError = false;
+	isSearched=false;
 
 	constructor(private postApi: PostsService) { }
 
