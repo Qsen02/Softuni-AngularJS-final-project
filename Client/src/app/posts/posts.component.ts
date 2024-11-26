@@ -10,7 +10,7 @@ import { UserItemComponent } from '../user/user-item/user-item.component';
 @Component({
 	selector: 'app-main',
 	standalone: true,
-	imports: [MainPostsComponent, ReactiveFormsModule,UserItemComponent],
+	imports: [MainPostsComponent, ReactiveFormsModule, UserItemComponent],
 	templateUrl: './posts.component.html',
 	styleUrl: './posts.component.css'
 })
@@ -42,12 +42,20 @@ export class MainComponent implements OnInit {
 
 	onSearch() {
 		let username = this.searchUserForm.value.username;
-		if(username==""){
-			username="No value";
+		if (username == "") {
+			username = "No value";
 		}
-		this.userService.searchUsers(username).subscribe((users) => {
-			this.isSearched = true;
-			this.searchedResults = users;
+		this.isLoading = true;
+		this.userService.searchUsers(username).subscribe({
+			next: (users) => {
+				this.isSearched = true;
+				this.searchedResults = users;
+				this.isLoading = false;
+			},
+			error: (err) => {
+				this.isLoading = false;
+				this.isError = true;
+			}
 		})
 	}
 }
