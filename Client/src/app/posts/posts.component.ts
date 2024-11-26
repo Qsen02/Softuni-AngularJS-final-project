@@ -5,11 +5,12 @@ import { MainPostsComponent } from './post-items/post-items.component';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { UserService } from '../services/user.service';
 import { User } from '../types/user';
+import { UserItemComponent } from '../user/user-item/user-item.component';
 
 @Component({
 	selector: 'app-main',
 	standalone: true,
-	imports: [MainPostsComponent, ReactiveFormsModule],
+	imports: [MainPostsComponent, ReactiveFormsModule,UserItemComponent],
 	templateUrl: './posts.component.html',
 	styleUrl: './posts.component.css'
 })

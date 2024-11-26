@@ -5,7 +5,11 @@
     </div>
 </form>
 <div class="wrapper">
-    <h1>All posts</h1>
+    @if(isSearched){
+        <h1>Users found</h1>
+    }@else {
+        <h1>All posts</h1>
+    }
     <section class="post-wrapper">
         @if(isLoading && !isError){
         <span class="loader"></span>
@@ -18,8 +22,14 @@
             <p>Something went wrong, please try again later!</p>
         </div>
         }@else{
-            @for (post of posts; track $index) {
-            <app-main-posts [postProp]=post />
+            @if(isSearched){
+                @for (user of searchedResults; track $index) {
+                  <app-user-item [userProp]="user"/>
+                }
+            }@else{
+                @for (post of posts; track $index) {
+                <app-main-posts [postProp]=post />
+                }
             }
         }
     </section>

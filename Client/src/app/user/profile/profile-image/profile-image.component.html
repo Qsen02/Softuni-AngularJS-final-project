@@ -6,7 +6,7 @@
         }@else if(!isLoading && isError){
         <h2>Something went wrong, please try again later!</h2>
         }@else{
-        <img src={{user?.profileImage}} alt={{user?.username}}>
+        <img src={{user?.profileImage}} alt={{user?.username}} (error)="onError($event)">
         }
     </section>
 </div>

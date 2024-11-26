@@ -1,0 +1,36 @@
+.user-wrapper{
+    width: 60vw;
+    background-color: rgb(40,40,40);
+    color: lightgray;
+    cursor: pointer;
+    padding: 20px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+    align-items: center;
+    gap:30px;
+    border-radius: 10px;
+    font-size: 16pt;
+}
+
+.user-wrapper:hover{
+    background-color: grey;
+}
+
+.user-wrapper img{
+    width: 70px;
+    height: 70px;
+    border-radius: 50%;
+}
+
+@media(max-width:820px){
+    .user-wrapper{
+        font-size: 12pt;
+        flex-direction: column;
+    }
+    .user-wrapper img{
+        width: 70px;
+        height: 70px;
+    }
+}

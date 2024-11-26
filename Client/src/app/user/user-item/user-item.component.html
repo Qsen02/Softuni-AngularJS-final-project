@@ -1,0 +1,5 @@
+<article class="user-wrapper" [routerLink]="['/profile',user?._id]">
+    <img src={{user?.profileImage}} alt={{user?.username}} (error)="onError($event)">
+    <h2>{{user?.username}}</h2>
+    <p>{{user?.email}}</p>
+</article>

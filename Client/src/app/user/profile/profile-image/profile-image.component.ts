@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { User } from '../../../types/user';
 import { UserService } from '../../../services/user.service';
 import { ActivatedRoute, Router } from '@angular/router';
+import { imageProfileErrorHandler } from '../../../utils/imageErrorHandlers';
 
 @Component({
     selector: 'app-profile-image',
@@ -36,5 +37,10 @@ export class ProfileImageComponent implements OnInit {
     onBack() {
         const userId = this.route.snapshot.params['userId'];
         this.router.navigate([`/profile/${userId}`]);
+    }
+
+    onError(event:Event){
+        const imageRef=event.target as HTMLImageElement;
+        imageProfileErrorHandler(imageRef);
     }
 }
