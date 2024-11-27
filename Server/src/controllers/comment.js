@@ -75,7 +75,7 @@ commentRouter.put("/:commentId", isUser(),
         }
     })
 
-    commentRouter.post("/:commentId/like",async(req,res)=>{
+    commentRouter.post("/:commentId/like", isUser(),async(req,res)=>{
         const commentId = req.params.commentId;
         const user=req.user;
         const isValid = await checkCommentId(commentId);
@@ -86,7 +86,7 @@ commentRouter.put("/:commentId", isUser(),
         res.json({message:"Comment liked successfully!"})
     })
 
-    commentRouter.post("/:commentId/unlike",async(req,res)=>{
+    commentRouter.post("/:commentId/unlike", isUser(),async(req,res)=>{
         const commentId = req.params.commentId;
         const user=req.user;
         const isValid = await checkCommentId(commentId);
