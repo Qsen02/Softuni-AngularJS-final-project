@@ -4,6 +4,7 @@ import { ChangeVisabilityDirective } from '../../directives/change-visability.di
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { UserService } from '../../services/user.service';
 import { passwordPattern } from '../../utils/passRegexp';
+import { ErrorMessageService } from '../../services/error-message.service';
 
 @Component({
     selector: 'app-login',
@@ -13,16 +14,14 @@ import { passwordPattern } from '../../utils/passRegexp';
     styleUrl: './login.component.css'
 })
 export class LoginComponent {
-    isError = false;
-    errorMessage = "";
     isVisible = false;
 
     loginForm = new FormGroup({
-        username: new FormControl("", [Validators.required,Validators.minLength(2)]),
+        username: new FormControl("", [Validators.required, Validators.minLength(2)]),
         password: new FormControl("", [Validators.required, Validators.pattern(passwordPattern)])
     })
 
-    constructor(private userService: UserService, private router: Router) { }
+    constructor(private userService: UserService, private router: Router, private errorService: ErrorMessageService) { }
 
     onChange() {
         if (this.isVisible == false) {
@@ -33,22 +32,11 @@ export class LoginComponent {
     }
 
     onLogin(): void {
-        try {
-           const {username,password}=this.loginForm.value;
-            if (!username || !password) {
-                throw new Error("All fields required!");
-            }
-            this.userService.login(username, password).subscribe((user)=>{
+            const { username, password } = this.loginForm.value;
+            this.userService.login(username, password).subscribe((user) => {
                 this.loginForm.reset();
                 this.router.navigate(['/home']);
             });
-        } catch (err) {
-            if (err instanceof Error) {
-                this.isError = true;
-                this.errorMessage = err.message
-            }
-            return;
-        }
     }
 
 }

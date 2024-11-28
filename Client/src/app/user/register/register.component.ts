@@ -16,8 +16,6 @@ import { matchPassword } from '../../utils/matchPassword.validator';
 export class RegisterComponent {
     isVisiblePass = false;
     isVisibleRepass = false;
-    isError = false;
-    errorMessage = "";
 
     registerForm = new FormGroup({
         username: new FormControl("", [Validators.required, Validators.minLength(2)]),
@@ -57,24 +55,13 @@ export class RegisterComponent {
     }
 
     onRegister(): void {
-        try {
             const username = this.registerForm.value.username;
             const email =this.registerForm.value.email;
             const password = this.registerForm.value.passGroup?.repass;
             const repass = this.registerForm.value.passGroup?.repass;
-            if (!username || !email || !password || !repass) {
-                throw new Error("All fields required!");
-            }
             this.userService.register(username, email, password, repass).subscribe((user)=>{
                 this.registerForm.reset();
                 this.router.navigate(['/home']);
             });
-        } catch (err) {
-            if (err instanceof Error) {
-                this.isError = true;
-                this.errorMessage = err.message;
-            }
-            return;
-        }
     }
 }

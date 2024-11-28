@@ -13,12 +13,12 @@ export class LogoutComponent {
     constructor(private userService: UserService, private router: Router) { }
 
     onCancel(): void {
-        this.router.navigate(['/home']);
+        history.back();
     }
 
     onLogout(): void {
         this.userService.logout().subscribe((user)=>{
-            this.router.navigate(['/home']);
+            this.router.navigate(['/login']);
         });
     }
 }

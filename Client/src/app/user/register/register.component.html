@@ -1,8 +1,5 @@
 <form class="form" [formGroup]="registerForm" (ngSubmit)="onRegister()">
     <h2>Register here</h2>
-    @if(isError){
-    <p class="error">{{errorMessage}}</p>
-    }
     <p class="input">
         <label for="username">Username</label>
         <input type="text" id="username" name="username" formControlName="username">

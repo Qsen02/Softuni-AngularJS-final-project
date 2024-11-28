@@ -13,6 +13,7 @@ import { ProfileComponent } from './user/profile/profile.component';
 import { PostImageComponent } from './posts/post-image/post-image.component';
 import { ProfileImageComponent } from './user/profile/profile-image/profile-image.component';
 import { ProfilePostDetailsComponent } from './user/profile/profile-post-details/profile-post-details.component';
+import { ErrMessageComponent } from './err-message/err-message/err-message.component';
 
 export const routes: Routes = [
     { path: "", redirectTo: "home", pathMatch: "full" },
@@ -35,5 +36,6 @@ export const routes: Routes = [
     { path: "register", component: RegisterComponent, canActivate: [guestGuard] },
     { path: "login", component: LoginComponent, canActivate: [guestGuard] },
     { path: "logout", component: LogoutComponent, canActivate: [userGuard] },
+    { path: "error", component: ErrMessageComponent },
     { path: "**", component: ErrorPageComponent },
 ];
