@@ -8,10 +8,9 @@ import { Comment } from '../types/comment';
     providedIn: 'root'
 })
 export class CommentService {
-    host = enviroment.apiUrl;
     constructor(private http: HttpClient) { }
 
     getCommentById(commentId: string | undefined): Observable<Comment> {
-        return this.http.get<Comment>(`${this.host}/comments/${commentId}`);
+        return this.http.get<Comment>(`/api/comments/${commentId}`);
     }
 }

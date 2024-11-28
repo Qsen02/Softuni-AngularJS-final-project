@@ -6,6 +6,15 @@ const { isUser } = require("../middlewares.js/guard");
 
 const userRouter = Router();
 
+userRouter.get("/me", (req, res) => {
+    const user = req.user;
+    const token = req.cookies?.token;
+    if (token) {
+        user.accessToken = token;
+    }
+    res.json(user);
+})
+
 userRouter.post("/register",
     body("username").trim().isLength({ min: 2 }),
     body("email").trim().isLength({ min: 2 }).isEmail(),
@@ -20,7 +29,7 @@ userRouter.post("/register",
             }
             const user = await register(fields.username, fields.email, fields.password);
             const token = setToken(user);
-            res.cookie("token", token,{httpOnly:true});
+            res.cookie("token", token, { httpOnly: true });
             res.json({
                 _id: user._id,
                 username: user.username,
@@ -45,7 +54,7 @@ userRouter.post("/login",
             }
             const user = await login(fields.username, fields.password);
             const token = setToken(user);
-            res.cookie("token", token,{httpOnly:true});
+            res.cookie("token", token, { httpOnly: true });
             res.json({
                 _id: user._id,
                 username: user.username,
@@ -60,7 +69,7 @@ userRouter.post("/login",
 
 userRouter.get("/logout", isUser(), (req, res) => {
     res.clearCookie("token");
-    res.json({ message: "Logout was successfull!" });
+    res.json(null);
 })
 
 userRouter.put("/changePassword/:userId", isUser(),

@@ -1,46 +1,35 @@
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { AuthUser, User } from '../types/user';
-import { enviroment } from '../enviroment/app.enviroment';
-import { Observable } from 'rxjs';
+import { BehaviorSubject, Observable, tap } from 'rxjs';
 import { Post } from '../types/post';
 
 @Injectable({
     providedIn: 'root',
 })
 export class UserService {
+    private user$$ = new BehaviorSubject<AuthUser | null>(null);
+    private user$ = this.user$$.asObservable();
+
     user: AuthUser | null = null;
-    USER_TOKEN = "user";
 
     get isLogged(): boolean {
         return !!this.user;
     }
 
     constructor(private http: HttpClient) {
-        try {
-            const user = JSON.stringify(localStorage.getItem(this.USER_TOKEN));
-            this.user = JSON.parse(user);
-        } catch (err) {
-            this.user = null;
-        }
+        this.user$.subscribe((user) => {
+            this.user = user;
+        })
     }
 
-    login(username: string | null | undefined, password: string | null | undefined): void {
-        try {
-            this.http.post<AuthUser>(`${enviroment.apiUrl}/users/login`, { username, password }).subscribe((user) => {
-                this.user = user;
-                localStorage.setItem(this.USER_TOKEN, JSON.stringify(this.user));
-            })
-        } catch (err) {
-            if (err instanceof HttpErrorResponse) {
-                throw new Error(err.error.message);
-            }
-        }
+    login(username: string | null | undefined, password: string | null | undefined): Observable<AuthUser> {
+        return this.http.post<AuthUser>("/api/users/login", { username, password })
+            .pipe(tap((user) => this.user$$.next(user)));
     }
 
-    logout(): void {
-        localStorage.removeItem(this.USER_TOKEN);
-        this.user = null;
+    logout(): Observable<AuthUser | null> {
+        return this.http.get<AuthUser | null>("/api/users/logout").pipe(tap((user) => this.user$$.next(user)));
     }
 
     register(
@@ -48,11 +37,9 @@ export class UserService {
         email: string | null | undefined,
         password: string | null | undefined,
         repass: string | null | undefined
-    ): void {
-        this.http.post<AuthUser>(`${enviroment.apiUrl}/users/register`, { username, email, password, repass }).subscribe((user) => {
-            this.user = user;
-            localStorage.setItem(this.USER_TOKEN, JSON.stringify(this.user));
-        })
+    ): Observable<AuthUser> {
+        return this.http.post<AuthUser>("/api/users/register", { username, email, password, repass })
+        .pipe(tap((user)=>this.user$$.next(user)))
     }
 
     getUser(): AuthUser | null {
@@ -62,15 +49,20 @@ export class UserService {
         return this.user;
     }
 
-    getUserById(userId:User|undefined):Observable<User>{
-        return this.http.get<User>(`${enviroment.apiUrl}/users/${userId}`);
+    getUserById(userId: User | undefined): Observable<User> {
+        return this.http.get<User>(`/api/users/${userId}`);
     }
 
-    getUserPosts(userId:string):Observable<Post[]>{
-        return this.http.get<Post[]>(`${enviroment.apiUrl}/users/${userId}/posts`);
+    getUserPosts(userId: string): Observable<Post[]> {
+        return this.http.get<Post[]>(`/api/users/${userId}/posts`);
     }
 
-    searchUsers(query:string|null|undefined):Observable<User[]>{
-        return this.http.get<User[]>(`${enviroment.apiUrl}/users/search/${query}`);
+    searchUsers(query: string | null | undefined): Observable<User[]> {
+        return this.http.get<User[]>(`/api/users/search/${query}`);
+    }
+
+    getUserProfile() {
+        return this.http.get<AuthUser>("/api/users/me")
+            .pipe(tap((user) => this.user$$.next(user)));
     }
 }

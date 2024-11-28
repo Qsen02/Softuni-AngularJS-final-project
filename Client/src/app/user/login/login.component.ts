@@ -34,14 +34,14 @@ export class LoginComponent {
 
     onLogin(): void {
         try {
-            const username = this.loginForm.value.username;
-            const password = this.loginForm.value.password;
+           const {username,password}=this.loginForm.value;
             if (!username || !password) {
                 throw new Error("All fields required!");
             }
-            this.userService.login(username, password);
-            this.loginForm.reset();
-            this.router.navigate(['/home']);
+            this.userService.login(username, password).subscribe((user)=>{
+                this.loginForm.reset();
+                this.router.navigate(['/home']);
+            });
         } catch (err) {
             if (err instanceof Error) {
                 this.isError = true;

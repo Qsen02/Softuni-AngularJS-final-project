@@ -17,7 +17,8 @@ export class LogoutComponent {
     }
 
     onLogout(): void {
-        this.userService.logout();
-        this.router.navigate(['/home']);
+        this.userService.logout().subscribe((user)=>{
+            this.router.navigate(['/home']);
+        });
     }
 }
