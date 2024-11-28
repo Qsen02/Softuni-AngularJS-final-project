@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Post } from '../../../types/post';
 import { PostsService } from '../../../services/posts.service';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { ProfilePostCommentsComponent } from './profile-post-comments/profile-post-comments.component';
 import { AuthUser } from '../../../types/user';
 import { UserService } from '../../../services/user.service';
@@ -9,7 +9,7 @@ import { UserService } from '../../../services/user.service';
 @Component({
     selector: 'app-profile-post-details',
     standalone: true,
-    imports: [ProfilePostCommentsComponent],
+    imports: [ProfilePostCommentsComponent ,RouterLink],
     templateUrl: './profile-post-details.component.html',
     styleUrl: './profile-post-details.component.css'
 })
@@ -18,6 +18,7 @@ export class ProfilePostDetailsComponent implements OnInit{
     isLoading=false;
     isError=false;
     curUser:AuthUser|null=null;
+    isLiked=false;
     constructor(private postService:PostsService, 
         private route:ActivatedRoute,
         private router:Router,
@@ -32,6 +33,7 @@ export class ProfilePostDetailsComponent implements OnInit{
                 this.post=post;
                 this.curUser=this.userService.getUser();
                 this.isLoading=false;
+                this.isLiked=Boolean(post.likes.find(el=>el._id==this.curUser?._id));
             },
             error:(err)=>{
                 this.isError=true;

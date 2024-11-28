@@ -21,6 +21,31 @@
                 <div class="description">
                     <p>{{post?.description}}</p>
                 </div>
+                @if(curUser){
+                    @if(curUser._id==post?.ownerId?._id){
+                    <div class="likes">
+                        <i class="fa-solid fa-thumbs-up"></i>
+                        <p [routerLink]="['/home','posts',post?._id,'likes']">{{post?.likes?.length}}</p>
+                    </div>
+                    }@else{
+                        @if(isLiked){
+                        <div class="likes">
+                            <i class="fa-solid fa-thumbs-up" id="user"></i>
+                            <p [routerLink]="['/home','posts',post?._id,'likes']">{{post?.likes?.length}}</p>
+                        </div>
+                        }@else {
+                        <div class="likes">
+                            <i class="fa-regular fa-thumbs-up" id="user"></i>
+                            <p [routerLink]="['/home','posts',post?._id,'likes']">{{post?.likes?.length}}</p>
+                        </div>
+                        }
+                    }
+                }@else{
+                    <div class="likes">
+                        <i class="fa-solid fa-thumbs-up"></i>
+                        <p [routerLink]="['/home','posts',post?._id,'likes']">{{post?.likes?.length}}</p>
+                    </div>
+                }
             </article>
             }
             <app-profile-post-comments [loadingProp]="isLoading" [userProp]="curUser" [errorProp]="isError"

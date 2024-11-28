@@ -41,7 +41,7 @@ export class PostLikesComponent implements OnInit {
     }
 
     onBack() {
-        this.router.navigate(['/home']);
+       history.back();
     }
 
     onError(event: Event) {

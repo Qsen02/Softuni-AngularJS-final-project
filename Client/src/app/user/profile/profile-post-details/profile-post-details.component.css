@@ -54,10 +54,6 @@
     background-color: rgb(131, 220, 255);
 }
 
-.description {
-    padding-bottom: 20px;
-}
-
 .description p {
     width: 100%;
     word-wrap: break-word;
@@ -85,6 +81,22 @@
 
 .details-body {
     text-align: center;
+}
+
+.likes{
+    display: flex;
+    flex-wrap: wrap;
+    gap:5px;
+    font-size: 16pt;
+    padding-bottom: 20px;
+}
+
+.likes p{
+    cursor: pointer;
+}
+
+#user{
+    cursor: pointer;
 }
 
 @media(max-width:900px) {
