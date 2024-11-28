@@ -41,8 +41,7 @@ export class PostCommentLikesComponent implements OnInit {
     }
 
     onBack():void{
-       const postId=this.route.snapshot.params['postId'];
-       this.router.navigate([`/home/posts/${postId}/comments`])
+      history.back();
     }
 
     onError(event: Event) {

@@ -41,7 +41,6 @@ export class ProfilePostDetailsComponent implements OnInit{
     }
 
     onBack(){
-        const userId=this.route.snapshot.params['userId'];
-        this.router.navigate([`/profile/${userId}`]);
+        history.back();
     }
 }

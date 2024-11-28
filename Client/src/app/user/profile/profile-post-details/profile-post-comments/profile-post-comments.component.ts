@@ -1,6 +1,5 @@
 import { Component, input, Input, OnInit } from '@angular/core';
 import { Comment } from '../../../../types/comment';
-import { UserService } from '../../../../services/user.service';
 import { PostCommentsItemComponent } from '../../../../posts/post-comments/post-comments-item/post-comments-item.component';
 import { AuthUser } from '../../../../types/user';
 

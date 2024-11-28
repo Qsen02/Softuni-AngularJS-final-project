@@ -12,15 +12,17 @@ import { imageProfileErrorHandler } from '../../utils/imageErrorHandlers';
     templateUrl: './header.component.html',
     styleUrl: './header.component.css'
 })
-export class HeaderComponent implements OnInit {
-    curUser:AuthUser|null=null;
+export class HeaderComponent {
+    get curUser(){
+        return this.userService.getUser();
+    }
+
+    get isLogged(){
+        return this.userService.isLogged;
+    }
+
     constructor(private userService:UserService){}
 
-    ngOnInit(): void {
-        this.userService.getUserProfile().subscribe((user)=>{
-            this.curUser=user;
-        });
-    }
 
     onError(event:Event){
         const imageRef=event.target as HTMLImageElement;
