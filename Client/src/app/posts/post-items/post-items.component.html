@@ -6,7 +6,7 @@
         @if(user?._id==post?.ownerId?._id){
         <div class="header-buttons">
             <button>Edit</button>
-            <button>Delete</button>
+            <button [routerLink]="['/home','posts',post?._id,'delete']">Delete</button>
         </div>
         }
     </div>

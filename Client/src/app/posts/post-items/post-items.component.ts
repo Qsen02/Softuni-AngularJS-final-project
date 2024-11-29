@@ -3,7 +3,7 @@ import { Post } from '../../types/post';
 import { UserService } from '../../services/user.service';
 import { AuthUser } from '../../types/user';
 import { PostsService } from '../../services/posts.service';
-import {  RouterLink } from '@angular/router';
+import { RouterLink } from '@angular/router';
 
 @Component({
     selector: 'app-main-posts',

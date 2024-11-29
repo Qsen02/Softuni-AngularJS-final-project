@@ -1,0 +1,47 @@
+.delete-container{
+    margin-top: -50px;
+    width: 40vw;
+    background-color: rgb(40,40,40);
+    color: lightgray;
+    font-size: 14pt;
+    text-align: center;
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: column;
+    align-items: center;
+    gap:20px;
+    padding: 20px;
+    border-radius: 20px;
+}
+
+.buttons{
+    display: flex;
+    justify-content: center;
+    gap:30px;
+}
+
+.buttons button{
+    padding: 10px 20px 10px 20px;
+    background-color: rgb(57, 199, 255);
+    color: white;
+    font-size: 14pt;
+    border: none;
+    border-radius: 30px;
+    cursor: pointer;
+}
+
+.buttons button:hover{
+    background-color: rgb(131, 220, 255);
+}
+
+@media(max-width:620px){
+    .delete-container{
+        font-size: 12pt;
+        width: 70vw;
+    }
+
+    .buttons button{
+        padding: 5px 10px 5px 10px;
+        font-size: 12pt;
+    }
+}

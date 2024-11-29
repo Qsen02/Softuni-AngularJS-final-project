@@ -25,9 +25,10 @@ export class MainComponent implements OnInit {
 	isSearched = false;
 	searchedResults: User[] | [] = [];
 
-	constructor(private postApi: PostsService, private userService: UserService) { }
+	constructor(private postApi: PostsService, private userService: UserService) {}
 
 	ngOnInit(): void {
+		this.isSearched = false;
 		this.isLoading = true;
 		this.postApi.getAllPosts().subscribe({
 			next: (posts) => {
