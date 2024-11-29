@@ -24,7 +24,7 @@ export class PostsService {
         return this.http.post<Post>(`/api/posts/${postId}/unlike`, {})
     }
 
-    createPost(description: string, imageUrl: string) {
+    createPost(description: string | null | undefined, imageUrl: string | null | undefined) {
         return this.http.post<Post>(`/api/posts`, { description, imageUrl });
     }
 
@@ -32,7 +32,7 @@ export class PostsService {
         return this.http.delete(`/api/posts/${postId}`);
     }
 
-    updatePost(postId:string,data:{}){
-        return this.http.put(`/api/posts/${postId}`,data);
+    updatePost(postId: string, data: {}) {
+        return this.http.put(`/api/posts/${postId}`, data);
     }
 }

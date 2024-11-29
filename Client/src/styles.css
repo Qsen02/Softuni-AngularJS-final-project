@@ -80,6 +80,17 @@ ul {
     border: none;
 }
 
+.form textarea{
+    width: 90%;
+    height: 60px;
+    border-radius: 20px;
+    background-color:grey;
+    color: lightgray;
+    font-size: 12pt;
+    padding-left: 10px;
+    border: none;
+}
+
 .form i{
     position: absolute;
     top:35px;

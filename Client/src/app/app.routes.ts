@@ -14,6 +14,7 @@ import { PostImageComponent } from './posts/post-image/post-image.component';
 import { ProfileImageComponent } from './user/profile/profile-image/profile-image.component';
 import { ProfilePostDetailsComponent } from './user/profile/profile-post-details/profile-post-details.component';
 import { ErrMessageComponent } from './err-message/err-message/err-message.component';
+import { CreatePostComponent } from './posts/create-post/create-post.component';
 
 export const routes: Routes = [
     { path: "", redirectTo: "home", pathMatch: "full" },
@@ -33,6 +34,7 @@ export const routes: Routes = [
             { path: ":userId/post/:postId/details", component: ProfilePostDetailsComponent }
         ]
     },
+    { path: "create", component: CreatePostComponent, canActivate: [userGuard] },
     { path: "register", component: RegisterComponent, canActivate: [guestGuard] },
     { path: "login", component: LoginComponent, canActivate: [guestGuard] },
     { path: "logout", component: LogoutComponent, canActivate: [userGuard] },

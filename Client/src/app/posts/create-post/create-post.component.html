@@ -1,0 +1,32 @@
+<form class="form" [formGroup]="createForm" (ngSubmit)="onCreate()">
+    <h2>Create post</h2>
+    <p class="input">
+        <label for="description">Description</label>
+        <textarea type="text" name="description" id="description" formControlName="description"></textarea>
+    </p>
+    @if(createForm.get("description")?.touched){
+        <div>
+            @if(createForm.get("description")?.errors?.["required"]){
+                <p class="error">Description is required!</p>
+            }
+            @if(createForm.get("description")?.errors?.["maxlength"]){
+                <p class="error">Description must be maximum 250 characters long!</p>
+            }
+        </div>
+    }
+    <p class="input">
+        <label for="imageUrl">Image URL</label>
+        <input type="text" name="imageUrl" id="imageUrl" formControlName="imageUrl">
+    </p>
+    @if(createForm.get("imageUrl")?.touched){
+        <div>
+            @if(createForm.get("imageUrl")?.errors?.["required"]){
+                <p class="error">Image URL is required!</p>
+            }
+            @if(createForm.get("imageUrl")?.errors?.["pattern"]){
+                <p class="error">Image URL must be valid URL!</p>
+            }
+        </div>
+    }
+    <button [disabled]="createForm.invalid">Create</button>
+</form>
