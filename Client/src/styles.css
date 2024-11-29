@@ -87,8 +87,9 @@ ul {
     background-color:grey;
     color: lightgray;
     font-size: 12pt;
-    padding-left: 10px;
+    padding: 10px;
     border: none;
+    font-family: Arial, Helvetica, sans-serif;
 }
 
 .form i{

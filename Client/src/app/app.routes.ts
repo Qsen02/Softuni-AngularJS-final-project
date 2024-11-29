@@ -16,6 +16,7 @@ import { ProfilePostDetailsComponent } from './user/profile/profile-post-details
 import { ErrMessageComponent } from './err-message/err-message/err-message.component';
 import { CreatePostComponent } from './posts/create-post/create-post.component';
 import { DeletePostComponent } from './posts/delete-post/delete-post.component';
+import { EditPostComponent } from './posts/edit-post/edit-post.component';
 
 export const routes: Routes = [
     { path: "", redirectTo: "home", pathMatch: "full" },
@@ -26,7 +27,8 @@ export const routes: Routes = [
             { path: "posts/:postId/comments", component: PostCommentsComponent },
             { path: "posts/:postId/comments/:commentId/likes", component: PostCommentLikesComponent },
             { path: "posts/:postId/image", component: PostImageComponent },
-            { path: "posts/:postId/delete", component: DeletePostComponent, canActivate: [userGuard] }
+            { path: "posts/:postId/delete", component: DeletePostComponent, canActivate: [userGuard] },
+            { path: "posts/:postId/edit", component: EditPostComponent, canActivate: [userGuard] }
         ]
     },
     {

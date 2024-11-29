@@ -5,7 +5,7 @@
         <h2>{{post?.ownerId?.username}}</h2>
         @if(user?._id==post?.ownerId?._id){
         <div class="header-buttons">
-            <button>Edit</button>
+            <button [routerLink]="['/home','posts',post?._id,'edit']">Edit</button>
             <button [routerLink]="['/home','posts',post?._id,'delete']">Delete</button>
         </div>
         }

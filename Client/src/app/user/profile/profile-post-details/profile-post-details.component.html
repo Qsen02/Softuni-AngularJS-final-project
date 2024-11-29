@@ -13,8 +13,8 @@
                 <div class="title">
                     <h2>{{post?.ownerId?.username}}</h2>
                     @if(curUser?._id==post?.ownerId?._id){
-                    <button>Edit</button>
-                    <button>Delete</button>
+                    <button [routerLink]="['/home','posts',post?._id,'edit']">Edit</button>
+                    <button [routerLink]="['/home','posts',post?._id,'delete']">Delete</button>
                     }
                     <button (click)="onBack()" id="back">X</button>
                 </div>

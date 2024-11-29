@@ -10,7 +10,7 @@ import { ActivatedRoute, Router } from '@angular/router';
     styleUrl: './delete-post.component.css'
 })
 export class DeletePostComponent {
-    constructor(private postService: PostsService, private route: ActivatedRoute) { }
+    constructor(private postService: PostsService, private route: ActivatedRoute,private router:Router) { }
 
     onBack() {
         history.back();
@@ -19,7 +19,7 @@ export class DeletePostComponent {
     onDelete(){
         const postId=this.route.snapshot.params['postId'];
         this.postService.deletePost(postId).subscribe(()=>{
-            history.back();
+            this.router.navigate(['/home']);
         })
     }
 }

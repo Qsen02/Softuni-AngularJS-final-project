@@ -1,0 +1,11 @@
+.form{
+    width: 40vw;
+}
+
+.buttons{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap:30px;
+    justify-content: center;
+}
