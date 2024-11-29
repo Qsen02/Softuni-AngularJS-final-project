@@ -78,8 +78,8 @@ postRouter.post("/:postId/like",isUser(), async (req, res) => {
     if (!isValid) {
         res.status(404).json({ message: "Resource not found!" });
     }
-    await likePost(user, postId);
-    res.json({ message: "Post liked successfully!" });
+    const post= await likePost(user, postId);
+    res.json(post);
 })
 
 postRouter.post("/:postId/unlike",isUser(), async (req, res) => {
@@ -89,8 +89,8 @@ postRouter.post("/:postId/unlike",isUser(), async (req, res) => {
     if (!isValid) {
         res.status(404).json({ message: "Resource not found!" });
     }
-    await unlikePost(user, postId);
-    res.json({ message: "Post unliked successfully!" });
+    const post=await unlikePost(user, postId);
+    res.json(post);
 })
 
 module.exports = {

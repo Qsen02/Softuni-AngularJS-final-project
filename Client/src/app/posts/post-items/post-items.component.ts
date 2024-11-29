@@ -1,10 +1,9 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { Post } from '../../types/post';
 import { UserService } from '../../services/user.service';
-import { AuthUser, User } from '../../types/user';
+import { AuthUser } from '../../types/user';
 import { PostsService } from '../../services/posts.service';
-import { RouterLink } from '@angular/router';
-import { HeaderComponent } from '../../core/header/header.component';
+import {  RouterLink } from '@angular/router';
 
 @Component({
     selector: 'app-main-posts',
@@ -19,7 +18,8 @@ export class MainPostsComponent implements OnInit {
     user: AuthUser | null = null;
     isLiked = false;
     isOwner = false;
-    constructor(private userService: UserService, private postsService: PostsService) { }
+
+    constructor(private userService: UserService, private postsService: PostsService) {}
 
     ngOnInit(): void {
         this.isUser = this.userService.isLogged;
@@ -29,10 +29,14 @@ export class MainPostsComponent implements OnInit {
     }
 
     like(): void {
-        this.postsService.likePost(this.post?._id);
+        this.postsService.likePost(this.post?._id).subscribe((post)=>{
+            this.post=post;
+        });
     }
 
     unlike(): void {
-        this.postsService.unlikePost(this.post?._id);
+        this.postsService.unlikePost(this.post?._id).subscribe((post)=>{
+            this.post=post;
+        });
     }
 }

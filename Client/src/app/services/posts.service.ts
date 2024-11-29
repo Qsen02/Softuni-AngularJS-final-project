@@ -1,8 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { enviroment } from '../enviroment/app.enviroment';
 import { Post } from '../types/post';
-import { BehaviorSubject, tap } from 'rxjs';
 
 @Injectable({
     providedIn: 'root'
@@ -19,11 +17,11 @@ export class PostsService {
     }
 
     likePost(postId: string | undefined) {
-        return this.http.post(`/api/posts/${postId}/like`, {})
+        return this.http.post<Post>(`/api/posts/${postId}/like`, {})
     }
 
     unlikePost(postId: string | undefined) {
-        return this.http.post(`/api/posts/${postId}/unlike`, {})
+        return this.http.post<Post>(`/api/posts/${postId}/unlike`, {})
     }
 
     createPost(description: string, imageUrl: string) {

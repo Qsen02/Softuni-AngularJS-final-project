@@ -34,11 +34,11 @@ async function editPost(postId, data) {
 }
 
 async function likePost(user, postId) {
-    await Posts.findByIdAndUpdate(postId, { $push: { likes: user._id } });
+    return await Posts.findByIdAndUpdate(postId, { $push: { likes: user._id } },{new:true}).lean();
 }
 
 async function unlikePost(user, postId) {
-    await Posts.findByIdAndUpdate(postId, { $pull: { likes: user._id } });
+    return await Posts.findByIdAndUpdate(postId, { $pull: { likes: user._id } },{new:true}).lean();
 }
 
 async function checkPostId(postId){

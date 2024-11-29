@@ -28,7 +28,7 @@
                 }
             }@else{
                 @for (post of posts; track $index) {
-                <app-main-posts [postProp]=post />
+                <app-main-posts [postProp]="post" />
                 }
             }
         }
