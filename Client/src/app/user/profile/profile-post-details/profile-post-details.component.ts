@@ -9,40 +9,60 @@ import { UserService } from '../../../services/user.service';
 @Component({
     selector: 'app-profile-post-details',
     standalone: true,
-    imports: [ProfilePostCommentsComponent ,RouterLink],
+    imports: [ProfilePostCommentsComponent, RouterLink],
     templateUrl: './profile-post-details.component.html',
     styleUrl: './profile-post-details.component.css'
 })
-export class ProfilePostDetailsComponent implements OnInit{
+export class ProfilePostDetailsComponent implements OnInit {
     post: Post | null = null;
-    isLoading=false;
-    isError=false;
-    curUser:AuthUser|null=null;
-    isLiked=false;
-    constructor(private postService:PostsService, 
-        private route:ActivatedRoute,
-        private router:Router,
-        private userService:UserService
-    ){}
+    isLoading = false;
+    isError = false;
+    curUser: AuthUser | null = null;
+    isLiked = false;
+    constructor(private postService: PostsService,
+        private route: ActivatedRoute,
+        private router: Router,
+        private userService: UserService
+    ) { }
+
+    checkStats() {
+        this.isLiked = Boolean(this.post?.likes.find(el => el._id == this.curUser?._id));
+    }
 
     ngOnInit(): void {
-        this.isLoading=true;
-        const postId=this.route.snapshot.params['postId'];
+        this.isLoading = true;
+        const postId = this.route.snapshot.params['postId'];
         this.postService.getPostById(postId).subscribe({
-            next:(post)=>{
-                this.post=post;
-                this.curUser=this.userService.getUser();
-                this.isLoading=false;
-                this.isLiked=Boolean(post.likes.find(el=>el._id==this.curUser?._id));
+            next: (post) => {
+                this.post = post;
+                this.curUser = this.userService.getUser();
+                this.isLoading = false;
+                this.checkStats();
             },
-            error:(err)=>{
-                this.isError=true;
-                this.isLoading=false;
+            error: (err) => {
+                this.isError = true;
+                this.isLoading = false;
             }
         })
     }
 
-    onBack(){
+    onLike() {
+        const postId = this.route.snapshot.params['postId'];
+        this.postService.likePost(postId).subscribe((post) => {
+            this.post = post;
+            this.checkStats();
+        })
+    }
+
+    onUnlike(){
+        const postId = this.route.snapshot.params['postId'];
+        this.postService.unlikePost(postId).subscribe((post) => {
+            this.post = post;
+            this.checkStats();
+        })
+    }
+
+    onBack() {
         history.back();
     }
 }

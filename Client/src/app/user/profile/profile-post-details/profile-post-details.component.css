@@ -91,6 +91,10 @@
     padding-bottom: 20px;
 }
 
+.likes i:hover{
+    color: white;
+}
+
 .likes p{
     cursor: pointer;
 }

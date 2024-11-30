@@ -30,12 +30,12 @@
                     }@else{
                         @if(isLiked){
                         <div class="likes">
-                            <i class="fa-solid fa-thumbs-up" id="user"></i>
+                            <i class="fa-solid fa-thumbs-up" id="user" (click)="onUnlike()"></i>
                             <p [routerLink]="['/home','posts',post?._id,'likes']">{{post?.likes?.length}}</p>
                         </div>
                         }@else {
                         <div class="likes">
-                            <i class="fa-regular fa-thumbs-up" id="user"></i>
+                            <i class="fa-regular fa-thumbs-up" id="user" (click)="onLike()"></i>
                             <p [routerLink]="['/home','posts',post?._id,'likes']">{{post?.likes?.length}}</p>
                         </div>
                         }
