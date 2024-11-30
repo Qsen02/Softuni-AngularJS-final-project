@@ -19,24 +19,30 @@ export class MainPostsComponent implements OnInit {
     isLiked = false;
     isOwner = false;
 
-    constructor(private userService: UserService, private postsService: PostsService) {}
+    constructor(private userService: UserService, private postsService: PostsService) { }
 
-    ngOnInit(): void {
-        this.isUser = this.userService.isLogged;
-        this.user = this.userService.getUser();
+    checkStats() {
         this.isLiked = Boolean(this.post?.likes.find((el) => el._id == this.user?._id));
         this.isOwner = this.post?.ownerId._id == this.user?._id;
     }
 
+    ngOnInit(): void {
+        this.user = this.userService.getUser();
+        this.isUser = this.userService.isLogged;
+        this.checkStats();
+    }
+
     like(): void {
-        this.postsService.likePost(this.post?._id).subscribe((post)=>{
-            this.post=post;
+        this.postsService.likePost(this.post?._id).subscribe((post) => {
+            this.post = post;
+            this.checkStats();
         });
     }
 
     unlike(): void {
-        this.postsService.unlikePost(this.post?._id).subscribe((post)=>{
-            this.post=post;
+        this.postsService.unlikePost(this.post?._id).subscribe((post) => {
+            this.post = post;
+            this.checkStats();
         });
     }
 }

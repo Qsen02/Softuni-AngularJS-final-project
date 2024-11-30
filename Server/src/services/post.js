@@ -34,11 +34,13 @@ async function editPost(postId, data) {
 }
 
 async function likePost(user, postId) {
-    return await Posts.findByIdAndUpdate(postId, { $push: { likes: user._id } },{new:true}).lean();
+    return await Posts.findByIdAndUpdate(postId, { $push: { likes: user._id } },{new:true})
+    .populate("ownerId").populate("comments").populate("likes").lean();
 }
 
 async function unlikePost(user, postId) {
-    return await Posts.findByIdAndUpdate(postId, { $pull: { likes: user._id } },{new:true}).lean();
+    return await Posts.findByIdAndUpdate(postId, { $pull: { likes: user._id } },{new:true})
+    .populate("ownerId").populate("comments").populate("likes").lean();
 }
 
 async function checkPostId(postId){
