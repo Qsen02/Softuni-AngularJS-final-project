@@ -17,7 +17,7 @@ commentRouter.get("/:commentId", async (req, res) => {
 })
 
 commentRouter.post("/in/:postId", isUser(),
-    body("content").isLength({ min: 2 }),
+    body("content").isLength({ min: 1 }),
     async (req, res) => {
         const postId = req.params.postId;
         const isValid = await checkPostId(postId);

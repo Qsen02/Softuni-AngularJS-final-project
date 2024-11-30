@@ -1,6 +1,7 @@
 .comment-wrapper {
     position: relative;
     width: 60vw;
+    height: 70vh;
     margin: -300px auto;
     background-color: rgb(40, 40, 40);
     color: lightgray;
@@ -10,8 +11,8 @@
     align-items: center;
     padding: 30px;
     border-radius: 20px;
-    overflow: auto;
     text-align: center;
+    overflow: auto;
 }
 
 .comment-wrapper form {

@@ -5,6 +5,7 @@ import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { ProfilePostCommentsComponent } from './profile-post-comments/profile-post-comments.component';
 import { AuthUser } from '../../../types/user';
 import { UserService } from '../../../services/user.service';
+import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 
 @Component({
     selector: 'app-profile-post-details',
@@ -19,10 +20,10 @@ export class ProfilePostDetailsComponent implements OnInit {
     isError = false;
     curUser: AuthUser | null = null;
     isLiked = false;
+
     constructor(private postService: PostsService,
         private route: ActivatedRoute,
-        private router: Router,
-        private userService: UserService
+        private userService: UserService,
     ) { }
 
     checkStats() {
