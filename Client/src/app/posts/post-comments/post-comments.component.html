@@ -3,24 +3,33 @@
         <button (click)="onBack()">X</button>
         <h2>Comments to {{postOwner}}'s post</h2>
         @if(isUser){
-        <form>
-            <input type="text" name="content" placeholder="Write comment...">
-            <button>Submit</button>
+        <form [formGroup]="commentForm" (ngSubmit)="onComment()">
+            <p>
+                <input type="text" name="content" placeholder="Write comment..." formControlName="content">
+                @if(commentForm.get("content")?.touched){
+                    <div>
+                        @if(commentForm.get("content")?.errors?.["required"]){
+                            <p class="error">Comment field must be filled!</p>
+                        }
+                    </div>
+            }
+            </p>
+            <button [disabled]="commentForm.invalid">Submit</button>
         </form>
         }
         <section class="comment-section">
             @if(isLoading && !isError){
-                <span class="loader"></span>
-                <h2>Comments loading...</h2>
+            <span class="loader"></span>
+            <h2>Comments loading...</h2>
             }
             @for (comment of comments; track $index) {
             <app-post-comments-item [commentProp]="comment" />
             }@empty {
-                @if(!isLoading && !isError){
-                <h2>No comments yet, be the first one!</h2>
-                }@else if(!isLoading && isError){
-                    <h2>Something went wrong, please try again later.</h2>
-                }
+            @if(!isLoading && !isError){
+            <h2>No comments yet, be the first one!</h2>
+            }@else if(!isLoading && isError){
+            <h2>Something went wrong, please try again later.</h2>
+            }
             }
         </section>
     </section>

@@ -14,7 +14,7 @@ export class CommentService {
         return this.http.get<Comment>(`/api/comments/${commentId}`);
     }
 
-    createComment(postId:string,content:string){
+    createComment(postId:string,content:string | null | undefined){
         return this.http.post<Comment>(`/api/comments/in/${postId}`,{content});
     }
 
