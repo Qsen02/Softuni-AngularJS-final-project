@@ -12,14 +12,14 @@ export class UserService implements OnDestroy {
     private user$ = this.user$$.asObservable();
 
     private user: AuthUser | null = null;
-    userSubscribtion:Subscription|null=null;
+    userSubscribtion: Subscription | null = null;
 
     get isLogged(): boolean {
         return !!this.user;
     }
 
     constructor(private http: HttpClient) {
-        this.userSubscribtion=this.user$.subscribe((user) => {
+        this.userSubscribtion = this.user$.subscribe((user) => {
             this.user = user;
         })
     }
@@ -40,7 +40,7 @@ export class UserService implements OnDestroy {
         repass: string | null | undefined
     ): Observable<AuthUser> {
         return this.http.post<AuthUser>("/api/users/register", { username, email, password, repass })
-        .pipe(tap((user)=>this.user$$.next(user)))
+            .pipe(tap((user) => this.user$$.next(user)))
     }
 
     getUser(): AuthUser | null {
@@ -62,6 +62,10 @@ export class UserService implements OnDestroy {
     getUserProfile() {
         return this.http.get<AuthUser>("/api/users/me")
             .pipe(tap((user) => this.user$$.next(user)));
+    }
+
+    editUser(userId: string, data: {}) {
+        return this.http.put(`/api/users/update/${userId}`, data);
     }
 
     ngOnDestroy(): void {

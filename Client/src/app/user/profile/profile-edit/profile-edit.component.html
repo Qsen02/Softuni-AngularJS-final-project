@@ -1,0 +1,51 @@
+<div class="modal">
+    <form class="form" [formGroup]="editProfileForm" (ngSubmit)="onEdit()">
+        <h2>Edit your profile</h2>
+        <p class="input">
+            <label for="username">Username</label>
+            <input type="text" name="username" id="username" formControlName="username">
+        </p>
+        @if(editProfileForm.get("username")?.touched){
+            <div>
+                @if(editProfileForm.get("username")?.errors?.["required"]){
+                    <p class="error">Username is required!</p>
+                }
+                @if(editProfileForm.get("username")?.errors?.["minlength"]){
+                    <p class="error">Username must be at least 2 characters long!</p>
+                }
+            </div>
+        }
+        <p class="input">
+            <label for="email">Email</label>
+            <input type="text" name="email" id="email" formControlName="email">
+        </p>
+        @if(editProfileForm.get("email")?.touched){
+            <div>
+                @if(editProfileForm.get("email")?.errors?.["required"]){
+                    <p class="error">Username is required!</p>
+                }
+                @if(editProfileForm.get("email")?.errors?.["minlength"]){
+                    <p class="error">Username must be at least 2 characters long!</p>
+                }
+                @if(editProfileForm.get("email")?.errors?.["email"]){
+                    <p class="error">Email must be valid email!</p>
+                }
+            </div>
+        }
+        <p class="input">
+            <label for="profileImage">Profile image</label>
+            <input type="text" name="profileImage" id="profileImage" formControlName="profileImage">
+        </p>
+        @if(editProfileForm.get("profileImage")?.touched){
+            <div>
+                @if(editProfileForm.get("profileImage")?.errors?.["pattern"]){
+                    <p class="error">Image URL must be valid URL</p>
+                }
+            </div>
+        }
+        <div class="buttons">
+            <button (click)="onBack($event)">Cancel</button>
+            <button [disabled]="editProfileForm.invalid">Edit</button>
+        </div>
+    </form>
+</div>

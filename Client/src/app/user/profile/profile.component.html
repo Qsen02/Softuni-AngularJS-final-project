@@ -16,7 +16,7 @@
     </section>
     @if(curUser?._id==userProfile?._id){
     <section class="profile-buttons">
-        <button>Edit profile</button>
+        <button [routerLink]="['/profile',userProfile?._id,'edit']">Edit profile</button>
         <button>Change password</button>
     </section>
     }

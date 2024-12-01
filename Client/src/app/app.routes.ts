@@ -19,6 +19,7 @@ import { DeletePostComponent } from './posts/delete-post/delete-post.component';
 import { EditPostComponent } from './posts/edit-post/edit-post.component';
 import { PostCommentsDeleteComponent } from './posts/post-comments/post-comments-delete/post-comments-delete.component';
 import { PostCommentsEditComponent } from './posts/post-comments/post-comments-edit/post-comments-edit.component';
+import { ProfileEditComponent } from './user/profile/profile-edit/profile-edit.component';
 
 export const routes: Routes = [
     { path: "", redirectTo: "home", pathMatch: "full" },
@@ -39,7 +40,8 @@ export const routes: Routes = [
         path: "profile", children: [
             { path: ":userId", component: ProfileComponent },
             { path: ":userId/image", component: ProfileImageComponent },
-            { path: ":userId/post/:postId/details", component: ProfilePostDetailsComponent }
+            { path: ":userId/post/:postId/details", component: ProfilePostDetailsComponent },
+            { path: ":userId/edit", component: ProfileEditComponent, canActivate: [userGuard] }
         ]
     },
     { path: "create", component: CreatePostComponent, canActivate: [userGuard] },
