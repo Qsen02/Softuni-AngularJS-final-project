@@ -25,7 +25,6 @@ export class PostCommentsItemComponent implements OnInit {
             this.isUser = this.userService.isLogged;
             this.commentLikes=this.comment?.likes as string[];
             this.curUserId = this.userService.getUser()?._id;
-            console.log(this.comment);
         })
     }
 }

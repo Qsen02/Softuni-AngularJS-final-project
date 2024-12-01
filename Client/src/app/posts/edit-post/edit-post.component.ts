@@ -22,7 +22,6 @@ export class EditPostComponent implements OnInit {
     ngOnInit(): void {
         const postId=this.route.snapshot.params["postId"];
         this.postService.getPostById(postId).subscribe((post)=>{
-            console.log(post);
             this.editForm.get("description")?.setValue(post.description);
             this.editForm.get("imageUrl")?.setValue(post.imageUrl);
         })

@@ -1,0 +1,19 @@
+<div class="modal">
+    <form class="form" [formGroup]="editCommentForm" (ngSubmit)="onEdit()">
+        <h2>Edit comment</h2>
+        <p class="input">
+            <input type="text" name="content" id="content" placeholder="Write comment here..." formControlName="content">
+        </p>
+        @if(editCommentForm.get("content")?.touched){
+            <div>
+                @if(editCommentForm.get("content")?.errors?.["required"]){
+                    <p class="error">Field must be filled!</p>
+                }
+            </div>
+        }
+        <div class="buttons">
+            <button (click)="onBack($event)">Cancel</button>
+            <button [disabled]="editCommentForm.invalid">Edit</button>
+        </div>
+    </form>
+</div>
