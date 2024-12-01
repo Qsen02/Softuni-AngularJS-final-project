@@ -2,7 +2,7 @@ const { Comments } = require("../models/comment");
 const { Posts } = require("../models/post");
 
 function getCommentById(commentId) {
-    const comment = Comments.findById(commentId).populate("ownerId").populate("likes");
+    const comment = Comments.findById(commentId).populate("ownerId").populate("likes").populate("postId");
     return comment;
 }
 
@@ -19,7 +19,7 @@ async function createComment(user, post, content) {
 
 async function deleteComment(commentId, postId) {
     await Comments.findByIdAndDelete(commentId);
-    await Posts.findByIdAndUpdate(postId, { $pull: { comments: commentId } });
+    await Posts.findByIdAndUpdate(postId, { $pull: { comments:  commentId  } });
 }
 
 async function editComment(commentId, data) {
@@ -44,5 +44,5 @@ async function checkCommentId(commentId) {
 }
 
 module.exports = {
-    getCommentById, createComment, deleteComment, editComment, checkCommentId,likeComment,unlikeComment
+    getCommentById, createComment, deleteComment, editComment, checkCommentId, likeComment, unlikeComment
 }

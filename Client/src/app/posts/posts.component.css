@@ -50,7 +50,7 @@
     font-size: 14pt;
     cursor: pointer;
     padding: 5px 10px 5px 5px;
-    background-color: grey;
+    background-color: transparent;
     border: none;
     overflow: hidden;
 }

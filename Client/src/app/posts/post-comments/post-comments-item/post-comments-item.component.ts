@@ -1,7 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { Comment } from '../../../types/comment';
 import { UserService } from '../../../services/user.service';
-import { AuthUser, User } from '../../../types/user';
+import {  User } from '../../../types/user';
 import { RouterLink } from '@angular/router';
 
 @Component({
@@ -25,6 +25,7 @@ export class PostCommentsItemComponent implements OnInit {
             this.isUser = this.userService.isLogged;
             this.commentLikes=this.comment?.likes as string[];
             this.curUserId = this.userService.getUser()?._id;
+            console.log(this.comment);
         })
     }
 }

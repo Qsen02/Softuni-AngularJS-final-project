@@ -3,8 +3,8 @@
         <img src={{owner?.profileImage}} alt={{owner?.username}} [routerLink]="['/profile',owner?._id]">
         <h2>{{owner?.username}}</h2>
         @if(owner?._id==curUserId && isUser){
-        <i class="fa-solid fa-pen-to-square"></i>
-        <i class="fa-solid fa-trash"></i>
+        <i class="fa-solid fa-pen-to-square" [routerLink]="['/home','posts',comment?.postId,'comments',comment?._id,'edit']"></i>
+        <i class="fa-solid fa-trash" [routerLink]="['/home','posts',comment?.postId,'comments',comment?._id,'delete']"></i>
         }
         <div class="comment-header-buttons">
             @if(isUser && curUserId){

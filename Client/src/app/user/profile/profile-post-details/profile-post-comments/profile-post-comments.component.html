@@ -5,11 +5,11 @@
         <p>
             <input type="text" name="content" placeholder="Write comment..." formControlName="content">
             @if(commentForm.get("content")?.touched){
-                <div>
-                    @if(commentForm.get("content")?.errors?.["required"]){
-                        <p class="error">Comment field must be filled!</p>
-                    }
-                </div>
+        <div>
+            @if(commentForm.get("content")?.errors?.["required"]){
+            <p class="error">Comment field must be filled!</p>
+            }
+        </div>
         }
         </p>
         <button [disabled]="commentForm.invalid">Submit</button>
@@ -23,11 +23,11 @@
         @for (comment of comments; track $index) {
         <app-post-comments-item [commentProp]="comment" />
         }@empty {
-        @if(!loading && error){
-
-        }@else if(!loading && !error){
-        <h2>No comments yet, be the first one!</h2>
-        }
+            @if(!loading && error){
+            <h2>Something went wrong, please try again later!</h2>
+            }@else if(!loading && !error){
+            <h2>No comments yet, be the first one!</h2>
+            }
         }
     </section>
 </section>
