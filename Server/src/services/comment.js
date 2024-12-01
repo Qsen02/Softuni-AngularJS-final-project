@@ -27,11 +27,11 @@ async function editComment(commentId, data) {
 }
 
 async function likeComment(commentId, user) {
-    await Comments.findByIdAndUpdate(commentId, { $push: { likes: user._id } });
+   return await Comments.findByIdAndUpdate(commentId, { $push: { likes: user._id } },{new:true}).lean();
 }
 
 async function unlikeComment(commentId, user) {
-    await Comments.findByIdAndUpdate(commentId, { $pull: { likes: user._id } });
+   return await Comments.findByIdAndUpdate(commentId, { $pull: { likes: user._id } },{new:true}).lean();
 }
 
 async function checkCommentId(commentId) {

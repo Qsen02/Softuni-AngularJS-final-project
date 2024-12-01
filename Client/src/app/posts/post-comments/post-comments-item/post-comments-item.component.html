@@ -1,6 +1,6 @@
 <article class="comment-item-wrapper" [class]="owner?._id==curUserId?'owner':''">
     <div class="comment-header">
-        <img src={{owner?.profileImage}} alt={{owner?.username}} [routerLink]="['/profile',owner?._id]">
+        <img src={{owner?.profileImage}} alt={{owner?.username}} [routerLink]="['/profile',owner?._id]" (error)="onError($event)">
         <h2>{{owner?.username}}</h2>
         @if(owner?._id==curUserId && isUser){
         <i class="fa-solid fa-pen-to-square" [routerLink]="['/home','posts',comment?.postId,'comments',comment?._id,'edit']"></i>
@@ -10,10 +10,10 @@
             @if(isUser && curUserId){
                 @if(owner?._id!=curUserId){
                     @if(commentLikes.includes(curUserId)){
-                    <i class="fa-solid fa-thumbs-up"></i>
+                    <i class="fa-solid fa-thumbs-up" (click)="onUnlike()"></i>
                     <p [routerLink]="['/home','posts',comment?.postId,'comments',comment?._id,'likes']">{{comment?.likes?.length}}</p>
                     }@else{
-                    <i class="fa-regular fa-thumbs-up"></i>
+                    <i class="fa-regular fa-thumbs-up" (click)="onLike()"></i>
                     <p [routerLink]="['/home','posts',comment?.postId,'comments',comment?._id,'likes']">{{comment?.likes?.length}}</p>
                     }
                 }@else{

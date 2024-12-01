@@ -82,8 +82,8 @@ commentRouter.put("/:commentId", isUser(),
         if (!isValid) {
             res.status(404).json({ message: "Resource not found!" });
         }
-        await likeComment(commentId,user);
-        res.json({message:"Comment liked successfully!"})
+       const comment= await likeComment(commentId,user);
+        res.json(comment)
     })
 
     commentRouter.post("/:commentId/unlike", isUser(),async(req,res)=>{
@@ -93,8 +93,8 @@ commentRouter.put("/:commentId", isUser(),
         if (!isValid) {
             res.status(404).json({ message: "Resource not found!" });
         }
-        await unlikeComment(commentId,user);
-        res.json({message:"Comment unliked successfully!"})
+        const comment=await unlikeComment(commentId,user);
+        res.json(comment)
     })
 
 module.exports = {

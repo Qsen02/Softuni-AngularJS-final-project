@@ -1,5 +1,4 @@
 import { Injectable } from '@angular/core';
-import { enviroment } from '../enviroment/app.enviroment';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { Comment } from '../types/comment';
@@ -26,11 +25,11 @@ export class CommentService {
         return this.http.delete(`/api/comments/${commentId}/in/${postId}`);
     }
 
-    likeComment(commentId: string) {
-        return this.http.post(`/api/comments/${commentId}/like`, {});
+    likeComment(commentId: string |undefined) {
+        return this.http.post<Comment>(`/api/comments/${commentId}/like`, {});
     }
 
-    unlikeComment(commentId: string) {
-        return this.http.post(`/api/comments/${commentId}/unlike`, {});
+    unlikeComment(commentId: string|undefined) {
+        return this.http.post<Comment>(`/api/comments/${commentId}/unlike`, {});
     }
 }
