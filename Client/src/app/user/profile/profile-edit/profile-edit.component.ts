@@ -38,6 +38,7 @@ export class ProfileEditComponent implements OnInit {
         this.editProfileForm.reset();
         this.router.navigate([`/profile/${userId}`]);
       })
+      this.userService.updateCurUser(username!,email!,profileImage!);
     }
 
     onBack(event:Event){
