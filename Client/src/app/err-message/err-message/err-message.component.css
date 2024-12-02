@@ -1,11 +1,25 @@
-.error-message{
+.error-message {
     position: absolute;
     padding: 20px;
-    top:150px;
-    right: 100px;
-    background-color: rgba(255,0,0,0.5);
+    top: 150px;
+    left: 50%;
+    transform: translate(-50%);
+    background-color: rgba(255, 0, 0, 0.5);
     color: white;
     font-size: 16pt;
     border-radius: 20px;
     cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap:10px;
+}
+
+.error-message a{
+    color: silver;
+    text-decoration: none;
+}
+
+.error-message a:hover{
+    color: white;
 }

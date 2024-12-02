@@ -9,7 +9,7 @@ import { Post } from '../types/post';
 })
 export class UserService implements OnDestroy {
     private user$$ = new BehaviorSubject<AuthUser | null>(null);
-    public user$ = this.user$$.asObservable();
+    private user$ = this.user$$.asObservable();
 
     private user: AuthUser | null = null;
     userSubscribtion: Subscription | null = null;

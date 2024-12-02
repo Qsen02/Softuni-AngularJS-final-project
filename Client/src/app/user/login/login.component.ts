@@ -4,7 +4,7 @@ import { ChangeVisabilityDirective } from '../../directives/change-visability.di
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { UserService } from '../../services/user.service';
 import { passwordPattern } from '../../utils/passRegexp';
-import { ErrorMessageService } from '../../services/error-message.service';
+import { ErrMessageComponent } from '../../err-message/err-message/err-message.component';
 
 @Component({
     selector: 'app-login',
@@ -21,7 +21,7 @@ export class LoginComponent {
         password: new FormControl("", [Validators.required, Validators.pattern(passwordPattern)])
     })
 
-    constructor(private userService: UserService, private router: Router, private errorService: ErrorMessageService) { }
+    constructor(private userService: UserService, private router: Router) { }
 
     onChange() {
         if (this.isVisible == false) {
@@ -32,11 +32,11 @@ export class LoginComponent {
     }
 
     onLogin(): void {
-            const { username, password } = this.loginForm.value;
-            this.userService.login(username, password).subscribe((user) => {
-                this.loginForm.reset();
-                this.router.navigate(['/home']);
-            });
+        const { username, password } = this.loginForm.value;
+        this.userService.login(username, password).subscribe((user) => {
+            this.loginForm.reset();
+            this.router.navigate(['/home']);
+        });
     }
 
 }

@@ -10,7 +10,6 @@ export const guestGuard: CanActivateFn = () => {
     return userService.getUserProfile().pipe(
         map((user) => {
             if (user) {
-                console.log(user);
                 router.navigate(['/home']);
                 return false;
             }
