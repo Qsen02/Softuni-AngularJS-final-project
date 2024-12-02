@@ -2,10 +2,10 @@
     <section class="profile-header-names">
         <div class="profile-names">
             @if(isLoadingProfile && !isError){
-                <span class="loader"></span>
+            <span class="loader"></span>
             }
-            <img src={{userProfile?.profileImage}} alt={{userProfile?.username}} (error)="onError($event)" 
-            [routerLink]="['/profile',userProfile?._id,'image']">
+            <img src={{userProfile?.profileImage}} alt={{userProfile?.username}} (error)="onError($event)"
+                [routerLink]="['/profile',userProfile?._id,'image']">
             <h2>{{userProfile?.username}}</h2>
             <p>{{userProfile?.email}}</p>
         </div>
@@ -17,7 +17,7 @@
     @if(curUser?._id==userProfile?._id){
     <section class="profile-buttons">
         <button [routerLink]="['/profile',userProfile?._id,'edit']">Edit profile</button>
-        <button>Change password</button>
+        <button [routerLink]="['/profile',userProfile?._id,'changePassword']">Change password</button>
     </section>
     }
 </section>
@@ -29,13 +29,14 @@
         <h2>Posts loading...</h2>
         }
         @for (post of posts; track $index) {
-        <img src={{post.imageUrl}} alt="User post" [routerLink]="['/profile',userProfile?._id,'post',post._id,'details']">
+        <img src={{post.imageUrl}} alt="User post"
+            [routerLink]="['/profile',userProfile?._id,'post',post._id,'details']">
         }@empty {
-        @if(!isLoadingPosts && !isError){
-        <h2>No publications yet.</h2>
-        }@else if(!isLoadingPosts && isError){
-        <h2>Something went wrong, please try again later!</h2>
-        }
+            @if(!isLoadingPosts && !isError){
+            <h2>No publications yet.</h2>
+            }@else if(!isLoadingPosts && isError){
+            <h2>Something went wrong, please try again later!</h2>
+            }
         }
     </section>
 </section>

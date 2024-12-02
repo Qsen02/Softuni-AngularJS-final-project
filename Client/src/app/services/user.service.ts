@@ -67,17 +67,21 @@ export class UserService implements OnDestroy {
     editUser(userId: string, data: {}) {
         return this.http.put(`/api/users/update/${userId}`, data);
     }
-    
-    updateCurUser(username:string,email:string,profileImage:string) {
-      this.user$$.next({
-        _id:this.user!._id,
-        username:username,
-        email:email,
-        profileImage:profileImage,
-        accessToken:this.user!.accessToken
-      })
+
+    updateCurUser(username: string, email: string, profileImage: string) {
+        this.user$$.next({
+            _id: this.user!._id,
+            username: username,
+            email: email,
+            profileImage: profileImage,
+            accessToken: this.user!.accessToken
+        })
     }
-    
+
+    changeUserPassord(userId: string | null | undefined, newPassword: string | null | undefined) {
+        return this.http.put(`/api/users/changePassword/${userId}`, { newPassword: newPassword });
+    }
+
     ngOnDestroy(): void {
         this.userSubscribtion?.unsubscribe();
     }

@@ -20,6 +20,7 @@ import { EditPostComponent } from './posts/edit-post/edit-post.component';
 import { PostCommentsDeleteComponent } from './posts/post-comments/post-comments-delete/post-comments-delete.component';
 import { PostCommentsEditComponent } from './posts/post-comments/post-comments-edit/post-comments-edit.component';
 import { ProfileEditComponent } from './user/profile/profile-edit/profile-edit.component';
+import { ProfileChangePasswordComponent } from './user/profile/profile-change-password/profile-change-password.component';
 
 export const routes: Routes = [
     { path: "", redirectTo: "home", pathMatch: "full" },
@@ -41,7 +42,8 @@ export const routes: Routes = [
             { path: ":userId", component: ProfileComponent },
             { path: ":userId/image", component: ProfileImageComponent },
             { path: ":userId/post/:postId/details", component: ProfilePostDetailsComponent },
-            { path: ":userId/edit", component: ProfileEditComponent, canActivate: [userGuard] }
+            { path: ":userId/edit", component: ProfileEditComponent, canActivate: [userGuard] },
+            { path: ":userId/changePassword",component:ProfileChangePasswordComponent, canActivate:[userGuard]}
         ]
     },
     { path: "create", component: CreatePostComponent, canActivate: [userGuard] },
