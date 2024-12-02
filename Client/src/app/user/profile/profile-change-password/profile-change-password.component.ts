@@ -40,7 +40,7 @@ export class ProfileChangePasswordComponent {
         const userId=this.route.snapshot.params['userId'];
         this.userService.changeUserPassord(userId,newPassword).subscribe(()=>{
             this.changePassForm.reset();
-            this.router.navigate([`/profile/${userId}`]);
+            this.router.navigate([`/profile/${userId}/successfullChanged`]);
         })
     }
 }

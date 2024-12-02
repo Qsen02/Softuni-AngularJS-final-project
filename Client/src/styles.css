@@ -205,7 +205,7 @@ ul {
 }
 
 @media(max-width:620px){
-    .delete-container{
+    .delete-modal {
         font-size: 12pt;
         width: 70vw;
     }

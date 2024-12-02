@@ -21,6 +21,7 @@ import { PostCommentsDeleteComponent } from './posts/post-comments/post-comments
 import { PostCommentsEditComponent } from './posts/post-comments/post-comments-edit/post-comments-edit.component';
 import { ProfileEditComponent } from './user/profile/profile-edit/profile-edit.component';
 import { ProfileChangePasswordComponent } from './user/profile/profile-change-password/profile-change-password.component';
+import { ProfileSuccessfullChangedComponent } from './user/profile/profile-successfull-changed/profile-successfull-changed.component';
 
 export const routes: Routes = [
     { path: "", redirectTo: "home", pathMatch: "full" },
@@ -43,7 +44,8 @@ export const routes: Routes = [
             { path: ":userId/image", component: ProfileImageComponent },
             { path: ":userId/post/:postId/details", component: ProfilePostDetailsComponent },
             { path: ":userId/edit", component: ProfileEditComponent, canActivate: [userGuard] },
-            { path: ":userId/changePassword",component:ProfileChangePasswordComponent, canActivate:[userGuard]}
+            { path: ":userId/changePassword",component:ProfileChangePasswordComponent, canActivate:[userGuard]},
+            { path: ":userId/successfullChanged",component:ProfileSuccessfullChangedComponent,canActivate:[userGuard]}
         ]
     },
     { path: "create", component: CreatePostComponent, canActivate: [userGuard] },
