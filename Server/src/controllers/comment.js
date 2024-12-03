@@ -10,7 +10,7 @@ commentRouter.get("/:commentId", async (req, res) => {
     const commentId = req.params.commentId;
     const isValid = await checkCommentId(commentId);
     if (!isValid) {
-        res.status(404).json({ message: "Resource not found!" });
+       return res.status(404).json({ message: "Resource not found!" });
     }
     const comment = await getCommentById(commentId).lean();
     res.json(comment);
@@ -24,7 +24,7 @@ commentRouter.post("/in/:postId", isUser(),
         const user = req.user;
         const content = req.body.content;
         if (!isValid) {
-            res.status(404).json({ message: "Resource not found!" });
+           return res.status(404).json({ message: "Resource not found!" });
         }
         try {
             const result = validationResult(req);
@@ -43,12 +43,12 @@ commentRouter.delete("/:commentId/in/:postId", isUser(), async (req, res) => {
     const commentId = req.params.commentId;
     const isValidComment = await checkCommentId(commentId);
     if (!isValidComment) {
-        res.status(404).json({ message: "Resource not found!" });
+       return res.status(404).json({ message: "Resource not found!" });
     }
     const postId = req.params.postId;
     const isValidPost = await checkPostId(postId);
     if (!isValidPost) {
-        res.status(404).json({ message: "Resource not found!" });
+       return res.status(404).json({ message: "Resource not found!" });
     }
     await deleteComment(commentId, postId);
     res.json({ message: "Comment deleted succesfully!" });
@@ -61,7 +61,7 @@ commentRouter.put("/:commentId", isUser(),
         const isValid = await checkCommentId(commentId);
         const fields = req.body;
         if (!isValid) {
-            res.status(404).json({ message: "Resource not found!" });
+           return res.status(404).json({ message: "Resource not found!" });
         }
         try {
             const result = validationResult(req);
@@ -80,7 +80,7 @@ commentRouter.put("/:commentId", isUser(),
         const user=req.user;
         const isValid = await checkCommentId(commentId);
         if (!isValid) {
-            res.status(404).json({ message: "Resource not found!" });
+           return res.status(404).json({ message: "Resource not found!" });
         }
        const comment= await likeComment(commentId,user);
         res.json(comment)
@@ -91,7 +91,7 @@ commentRouter.put("/:commentId", isUser(),
         const user=req.user;
         const isValid = await checkCommentId(commentId);
         if (!isValid) {
-            res.status(404).json({ message: "Resource not found!" });
+            return res.status(404).json({ message: "Resource not found!" });
         }
         const comment=await unlikeComment(commentId,user);
         res.json(comment)

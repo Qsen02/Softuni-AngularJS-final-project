@@ -79,7 +79,7 @@ userRouter.put("/changePassword/:userId", isUser(),
         const newPassword = req.body.newPassword;
         const isValid = await checkUserId(userId);
         if (!isValid) {
-            res.status(404).json({ message: "Resource not found!" });
+           return res.status(404).json({ message: "Resource not found!" });
         }
         try {
             const result = validationResult(req);
@@ -102,7 +102,7 @@ userRouter.put("/update/:userId", isUser(),
         const fields = req.body;
         const isValid = await checkUserId(userId);
         if (!isValid) {
-            res.status(404).json({ message: "Resource not found!" });
+           return res.status(404).json({ message: "Resource not found!" });
         }
         try {
             const result = validationResult(req);
@@ -129,7 +129,7 @@ userRouter.get("/:userId/posts", async (req, res) => {
     const userId = req.params.userId;
     const isValid = await checkUserId(userId);
     if (!isValid) {
-        res.status(404).json({ message: "Resource not found!" });
+       return res.status(404).json({ message: "Resource not found!" });
     }
     const posts = await getUserPublications(userId).lean();
     res.json(posts);
@@ -139,7 +139,7 @@ userRouter.get("/:userId", async (req, res) => {
     const userId = req.params.userId;
     const isValid = await checkUserId(userId);
     if (!isValid) {
-        res.status(404).json({ message: "Resource not found!" });
+       return res.status(404).json({ message: "Resource not found!" });
     }
     const user = await getUserById(userId).lean();
     res.json(user);

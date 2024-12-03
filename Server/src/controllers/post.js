@@ -14,7 +14,7 @@ postRouter.get("/:postId", async (req, res) => {
     const postId = req.params.postId;
     const isValid = await checkPostId(postId);
     if (!isValid) {
-        res.status(404).json({ message: "Resource not found!" });
+       return res.status(404).json({ message: "Resource not found!" });
     }
     const post = await getPostById(postId).lean();
     res.json(post);
@@ -42,7 +42,7 @@ postRouter.delete("/:postId", isUser(), async (req, res) => {
     const postId = req.params.postId;
     const isValid = await checkPostId(postId);
     if (!isValid) {
-        res.status(404).json({ message: "Resource not found!" });
+        return res.status(404).json({ message: "Resource not found!" });
     }
     await deletePost(postId);
     res.json({ message: "Post deleted successfully!" });
@@ -57,7 +57,7 @@ postRouter.put("/:postId",
         const postId = req.params.postId;
         const isValid = await checkPostId(postId);
         if (!isValid) {
-            res.status(404).json({ message: "Resource not found!" });
+           return res.status(404).json({ message: "Resource not found!" });
         }
         try {
             const result = validationResult(req);
@@ -76,7 +76,7 @@ postRouter.post("/:postId/like",isUser(), async (req, res) => {
     const isValid = await checkPostId(postId);
     const user = req.user;
     if (!isValid) {
-        res.status(404).json({ message: "Resource not found!" });
+        return res.status(404).json({ message: "Resource not found!" });
     }
     const post= await likePost(user, postId);
     res.json(post);
@@ -87,7 +87,7 @@ postRouter.post("/:postId/unlike",isUser(), async (req, res) => {
     const isValid = await checkPostId(postId);
     const user = req.user;
     if (!isValid) {
-        res.status(404).json({ message: "Resource not found!" });
+       return res.status(404).json({ message: "Resource not found!" });
     }
     const post=await unlikePost(user, postId);
     res.json(post);

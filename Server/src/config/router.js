@@ -10,7 +10,7 @@ function routerConfig(app) {
     app.use("/comments",commentRouter);
 
     app.use("*", (req, res) => {
-        res.status(404).json({ message: "Resource not found!" });
+       return res.status(404).json({ message: "Resource not found!" });
     })
 }
 
