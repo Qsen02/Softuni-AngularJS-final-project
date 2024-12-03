@@ -22,11 +22,11 @@ async function createPost(description, imageUrl, user) {
 }
 
 async function deletePost(postId) {
-    await Posts.findByIdAndDelete(postId);
     const comments = await Comments.find({ postId: postId }).lean();
     for (let comment of comments) {
-        await Posts.findByIdAndDelete(comment._id.toString());
+        await Comments.findByIdAndDelete(comment._id);
     }
+    await Posts.findByIdAndDelete(postId);
 }
 
 async function editPost(postId, data) {
