@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ErrorMessageService } from '../../services/error-message.service';
+import { Router } from '@angular/router';
 
 @Component({
     selector: 'app-err-message',
@@ -11,7 +12,7 @@ import { ErrorMessageService } from '../../services/error-message.service';
 export class ErrMessageComponent implements OnInit {
     errorMessage: string | null = "";
 
-    constructor(private errService: ErrorMessageService) { }
+    constructor(private errService: ErrorMessageService, private router: Router) { }
 
     ngOnInit(): void {
         this.errService.errorMessage$.subscribe((err) => {
@@ -20,6 +21,10 @@ export class ErrMessageComponent implements OnInit {
     }
 
     onBack() {
-        history.back();
+        if (this.errorMessage == "Resource not found!") {
+            this.router.navigate(['/home']);
+        } else {
+            history.back();
+        }
     }
 }
