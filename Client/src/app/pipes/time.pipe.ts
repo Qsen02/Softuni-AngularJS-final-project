@@ -19,7 +19,9 @@ export class TimePipe implements PipeTransform {
             const days = Math.floor(hours / 24);
             const weeks=Math.floor(days/7);
 
-            if (hours <= 0) {
+            if(minutes<=0 && minutes<60){
+                return `Now`;
+            }else if (hours <= 0) {
                 return `${minutes}m`;
             } else if (hours > 0 && days <= 0) {
                 return `${hours}h`;
