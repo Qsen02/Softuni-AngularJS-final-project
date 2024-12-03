@@ -23,7 +23,7 @@ const postSchema = new mongoose.Schema({
         ref: "Comments",
         default: []
     }
-})
+}, { timestamps: { createdAt: "created_at" } })
 
 const Posts = mongoose.model("Posts", postSchema);
 module.exports = {

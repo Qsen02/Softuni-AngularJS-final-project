@@ -7,5 +7,7 @@ export interface Post{
     imageUrl:string,
     ownerId:User,
     comments:Comment[],
-    likes:User[]
+    likes:User[],
+    created_at:string,
+    updatedAt:string
 }

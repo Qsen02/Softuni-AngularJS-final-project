@@ -34,6 +34,11 @@
     border-bottom: solid 2px grey;
 }
 
+.title>p{
+    margin-left: -25px;
+    color: darkgrey;
+}
+
 .title {
     display: flex;
     justify-content: space-around;
@@ -126,5 +131,9 @@
     .title button {
         padding: 5px 10px 5px 10px;
         font-size: 12pt;
+    }
+
+    .title>p{
+        margin-left: -5px;
     }
 }

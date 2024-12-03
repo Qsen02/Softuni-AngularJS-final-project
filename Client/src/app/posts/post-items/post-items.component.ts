@@ -4,11 +4,12 @@ import { UserService } from '../../services/user.service';
 import { AuthUser } from '../../types/user';
 import { PostsService } from '../../services/posts.service';
 import { RouterLink } from '@angular/router';
+import { TimePipe } from '../../pipes/time.pipe';
 
 @Component({
     selector: 'app-main-posts',
     standalone: true,
-    imports: [RouterLink],
+    imports: [RouterLink,TimePipe],
     templateUrl: './post-items.component.html',
     styleUrl: './post-items.component.css'
 })

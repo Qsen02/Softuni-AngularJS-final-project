@@ -5,12 +5,12 @@ import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { ProfilePostCommentsComponent } from './profile-post-comments/profile-post-comments.component';
 import { AuthUser } from '../../../types/user';
 import { UserService } from '../../../services/user.service';
-import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import { TimePipe } from '../../../pipes/time.pipe';
 
 @Component({
     selector: 'app-profile-post-details',
     standalone: true,
-    imports: [ProfilePostCommentsComponent, RouterLink],
+    imports: [ProfilePostCommentsComponent, RouterLink,TimePipe],
     templateUrl: './profile-post-details.component.html',
     styleUrl: './profile-post-details.component.css'
 })

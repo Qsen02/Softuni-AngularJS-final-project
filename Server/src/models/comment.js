@@ -18,7 +18,7 @@ const commentSchema=new mongoose.Schema({
         type:mongoose.SchemaTypes.ObjectId,
         ref:"Posts"
     }
-})
+},{ timestamps: { createdAt: "created_at" } })
 
 const Comments=mongoose.model("Comments",commentSchema);
 

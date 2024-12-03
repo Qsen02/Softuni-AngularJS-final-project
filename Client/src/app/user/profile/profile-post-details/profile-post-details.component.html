@@ -12,6 +12,7 @@
             <article class="post-header">
                 <div class="title">
                     <h2>{{post?.ownerId?.username}}</h2>
+                    <p>{{post?.created_at | time}}</p>
                     @if(curUser?._id==post?.ownerId?._id){
                     <button [routerLink]="['/home','posts',post?._id,'edit']">Edit</button>
                     <button [routerLink]="['/home','posts',post?._id,'delete']">Delete</button>

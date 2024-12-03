@@ -20,7 +20,7 @@ const userSchema=new mongoose.Schema({
         require:true,
         unique:true
     }
-})
+},{ timestamps: { createdAt: "created_at" } })
 
 const Users=mongoose.model("Users",userSchema);
 

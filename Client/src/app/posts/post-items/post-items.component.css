@@ -21,6 +21,10 @@
     align-items: center;
 }
 
+.post-header>p{
+    color: darkgray;
+}
+
 .post-header img{
     width: 50px;
     height: 50px;

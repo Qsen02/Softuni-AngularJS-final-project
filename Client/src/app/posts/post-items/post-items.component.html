@@ -3,6 +3,7 @@
         <img src={{post?.ownerId?.profileImage}} alt={{post?.ownerId?.username}}
             [routerLink]="['/profile',post?.ownerId?._id]">
         <h2>{{post?.ownerId?.username}}</h2>
+        <p>{{post?.created_at| time }}</p>
         @if(user?._id==post?.ownerId?._id){
         <div class="header-buttons">
             <button [routerLink]="['/home','posts',post?._id,'edit']">Edit</button>
