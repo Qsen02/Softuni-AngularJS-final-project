@@ -5,11 +5,12 @@ import { User } from '../../../types/user';
 import { RouterLink } from '@angular/router';
 import { CommentService } from '../../../services/comment.service';
 import { imageProfileErrorHandler } from '../../../utils/imageErrorHandlers';
+import { TimePipe } from '../../../pipes/time.pipe';
 
 @Component({
     selector: 'app-post-comments-item',
     standalone: true,
-    imports: [RouterLink],
+    imports: [RouterLink,TimePipe],
     templateUrl: './post-comments-item.component.html',
     styleUrl: './post-comments-item.component.css'
 })

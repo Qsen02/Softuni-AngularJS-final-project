@@ -19,12 +19,20 @@
     align-items: center;
     gap: 10px;
 }
-.comment-header i{
+
+.comment-header>p {
+    position: absolute;
+    top:50px;
+    left:80px;
+    color: darkgrey;
+}
+
+.comment-header i {
     font-size: 16pt;
     cursor: pointer;
 }
 
-.comment-header i:hover{
+.comment-header i:hover {
     color: white;
 }
 
@@ -49,51 +57,58 @@
 .comment-header-buttons {
     width: 100px;
     position: absolute;
-    top:18px;
+    top: 18px;
     right: 0;
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
     align-items: center;
-    gap:5px;
+    gap: 5px;
     font-size: 16pt;
     cursor: pointer;
 }
 
-#owner{
+#owner {
     cursor: default;
 }
 
-#owner:hover{
+#owner:hover {
     color: lightgrey;
 }
 
-.owner{
+.owner {
     background-color: rgb(0, 162, 227);
 }
 
-.owner-buttons{
+.owner-buttons {
     width: 70px;
     display: flex;
     flex-wrap: wrap;
-    gap:10px;
+    gap: 10px;
 }
 
 @media(max-width:750px) {
-    .comment-header i{
+    .comment-header i {
         font-size: 12pt;
     }
 
-    .comment-header img{
+    .comment-header img {
         width: 40px;
         height: 40px;
     }
-    .comment-item-wrapper{
+
+    .comment-item-wrapper {
         width: 95%;
     }
-    .comment-header-buttons{
+
+    .comment-header-buttons {
         width: 30px;
-        top:10px;
+        top: 10px;
         font-size: 10pt;
+    }
+
+    .comment-header>p {
+        top:30px;
+        left:50px;
     }
 }

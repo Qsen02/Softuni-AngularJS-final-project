@@ -11,6 +11,7 @@
                 [routerLink]="['/home','posts',comment?.postId,'comments',comment?._id,'delete']"></i>
         </div>
         }
+        <p>{{comment?.created_at | time}}</p>
         <div class="comment-header-buttons">
             @if(isUser && curUserId){
             @if(owner?._id!=curUserId){
