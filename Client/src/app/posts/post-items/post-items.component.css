@@ -153,5 +153,11 @@
     }
     .post-likes{
         flex: 0 0 45%;
+        gap:5px;
+    }
+
+    .post-likes-wrapper {
+        flex: 0 0 45%;
+        gap:5px;
     }
 }
