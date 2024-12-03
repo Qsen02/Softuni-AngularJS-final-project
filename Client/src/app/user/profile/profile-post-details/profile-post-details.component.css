@@ -7,7 +7,7 @@
     flex-wrap: wrap;
     overflow: hidden;
     color: lightgray;
-    overflow: auto;
+    overflow-y: auto;
 }
 
 .details-image {
