@@ -1,8 +1,8 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import {  Component, OnDestroy, OnInit } from '@angular/core';
 import { Post } from '../types/post';
 import { PostsService } from '../services/posts.service';
 import { MainPostsComponent } from './post-items/post-items.component';
-import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { UserService } from '../services/user.service';
 import { User } from '../types/user';
 import { UserItemComponent } from '../user/user-item/user-item.component';
@@ -32,7 +32,6 @@ export class MainComponent implements OnInit,OnDestroy {
 	constructor(private postApi: PostsService, private userService: UserService) {}
 
 	ngOnInit(): void {
-		this.isSearched = false;
 		this.isLoading = true;
 		this.postSubscription=this.postApi.getAllPosts().subscribe({
 			next: (posts) => {

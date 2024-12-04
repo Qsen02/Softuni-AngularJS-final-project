@@ -1,6 +1,6 @@
 <header>
     <div class="image-wrapper">
-        <img src={{curUser?.profileImage}} alt={{curUser?.username}} (error)="onError($event)">
+        <img src={{curUser?.profileImage}} alt={{curUser?.username}} (error)="onError($event)" routerLink="/home">
     </div>
     <nav class="navigation">
         <ul>

@@ -36,6 +36,7 @@ header {
     width: 70px;
     height: 70px;
     border-radius: 50%;
+    cursor: pointer;
 }
 
 @media(max-width:1750px){

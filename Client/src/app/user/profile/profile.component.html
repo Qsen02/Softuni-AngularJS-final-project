@@ -3,11 +3,12 @@
         <div class="profile-names">
             @if(isLoadingProfile && !isError){
             <span class="loader"></span>
-            }
+            }@else{
             <img src={{userProfile?.profileImage}} alt={{userProfile?.username}} (error)="onError($event)"
                 [routerLink]="['/profile',userProfile?._id,'image']">
             <h2>{{userProfile?.username}}</h2>
             <p>{{userProfile?.email}}</p>
+            }
         </div>
         <div class="more-info">
             <p>{{posts.length}}</p>
