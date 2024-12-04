@@ -49,7 +49,7 @@ export const routes: Routes = [
         ]
     },
     { path: "create", component: CreatePostComponent, canActivate: [userGuard] },
-    { path: "register", component: RegisterComponent, canActivate: [guestGuard] },
+    { path: "register", component:RegisterComponent,canActivate: [guestGuard] },
     { path: "login", component: LoginComponent, canActivate: [guestGuard] },
     { path: "logout", component: LogoutComponent, canActivate: [userGuard] },
     { path: "error", component: ErrMessageComponent },
