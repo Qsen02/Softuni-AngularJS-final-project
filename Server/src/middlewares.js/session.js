@@ -9,7 +9,8 @@ function session() {
                 const payload = verifyToken(token);
                 req.user = payload;
             } catch (err) {
-               res.clearCookies("token");
+               res.clearCookie("token");
+               res.status(403).json({message:"You don't have credentialsq please login or register!"});
             }
         }
         next();

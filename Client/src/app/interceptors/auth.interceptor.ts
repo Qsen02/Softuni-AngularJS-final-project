@@ -24,6 +24,8 @@ export const authInterceptor: HttpInterceptorFn = (req, next) => {
         catchError((err)=>{
              if(err.status===401){
                router.navigate(['/login']);
+             }else if(err.status===403){
+                localStorage.removeItem("user");
              }else{
                 errorService.setError(err);
                 router.navigate(['/error']);

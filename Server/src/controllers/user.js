@@ -29,7 +29,7 @@ userRouter.post("/register",
             }
             const user = await register(fields.username, fields.email, fields.password);
             const token = setToken(user);
-            res.cookie("token", token, { httpOnly: true });
+            res.cookie("token", token, { httpOnly: true, secure: true, sameSite: "none" });
             res.json({
                 _id: user._id,
                 username: user.username,
@@ -54,7 +54,7 @@ userRouter.post("/login",
             }
             const user = await login(fields.username, fields.password);
             const token = setToken(user);
-            res.cookie("token", token, { httpOnly: true });
+            res.cookie("token", token, { httpOnly: true, secure: true, sameSite: "none" });
             res.json({
                 _id: user._id,
                 username: user.username,
@@ -79,7 +79,7 @@ userRouter.put("/changePassword/:userId", isUser(),
         const newPassword = req.body.newPassword;
         const isValid = await checkUserId(userId);
         if (!isValid) {
-           return res.status(404).json({ message: "Resource not found!" });
+            return res.status(404).json({ message: "Resource not found!" });
         }
         try {
             const result = validationResult(req);
@@ -102,7 +102,7 @@ userRouter.put("/update/:userId", isUser(),
         const fields = req.body;
         const isValid = await checkUserId(userId);
         if (!isValid) {
-           return res.status(404).json({ message: "Resource not found!" });
+            return res.status(404).json({ message: "Resource not found!" });
         }
         try {
             const result = validationResult(req);
@@ -129,7 +129,7 @@ userRouter.get("/:userId/posts", async (req, res) => {
     const userId = req.params.userId;
     const isValid = await checkUserId(userId);
     if (!isValid) {
-       return res.status(404).json({ message: "Resource not found!" });
+        return res.status(404).json({ message: "Resource not found!" });
     }
     const posts = await getUserPublications(userId).lean();
     res.json(posts);
@@ -139,7 +139,7 @@ userRouter.get("/:userId", async (req, res) => {
     const userId = req.params.userId;
     const isValid = await checkUserId(userId);
     if (!isValid) {
-       return res.status(404).json({ message: "Resource not found!" });
+        return res.status(404).json({ message: "Resource not found!" });
     }
     const user = await getUserById(userId).lean();
     res.json(user);
