@@ -55,7 +55,7 @@ commentRouter.delete("/:commentId/in/:postId", isUser(), async (req, res) => {
 })
 
 commentRouter.put("/:commentId", isUser(),
-    body("content").isLength({ min: 2 }),
+    body("content").isLength({ min: 1 }),
     async (req, res) => {
         const commentId = req.params.commentId;
         const isValid = await checkCommentId(commentId);

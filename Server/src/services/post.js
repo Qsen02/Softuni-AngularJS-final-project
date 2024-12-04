@@ -2,7 +2,7 @@ const { Comments } = require("../models/comment");
 const { Posts } = require("../models/post");
 
 function getAllPosts() {
-    const posts = Posts.find().populate("comments").populate("ownerId").populate("likes");
+    const posts = Posts.find().sort({ $natural: -1 }).populate("comments").populate("ownerId").populate("likes");
     return posts;
 }
 
@@ -30,20 +30,20 @@ async function deletePost(postId) {
 }
 
 async function editPost(postId, data) {
-    await Posts.findByIdAndUpdate(postId, { $set:  data  });
+    await Posts.findByIdAndUpdate(postId, { $set: data });
 }
 
 async function likePost(user, postId) {
-    return await Posts.findByIdAndUpdate(postId, { $push: { likes: user._id } },{new:true})
-    .populate("ownerId").populate("comments").populate("likes").lean();
+    return await Posts.findByIdAndUpdate(postId, { $push: { likes: user._id } }, { new: true })
+        .populate("ownerId").populate("comments").populate("likes").lean();
 }
 
 async function unlikePost(user, postId) {
-    return await Posts.findByIdAndUpdate(postId, { $pull: { likes: user._id } },{new:true})
-    .populate("ownerId").populate("comments").populate("likes").lean();
+    return await Posts.findByIdAndUpdate(postId, { $pull: { likes: user._id } }, { new: true })
+        .populate("ownerId").populate("comments").populate("likes").lean();
 }
 
-async function checkPostId(postId){
+async function checkPostId(postId) {
     const posts = await Posts.find().lean();
     const isValid = posts.find(el => el._id.toString() == postId);
     if (isValid) {
@@ -52,6 +52,6 @@ async function checkPostId(postId){
     return false;
 }
 
-module.exports={
-    getAllPosts,createPost,deletePost,editPost,likePost,unlikePost,getPostById,checkPostId
+module.exports = {
+    getAllPosts, createPost, deletePost, editPost, likePost, unlikePost, getPostById, checkPostId
 }

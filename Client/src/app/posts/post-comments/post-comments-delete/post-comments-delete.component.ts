@@ -1,6 +1,7 @@
-import { Component } from '@angular/core';
+import { Component, OnDestroy } from '@angular/core';
 import { CommentService } from '../../../services/comment.service';
 import { ActivatedRoute } from '@angular/router';
+import { Subscription } from 'rxjs';
 
 @Component({
     selector: 'app-post-comments-delete',
@@ -9,7 +10,8 @@ import { ActivatedRoute } from '@angular/router';
     templateUrl: './post-comments-delete.component.html',
     styleUrl: './post-comments-delete.component.css'
 })
-export class PostCommentsDeleteComponent {
+export class PostCommentsDeleteComponent implements OnDestroy{
+    commentSubscription:Subscription|null=null;
 
     constructor(private commentService: CommentService, private route: ActivatedRoute) { }
 
@@ -20,8 +22,12 @@ export class PostCommentsDeleteComponent {
     onDelete() {
         const commentId = this.route.snapshot.params['commentId'];
         const postId = this.route.snapshot.params['postId'];
-        this.commentService.deleteComment(commentId, postId).subscribe(() => {
+        this.commentSubscription=this.commentService.deleteComment(commentId, postId).subscribe(() => {
             history.back();
         })
+    }
+
+    ngOnDestroy(): void {
+        this.commentSubscription?.unsubscribe();
     }
 }

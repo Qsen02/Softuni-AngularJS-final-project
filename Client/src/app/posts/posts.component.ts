@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Post } from '../types/post';
 import { PostsService } from '../services/posts.service';
 import { MainPostsComponent } from './post-items/post-items.component';
@@ -6,6 +6,7 @@ import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angula
 import { UserService } from '../services/user.service';
 import { User } from '../types/user';
 import { UserItemComponent } from '../user/user-item/user-item.component';
+import { Subscription } from 'rxjs';
 
 @Component({
 	selector: 'app-main',
@@ -14,7 +15,7 @@ import { UserItemComponent } from '../user/user-item/user-item.component';
 	templateUrl: './posts.component.html',
 	styleUrl: './posts.component.css'
 })
-export class MainComponent implements OnInit {
+export class MainComponent implements OnInit,OnDestroy {
 	searchUserForm = new FormGroup({
 		username: new FormControl("")
 	})
@@ -25,12 +26,15 @@ export class MainComponent implements OnInit {
 	isSearched = false;
 	searchedResults: User[] | [] = [];
 
+	postSubscription:Subscription|null=null;
+	userSubscription:Subscription|null=null;
+
 	constructor(private postApi: PostsService, private userService: UserService) {}
 
 	ngOnInit(): void {
 		this.isSearched = false;
 		this.isLoading = true;
-		this.postApi.getAllPosts().subscribe({
+		this.postSubscription=this.postApi.getAllPosts().subscribe({
 			next: (posts) => {
 				this.posts = posts;
 				this.isLoading = false;
@@ -47,7 +51,7 @@ export class MainComponent implements OnInit {
 			username = "No value";
 		}
 		this.isLoading = true;
-		this.userService.searchUsers(username).subscribe({
+		this.userSubscription=this.userService.searchUsers(username).subscribe({
 			next: (users) => {
 				this.isSearched = true;
 				this.searchedResults = users;
@@ -58,5 +62,10 @@ export class MainComponent implements OnInit {
 				this.isError = true;
 			}
 		})
+	}
+
+	ngOnDestroy(): void {
+		this.postSubscription?.unsubscribe();
+		this.userSubscription?.unsubscribe();
 	}
 }

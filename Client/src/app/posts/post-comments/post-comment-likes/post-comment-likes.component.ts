@@ -1,9 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { AuthUser, User } from '../../../types/user';
 import { CommentService } from '../../../services/comment.service';
 import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { UserService } from '../../../services/user.service';
 import { imageProfileErrorHandler } from '../../../utils/imageErrorHandlers';
+import { Subscription } from 'rxjs';
 
 @Component({
     selector: 'app-post-comment-likes',
@@ -12,22 +13,23 @@ import { imageProfileErrorHandler } from '../../../utils/imageErrorHandlers';
     templateUrl: './post-comment-likes.component.html',
     styleUrl: './post-comment-likes.component.css'
 })
-export class PostCommentLikesComponent implements OnInit {
+export class PostCommentLikesComponent implements OnInit,OnDestroy {
     likes: User[] = [];
     isError = false;
     isLoading = false;
     curUser:AuthUser|null=null;
 
+    commentSubscription:Subscription|null=null;
+
     constructor(private commentService: CommentService, 
         private route: ActivatedRoute, 
         private userService:UserService,
-        private router:Router
     ) { }
 
     ngOnInit(): void {
         this.isLoading = true;
         const commentId = this.route.snapshot.params['commentId'];
-        this.commentService.getCommentById(commentId).subscribe({
+        this.commentSubscription=this.commentService.getCommentById(commentId).subscribe({
             next: (comment) => {
                 this.likes = comment.likes as User[];
                 this.curUser=this.userService.getUser();
@@ -47,5 +49,9 @@ export class PostCommentLikesComponent implements OnInit {
     onError(event: Event) {
         const imgRef = event.target as HTMLImageElement;
         imageProfileErrorHandler(imgRef);
+    }
+
+    ngOnDestroy(): void {
+        this.commentSubscription?.unsubscribe();
     }
 }

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { PostCommentsItemComponent } from './post-comments-item/post-comments-item.component';
 import { PostsService } from '../../services/posts.service';
 import { Comment } from '../../types/comment';
@@ -6,6 +6,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { UserService } from '../../services/user.service';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { CommentService } from '../../services/comment.service';
+import { Subscription } from 'rxjs';
 
 @Component({
     selector: 'app-post-comments',
@@ -14,7 +15,7 @@ import { CommentService } from '../../services/comment.service';
     templateUrl: './post-comments.component.html',
     styleUrl: './post-comments.component.css'
 })
-export class PostCommentsComponent implements OnInit {
+export class PostCommentsComponent implements OnInit,OnDestroy {
     comments: Comment[] = [];
     isLoading = false;
     isError = false;
@@ -24,6 +25,9 @@ export class PostCommentsComponent implements OnInit {
     commentForm = new FormGroup({
         content: new FormControl("", Validators.required)
     })
+
+    postSubscription:Subscription|null=null;
+    commentSubscription:Subscription|null=null;
 
     constructor(
         private postService: PostsService,
@@ -36,7 +40,7 @@ export class PostCommentsComponent implements OnInit {
     ngOnInit(): void {
         this.isLoading = true;
         const postId = this.route.snapshot.params['postId'];
-        this.postService.getPostById(postId).subscribe({
+        this.postSubscription=this.postService.getPostById(postId).subscribe({
             next: (post) => {
                 this.comments = post.comments;
                 this.postOwner = post.ownerId.username;
@@ -53,7 +57,7 @@ export class PostCommentsComponent implements OnInit {
     onComment() {
         const content=this.commentForm.value.content;
         const postId = this.route.snapshot.params['postId'];
-        this.commentService.createComment(postId,content).subscribe((newComment)=>{
+        this.commentSubscription=this.commentService.createComment(postId,content).subscribe((newComment)=>{
             this.comments.push(newComment);
             this.commentForm.reset();
         })
@@ -61,5 +65,10 @@ export class PostCommentsComponent implements OnInit {
 
     onBack(): void {
         this.router.navigate(["/home"]);
+    }
+
+    ngOnDestroy(): void {
+        this.postSubscription?.unsubscribe();
+        this.commentSubscription?.unsubscribe();
     }
 }

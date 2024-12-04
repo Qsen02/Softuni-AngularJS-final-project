@@ -1,9 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { AuthUser, User } from '../../types/user';
 import { PostsService } from '../../services/posts.service';
 import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { UserService } from '../../services/user.service';
 import { imageProfileErrorHandler } from '../../utils/imageErrorHandlers';
+import { Subscription } from 'rxjs';
 
 @Component({
     selector: 'app-post-likes',
@@ -12,15 +13,16 @@ import { imageProfileErrorHandler } from '../../utils/imageErrorHandlers';
     templateUrl: './post-likes.component.html',
     styleUrl: './post-likes.component.css'
 })
-export class PostLikesComponent implements OnInit {
+export class PostLikesComponent implements OnInit, OnDestroy {
     likes: User[] = [];
     user: AuthUser | null = null;
     isLoading = false;
     isError = false;
 
+    postSubscription: Subscription | null = null;
+
     constructor(private postService: PostsService,
         private route: ActivatedRoute,
-        private router: Router,
         private userService: UserService
     ) { }
 
@@ -28,7 +30,7 @@ export class PostLikesComponent implements OnInit {
         this.isLoading = true;
         const postId = this.route.snapshot.params['postId'];
         this.user = this.userService.getUser();
-        this.postService.getPostById(postId).subscribe({
+        this.postSubscription = this.postService.getPostById(postId).subscribe({
             next: (post) => {
                 this.likes = post.likes;
                 this.isLoading = false;
@@ -41,11 +43,15 @@ export class PostLikesComponent implements OnInit {
     }
 
     onBack() {
-       history.back();
+        history.back();
     }
 
     onError(event: Event) {
         const imgRef = event.target as HTMLImageElement;
         imageProfileErrorHandler(imgRef);
+    }
+
+    ngOnDestroy(): void {
+        this.postSubscription?.unsubscribe();
     }
 }

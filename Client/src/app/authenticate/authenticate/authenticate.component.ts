@@ -1,5 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { UserService } from '../../services/user.service';
+import { Subscription } from 'rxjs';
 
 @Component({
     selector: 'app-authenticate',
@@ -8,13 +9,14 @@ import { UserService } from '../../services/user.service';
     templateUrl: './authenticate.component.html',
     styleUrl: './authenticate.component.css'
 })
-export class AuthenticateComponent implements OnInit {
+export class AuthenticateComponent implements OnInit,OnDestroy {
     isAuthenticate=true;
 
+    userSubscription:Subscription|null=null;
     constructor(private userService:UserService){}
 
     ngOnInit(): void {
-        this.userService.getUserProfile().subscribe({
+        this.userSubscription=this.userService.getUserProfile().subscribe({
             next:()=>{
                 this.isAuthenticate=false;
             },
@@ -25,5 +27,9 @@ export class AuthenticateComponent implements OnInit {
                 this.isAuthenticate=false;
             }
         })
+    }
+
+    ngOnDestroy(): void {
+        this.userSubscription?.unsubscribe();
     }
 }
