@@ -1,7 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { UserService } from '../../../services/user.service';
 import { ActivatedRoute, Router } from '@angular/router';
+import { Subscription } from 'rxjs';
 
 @Component({
     selector: 'app-profile-edit',
@@ -10,7 +11,7 @@ import { ActivatedRoute, Router } from '@angular/router';
     templateUrl: './profile-edit.component.html',
     styleUrl: './profile-edit.component.css'
 })
-export class ProfileEditComponent implements OnInit {
+export class ProfileEditComponent implements OnInit, OnDestroy {
     imagePattern = /^https?:\/\//;
     editProfileForm = new FormGroup({
         username: new FormControl("", [Validators.required, Validators.minLength(2)]),
@@ -18,32 +19,40 @@ export class ProfileEditComponent implements OnInit {
         profileImage: new FormControl("", Validators.pattern(this.imagePattern))
     })
 
+    getUserSubscription: Subscription | null = null;
+    editSubscription: Subscription | null = null;
+
     constructor(private userService: UserService, private router: Router, private route: ActivatedRoute) { }
 
     ngOnInit(): void {
         const userId = this.route.snapshot.params['userId'];
-        this.userService.getUserById(userId).subscribe((user) => {
+       this.getUserSubscription= this.userService.getUserById(userId).subscribe((user) => {
             this.editProfileForm.get("username")?.setValue(user.username);
             this.editProfileForm.get("email")?.setValue(user.email);
             this.editProfileForm.get("profileImage")?.setValue(user.profileImage);
         })
     }
 
-    onEdit(){
-      const username=this.editProfileForm.value.username;
-      const email=this.editProfileForm.value.email;
-      const profileImage=this.editProfileForm.value.profileImage;
-      const userId = this.route.snapshot.params['userId'];
-      this.userService.editUser(userId,{username,email,profileImage}).subscribe(()=>{
-        this.editProfileForm.reset();
-        this.router.navigate([`/profile/${userId}`]);
-      })
-      this.userService.updateCurUser(username!,email!,profileImage!);
+    onEdit() {
+        const username = this.editProfileForm.value.username;
+        const email = this.editProfileForm.value.email;
+        const profileImage = this.editProfileForm.value.profileImage;
+        const userId = this.route.snapshot.params['userId'];
+        this.editSubscription=this.userService.editUser(userId, { username, email, profileImage }).subscribe(() => {
+            this.editProfileForm.reset();
+            this.router.navigate([`/profile/${userId}`]);
+        })
+        this.userService.updateCurUser(username!, email!, profileImage!);
     }
 
-    onBack(event:Event){
+    onBack(event: Event) {
         event.preventDefault();
         const userId = this.route.snapshot.params['userId'];
         this.router.navigate([`/profile/${userId}`]);
+    }
+
+    ngOnDestroy(): void {
+        this.getUserSubscription?.unsubscribe();
+        this.editSubscription?.unsubscribe();
     }
 }

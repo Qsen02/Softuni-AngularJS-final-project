@@ -1,9 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Post } from '../../types/post';
 import { ActivatedRoute, RouterLink } from '@angular/router';
 import { UserService } from '../../services/user.service';
 import { AuthUser, User } from '../../types/user';
 import { imageProfileErrorHandler } from '../../utils/imageErrorHandlers';
+import { Subscription } from 'rxjs';
 
 @Component({
     selector: 'app-profile',
@@ -12,7 +13,7 @@ import { imageProfileErrorHandler } from '../../utils/imageErrorHandlers';
     templateUrl: './profile.component.html',
     styleUrl: './profile.component.css'
 })
-export class ProfileComponent implements OnInit {
+export class ProfileComponent implements OnInit, OnDestroy {
     posts: Post[] = [];
     isLoadingPosts = false;
     isLoadingProfile = false;
@@ -20,15 +21,18 @@ export class ProfileComponent implements OnInit {
     userProfile: User | null = null;
     curUser: AuthUser | null = null;
 
+    userPostsSubscription: Subscription | null = null;
+    userSubscription: Subscription | null = null;
+
     constructor(private route: ActivatedRoute, private userService: UserService) { }
 
     ngOnInit(): void {
         this.isLoadingProfile = true;
         const userId = this.route.snapshot.params['userId'];
-        this.userService.getUserPosts(userId).subscribe({
+        this.userPostsSubscription = this.userService.getUserPosts(userId).subscribe({
             next: (posts) => {
                 this.posts = posts;
-                this.isLoadingProfile=false;
+                this.isLoadingProfile = false;
             },
             error: (err) => {
                 this.isError = true;
@@ -36,7 +40,7 @@ export class ProfileComponent implements OnInit {
             }
         })
         this.isLoadingPosts = true;
-        this.userService.getUserById(userId).subscribe({
+        this.userSubscription = this.userService.getUserById(userId).subscribe({
             next: (user) => {
                 this.userProfile = user;
                 this.curUser = this.userService.getUser();
@@ -51,5 +55,10 @@ export class ProfileComponent implements OnInit {
     onError(event: Event) {
         const imgRef = event.target as HTMLImageElement;
         imageProfileErrorHandler(imgRef);
+    }
+
+    ngOnDestroy(): void {
+        this.userPostsSubscription?.unsubscribe();
+        this.userSubscription?.unsubscribe();
     }
 }
