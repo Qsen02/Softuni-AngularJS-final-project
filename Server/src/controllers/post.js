@@ -1,12 +1,13 @@
 const { Router } = require("express");
-const { getAllPosts, checkPostId, getPostById, createPost, deletePost, editPost, likePost, unlikePost } = require("../services/post");
+const { checkPostId, getPostById, createPost, deletePost, editPost, likePost, unlikePost, getNextPosts } = require("../services/post");
 const { isUser } = require("../middlewares.js/guard");
 const { body, validationResult } = require("express-validator");
 
 const postRouter = Router();
 
-postRouter.get("/", async (req, res) => {
-    const posts = await getAllPosts().lean();
+postRouter.get("/:count", async (req, res) => {
+    const count=Number(req.params.count);
+    const posts = await getNextPosts(count).lean();
     res.json(posts);
 })
 

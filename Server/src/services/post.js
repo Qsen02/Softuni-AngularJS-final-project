@@ -1,8 +1,9 @@
 const { Comments } = require("../models/comment");
 const { Posts } = require("../models/post");
 
-function getAllPosts() {
-    const posts = Posts.find().sort({ $natural: -1 }).populate("comments").populate("ownerId").populate("likes");
+function getNextPosts(count) {
+    const skipCount=count*3;
+    const posts = Posts.find().skip(skipCount).limit(3).sort({ $natural: -1 }).populate("comments").populate("ownerId").populate("likes");
     return posts;
 }
 
@@ -53,5 +54,5 @@ async function checkPostId(postId) {
 }
 
 module.exports = {
-    getAllPosts, createPost, deletePost, editPost, likePost, unlikePost, getPostById, checkPostId
+    getNextPosts, createPost, deletePost, editPost, likePost, unlikePost, getPostById, checkPostId
 }

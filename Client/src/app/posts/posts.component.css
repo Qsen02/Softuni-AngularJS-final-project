@@ -10,6 +10,7 @@
 .post-wrapper {
     width: 60%;
     padding: 30px;
+    margin-bottom: 100px;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -59,12 +60,18 @@
     color: lightgray;
 }
 
+.loder {
+    display: block;
+    margin: 0 auto;
+}
+
 @media(max-width:1200px) {
     .search-form {
         top: 75px;
     }
 }
-@media(max-width:650px){
+
+@media(max-width:650px) {
     .search-form {
         top: 120px;
         left: 45%;

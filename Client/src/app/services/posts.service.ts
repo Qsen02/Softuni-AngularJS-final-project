@@ -8,8 +8,8 @@ import { Post } from '../types/post';
 export class PostsService {
     constructor(private http: HttpClient) { }
 
-    getAllPosts() {
-        return this.http.get<Post[]>("/api/posts");
+    getNexPosts(count:number) {
+        return this.http.get<Post[]>(`/api/posts/${count}`);
     }
 
     getPostById(id: string) {
