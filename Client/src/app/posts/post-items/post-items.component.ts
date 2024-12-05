@@ -6,6 +6,7 @@ import { PostsService } from '../../services/posts.service';
 import { RouterLink } from '@angular/router';
 import { TimePipe } from '../../pipes/time.pipe';
 import { Subscription } from 'rxjs';
+import { imageErrorHandler, imageProfileErrorHandler } from '../../utils/imageErrorHandlers';
 
 @Component({
     selector: 'app-main-posts',
@@ -49,6 +50,16 @@ export class MainPostsComponent implements OnInit,OnDestroy {
             this.post = post;
             this.checkStats();
         });
+    }
+
+    onImageError(event:Event){
+        const imageRef=event.target as HTMLImageElement;
+        imageErrorHandler(imageRef);
+    }
+
+    onProfileImageError(event:Event){
+        const imageRef=event.target as HTMLImageElement;
+        imageProfileErrorHandler(imageRef);
     }
 
     ngOnDestroy(): void {

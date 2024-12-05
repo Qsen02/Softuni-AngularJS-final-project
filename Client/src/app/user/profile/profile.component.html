@@ -31,7 +31,7 @@
         }
         @for (post of posts; track $index) {
         <img src={{post.imageUrl}} alt="User post"
-            [routerLink]="['/profile',userProfile?._id,'post',post._id,'details']">
+            [routerLink]="['/profile',userProfile?._id,'post',post._id,'details']" (error)="onImageError($event)">
         }@empty {
             @if(!isLoadingPosts && !isError){
             <h2>No publications yet.</h2>

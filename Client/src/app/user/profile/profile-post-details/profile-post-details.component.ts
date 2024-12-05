@@ -7,6 +7,7 @@ import { AuthUser } from '../../../types/user';
 import { UserService } from '../../../services/user.service';
 import { TimePipe } from '../../../pipes/time.pipe';
 import { Subscription } from 'rxjs';
+import { imageErrorHandler } from '../../../utils/imageErrorHandlers';
 
 @Component({
     selector: 'app-profile-post-details',
@@ -49,6 +50,11 @@ export class ProfilePostDetailsComponent implements OnInit,OnDestroy {
                 this.isLoading = false;
             }
         })
+    }
+
+    onError(event:Event){
+        const imageRef=event.target as HTMLImageElement;
+        imageErrorHandler(imageRef);
     }
 
     onLike() {

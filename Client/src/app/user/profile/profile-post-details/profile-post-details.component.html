@@ -1,7 +1,7 @@
 <div class="modal">
     <section class="details-wrapper">
         <section class="details-image">
-            <img src={{post?.imageUrl}} alt={{post?.description}}>
+            <img src={{post?.imageUrl}} alt={{post?.description}} (error)="onError($event)">
         </section>
         <section class="details-body">
             @if(isLoading && !isError){

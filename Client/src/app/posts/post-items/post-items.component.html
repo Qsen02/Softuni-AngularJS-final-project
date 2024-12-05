@@ -1,7 +1,7 @@
 <article class="post-item">
     <div class="post-header">
         <img src={{post?.ownerId?.profileImage}} alt={{post?.ownerId?.username}}
-            [routerLink]="['/profile',post?.ownerId?._id]">
+            (error)="onProfileImageError($event)" [routerLink]="['/profile',post?.ownerId?._id]">
         <h2>{{post?.ownerId?.username}}</h2>
         <p>{{post?.created_at| time }}</p>
         @if(user?._id==post?.ownerId?._id){
@@ -14,7 +14,7 @@
     <div class="post-body">
         <div class="post-body-main">
             <p>{{post?.description}}</p>
-            <img src={{post?.imageUrl}} alt="post image" [routerLink]="['/home','posts',post?._id,'image']">
+            <img src={{post?.imageUrl}} alt="post image" (error)="onImageError($event)" [routerLink]="['/home','posts',post?._id,'image']">
         </div>
         <article class="buttons">
             @if(isUser && !isOwner){

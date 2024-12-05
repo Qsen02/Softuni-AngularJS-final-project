@@ -3,6 +3,7 @@ import { Post } from '../../types/post';
 import { PostsService } from '../../services/posts.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Subscription } from 'rxjs';
+import { imageErrorHandler } from '../../utils/imageErrorHandlers';
 
 @Component({
     selector: 'app-post-image',
@@ -11,33 +12,38 @@ import { Subscription } from 'rxjs';
     templateUrl: './post-image.component.html',
     styleUrl: './post-image.component.css'
 })
-export class PostImageComponent implements OnInit,OnDestroy {
+export class PostImageComponent implements OnInit, OnDestroy {
     post: Post | null = null;
-    isLoading=false;
-    isError=false;
+    isLoading = false;
+    isError = false;
 
-    postSubscription:Subscription|null=null;
+    postSubscription: Subscription | null = null;
 
-    constructor(private postService: PostsService, private route: ActivatedRoute,private router:Router) { }
+    constructor(private postService: PostsService, private route: ActivatedRoute, private router: Router) { }
 
     ngOnInit(): void {
         const postId = this.route.snapshot.params['postId'];
-        this.isLoading=true;
-       this.postSubscription=this.postService.getPostById(postId).subscribe({
-            next:(post)=>{
-                this.post=post;
-                this.isLoading=false;
+        this.isLoading = true;
+        this.postSubscription = this.postService.getPostById(postId).subscribe({
+            next: (post) => {
+                this.post = post;
+                this.isLoading = false;
             },
-            error:(err)=>{
+            error: (err) => {
                 console.log(err);
-                this.isError=true;
-                this.isLoading=false;
+                this.isError = true;
+                this.isLoading = false;
             }
         })
     }
 
-    onBack(){
+    onBack() {
         this.router.navigate(['/home']);
+    }
+
+    onError(event: Event) {
+        const imgRef = event.target as HTMLImageElement;
+        imageErrorHandler(imgRef);
     }
 
     ngOnDestroy(): void {

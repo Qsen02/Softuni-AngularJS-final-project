@@ -3,7 +3,7 @@ import { Post } from '../../types/post';
 import { ActivatedRoute, RouterLink } from '@angular/router';
 import { UserService } from '../../services/user.service';
 import { AuthUser, User } from '../../types/user';
-import { imageProfileErrorHandler } from '../../utils/imageErrorHandlers';
+import { imageErrorHandler, imageProfileErrorHandler } from '../../utils/imageErrorHandlers';
 import { Subscription } from 'rxjs';
 
 @Component({
@@ -52,9 +52,15 @@ export class ProfileComponent implements OnInit, OnDestroy {
             }
         })
     }
+
     onError(event: Event) {
         const imgRef = event.target as HTMLImageElement;
         imageProfileErrorHandler(imgRef);
+    }
+
+    onImageError(event:Event){
+        const imgRef = event.target as HTMLImageElement;
+        imageErrorHandler(imgRef);
     }
 
     ngOnDestroy(): void {
