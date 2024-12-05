@@ -13,7 +13,7 @@ import { ProfileComponent } from './user/profile/profile.component';
 import { PostImageComponent } from './posts/post-image/post-image.component';
 import { ProfileImageComponent } from './user/profile/profile-image/profile-image.component';
 import { ProfilePostDetailsComponent } from './user/profile/profile-post-details/profile-post-details.component';
-import { ErrMessageComponent } from './err-message/err-message/err-message.component';
+import { ErrMessageComponent } from './err-message/err-message.component';
 import { CreatePostComponent } from './posts/create-post/create-post.component';
 import { DeletePostComponent } from './posts/delete-post/delete-post.component';
 import { EditPostComponent } from './posts/edit-post/edit-post.component';

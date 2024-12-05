@@ -6,7 +6,7 @@ import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angula
 import { passwordPattern } from '../../utils/passRegexp';
 import { matchPassword } from '../../utils/matchPassword.validator';
 import { Subscription } from 'rxjs';
-import { ErrMessageComponent } from '../../err-message/err-message/err-message.component';
+import { ErrMessageComponent } from '../../err-message/err-message.component';
 
 @Component({
     selector: 'app-register',

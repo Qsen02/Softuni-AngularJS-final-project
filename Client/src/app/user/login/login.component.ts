@@ -5,7 +5,7 @@ import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angula
 import { UserService } from '../../services/user.service';
 import { passwordPattern } from '../../utils/passRegexp';
 import { Subscription } from 'rxjs';
-import { ErrMessageComponent } from '../../err-message/err-message/err-message.component';
+import { ErrMessageComponent } from '../../err-message/err-message.component';
 
 @Component({
     selector: 'app-login',

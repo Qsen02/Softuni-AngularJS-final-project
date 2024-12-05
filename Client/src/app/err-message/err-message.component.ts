@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ErrorMessageService } from '../../services/error-message.service';
+import { ErrorMessageService } from '../services/error-message.service';
 import { Router } from '@angular/router';
 
 @Component({
