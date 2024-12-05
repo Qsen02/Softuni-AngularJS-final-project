@@ -1,5 +1,5 @@
 import { HttpInterceptorFn } from '@angular/common/http';
-import { catchError } from 'rxjs';
+import { catchError, throwError } from 'rxjs';
 import { enviroment } from '../enviroment/app.enviroment';
 import { inject } from '@angular/core';
 import { ErrorMessageService } from '../services/error-message.service';
@@ -28,9 +28,8 @@ export const authInterceptor: HttpInterceptorFn = (req, next) => {
                 localStorage.removeItem("user");
             } else {
                 errorService.setError(err);
-                router.navigate(['/error']);
             }
-            return [err];
+            return throwError(()=>err);
         })
     );
 };

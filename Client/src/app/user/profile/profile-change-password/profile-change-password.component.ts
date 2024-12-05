@@ -15,6 +15,7 @@ import { Subscription } from 'rxjs';
 })
 export class ProfileChangePasswordComponent implements OnDestroy {
     isVisibleNewPass = false;
+    errMessage: string | null | undefined = "";
 
     changePassForm = new FormGroup({
         newPassword: new FormControl("", [Validators.required, Validators.pattern(passwordPattern)])
@@ -40,9 +41,15 @@ export class ProfileChangePasswordComponent implements OnDestroy {
     onChange() {
         const newPassword = this.changePassForm.value.newPassword;
         const userId = this.route.snapshot.params['userId'];
-       this.changePasswordSubscription=this.userService.changeUserPassord(userId, newPassword).subscribe(() => {
-            this.changePassForm.reset();
-            this.router.navigate([`/profile/${userId}/successfullChanged`]);
+        this.changePasswordSubscription = this.userService.changeUserPassord(userId, newPassword).subscribe({
+            next: () => {
+             this.errMessage= "";
+                this.changePassForm.reset();
+                this.router.navigate([`/profile/${userId}/successfullChanged`]);
+            },
+            error: (err) => {
+                this.errMessage = err.error?.message;
+            }
         })
     }
 

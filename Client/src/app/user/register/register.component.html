@@ -1,3 +1,6 @@
+@if(errMessage){
+    <app-err-message/>
+}
 <form class="form" [formGroup]="registerForm" (ngSubmit)="onRegister()">
     <h2>Register here</h2>
     <p class="input">

@@ -6,17 +6,19 @@ import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angula
 import { passwordPattern } from '../../utils/passRegexp';
 import { matchPassword } from '../../utils/matchPassword.validator';
 import { Subscription } from 'rxjs';
+import { ErrMessageComponent } from '../../err-message/err-message/err-message.component';
 
 @Component({
     selector: 'app-register',
     standalone: true,
-    imports: [RouterLink, ChangeVisabilityDirective, ReactiveFormsModule],
+    imports: [RouterLink, ChangeVisabilityDirective, ReactiveFormsModule,ErrMessageComponent],
     templateUrl: './register.component.html',
     styleUrl: './register.component.css'
 })
 export class RegisterComponent implements OnDestroy {
     isVisiblePass = false;
     isVisibleRepass = false;
+    errMessage: string | null | undefined = "";
 
     registerForm = new FormGroup({
         username: new FormControl("", [Validators.required, Validators.minLength(2)]),
@@ -62,9 +64,15 @@ export class RegisterComponent implements OnDestroy {
         const email = this.registerForm.value.email;
         const password = this.registerForm.value.passGroup?.repass;
         const repass = this.registerForm.value.passGroup?.repass;
-        this.registerSubscription = this.userService.register(username, email, password, repass).subscribe((user) => {
-            this.registerForm.reset();
-            this.router.navigate(['/home']);
+        this.registerSubscription = this.userService.register(username, email, password, repass).subscribe({
+            next: (user) => {
+                this.errMessage="";
+                this.registerForm.reset();
+                this.router.navigate(['/home']);
+            },
+            error: (err) => {
+                this.errMessage = err.error?.message;
+            }
         });
     }
 

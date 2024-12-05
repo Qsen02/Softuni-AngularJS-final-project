@@ -19,12 +19,4 @@ export class ErrMessageComponent implements OnInit {
             this.errorMessage = err;
         })
     }
-
-    onBack() {
-        if (this.errorMessage == "Resource not found!") {
-            this.router.navigate(['/home']);
-        } else {
-            history.back();
-        }
-    }
 }

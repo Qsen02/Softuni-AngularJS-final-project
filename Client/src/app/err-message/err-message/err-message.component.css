@@ -1,8 +1,8 @@
 .error-message {
     position: absolute;
     padding: 20px;
-    top: 150px;
-    left: 50%;
+    top: 170px;
+    right: 0;
     transform: translate(-50%);
     background-color: rgba(255, 0, 0, 0.5);
     color: white;
