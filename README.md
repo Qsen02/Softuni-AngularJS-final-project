@@ -29,7 +29,7 @@ Site for posting publications and interact with them like in social media.
 
 -Posts:
 
--get all posts (GET)-/posts
+-get next posts (GET)-/posts/count/${count}
 
 -get post by id (GET)-/posts/{postId}
 
