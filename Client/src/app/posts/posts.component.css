@@ -1,4 +1,5 @@
 .wrapper {
+    position: relative;
     margin: 30px auto;
     display: flex;
     flex-direction: column;
@@ -60,9 +61,10 @@
     color: lightgray;
 }
 
-.loder {
-    display: block;
-    margin: 0 auto;
+.loader {
+    position: absolute;
+    bottom: 40px;
+    left: 46%;
 }
 
 @media(max-width:1200px) {

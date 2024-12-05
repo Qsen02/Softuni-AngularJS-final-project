@@ -26,6 +26,7 @@ export class MainComponent implements OnInit, OnDestroy {
 	isError = false;
 	isSearched = false;
 	searchedResults: User[] | [] = [];
+	isOver = false;
 
 	postSubscription: Subscription | null = null;
 	userSubscription: Subscription | null = null;
@@ -53,19 +54,22 @@ export class MainComponent implements OnInit, OnDestroy {
 		const max = document.documentElement.scrollHeight;
 
 		if (curPosition >= max) {
-			this.postSubscription = this.postApi.getNexPosts(this.count).subscribe({
-				next: (posts) => {
-					if (posts.length > 0) {
-						this.isLoading = true;
-						this.count++;
+			if (!this.isOver) {
+				this.isLoading = true;
+				this.postSubscription = this.postApi.getNexPosts(this.count).subscribe({
+					next: (posts) => {
+							this.count++;
+							this.posts.push(...posts);
+							this.isLoading = false;
+						if (posts.length == 0) {
+							this.isOver = true;
+						}
+					},
+					error: err => {
+						this.isError = true;
 					}
-					this.posts.push(...posts);
-					this.isLoading = false;
-				},
-				error: err => {
-					this.isError = true;
-				}
-			});
+				});
+			}
 		}
 	}
 

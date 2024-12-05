@@ -5,12 +5,6 @@ const { body, validationResult } = require("express-validator");
 
 const postRouter = Router();
 
-postRouter.get("/:count", async (req, res) => {
-    const count=Number(req.params.count);
-    const posts = await getNextPosts(count).lean();
-    res.json(posts);
-})
-
 postRouter.get("/:postId", async (req, res) => {
     const postId = req.params.postId;
     const isValid = await checkPostId(postId);
@@ -19,6 +13,13 @@ postRouter.get("/:postId", async (req, res) => {
     }
     const post = await getPostById(postId).lean();
     res.json(post);
+})
+
+
+postRouter.get("/count/:count", async (req, res) => {
+    const count=Number(req.params.count);
+    const posts = await getNextPosts(count).lean();
+    res.json(posts);
 })
 
 postRouter.post("/", isUser(),

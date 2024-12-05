@@ -9,7 +9,7 @@ export class PostsService {
     constructor(private http: HttpClient) { }
 
     getNexPosts(count:number) {
-        return this.http.get<Post[]>(`/api/posts/${count}`);
+        return this.http.get<Post[]>(`/api/posts/count/${count}`);
     }
 
     getPostById(id: string) {

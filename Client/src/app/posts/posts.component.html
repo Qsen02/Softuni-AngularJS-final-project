@@ -11,9 +11,7 @@
     <h1>All posts</h1>
     }
     <section class="post-wrapper">
-        @if(isLoading && !isError){
-        <span class="loader"></span>
-        }@else if(posts.length==0 && !isError && !isLoading){
+        @if(posts.length==0 && !isError && !isLoading){
         <div class="message">
             <p>No posts yet</p>
         </div>
@@ -23,18 +21,19 @@
         </div>
         }@else{
             @if(isSearched){
-                @if(searchedResults.length>0){
-                    @for (user of searchedResults; track $index) {
+                @for (user of searchedResults; track $index) {
                     <app-user-item [userProp]="user" />
-                    }
-                    }@else{
+                }@empty{
                     <div class="message">
                         <p>No users found :(</p>
                     </div>
-                    }
+                }
             }@else{
                 @for (post of posts; track $index) {
-                <app-main-posts [postProp]="post" />
+                    @if(isLoading && !isError){
+                        <span class="loader"></span>
+                    }
+                    <app-main-posts [postProp]="post" />
                 }
             }
         }
