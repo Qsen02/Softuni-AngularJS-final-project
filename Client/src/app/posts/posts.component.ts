@@ -27,6 +27,7 @@ export class MainComponent implements OnInit, OnDestroy {
 	isSearched = false;
 	searchedResults: User[] | [] = [];
 	isOver = false;
+	initialLoad=false;
 
 	postSubscription: Subscription | null = null;
 	userSubscription: Subscription | null = null;
@@ -34,11 +35,11 @@ export class MainComponent implements OnInit, OnDestroy {
 	constructor(private postApi: PostsService, private userService: UserService) { }
 
 	ngOnInit(): void {
-		this.isLoading = true;
+		this.initialLoad = true;
 		this.postSubscription = this.postApi.getNexPosts(this.count).subscribe({
 			next: (posts) => {
 				this.posts = posts;
-				this.isLoading = false;
+				this.initialLoad = false;
 				this.count++;
 			},
 			error: err => {
