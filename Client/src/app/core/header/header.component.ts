@@ -10,22 +10,21 @@ import { imageProfileErrorHandler } from '../../utils/imageErrorHandlers';
     standalone: true,
     imports: [RouterLink],
     templateUrl: './header.component.html',
-    styleUrl: './header.component.css'
+    styleUrl: './header.component.css',
 })
 export class HeaderComponent {
-    get curUser(){
+    get curUser() {
         return this.userService.getUser();
     }
 
-    get isLogged(){
+    get isLogged() {
         return this.userService.isLogged;
     }
 
-    constructor(private userService:UserService){}
+    constructor(private userService: UserService) {}
 
-
-    onError(event:Event){
-        const imageRef=event.target as HTMLImageElement;
+    onError(event: Event) {
+        const imageRef = event.target as HTMLImageElement;
         imageProfileErrorHandler(imageRef);
     }
 }
