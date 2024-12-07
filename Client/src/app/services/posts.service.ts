@@ -1,30 +1,34 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Post } from '../types/post';
+import { Observable } from 'rxjs';
 
 @Injectable({
-    providedIn: 'root'
+    providedIn: 'root',
 })
 export class PostsService {
-    constructor(private http: HttpClient) { }
+    constructor(private http: HttpClient) {}
 
-    getNexPosts(count:number) {
+    getNexPosts(count: number) {
         return this.http.get<Post[]>(`/api/posts/count/${count}`);
     }
 
     getPostById(id: string) {
-        return this.http.get<Post>(`/api/posts/${id}`)
+        return this.http.get<Post>(`/api/posts/${id}`);
     }
 
     likePost(postId: string | undefined) {
-        return this.http.post<Post>(`/api/posts/${postId}/like`, {})
+        return this.http.post<Post>(`/api/posts/${postId}/like`, {});
     }
 
     unlikePost(postId: string | undefined) {
-        return this.http.post<Post>(`/api/posts/${postId}/unlike`, {})
+        return this.http.post<Post>(`/api/posts/${postId}/unlike`, {});
     }
 
-    createPost(description: string | null | undefined, imageUrl: string | null | undefined) {
+    createPost(
+        description: string | null | undefined,
+        imageUrl: string | null | undefined
+    ) {
         return this.http.post<Post>(`/api/posts`, { description, imageUrl });
     }
 

@@ -11,7 +11,7 @@ export class ErrorMessageService {
 
     constructor() { }
 
-    setError(err:any): void {
+    setError(err:unknown): void {
         if (err instanceof HttpErrorResponse) {
             this.errorMessage$$.next(err.error.message);
         } else if (err instanceof Error) {

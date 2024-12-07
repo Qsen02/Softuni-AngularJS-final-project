@@ -41,7 +41,7 @@ export class ProfileChangePasswordComponent implements OnDestroy {
     onChange() {
         const newPassword = this.changePassForm.value.newPassword;
         const userId = this.route.snapshot.params['userId'];
-        this.changePasswordSubscription = this.userService.changeUserPassord(userId, newPassword).subscribe({
+        this.changePasswordSubscription = this.userService.changeUserPassword(userId, newPassword).subscribe({
             next: () => {
              this.errMessage= "";
                 this.changePassForm.reset();

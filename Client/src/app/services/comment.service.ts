@@ -9,7 +9,7 @@ import { Comment } from '../types/comment';
 export class CommentService {
     constructor(private http: HttpClient) { }
 
-    getCommentById(commentId: string | undefined): Observable<Comment> {
+    getCommentById(commentId: string | undefined) {
         return this.http.get<Comment>(`/api/comments/${commentId}`);
     }
 

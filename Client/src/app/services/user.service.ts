@@ -19,29 +19,37 @@ export class UserService implements OnDestroy {
     }
 
     constructor(private http: HttpClient) {
-        const storedUser=localStorage.getItem("user");
-        if(storedUser){
-            this.user=JSON.parse(storedUser);
+        const storedUser = localStorage.getItem('user');
+        if (storedUser) {
+            this.user = JSON.parse(storedUser);
             this.user$$.next(this.user);
         }
         this.userSubscribtion = this.user$.subscribe((user) => {
             this.user = user;
-        })
+        });
     }
 
-    login(username: string | null | undefined, password: string | null | undefined): Observable<AuthUser> {
-        return this.http.post<AuthUser>("/api/users/login", { username, password })
-            .pipe(tap((user) =>{
-                localStorage.setItem("user",JSON.stringify(user))
-                this.user$$.next(user)
-    }));
+    login(
+        username: string | null | undefined,
+        password: string | null | undefined
+    ) {
+        return this.http
+            .post<AuthUser>('/api/users/login', { username, password })
+            .pipe(
+                tap((user) => {
+                    localStorage.setItem('user', JSON.stringify(user));
+                    this.user$$.next(user);
+                })
+            );
     }
 
-    logout(): Observable<AuthUser | null> {
-        return this.http.get<AuthUser | null>("/api/users/logout").pipe(tap((user) =>{ 
-            localStorage.removeItem("user");
-            this.user$$.next(user)
-        }));
+    logout() {
+        return this.http.get<AuthUser | null>('/api/users/logout').pipe(
+            tap((user) => {
+                localStorage.removeItem('user');
+                this.user$$.next(user);
+            })
+        );
     }
 
     register(
@@ -49,32 +57,41 @@ export class UserService implements OnDestroy {
         email: string | null | undefined,
         password: string | null | undefined,
         repass: string | null | undefined
-    ): Observable<AuthUser> {
-        return this.http.post<AuthUser>("/api/users/register", { username, email, password, repass })
-            .pipe(tap((user) => {
-                localStorage.setItem("user",JSON.stringify(user));
-                this.user$$.next(user)
-            }))
+    ) {
+        return this.http
+            .post<AuthUser>('/api/users/register', {
+                username,
+                email,
+                password,
+                repass,
+            })
+            .pipe(
+                tap((user) => {
+                    localStorage.setItem('user', JSON.stringify(user));
+                    this.user$$.next(user);
+                })
+            );
     }
 
     getUser(): AuthUser | null {
         return this.user;
     }
 
-    getUserById(userId: User | undefined): Observable<User> {
+    getUserById(userId: User | undefined) {
         return this.http.get<User>(`/api/users/${userId}`);
     }
 
-    getUserPosts(userId: string): Observable<Post[]> {
+    getUserPosts(userId: string) {
         return this.http.get<Post[]>(`/api/users/${userId}/posts`);
     }
 
-    searchUsers(query: string | null | undefined): Observable<User[]> {
+    searchUsers(query: string | null | undefined) {
         return this.http.get<User[]>(`/api/users/search/${query}`);
     }
 
-    getUserProfile() {
-        return this.http.get<AuthUser>("/api/users/me")
+    getUserProfile(): Observable<AuthUser> {
+        return this.http
+            .get<AuthUser>('/api/users/me')
             .pipe(tap((user) => this.user$$.next(user)));
     }
 
@@ -88,12 +105,17 @@ export class UserService implements OnDestroy {
             username: username,
             email: email,
             profileImage: profileImage,
-            accessToken: this.user!.accessToken
-        })
+            accessToken: this.user!.accessToken,
+        });
     }
 
-    changeUserPassord(userId: string | null | undefined, newPassword: string | null | undefined) {
-        return this.http.put(`/api/users/changePassword/${userId}`, { newPassword: newPassword });
+    changeUserPassword(
+        userId: string | null | undefined,
+        newPassword: string | null | undefined
+    ) {
+        return this.http.put(`/api/users/changePassword/${userId}`, {
+            newPassword: newPassword,
+        });
     }
 
     ngOnDestroy(): void {
