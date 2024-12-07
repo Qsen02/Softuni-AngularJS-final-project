@@ -24,7 +24,7 @@ async function createPost(description, imageUrl, user) {
 
 async function deletePost(postId) {
     const comments = await Comments.find({ postId: postId }).lean();
-    for (let comment of comments) {
+    for (const comment of comments) {
         await Comments.findByIdAndDelete(comment._id);
     }
     await Posts.findByIdAndDelete(postId);

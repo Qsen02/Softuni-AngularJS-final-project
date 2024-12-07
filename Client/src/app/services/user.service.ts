@@ -47,7 +47,7 @@ export class UserService implements OnDestroy {
         return this.http.get<AuthUser | null>('/api/users/logout').pipe(
             tap((user) => {
                 localStorage.removeItem('user');
-                this.user$$.next(user);
+                this.user$$.next(null);
             })
         );
     }
