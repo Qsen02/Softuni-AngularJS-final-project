@@ -9,6 +9,11 @@ export default [
         files: ["*.ts"],
         languageOptions: {
             parser: typescriptParser,
+            parserOptions: {
+                sourceType: "module",
+                ecmaVersion: 2022,
+                project: "./tsconfig.json"
+              },
         },
         plugins: {
             "@angular-eslint": angularEslintPlugin,
