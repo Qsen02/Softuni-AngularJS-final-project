@@ -12,8 +12,8 @@ export default [
             parserOptions: {
                 sourceType: "module",
                 ecmaVersion: 2022,
-                project: "./tsconfig.json"
-              },
+                project: "./tsconfig.json",
+            },
         },
         plugins: {
             "@angular-eslint": angularEslintPlugin,
@@ -24,18 +24,18 @@ export default [
             "@angular-eslint/component-class-suffix": "error",
 
             // TypeScript rules
-            "@typescript-eslint/no-unused-vars": "warn", 
-            "@typescript-eslint/no-explicit-any": "warn", 
-            "@typescript-eslint/explicit-function-return-type": "error"
-        }
+            "@typescript-eslint/no-unused-vars": "warn",
+            "@typescript-eslint/no-explicit-any": "warn",
+            "@typescript-eslint/explicit-function-return-type": "error",
+        },
     },
     {
         files: ["*.html"],
         languageOptions: {
-          parser: templateParser,
+            parser: templateParser,
         },
         plugins: {
-          "@angular-eslint/template": angularTemplatePlugin,
-        }
-      }
+            "@angular-eslint/template": angularTemplatePlugin,
+        },
+    },
 ];

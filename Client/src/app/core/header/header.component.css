@@ -7,6 +7,7 @@ header {
     gap: 20px;
     align-items: center;
 }
+
 .navigation{
     flex:0 0 25%;
 }
@@ -37,6 +38,10 @@ header {
     height: 70px;
     border-radius: 50%;
     cursor: pointer;
+}
+
+.active{
+    color: white !important;
 }
 
 @media(max-width:1750px){

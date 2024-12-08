@@ -1,4 +1,4 @@
-import { Directive, ElementRef, Input, OnDestroy, OnInit, Renderer2 } from '@angular/core';
+import { Directive, ElementRef, OnDestroy, OnInit, Renderer2 } from '@angular/core';
 
 @Directive({
     selector: '[appChangeVisability]',
