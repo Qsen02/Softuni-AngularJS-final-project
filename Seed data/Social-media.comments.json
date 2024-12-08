@@ -1,0 +1,192 @@
+[{
+  "_id": {
+    "$oid": "674ee4151fa3bc57a6b60eb2"
+  },
+  "content": "I love mountains!",
+  "ownerId": {
+    "$oid": "6730f8239c3d5c2e81fae13a"
+  },
+  "likes": [
+    {
+      "$oid": "673db602803afccbd451825a"
+    },
+    {
+      "$oid": "67405467b64199bf05d1f9e4"
+    },
+    {
+      "$oid": "67306d95f7696eee7bef62c3"
+    }
+  ],
+  "postId": {
+    "$oid": "674ed94d1fa3bc57a6b60daa"
+  },
+  "created_at": {
+    "$date": "2024-12-03T10:57:25.113Z"
+  },
+  "updatedAt": {
+    "$date": "2024-12-06T21:31:11.515Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "674ee42d1fa3bc57a6b60ed5"
+  },
+  "content": "Good picture!",
+  "ownerId": {
+    "$oid": "67306d95f7696eee7bef62c3"
+  },
+  "likes": [
+    {
+      "$oid": "673db602803afccbd451825a"
+    },
+    {
+      "$oid": "67405467b64199bf05d1f9e4"
+    },
+    {
+      "$oid": "6730f8239c3d5c2e81fae13a"
+    }
+  ],
+  "postId": {
+    "$oid": "674ed9bc1fa3bc57a6b60dcf"
+  },
+  "created_at": {
+    "$date": "2024-12-03T10:57:49.938Z"
+  },
+  "updatedAt": {
+    "$date": "2024-12-07T20:38:47.746Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "674ee4371fa3bc57a6b60ee6"
+  },
+  "content": "Nice!",
+  "ownerId": {
+    "$oid": "67306d95f7696eee7bef62c3"
+  },
+  "likes": [
+    {
+      "$oid": "6730f8239c3d5c2e81fae13a"
+    },
+    {
+      "$oid": "673db602803afccbd451825a"
+    },
+    {
+      "$oid": "67405467b64199bf05d1f9e4"
+    }
+  ],
+  "postId": {
+    "$oid": "674ed9de1fa3bc57a6b60ddc"
+  },
+  "created_at": {
+    "$date": "2024-12-03T10:57:59.339Z"
+  },
+  "updatedAt": {
+    "$date": "2024-12-03T15:16:24.587Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "674f179260abfec89151a734"
+  },
+  "content": "I love the oceans!",
+  "ownerId": {
+    "$oid": "673db602803afccbd451825a"
+  },
+  "likes": [
+    {
+      "$oid": "6730f8239c3d5c2e81fae13a"
+    },
+    {
+      "$oid": "67405467b64199bf05d1f9e4"
+    }
+  ],
+  "postId": {
+    "$oid": "674ed9de1fa3bc57a6b60ddc"
+  },
+  "created_at": {
+    "$date": "2024-12-03T14:37:06.377Z"
+  },
+  "updatedAt": {
+    "$date": "2024-12-03T15:16:25.298Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "674f1bfd60abfec89151a82c"
+  },
+  "content": "Yeah! I like winter",
+  "ownerId": {
+    "$oid": "673db602803afccbd451825a"
+  },
+  "likes": [
+    {
+      "$oid": "67405467b64199bf05d1f9e4"
+    },
+    {
+      "$oid": "6730f8239c3d5c2e81fae13a"
+    }
+  ],
+  "postId": {
+    "$oid": "674f1b0f60abfec89151a7c7"
+  },
+  "created_at": {
+    "$date": "2024-12-03T14:55:57.043Z"
+  },
+  "updatedAt": {
+    "$date": "2024-12-07T20:39:24.396Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "674f1c6f60abfec89151a869"
+  },
+  "content": "Very big",
+  "ownerId": {
+    "$oid": "6730f8239c3d5c2e81fae13a"
+  },
+  "likes": [
+    {
+      "$oid": "67405467b64199bf05d1f9e4"
+    }
+  ],
+  "postId": {
+    "$oid": "674f1c2d60abfec89151a84b"
+  },
+  "created_at": {
+    "$date": "2024-12-03T14:57:51.775Z"
+  },
+  "updatedAt": {
+    "$date": "2024-12-06T21:31:56.398Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "674f1d7660abfec89151a8d6"
+  },
+  "content": "Yeah, looks like delicious",
+  "ownerId": {
+    "$oid": "6730f8239c3d5c2e81fae13a"
+  },
+  "likes": [
+    {
+      "$oid": "67405467b64199bf05d1f9e4"
+    }
+  ],
+  "postId": {
+    "$oid": "674f1cec60abfec89151a890"
+  },
+  "created_at": {
+    "$date": "2024-12-03T15:02:14.257Z"
+  },
+  "updatedAt": {
+    "$date": "2024-12-04T18:59:04.660Z"
+  },
+  "__v": 0
+}]
