@@ -4,16 +4,15 @@ import { enviroment } from '../../../enviroment/app.enviroment';
 import { inject } from '@angular/core';
 import { ErrorMessageService } from '../services/error-message.service';
 import { Router } from '@angular/router';
-import { production } from '../../../enviroment/production.environment';
 
 // const { apiUrl } = enviroment;
-const { apiUrl } = production;
 const API = '/api';
+const enviromentUrl=process.env['API_URL'] as string;
 
 export const authInterceptor: HttpInterceptorFn = (req, next) => {
     if (req.url.startsWith(API)) {
         req = req.clone({
-            url: req.url.replace(API, apiUrl),
+            url: req.url.replace(API,enviromentUrl),
             withCredentials: true,
         });
     }
