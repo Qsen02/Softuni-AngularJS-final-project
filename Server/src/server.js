@@ -3,7 +3,7 @@ const { expressConfig } = require("./config/express");
 const { runDB } = require("./config/mongoose");
 const { routerConfig } = require("./config/router");
 
-const port=3000;
+const port=process.env.PORT || 3000;
 
 const app=express();
 
