@@ -1,18 +1,19 @@
 import { HttpInterceptorFn } from '@angular/common/http';
 import { catchError, throwError } from 'rxjs';
-import { enviroment } from '../../../enviroment/app.enviroment';
 import { inject } from '@angular/core';
 import { ErrorMessageService } from '../services/error-message.service';
 import { Router } from '@angular/router';
+import { enviromentProd } from '../../../enviroment/app.prod.js';
+import { enviroment } from '../../../enviroment/app.enviroment';
 
-// const { apiUrl } = enviroment;
 const API = '/api';
-const enviromentUrl=process.env['API_URL'] as string;
+// const {apiUrl}=enviroment;
+const {apiUrl}=enviromentProd;
 
 export const authInterceptor: HttpInterceptorFn = (req, next) => {
     if (req.url.startsWith(API)) {
         req = req.clone({
-            url: req.url.replace(API,enviromentUrl),
+            url: req.url.replace(API,apiUrl),
             withCredentials: true,
         });
     }
