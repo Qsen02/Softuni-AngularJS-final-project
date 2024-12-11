@@ -63,9 +63,9 @@ Site for posting publications and interact with them like in social media.
 -Guests only see user profiles and their publications and comments without interacting them with liking or commenting and they can't create or edit and delete posts.
 
 # How to start client and server
--First in config/mongoose add localDB constant in mongoose.connect and next write the command `npm start` or `node server.js` in terminal.
+-Server: First in config/mongoose add localDB constant in mongoose.connect and next write the command `npm start` or `node server.js` in terminal.
 
--First in auth interceptor uncomment constant environment and comment environmentProd and next write the command `npm start` or `ng serve` in terminal.
+-Client: First in auth interceptor uncomment constant environment and comment environmentProd and next write the command `npm start` or `ng serve` in terminal.
 
 # Deployment link:
 -https://softuni-angularjs-final-project.onrender.com
