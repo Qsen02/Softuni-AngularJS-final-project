@@ -8,7 +8,6 @@ section img {
     width: 700px;
     height: 700px;
     border-radius: 10px;
-    object-fit: cover;
 }
 
 section button {
