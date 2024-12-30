@@ -46,7 +46,6 @@ export class MainComponent implements OnInit, OnDestroy {
 				this.isError = true;
 			}
 		});
-		console.log("Main component works! YEEE");
 	}
 
 	@HostListener('window:scroll')
