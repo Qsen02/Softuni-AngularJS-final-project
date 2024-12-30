@@ -8,6 +8,7 @@ import { Post } from '../types/post';
     providedIn: 'root',
 })
 export class UserService implements OnDestroy {
+    endpoint="users";
     private user$$ = new BehaviorSubject<AuthUser | null>(null);
     private user$ = this.user$$.asObservable();
 
@@ -34,7 +35,7 @@ export class UserService implements OnDestroy {
         password: string | null | undefined
     ) {
         return this.http
-            .post<AuthUser>('/api/users/login', { username, password })
+            .post<AuthUser>(`/api/${this.endpoint}/login`, { username, password })
             .pipe(
                 tap((user) => {
                     localStorage.setItem('user', JSON.stringify(user));
@@ -44,7 +45,7 @@ export class UserService implements OnDestroy {
     }
 
     logout() {
-        return this.http.get<AuthUser | null>('/api/users/logout').pipe(
+        return this.http.get<AuthUser | null>(`/api/${this.endpoint}/logout`).pipe(
             tap((user) => {
                 localStorage.removeItem('user');
                 this.user$$.next(null);
@@ -59,7 +60,7 @@ export class UserService implements OnDestroy {
         repass: string | null | undefined
     ) {
         return this.http
-            .post<AuthUser>('/api/users/register', {
+            .post<AuthUser>(`/api/${this.endpoint}/register`, {
                 username,
                 email,
                 password,
@@ -78,15 +79,15 @@ export class UserService implements OnDestroy {
     }
 
     getUserById(userId: User | undefined) {
-        return this.http.get<User>(`/api/users/${userId}`);
+        return this.http.get<User>(`/api/${this.endpoint}/${userId}`);
     }
 
     getUserPosts(userId: string) {
-        return this.http.get<Post[]>(`/api/users/${userId}/posts`);
+        return this.http.get<Post[]>(`/api/${this.endpoint}/${userId}/posts`);
     }
 
     searchUsers(query: string | null | undefined) {
-        return this.http.get<User[]>(`/api/users/search/${query}`);
+        return this.http.get<User[]>(`/api/${this.endpoint}/search/${query}`);
     }
 
     getUserProfile(): Observable<AuthUser> {
@@ -96,7 +97,7 @@ export class UserService implements OnDestroy {
     }
 
     editUser(userId: string, data: {}) {
-        return this.http.put(`/api/users/update/${userId}`, data);
+        return this.http.put(`/api/${this.endpoint}/update/${userId}`, data);
     }
 
     updateCurUser(username: string, email: string, profileImage: string) {
@@ -113,7 +114,7 @@ export class UserService implements OnDestroy {
         userId: string | null | undefined,
         newPassword: string | null | undefined
     ) {
-        return this.http.put(`/api/users/changePassword/${userId}`, {
+        return this.http.put(`/api/${this.endpoint}/changePassword/${userId}`, {
             newPassword: newPassword,
         });
     }

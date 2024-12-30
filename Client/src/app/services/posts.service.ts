@@ -7,36 +7,38 @@ import { Observable } from 'rxjs';
     providedIn: 'root',
 })
 export class PostsService {
+    endpoint = 'posts';
+
     constructor(private http: HttpClient) {}
 
     getNexPosts(count: number) {
-        return this.http.get<Post[]>(`/api/posts/count/${count}`);
+        return this.http.get<Post[]>(`/api/${this.endpoint}/count/${count}`);
     }
 
     getPostById(id: string) {
-        return this.http.get<Post>(`/api/posts/${id}`);
+        return this.http.get<Post>(`/api/${this.endpoint}/${id}`);
     }
 
     likePost(postId: string | undefined) {
-        return this.http.post<Post>(`/api/posts/${postId}/like`, {});
+        return this.http.post<Post>(`/api/${this.endpoint}/${postId}/like`, {});
     }
 
     unlikePost(postId: string | undefined) {
-        return this.http.post<Post>(`/api/posts/${postId}/unlike`, {});
+        return this.http.post<Post>(`/api/${this.endpoint}/${postId}/unlike`, {});
     }
 
     createPost(
         description: string | null | undefined,
         imageUrl: string | null | undefined
     ) {
-        return this.http.post<Post>(`/api/posts`, { description, imageUrl });
+        return this.http.post<Post>(`/api/${this.endpoint}`, { description, imageUrl });
     }
 
     deletePost(postId: string) {
-        return this.http.delete(`/api/posts/${postId}`);
+        return this.http.delete(`/api/${this.endpoint}/${postId}`);
     }
 
     updatePost(postId: string, data: {}) {
-        return this.http.put(`/api/posts/${postId}`, data);
+        return this.http.put(`/api/${this.endpoint}/${postId}`, data);
     }
 }

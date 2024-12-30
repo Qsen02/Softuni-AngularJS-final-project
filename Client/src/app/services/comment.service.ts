@@ -1,35 +1,36 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs';
 import { Comment } from '../types/comment';
 
 @Injectable({
     providedIn: 'root'
 })
 export class CommentService {
+    endpoint="comments";
+
     constructor(private http: HttpClient) { }
 
     getCommentById(commentId: string | undefined) {
-        return this.http.get<Comment>(`/api/comments/${commentId}`);
+        return this.http.get<Comment>(`/api/${this.endpoint}/${commentId}`);
     }
 
     createComment(postId: string, content: string | null | undefined) {
-        return this.http.post<Comment>(`/api/comments/in/${postId}`, { content });
+        return this.http.post<Comment>(`/api/${this.endpoint}/in/${postId}`, { content });
     }
 
     editComment(commentId: string, content: string | null | undefined) {
-        return this.http.put(`/api/comments/${commentId}`, { content: content });
+        return this.http.put(`/api/${this.endpoint}/${commentId}`, { content: content });
     }
 
     deleteComment(commentId: string, postId: string) {
-        return this.http.delete(`/api/comments/${commentId}/in/${postId}`);
+        return this.http.delete(`/api/${this.endpoint}/${commentId}/in/${postId}`);
     }
 
     likeComment(commentId: string |undefined) {
-        return this.http.post<Comment>(`/api/comments/${commentId}/like`, {});
+        return this.http.post<Comment>(`/api/${this.endpoint}/${commentId}/like`, {});
     }
 
     unlikeComment(commentId: string|undefined) {
-        return this.http.post<Comment>(`/api/comments/${commentId}/unlike`, {});
+        return this.http.post<Comment>(`/api/${this.endpoint}/${commentId}/unlike`, {});
     }
 }
