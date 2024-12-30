@@ -62,15 +62,16 @@
 }
 
 .post-body img{
-    width: 100%;
-    height: 500px;
+    width: 700px;
+    height: 700px;
     border-radius:7px ;
     object-fit: cover;
-    cursor: pointer;;
+    cursor: pointer;
+    align-self: center;
 }
 
 .post-body-main {
-    padding: 10px;
+    padding: 23px;
     display: flex;
     flex-direction: column;
     gap: 20px;
@@ -135,6 +136,7 @@
         width: 500px;
     }
     .post-body img{
+        width: 400px;
         height: 400px;
     }
 }
@@ -170,6 +172,7 @@
     }
 
     .post-body img{
-        height: 300px;
+        width: 250px;
+        height: 250px;
     }
 }

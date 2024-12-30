@@ -5,16 +5,16 @@ section {
 }
 
 section img {
-    width: 70vw;
-    height: 70vh;
+    width: 700px;
+    height: 700px;
     border-radius: 10px;
     object-fit: cover;
 }
 
 section button {
     position: absolute;
-    top: -90px;
-    right: -90px;
+    top: -70px;
+    right: -120px;
     background-color: rgb(80,80,80);
     color: lightgray;
     border-radius: 50%;
@@ -29,17 +29,47 @@ section button:hover{
     color: white;
 }
 
+@media(max-width:960px){
+    section img {
+        width: 500px;
+        height: 500px;
+    }
+
+    section button {
+        width: 40px;
+        height: 40px;
+        font-size: 14pt;
+        top: -40px;
+        right: -70px;
+    }
+}
+
 @media(max-width:650px){
     section img {
-        width: 60vw;
-        height:30vh;
+        width: 250px;
+        height:250px;
     }
 
     section button{
         width: 30px;
         height: 30px;
         font-size: 12pt;
-        top: -50px;
-        right: -50px;
+        top: -40px;
+        right: -40px;
+    }
+}
+
+@media(max-width:360px){
+    section img {
+        width: 150px;
+        height:150px;
+    }
+
+    section button{
+        width: 20px;
+        height: 20px;
+        font-size: 10pt;
+        top: -30px;
+        right: -30px;
     }
 }
