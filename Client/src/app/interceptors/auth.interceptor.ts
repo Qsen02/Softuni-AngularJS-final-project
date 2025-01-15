@@ -7,8 +7,8 @@ import { enviromentProd } from '../../../enviroment/app.prod.js';
 import { enviroment } from '../../../enviroment/app.enviroment';
 
 const API = '/api';
-// const { apiUrl } = enviroment;
-const {apiUrl}=enviromentProd;
+const { apiUrl } = enviroment;
+// const {apiUrl}=enviromentProd;
 
 export const authInterceptor: HttpInterceptorFn = (req, next) => {
     if (req.url.startsWith(API)) {
