@@ -8,65 +8,107 @@ header {
     align-items: center;
 }
 
-.navigation{
-    flex:0 0 25%;
+.navigation {
+    flex: 0 0 25%;
 }
 
-.navigation ul{
+.navigation ul {
     display: flex;
-    gap:10px;
+    gap: 10px;
     flex-wrap: wrap;
 }
 
-.navigation ul li a{
+.navigation ul li a {
     padding: 20px;
     color: lightgray;
     font-weight: bold;
     font-size: 16pt;
 }
 
-.navigation ul li a:hover{
+.navigation ul li a:hover {
     color: white;
 }
 
-.image-wrapper{
-    flex:0 0 70%;
+.image-wrapper {
+    flex: 0 0 70%;
 }
 
-.image-wrapper img{
+.image-wrapper img {
     width: 70px;
     height: 70px;
     border-radius: 50%;
     cursor: pointer;
 }
 
-.active{
+.active {
     color: white !important;
 }
 
-@media(max-width:1750px){
-    .image-wrapper{
+.navigation i {
+    position: absolute;
+    top: 50px;
+    right: 50px;
+    color: lightgray;
+    font-size: 24pt;
+    cursor: pointer;
+}
+
+.navigation i:hover{
+    color: white;
+}
+
+.message-balloon{
+    position: absolute;
+    top:45px;
+    right: 40px;
+    width: 20px;
+    height: 20px;
+    background-color: red;
+    color: white;
+    border-radius: 50%;
+    font-size: 12pt;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+@media (max-width: 1750px) {
+    .image-wrapper {
         flex: 0 0 50%;
     }
-    .navigation{
+    .navigation {
         flex: 0 0 40%;
     }
 }
-@media(max-width:1200px){
-    .navigation ul{
+@media (max-width: 1200px) {
+    .navigation ul {
         flex-direction: column;
     }
     .image-wrapper {
         flex: 0 0 70%;
     }
-    .navigation{
+    .navigation {
         flex: 0 0 20%;
     }
+    .navigation i{
+        font-size: 22pt;
+    }
 }
-@media(max-width:650px){
-    header{
+@media (max-width: 650px) {
+    header {
         flex-direction: column;
         justify-content: center;
-        gap:80px;
+        text-align: center;
+        gap: 80px;
+    }
+    .navigation i{
+        font-size: 20pt;
+    }
+    .message-balloon{
+        font-size: 10pt;
+        width: 15px;
+        height: 15px;
+        top:47px;
+        right: 43px;
     }
 }
