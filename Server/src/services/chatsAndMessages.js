@@ -33,14 +33,38 @@ async function deleteMessage(messageId, chatId) {
     await Chats.findByIdAndUpdate(chatId, { $pull: { messages: messageId } });
 }
 
-async function createChat(user){
-    const chat= new Chats({
-        sender_id:user._id,
-    })
+async function createChat(user) {
+    const chat = new Chats({
+        sender_id: user._id,
+    });
     await chat.save();
     return chat;
 }
 
-module.exports={
-    getChatById,deleteMessage,editMessage,addMessageToChat,createChat
+async function checkChatId(chatId) {
+    const chats = await Chats.find().lean();
+    const isValid = chats.find((el) => el._id.toString() == chatId);
+    if (isValid) {
+        return true;
+    }
+    return false;
 }
+
+async function checkMessageId(messageId) {
+    const messages = await Messages.find().lean();
+    const isValid = messages.find((el) => el._id.toString() == messageId);
+    if (isValid) {
+        return true;
+    }
+    return false;
+}
+
+module.exports = {
+    getChatById,
+    deleteMessage,
+    editMessage,
+    addMessageToChat,
+    createChat,
+    checkChatId,
+    checkMessageId,
+};
