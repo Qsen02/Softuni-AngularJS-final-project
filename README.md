@@ -67,9 +67,6 @@ Site for posting publications and interact with them like in social media.
 
 -Client: First in auth interceptor uncomment constant environment and comment environmentProd and next write the command `npm start` or `ng serve` in terminal.
 
-# Deployment link:
--https://softuni-angularjs-final-project.onrender.com
-
 # Screenshots
 -Home
 ![Screenshot 2024-12-02 223935](https://github.com/user-attachments/assets/210bb52e-4318-4e38-8db3-1709201c47ea)
