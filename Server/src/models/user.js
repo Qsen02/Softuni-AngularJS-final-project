@@ -19,6 +19,11 @@ const userSchema=new mongoose.Schema({
         type:String,
         require:true,
         unique:true
+    },
+    chats:{
+        type:[mongoose.SchemaTypes.ObjectId],
+        ref:"Chats",
+        default:[]
     }
 },{ timestamps: { createdAt: "created_at" } })
 
