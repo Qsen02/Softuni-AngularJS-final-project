@@ -24,6 +24,11 @@ const userSchema=new mongoose.Schema({
         type:[mongoose.SchemaTypes.ObjectId],
         ref:"Chats",
         default:[]
+    },
+    requests:{
+        type:[mongoose.SchemaTypes.ObjectId],
+        ref:"Requests",
+        default:[]
     }
 },{ timestamps: { createdAt: "created_at" } })
 
