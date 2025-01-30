@@ -1,9 +1,9 @@
 const { Requests } = require("../models/requests");
 const { Users } = require("../models/user");
 
-async function sendRequest(userId, receiverId) {
+async function sendRequest(senderId, receiverId) {
     const newRequest = new Requests({
-        sender_id: userId,
+        sender_id: senderId,
     });
     await newRequest.save();
     await Users.findByIdAndUpdate(receiverId, {
@@ -12,11 +12,11 @@ async function sendRequest(userId, receiverId) {
     return newRequest;
 }
 
-async function declineRequest(userId, requestId) {
+async function declineRequest(senderId, requestId) {
     await Requests.findByIdAndDelete(requestId);
-    return await Users.findByIdAndUpdate(userId, {
+    return await Users.findByIdAndUpdate(senderId, {
         $pull: { requests: requestId },
-    });
+    },{new:true});
 }
 
 function getRequestById(requestId){

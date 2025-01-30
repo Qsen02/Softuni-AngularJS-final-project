@@ -1,6 +1,7 @@
 const { chatsAndMessagesRouter } = require("../controllers/chatsAndMessages");
 const { commentRouter } = require("../controllers/comment");
 const { postRouter } = require("../controllers/post");
+const { requestRouter } = require("../controllers/requests");
 const { userRouter } = require("../controllers/user");
 
 function routerConfig(app) {
@@ -11,6 +12,8 @@ function routerConfig(app) {
     app.use("/comments",commentRouter);
 
     app.use("/chats",chatsAndMessagesRouter);
+
+    app.use("/requests",requestRouter);
 
     app.use("*", (req, res) => {
        return res.status(404).json({ message: "Resource not found!" });
