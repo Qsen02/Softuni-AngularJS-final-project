@@ -1,7 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Chat } from '../types/chats';
-import { User } from '../types/user';
 import { Message } from '../types/messages';
 
 @Injectable({
