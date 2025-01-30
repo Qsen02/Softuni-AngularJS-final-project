@@ -1,5 +1,6 @@
 const { Requests } = require("../models/requests");
 const { Users } = require("../models/user");
+const { createChat } = require("./chatsAndMessages");
 
 async function sendRequest(senderId, receiverId) {
     const newRequest = new Requests({
@@ -12,11 +13,20 @@ async function sendRequest(senderId, receiverId) {
     return newRequest;
 }
 
-async function declineRequest(senderId, requestId) {
+async function declineRequest(receiverId, requestId) {
     await Requests.findByIdAndDelete(requestId);
-    return await Users.findByIdAndUpdate(senderId, {
+    return await Users.findByIdAndUpdate(receiverId, {
         $pull: { requests: requestId },
     },{new:true});
+}
+
+async function acceptRequest(senderId,requesterId,requestId){
+    const updatedUser=await createChat(requesterId,senderId);
+    await Requests.findByIdAndDelete(requestId);
+    await Users.findByIdAndUpdate(requesterId, {
+        $pull: { requests: requestId },
+    },{new:true});
+    return updatedUser;
 }
 
 function getRequestById(requestId){
@@ -34,5 +44,5 @@ async function checkRequestId(requestId) {
 }
 
 module.exports={
-    sendRequest,declineRequest,getRequestById,checkRequestId
+    sendRequest,declineRequest,getRequestById,checkRequestId,acceptRequest
 }
