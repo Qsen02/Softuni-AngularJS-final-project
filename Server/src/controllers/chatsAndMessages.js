@@ -25,13 +25,13 @@ chatsAndMessagesRouter.get("/:chatId", isUser(), async (req, res) => {
 });
 
 chatsAndMessagesRouter.post("/", isUser(), async (req, res) => {
-    const user = req.body;
-    const isValid = await checkUserId(user?._id);
+    const userId = req.body._id;
+    const isValid = await checkUserId(userId);
     const curUser=req.user;
     if (!isValid) {
         return res.status(400).json({ message: "Invalid user!" });
     }
-    const newChat = await createChat(curUser._id,user);
+    const newChat = await createChat(curUser._id,userId);
     res.json(newChat);
 });
 
