@@ -1,13 +1,17 @@
 const { Chats } = require("../models/chats");
 const { Messages } = require("../models/messages");
+const { Users } = require("../models/user");
 
 function getChatById(chatId) {
     const chat = Chats.findById(chatId);
     return chat;
 }
 
-async function addMessageToChat(chatId, message) {
-    const newMessage = new Messages(message);
+async function addMessageToChat(curUser, chatId, message) {
+    const newMessage = new Messages({
+        owner_id: curUser._id,
+        text: message,
+    });
     await newMessage.save();
     return await Chats.findByIdAndUpdate(
         chatId,
@@ -33,12 +37,18 @@ async function deleteMessage(messageId, chatId) {
     await Chats.findByIdAndUpdate(chatId, { $pull: { messages: messageId } });
 }
 
-async function createChat(user) {
+async function createChat(curUserId, user) {
     const chat = new Chats({
-        sender_id: user._id,
+        requester_id: curUserId,
+        receiver_id:user._id
     });
     await chat.save();
-    return chat;
+    await Users.findByIdAndUpdate(user._id, { $push: { chats: chat } });
+    return await Users.findByIdAndUpdate(
+        curUserId,
+        { $push: { chats: chat } },
+        { new: true }
+    );
 }
 
 async function checkChatId(chatId) {

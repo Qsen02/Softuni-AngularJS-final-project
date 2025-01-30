@@ -25,12 +25,13 @@ chatsAndMessagesRouter.get("/:chatId", isUser(), async (req, res) => {
 });
 
 chatsAndMessagesRouter.post("/", isUser(), async (req, res) => {
-    const user = req.body.user;
+    const user = req.body;
     const isValid = await checkUserId(user?._id);
+    const curUser=req.user;
     if (!isValid) {
         return res.status(400).json({ message: "Invalid user!" });
     }
-    const newChat = await createChat(user);
+    const newChat = await createChat(curUser._id,user);
     res.json(newChat);
 });
 
@@ -42,6 +43,7 @@ chatsAndMessagesRouter.put(
         const fields = req.body;
         const chatId = req.params.chatId;
         const isValid = await checkChatId(chatId);
+        const user=req.user;
         if (!isValid) {
             return res.status(404).json({ message: "Resource not found!" });
         }
@@ -50,7 +52,7 @@ chatsAndMessagesRouter.put(
             if (result.errors.length) {
                 throw new Error("Your data is not in valid format!");
             }
-            const chat = await addMessageToChat(chatId, fields.text);
+            const chat = await addMessageToChat(user,chatId, fields.text);
             res.json(chat);
         } catch (err) {
             return res.status(400).json({ message: err.message });
