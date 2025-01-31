@@ -48,7 +48,7 @@ async function updateUser(userId, data) {
 }
 
 function getUserById(userId) {
-    const user = Users.findById(userId);
+    const user = Users.findById(userId).populate("chats").populate("requests");
     return user
 }
 

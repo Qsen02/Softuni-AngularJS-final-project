@@ -3,7 +3,7 @@ const { Messages } = require("../models/messages");
 const { Users } = require("../models/user");
 
 function getChatById(chatId) {
-    const chat = Chats.findById(chatId);
+    const chat = Chats.findById(chatId).populate("messages");
     return chat;
 }
 
