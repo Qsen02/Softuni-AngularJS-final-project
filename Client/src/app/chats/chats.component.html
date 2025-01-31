@@ -23,19 +23,43 @@
             @for (chat of chats; track $index) {
                 @if(userId==chat.receiver_id._id){
                     <article class="chat-item">
-                        <img src={{chat.requester_id.profileImage}} alt={{chat.requester_id.username}}>
+                        <img src={{chat.requester_id.profileImage}} alt={{chat.requester_id.username}} (error)="onProfileImageError($event)">
                         <h3>{{chat.requester_id.username}}</h3>
                     </article>
                 }@else{
                     <article class="chat-item">
-                        <img src={{chat.receiver_id.profileImage}} alt={{chat.receiver_id.username}}>
+                        <img src={{chat.receiver_id.profileImage}} alt={{chat.receiver_id.username}} (error)="onProfileImageError($event)">
                         <h3>{{chat.receiver_id.username}}</h3>
                     </article>
                 }
+            }@empty {
+                <h2>No chats yet, send request to someone and start the chat!</h2>
             }
         </section>
         <section class="main-section">
-
+           @if(isInit){
+            <div class="main-title">
+                <h2>Select chat, send request or search users for chat.</h2>
+            </div>
+           }@else{
+                @if(isSearched){
+                    @for (item of searchedResults; track $index) {
+                        @if(userId!=item._id){
+                        <article class="user-item">
+                            <a [routerLink]="['/profile',item._id]">
+                                <img src={{item.profileImage}} alt={{item.username}} (error)="onProfileImageError($event)">
+                            </a>
+                            <h2>{{item.username}}</h2>
+                            <button>Send request</button>
+                        </article>
+                       }
+                    }@empty {
+                        <div class="main-title">
+                            <h2>No results :(</h2>
+                        </div>
+                    }
+                }
+           }
         </section>
     </section>
 </section>

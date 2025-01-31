@@ -1,16 +1,17 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Chat } from '../types/chats';
 import { Subscription } from 'rxjs';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, RouterLink } from '@angular/router';
 import { Request } from '../types/requests';
 import { UserService } from '../services/user.service';
 import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { User } from '../types/user';
+import { imageProfileErrorHandler } from '../utils/imageErrorHandlers';
 
 @Component({
   selector: 'app-chats',
   standalone: true,
-  imports: [ReactiveFormsModule],
+  imports: [ReactiveFormsModule,RouterLink],
   templateUrl: './chats.component.html',
   styleUrl: './chats.component.css'
 })
@@ -24,7 +25,7 @@ export class ChatsComponent implements OnInit,OnDestroy{
     isSearched=false;
     searchedResults:User[]=[];
     userId="";
-
+    isInit=true;
     searchUserForm = new FormGroup({
         username: new FormControl("")
     })
@@ -54,6 +55,7 @@ export class ChatsComponent implements OnInit,OnDestroy{
 			username = "No value";
 		}
 		this.isLoading = true;
+        this.isInit=false;
 		this.userSubscription = this.userService.searchUsers(username).subscribe({
 			next: (users) => {
 				this.isSearched = true;
@@ -65,6 +67,11 @@ export class ChatsComponent implements OnInit,OnDestroy{
 				this.isError = true;
 			}
 		})
+    }
+
+    onProfileImageError(event:Event){
+            const imageRef=event.target as HTMLImageElement;
+            imageProfileErrorHandler(imageRef);
     }
 
     ngOnDestroy(): void {
