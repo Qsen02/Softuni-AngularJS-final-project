@@ -14,8 +14,8 @@ async function register(username, email, password) {
     const newUser = new Users({
         username: username,
         email: email,
-        password: await bcrypt.hash(password, 10)
-    })
+        password: await bcrypt.hash(password, 10),
+    });
     await newUser.save();
     return newUser;
 }
@@ -40,7 +40,9 @@ async function changePassword(userId, newPassword) {
         throw new Error("Old password can't be new password!");
     }
     const hashedPassword = await bcrypt.hash(newPassword, 10);
-    await Users.findByIdAndUpdate(userId, { $set: { password: hashedPassword } });
+    await Users.findByIdAndUpdate(userId, {
+        $set: { password: hashedPassword },
+    });
 }
 
 async function updateUser(userId, data) {
@@ -48,13 +50,27 @@ async function updateUser(userId, data) {
 }
 
 function getUserById(userId) {
-    const user = Users.findById(userId).populate("chats").populate("requests");
-    return user
+    const user = Users.findById(userId)
+        .populate({
+            path: "chats",
+            populate: [
+                { path: "requester_id", model: "Users" },
+                { path: "receiver_id", model: "Users" },
+            ]
+        })
+        .populate({
+            path: "requests",
+            populate: {
+                path: "sender_id",
+                model: "Users",
+            },
+        });
+    return user;
 }
 
 async function checkUserId(userId) {
     const users = await Users.find().lean();
-    const isValid = users.find(el => el._id.toString() == userId);
+    const isValid = users.find((el) => el._id.toString() == userId);
     if (isValid) {
         return true;
     }
@@ -66,11 +82,18 @@ function searchUsers(username) {
     return user;
 }
 
-function getUserPublications(userId){
-    const publications=Posts.find({ownerId:userId});
+function getUserPublications(userId) {
+    const publications = Posts.find({ ownerId: userId });
     return publications;
 }
 
 module.exports = {
-    register, login, changePassword, updateUser, getUserById, checkUserId, searchUsers,getUserPublications
-}
+    register,
+    login,
+    changePassword,
+    updateUser,
+    getUserById,
+    checkUserId,
+    searchUsers,
+    getUserPublications,
+};

@@ -1,1 +1,35 @@
-<p>chats works!</p>
+<section class="wrapper">
+    <section class="header-wrapper">
+        <section class="search">
+            <form class="search-form" [formGroup]="searchUserForm" (ngSubmit)="onSearch()">
+                <div>
+                    <input type="text" name="username" placeholder="Search for users..." formControlName="username" />
+                    <button [disabled]="searchUserForm.invalid"><i class="fa-solid fa-magnifying-glass"></i></button>
+                </div>
+            </form>
+        </section>
+        <section class="requests">
+            <h3>Requests</h3>
+            <div class="icon-wrapper">
+                <i class="fa-regular fa-comment-dots"></i>
+                <div class="message-balloon">
+                    <p>{{requests.length}}</p>
+                </div>
+            </div>
+        </section>
+    </section>
+    <section class="main-wrapper">
+        <section class="chats">
+            @for (chat of chats; track $index) {
+                <article>
+                    <img src={{chat.requester_id.profileImage}} alt={{chat.requester_id.username}}>
+                    <h3>{{chat.requester_id.username}}</h3>
+                </article>
+            }
+        </section>
+        <section class="main-section">
+
+        </section>
+    </section>
+</section>
+

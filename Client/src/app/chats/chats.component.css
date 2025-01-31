@@ -1,0 +1,159 @@
+.wrapper{
+    margin: 30px auto;
+    width:80%;
+    background-color: rgb(40, 40, 40);
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+}
+
+.header-wrapper{
+    padding: 10px;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    gap:50px;
+    border-bottom: 2px grey solid;
+}
+
+.search{
+    padding: 10px;
+    flex: 0 0 45%;
+    border-right: 2px grey solid;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+.search-form input {
+    width: 350px;
+    height: 35px;
+    border-radius: 20px;
+    background-color: grey;
+    border: none;
+    color: lightgray;
+    padding-left: 7px;
+    font-size: 12pt;
+}
+
+.search-form input::placeholder {
+    color: lightgray;
+    font-size: 12pt;
+}
+
+.search-form div {
+    position: relative;
+    width: 210px;
+}
+
+.search-form button {
+    position: absolute;
+    top: 2px;
+    right: -120px;
+    font-size: 14pt;
+    cursor: pointer;
+    padding: 5px 10px 5px 5px;
+    background-color: transparent;
+    border: none;
+    overflow: hidden;
+}
+
+.search-form button:hover {
+    color: lightgray;
+}
+
+.requests{
+    flex: 0 0 45%;
+    color: lightgray;
+    display: flex;
+    align-items: center;
+    gap:30px;
+}
+.requests h3{
+    font-size: 18pt;
+    flex:0 0 80%
+}
+
+.requests i{
+    font-size: 22pt;
+    cursor: pointer;
+    flex: 0 0 15%;
+}
+
+.requests i:hover{
+    color: white;
+}
+
+.icon-wrapper{
+    width: 50px;
+    height: 50px;
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.message-balloon{
+    position: absolute;
+    top:0px;
+    right: 0px;
+    width: 20px;
+    height: 20px;
+    background-color: red;
+    color: white;
+    border-radius: 50%;
+    font-size: 12pt;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.chats img{
+    width: 50px;
+    height: 50px;
+}
+
+@media(max-width:1200px) {
+    .search-form input{
+        width: 220px;
+    }
+    .requests h3{
+        font-size: 16pt;
+    }
+    .requests i{
+        font-size: 20pt;
+    }
+    .search-form button {
+        right:0px;
+    }
+}
+
+@media(max-width:650px) {
+    .search-form input{
+        width: 200px;
+    }
+    .message-balloon{
+        top:5px;
+        right:-7px;
+        font-size: 10pt;
+        width: 15px;
+        height: 15px;
+    }
+    .search-form button {
+        right:10px;
+    }
+    .search{
+        justify-content: center;
+        border-right:none;
+        padding-bottom: 30px;
+        border-bottom: 2px solid grey;
+    }
+    .wrapper{
+        width: 100vw;
+    }
+    .header-wrapper{
+        flex-direction: column;
+        gap:10px;
+        align-items: center;
+    }
+}
