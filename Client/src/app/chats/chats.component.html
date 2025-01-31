@@ -21,10 +21,17 @@
     <section class="main-wrapper">
         <section class="chats">
             @for (chat of chats; track $index) {
-                <article>
-                    <img src={{chat.requester_id.profileImage}} alt={{chat.requester_id.username}}>
-                    <h3>{{chat.requester_id.username}}</h3>
-                </article>
+                @if(userId==chat.receiver_id._id){
+                    <article class="chat-item">
+                        <img src={{chat.requester_id.profileImage}} alt={{chat.requester_id.username}}>
+                        <h3>{{chat.requester_id.username}}</h3>
+                    </article>
+                }@else{
+                    <article class="chat-item">
+                        <img src={{chat.receiver_id.profileImage}} alt={{chat.receiver_id.username}}>
+                        <h3>{{chat.receiver_id.username}}</h3>
+                    </article>
+                }
             }
         </section>
         <section class="main-section">

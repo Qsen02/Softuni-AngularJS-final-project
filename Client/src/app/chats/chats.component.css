@@ -1,22 +1,22 @@
-.wrapper{
+.wrapper {
     margin: 30px auto;
-    width:80%;
+    width: 80%;
     background-color: rgb(40, 40, 40);
     border-radius: 10px;
     display: flex;
     flex-direction: column;
 }
 
-.header-wrapper{
+.header-wrapper {
     padding: 10px;
     width: 100%;
     display: flex;
     justify-content: center;
-    gap:50px;
+    gap: 50px;
     border-bottom: 2px grey solid;
 }
 
-.search{
+.search {
     padding: 10px;
     flex: 0 0 45%;
     border-right: 2px grey solid;
@@ -62,29 +62,29 @@
     color: lightgray;
 }
 
-.requests{
+.requests {
     flex: 0 0 45%;
     color: lightgray;
     display: flex;
     align-items: center;
-    gap:30px;
+    gap: 30px;
 }
-.requests h3{
+.requests h3 {
     font-size: 18pt;
-    flex:0 0 80%
+    flex: 0 0 80%;
 }
 
-.requests i{
+.requests i {
     font-size: 22pt;
     cursor: pointer;
     flex: 0 0 15%;
 }
 
-.requests i:hover{
+.requests i:hover {
     color: white;
 }
 
-.icon-wrapper{
+.icon-wrapper {
     width: 50px;
     height: 50px;
     position: relative;
@@ -93,9 +93,9 @@
     align-items: center;
 }
 
-.message-balloon{
+.message-balloon {
     position: absolute;
-    top:0px;
+    top: 0px;
     right: 0px;
     width: 20px;
     height: 20px;
@@ -108,52 +108,80 @@
     align-items: center;
 }
 
-.chats img{
-    width: 50px;
-    height: 50px;
+.main-wrapper {
+    display: flex;
+    height: 70vh;
 }
 
-@media(max-width:1200px) {
-    .search-form input{
+.chats {
+    flex: 0 0 25%;
+    border-right: 2px solid grey;
+    overflow: auto;
+}
+
+.chat-item{
+    display: flex;
+    gap:50px;
+    align-items: center;
+    padding: 20px;
+    color: lightgray;
+    cursor: pointer;
+    border-bottom: 2px solid grey;
+    justify-content: center;
+    font-size: 18pt;
+}
+
+.chat-item:hover{
+    background-color: rgb(80, 80, 80);
+}
+
+.chat-item img {
+    width: 70px;
+    height: 70px;
+    border-radius: 50%;
+}
+
+@media (max-width: 1200px) {
+    .search-form input {
         width: 220px;
     }
-    .requests h3{
+    .requests h3 {
         font-size: 16pt;
     }
-    .requests i{
+    .requests i {
         font-size: 20pt;
     }
     .search-form button {
-        right:0px;
+        right: 0px;
     }
 }
 
-@media(max-width:650px) {
-    .search-form input{
+@media (max-width: 650px) {
+    .search-form input {
         width: 200px;
     }
-    .message-balloon{
-        top:5px;
-        right:-7px;
+    .message-balloon {
+        top: 5px;
+        right: -7px;
         font-size: 10pt;
         width: 15px;
         height: 15px;
     }
     .search-form button {
-        right:10px;
+        right: 10px;
     }
-    .search{
+    .search {
         justify-content: center;
-        border-right:none;
+        border-right: none;
         padding-bottom: 30px;
         border-bottom: 2px solid grey;
     }
-    .wrapper{
+    .wrapper {
         width: 100vw;
     }
-    .header-wrapper{
+    .header-wrapper {
         flex-direction: column;
-        gap:10px;
+        gap: 10px;
         align-items: center;
     }
 }

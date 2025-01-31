@@ -23,6 +23,7 @@ export class ChatsComponent implements OnInit,OnDestroy{
     isError=false;
     isSearched=false;
     searchedResults:User[]=[];
+    userId="";
 
     searchUserForm = new FormGroup({
         username: new FormControl("")
@@ -38,7 +39,7 @@ export class ChatsComponent implements OnInit,OnDestroy{
                 this.chats=user.chats;
                 this.requests=user.requests;
                 this.isLoading=false;
-                console.log( this.chats);
+                this.userId=userId;
             },
             error:()=>{
                 this.isLoading=false;
