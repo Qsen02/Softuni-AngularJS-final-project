@@ -19,11 +19,11 @@ export class RequestsService {
         return this.http.post<Request>(`/api/${this.endpoint}`, { _id: userId });
     }
 
-    declineRequest(requestId:string){
+    declineRequest(requestId: string | undefined){
         return this.http.delete<User>(`/api/${this.endpoint}/${requestId}`);
     }
 
-    acceptRequest(requestId:string){
+    acceptRequest(requestId:string | undefined){
         return this.http.post<User>(`/api/${this.endpoint}/${requestId}`,{});
     }
 }

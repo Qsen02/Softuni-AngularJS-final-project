@@ -1,0 +1,13 @@
+<article class="request-item">
+    <div class="request-header">
+        <a [routerLink]="['/profile',request?.sender_id?._id]">
+            <img src={{request?.sender_id?.profileImage}} alt={{request?.sender_id?.username}} (error)="onProfileImageError($event)">
+        </a>
+        <h2>{{request?.sender_id?.username}}</h2>
+    </div>
+    <p>{{request?.sender_id?.username}} want to chat with you.</p>
+    <div class="buttons">
+        <button (click)="onDecline()">Decline</button>
+        <button (click)="onAccept()">Accept</button>
+    </div>
+</article>

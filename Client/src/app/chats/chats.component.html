@@ -31,7 +31,7 @@
                 @if(isSearched){
                     <app-chats-searched-results [userIdProp]="userId" [searchedResultsProp]="searchedResults"></app-chats-searched-results>
                 }@else if (isRequestsOpen) {
-                    <app-chats-requests [requestsProps]="requests"></app-chats-requests>
+                    <app-chats-requests [requestsProps]="requests" [chatsProps]="chats"></app-chats-requests>
                 }
            }
         </section>
