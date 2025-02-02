@@ -8,11 +8,12 @@ import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { User } from '../types/user';
 import { imageProfileErrorHandler } from '../utils/imageErrorHandlers';
 import { ChatsSearchedResultsComponent } from './chats-searched-results/chats-searched-results.component';
+import { ChatsUserItemComponent } from './chats-user-item/chats-user-item.component';
 
 @Component({
   selector: 'app-chats',
   standalone: true,
-  imports: [ReactiveFormsModule,ChatsSearchedResultsComponent],
+  imports: [ReactiveFormsModule,ChatsSearchedResultsComponent,ChatsUserItemComponent],
   templateUrl: './chats.component.html',
   styleUrl: './chats.component.css'
 })

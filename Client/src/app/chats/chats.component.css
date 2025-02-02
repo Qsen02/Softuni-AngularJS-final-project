@@ -121,28 +121,6 @@
     flex-direction: column;
 }
 
-.chat-item {
-    display: flex;
-    gap: 50px;
-    align-items: center;
-    padding: 20px;
-    color: lightgray;
-    cursor: pointer;
-    border-bottom: 2px solid grey;
-    justify-content: center;
-    font-size: 18pt;
-}
-
-.chat-item:hover {
-    background-color: rgb(80, 80, 80);
-}
-
-.chat-item img {
-    width: 70px;
-    height: 70px;
-    border-radius: 50%;
-}
-
 .chats h2 {
     color: lightgray;
     text-align: center;

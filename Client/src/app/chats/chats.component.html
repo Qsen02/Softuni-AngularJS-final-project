@@ -20,21 +20,7 @@
     </section>
     <section class="main-wrapper">
         <section class="chats">
-            @for (chat of chats; track $index) {
-                @if(userId==chat.receiver_id._id){
-                    <article class="chat-item">
-                        <img src={{chat.requester_id.profileImage}} alt={{chat.requester_id.username}} (error)="onProfileImageError($event)">
-                        <h3>{{chat.requester_id.username}}</h3>
-                    </article>
-                }@else{
-                    <article class="chat-item">
-                        <img src={{chat.receiver_id.profileImage}} alt={{chat.receiver_id.username}} (error)="onProfileImageError($event)">
-                        <h3>{{chat.receiver_id.username}}</h3>
-                    </article>
-                }
-            }@empty {
-                <h2>No chats yet, send request to someone and start the chat!</h2>
-            }
+           <app-chats-user-item [userIdProp]="userId" [chatsProp]="chats"></app-chats-user-item>
         </section>
         <section class="main-section">
            @if(isInit){
