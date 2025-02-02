@@ -1,0 +1,78 @@
+.request-item {
+    width: 100%;
+    border-bottom: 2px solid grey;
+    padding: 20px;
+    color: lightgray;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    align-items: center;
+    text-align: center;
+}
+
+.request-item p{
+    font-size: 16pt;
+}
+
+.request-header{
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    align-items: center;
+    font-size: 16pt;
+}
+
+.request-header img {
+    width: 70px;
+    height: 70px;
+    border-radius: 50%;
+}
+
+.buttons{
+    display: flex;
+    gap: 30px;
+}
+
+.buttons button{
+    padding: 10px 20px 10px 20px;
+    background-color: rgb(57, 199, 255);
+    color: white;
+    font-size: 14pt;
+    border: none;
+    border-radius: 30px;
+    cursor: pointer;
+}
+
+.buttons button:hover{
+    background-color: rgb(131, 220, 255);
+}
+
+@media(max-width:1200px){
+    .request-item p{
+        font-size: 14pt;
+    }
+    .request-header{
+        font-size: 14pt;
+    }
+    .request-header img{
+        width: 50px;
+        height: 50px;
+    }
+}
+
+@media(max-width:670px){
+    .request-item p{
+        font-size: 12pt;
+    }
+    .request-header{
+        font-size: 12pt;
+    }
+    .request-header img{
+        width: 30px;
+        height: 30px;
+    }
+    .buttons button{
+        padding: 5px 10px 5px 10px;
+        font-size: 12pt;
+    }
+}

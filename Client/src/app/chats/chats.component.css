@@ -121,13 +121,6 @@
     flex-direction: column;
 }
 
-.chats h2 {
-    color: lightgray;
-    text-align: center;
-    word-wrap: break-word;
-    margin-top: 100px;
-}
-
 .main-section {
     flex: 0 0 70%;
     display: flex;
