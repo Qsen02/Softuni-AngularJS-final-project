@@ -15,7 +15,7 @@ export class RequestsService {
         return this.http.get<Request>(`/api/${this.endpoint}/${requestId}`);
     }
 
-    sendRequest(userId: string) {
+    sendRequest(userId: string | undefined) {
         return this.http.post<Request>(`/api/${this.endpoint}`, { _id: userId });
     }
 

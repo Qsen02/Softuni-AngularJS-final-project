@@ -1,12 +1,6 @@
 @for (item of searchedResults; track $index) {
-    @if(userId!=item._id){
-    <article class="user-item">
-        <a [routerLink]="['/profile',item._id]">
-            <img src={{item.profileImage}} alt={{item.username}} (error)="onProfileImageError($event)">
-        </a>
-        <h2>{{item.username}}</h2>
-        <button>Send request</button>
-    </article>
+    @if(userId != item._id){
+        <app-chats-searched-resuts-item [userIdProps]="userId" [itemProps]="item"></app-chats-searched-resuts-item>
    }
 }@empty {
     <div class="main-title">

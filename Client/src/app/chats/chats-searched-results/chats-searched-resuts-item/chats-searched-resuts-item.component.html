@@ -1,0 +1,11 @@
+<article class="user-item">
+    <a [routerLink]="['/profile',item?._id]">
+        <img src={{item?.profileImage}} alt={{item?.username}} (error)="onProfileImageError($event)">
+    </a>
+    <h2>{{item?.username}}</h2>
+    @if(isSended){
+        <div class="sended">Sended!</div>
+    }@else{
+        <button (click)="onSendRequest()">Send request</button>
+    }
+</article>

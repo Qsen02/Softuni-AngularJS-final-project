@@ -1,21 +1,15 @@
-import { Component, input, Input } from '@angular/core';
-import { imageProfileErrorHandler } from '../../utils/imageErrorHandlers';
+import { Component, Input } from '@angular/core';
 import { User } from '../../types/user';
-import { RouterLink } from '@angular/router';
+import { ChatsSearchedResutsItemComponent } from './chats-searched-resuts-item/chats-searched-resuts-item.component';
 
 @Component({
     selector: 'app-chats-searched-results',
     standalone: true,
-    imports: [RouterLink],
+    imports: [ChatsSearchedResutsItemComponent],
     templateUrl: './chats-searched-results.component.html',
     styleUrl: './chats-searched-results.component.css',
 })
 export class ChatsSearchedResultsComponent {
-    @Input('userIdProp') userId: string = "";
-    @Input('searchedResultsProp') searchedResults: User[] =[];
-
-    onProfileImageError(event: Event) {
-        const imageRef = event.target as HTMLImageElement;
-        imageProfileErrorHandler(imageRef);
-    }
+    @Input('userIdProp') userId: string = '';
+    @Input('searchedResultsProp') searchedResults: User[] = [];
 }

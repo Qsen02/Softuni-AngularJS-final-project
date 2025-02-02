@@ -158,21 +158,6 @@
     .chats h2 {
         font-size: 14pt;
     }
-    .chat-item img {
-        width: 50px;
-        height: 50px;
-    }
-    .chat-item {
-        font-size: 16pt;
-        gap: 20px;
-    }
-    .user-item{
-        font-size: 14pt;
-    }
-    .user-item img{
-        width: 50px;
-        height: 50px;
-    }
 }
 
 @media (max-width: 670px) {
@@ -204,28 +189,6 @@
         align-items: center;
     }
     .chats h2 {
-        font-size: 12pt;
-    }
-    .chat-item img {
-        width: 30px;
-        height: 30px;
-    }
-    .chat-item {
-        font-size: 12pt;
-        gap: 10px;
-        flex-direction: column;
-    }
-    .user-item{
-        font-size: 12pt;
-        flex-direction: column;
-        gap:10px;
-    }
-    .user-item img{
-        width: 30px;
-        height: 30px;
-    }
-    .user-item button {
-        padding: 5px 10px 5px 10px;
         font-size: 12pt;
     }
 }

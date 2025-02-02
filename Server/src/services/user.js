@@ -78,7 +78,14 @@ async function checkUserId(userId) {
 }
 
 function searchUsers(username) {
-    const user = Users.find({ username: new RegExp(username, "i") });
+    const user = Users.find({ username: new RegExp(username, "i") }).populate({
+        path:"requests",
+        model:"Requests",
+        populate:{
+            path:"sender_id",
+            model:"Users"
+        }
+    });
     return user;
 }
 
