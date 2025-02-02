@@ -1,17 +1,18 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Chat } from '../types/chats';
 import { Subscription } from 'rxjs';
-import { ActivatedRoute, RouterLink } from '@angular/router';
+import { ActivatedRoute } from '@angular/router';
 import { Request } from '../types/requests';
 import { UserService } from '../services/user.service';
 import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { User } from '../types/user';
 import { imageProfileErrorHandler } from '../utils/imageErrorHandlers';
+import { ChatsSearchedResultsComponent } from './chats-searched-results/chats-searched-results.component';
 
 @Component({
   selector: 'app-chats',
   standalone: true,
-  imports: [ReactiveFormsModule,RouterLink],
+  imports: [ReactiveFormsModule,ChatsSearchedResultsComponent],
   templateUrl: './chats.component.html',
   styleUrl: './chats.component.css'
 })
@@ -76,5 +77,6 @@ export class ChatsComponent implements OnInit,OnDestroy{
 
     ngOnDestroy(): void {
         this.chatSubscription?.unsubscribe();
+        this.userSubscription?.unsubscribe();
     }
 }

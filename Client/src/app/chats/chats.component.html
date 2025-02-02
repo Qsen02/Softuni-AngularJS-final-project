@@ -43,21 +43,7 @@
             </div>
            }@else{
                 @if(isSearched){
-                    @for (item of searchedResults; track $index) {
-                        @if(userId!=item._id){
-                        <article class="user-item">
-                            <a [routerLink]="['/profile',item._id]">
-                                <img src={{item.profileImage}} alt={{item.username}} (error)="onProfileImageError($event)">
-                            </a>
-                            <h2>{{item.username}}</h2>
-                            <button>Send request</button>
-                        </article>
-                       }
-                    }@empty {
-                        <div class="main-title">
-                            <h2>No results :(</h2>
-                        </div>
-                    }
+                    <app-chats-searched-results [userIdProp]="userId" [searchedResultsProp]="searchedResults"></app-chats-searched-results>
                 }
            }
         </section>
