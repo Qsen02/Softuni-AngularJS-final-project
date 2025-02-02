@@ -78,7 +78,7 @@ export class UserService implements OnDestroy {
         return this.user;
     }
 
-    getUserById(userId: User | undefined) {
+    getUserById(userId: User | undefined | string) {
         return this.http.get<User>(`/api/${this.endpoint}/${userId}`);
     }
 

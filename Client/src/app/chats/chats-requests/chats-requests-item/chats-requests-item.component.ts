@@ -19,14 +19,17 @@ export class ChatsRequestsItemComponent {
     @Input('chatsProps') chats: Chat[] = [];
     @Input('requestsProps') requests: Request[] = [];
 
-    constructor(private requestsService: RequestsService) {}
+    constructor(
+        private requestsService: RequestsService,
+        private userService: UserService
+    ) {}
 
     onAccept() {
         this.requestsService
             .acceptRequest(this.request?._id)
             .subscribe((user) => {
-                this.chats = user.chats;
                 this.requests = user.requests;
+                this.chats = user.chats;
             });
     }
 

@@ -1,7 +1,7 @@
 @for (request of requests; track $index) {
    <app-chats-requests-item [requestProps]="request" [chatsProps]="chats" [requestsProps]="requests"></app-chats-requests-item>
 }@empty {
-    <div>
+    <div class="no-requests">
         <h2>No requests yet.</h2>
     </div>
 }
