@@ -3,9 +3,11 @@
         <img src={{item?.profileImage}} alt={{item?.username}} (error)="onProfileImageError($event)">
     </a>
     <h2>{{item?.username}}</h2>
-    @if(isSended){
-        <div class="sended">Sended!</div>
-    }@else{
+    @if(isChatExist){
+        <div class="sended">Already chatting!</div>
+    }@else if(!isSended){
         <button (click)="onSendRequest()">Send request</button>
+    }@else if (isSended) {
+        <div class="sended">Sended!</div>
     }
 </article>

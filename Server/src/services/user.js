@@ -56,7 +56,7 @@ function getUserById(userId) {
             populate: [
                 { path: "requester_id", model: "Users" },
                 { path: "receiver_id", model: "Users" },
-            ]
+            ],
         })
         .populate({
             path: "requests",
@@ -78,14 +78,23 @@ async function checkUserId(userId) {
 }
 
 function searchUsers(username) {
-    const user = Users.find({ username: new RegExp(username, "i") }).populate({
-        path:"requests",
-        model:"Requests",
-        populate:{
-            path:"sender_id",
-            model:"Users"
-        }
-    });
+    const user = Users.find({ username: new RegExp(username, "i") })
+        .populate({
+            path: "requests",
+            model: "Requests",
+            populate: {
+                path: "sender_id",
+                model: "Users",
+            },
+        })
+        .populate({
+            path: "chats",
+            model: "Chats",
+            populate: [
+                { path: "requester_id", model: "Users" },
+                { path: "receiver_id", model: "Users" },
+            ],
+        });
     return user;
 }
 

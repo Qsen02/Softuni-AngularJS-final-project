@@ -1,6 +1,7 @@
 import { Component, Input } from '@angular/core';
 import { User } from '../../types/user';
 import { ChatsSearchedResutsItemComponent } from './chats-searched-resuts-item/chats-searched-resuts-item.component';
+import { Chat } from '../../types/chats';
 
 @Component({
     selector: 'app-chats-searched-results',
@@ -12,4 +13,5 @@ import { ChatsSearchedResutsItemComponent } from './chats-searched-resuts-item/c
 export class ChatsSearchedResultsComponent {
     @Input('userIdProp') userId: string = '';
     @Input('searchedResultsProp') searchedResults: User[] = [];
+    @Input('chatsProps') chats: Chat[] = [];
 }

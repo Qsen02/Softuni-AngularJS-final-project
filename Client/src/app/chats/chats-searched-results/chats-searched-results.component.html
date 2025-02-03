@@ -1,6 +1,6 @@
 @for (item of searchedResults; track $index) {
     @if(userId != item._id){
-        <app-chats-searched-resuts-item [userIdProps]="userId" [itemProps]="item"></app-chats-searched-resuts-item>
+        <app-chats-searched-resuts-item [userIdProps]="userId" [itemProps]="item" [chatsProps]="chats"></app-chats-searched-resuts-item>
    }
 }@empty {
     <div class="main-title">
