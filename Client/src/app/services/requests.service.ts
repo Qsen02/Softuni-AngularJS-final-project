@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Request } from '../types/requests';
 import { User } from '../types/user';
+import { Chat } from '../types/chats';
 
 @Injectable({
     providedIn: 'root',
@@ -16,14 +17,19 @@ export class RequestsService {
     }
 
     sendRequest(userId: string | undefined) {
-        return this.http.post<Request>(`/api/${this.endpoint}`, { _id: userId });
+        return this.http.post<Request>(`/api/${this.endpoint}`, {
+            _id: userId,
+        });
     }
 
-    declineRequest(requestId: string | undefined){
-        return this.http.delete<User>(`/api/${this.endpoint}/${requestId}`);
+    declineRequest(requestId: string | undefined) {
+        return this.http.delete<Request>(`/api/${this.endpoint}/${requestId}`);
     }
 
-    acceptRequest(requestId:string | undefined){
-        return this.http.post<User>(`/api/${this.endpoint}/${requestId}`,{});
+    acceptRequest(requestId: string | undefined) {
+        return this.http.post<{ chat: Chat; request: Request }>(
+            `/api/${this.endpoint}/${requestId}`,
+            {}
+        );
     }
 }

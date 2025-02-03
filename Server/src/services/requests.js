@@ -25,7 +25,7 @@ async function declineRequest(receiverId, requestId) {
 }
 
 async function acceptRequest(senderId, requesterId, requestId) {
-    const updatedUser = await createChat(requesterId, senderId);
+    const newChat= await createChat(requesterId, senderId);
     await Requests.findByIdAndDelete(requestId);
     await Users.findByIdAndUpdate(
         requesterId,
@@ -34,11 +34,11 @@ async function acceptRequest(senderId, requesterId, requestId) {
         },
         { new: true }
     );
-    return updatedUser;
+    return (await newChat.populate("requester_id")).populate("receiver_id");
 }
 
 function getRequestById(requestId) {
-    const request = Requests.findById(requestId);
+    const request = Requests.findById(requestId).populate("sender_id");
     return request;
 }
 

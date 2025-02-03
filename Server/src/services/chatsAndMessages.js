@@ -44,11 +44,13 @@ async function createChat(curUserId, user) {
     });
     await chat.save();
     await Users.findByIdAndUpdate(user._id, { $push: { chats: chat } });
-    return await Users.findByIdAndUpdate(
+    await Users.findByIdAndUpdate(
         curUserId,
         { $push: { chats: chat } },
         { new: true }
     );
+
+    return chat;
 }
 
 async function checkChatId(chatId) {

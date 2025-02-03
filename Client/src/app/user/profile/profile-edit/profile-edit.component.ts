@@ -26,7 +26,7 @@ export class ProfileEditComponent implements OnInit, OnDestroy {
 
     ngOnInit(): void {
         const userId = this.route.snapshot.params['userId'];
-       this.getUserSubscription= this.userService.getUserById(userId).subscribe((user) => {
+        this.getUserSubscription= this.userService.getUserById(userId).subscribe((user) => {
             this.editProfileForm.get("username")?.setValue(user.username);
             this.editProfileForm.get("email")?.setValue(user.email);
             this.editProfileForm.get("profileImage")?.setValue(user.profileImage);

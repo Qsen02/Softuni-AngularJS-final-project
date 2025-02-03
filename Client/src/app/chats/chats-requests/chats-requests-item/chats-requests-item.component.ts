@@ -4,8 +4,6 @@ import { Request } from '../../../types/requests';
 import { imageProfileErrorHandler } from '../../../utils/imageErrorHandlers';
 import { RequestsService } from '../../../services/requests.service';
 import { Chat } from '../../../types/chats';
-import { UserService } from '../../../services/user.service';
-import { User } from '../../../types/user';
 
 @Component({
     selector: 'app-chats-requests-item',
@@ -19,25 +17,26 @@ export class ChatsRequestsItemComponent {
     @Input('chatsProps') chats: Chat[] = [];
     @Input('requestsProps') requests: Request[] = [];
 
-    constructor(
-        private requestsService: RequestsService,
-        private userService: UserService
-    ) {}
+    constructor(private requestsService: RequestsService) {}
 
     onAccept() {
         this.requestsService
             .acceptRequest(this.request?._id)
-            .subscribe((user) => {
-                this.requests = user.requests;
-                this.chats = user.chats;
+            .subscribe(({chat,request}) => {
+                const requestIds=this.requests.map(el=>el._id);
+                const index=requestIds.indexOf(request._id);
+                this.requests.splice(index,1);
+                this.chats.push(chat);
             });
     }
 
     onDecline() {
         this.requestsService
             .declineRequest(this.request?._id)
-            .subscribe((user) => {
-                this.requests = user.requests;
+            .subscribe((request) => {
+                const requestIds=this.requests.map(el=>el._id);
+                const index=requestIds.indexOf(request._id);
+                this.requests.splice(index,1);
             });
     }
 
