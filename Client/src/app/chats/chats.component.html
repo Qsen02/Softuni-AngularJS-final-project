@@ -39,7 +39,7 @@
                 }@else if (isRequestsOpen) {
                     <app-chats-requests [requestsProps]="requests" [chatsProps]="chats"></app-chats-requests>
                 }@else if (isChatOpenParent) {
-                    
+                    <app-chats-item [chatProp]="openChatParent" [userIdProp]="userId"></app-chats-item>
                 }
            }
         </section>

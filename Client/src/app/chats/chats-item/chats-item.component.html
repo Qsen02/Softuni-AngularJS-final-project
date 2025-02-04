@@ -1,0 +1,29 @@
+<section class="chat-header">
+    @if(userId==chat?.receiver_id?._id){
+        <img src={{chat?.requester_id?.profileImage}} alt={{chat?.requester_id?.username}}>
+        <h2>{{chat?.requester_id?.username}}</h2>
+        <p>{{chat?.requester_id?.email}}</p>
+    }@else if(userId==chat?.requester_id?._id){
+        <img src={{chat?.receiver_id?.profileImage}} alt={{chat?.receiver_id?.username}}>
+        <h2>{{chat?.receiver_id?.username}}</h2>
+        <p>{{chat?.receiver_id?.email}}</p>
+    }
+</section>
+<section class="chat-body">
+    @for (message of chat?.messages; track $index) {
+        <div>
+            <img src={{message.owner_id.profileImage}} alt={{message.owner_id.username}}>
+            <article>
+                <p>{{message.text}}</p>
+            </article>
+        </div>
+    }@empty {
+        <div>
+            <h2>No messages yet.</h2>
+        </div>
+    }
+</section>
+<form>
+    <input type="text" name="text" placeholder="Write message...">
+    <i class="fa-regular fa-paper-plane"></i>
+</form>

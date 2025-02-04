@@ -10,6 +10,7 @@ import { imageProfileErrorHandler } from '../utils/imageErrorHandlers';
 import { ChatsSearchedResultsComponent } from './chats-searched-results/chats-searched-results.component';
 import { ChatsUserItemComponent } from './chats-user-item/chats-user-item.component';
 import { ChatsRequestsComponent } from './chats-requests/chats-requests.component';
+import { ChatsItemComponent } from './chats-item/chats-item.component';
 
 @Component({
     selector: 'app-chats',
@@ -19,6 +20,7 @@ import { ChatsRequestsComponent } from './chats-requests/chats-requests.componen
         ChatsSearchedResultsComponent,
         ChatsUserItemComponent,
         ChatsRequestsComponent,
+        ChatsItemComponent
     ],
     templateUrl: './chats.component.html',
     styleUrl: './chats.component.css',
