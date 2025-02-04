@@ -3,7 +3,14 @@ const { Messages } = require("../models/messages");
 const { Users } = require("../models/user");
 
 function getChatById(chatId) {
-    const chat = Chats.findById(chatId).populate("messages").populate("receiver_id").populate("requester_id");
+    const chat = Chats.findById(chatId).populate({
+        path:"messages",
+        model:"Messages",
+        populate:{
+            path:"owner_id",
+            model:"Users"
+        }
+    }).populate("receiver_id").populate("requester_id");
     return chat;
 }
 

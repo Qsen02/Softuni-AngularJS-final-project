@@ -1,19 +1,23 @@
 <section class="chat-header">
     @if(userId==chat?.receiver_id?._id){
-        <img src={{chat?.requester_id?.profileImage}} alt={{chat?.requester_id?.username}}>
+        <a [routerLink]="['/profile',chat?.requester_id?._id]">
+            <img src={{chat?.requester_id?.profileImage}} alt={{chat?.requester_id?.username}}>
+        </a>
         <h2>{{chat?.requester_id?.username}}</h2>
         <p>{{chat?.requester_id?.email}}</p>
     }@else if(userId==chat?.requester_id?._id){
-        <img src={{chat?.receiver_id?.profileImage}} alt={{chat?.receiver_id?.username}}>
+        <a [routerLink]="['/profile',chat?.receiver_id?._id]">
+            <img src={{chat?.receiver_id?.profileImage}} alt={{chat?.receiver_id?.username}}>
+        </a>
         <h2>{{chat?.receiver_id?.username}}</h2>
         <p>{{chat?.receiver_id?.email}}</p>
     }
 </section>
 <section class="chat-body">
     @for (message of chat?.messages; track $index) {
-        <div>
+        <div [ngClass]="(message.owner_id._id == userId) ? 'flex-end' : 'flex-start'">
             <img src={{message.owner_id.profileImage}} alt={{message.owner_id.username}}>
-            <article>
+            <article [ngClass]="(message.owner_id._id == userId) ? 'background-grey' : 'background-darkgrey'">
                 <p>{{message.text}}</p>
             </article>
         </div>
@@ -23,7 +27,7 @@
         </div>
     }
 </section>
-<form>
+<form class="message-form">
     <input type="text" name="text" placeholder="Write message...">
     <i class="fa-regular fa-paper-plane"></i>
 </form>
