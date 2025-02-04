@@ -10,8 +10,8 @@
     font-size: 16pt;
 }
 .chat-header img{
-    width: 150px;
-    height: 150px;
+    width: 100px;
+    height: 100px;
     border-radius: 50%;
 }
 
@@ -22,6 +22,7 @@
 }
 
 .chat-body div{
+    width: 50%;
     display: flex;
     align-items: center;
     gap:10px;
@@ -37,7 +38,7 @@
 
 .chat-body div article{
     padding: 20px;
-    width: 70%;
+    width: 90%;
     word-wrap: break-word;
     border-radius: 30px;
 }
@@ -59,7 +60,8 @@
 }
 
 .message-form{
-    margin-top: 210px;
+    position: absolute;
+    bottom:10px;
     width: 100%;
     display: flex;
     gap:10px;
@@ -91,4 +93,45 @@
 
 .message-form i:hover{
     color: white;
+}
+
+.label{
+  width: 100%;
+  margin-top: 30px;
+  display: flex;
+  justify-content: center;
+}
+
+@media(max-width:670px){
+    .chat-header{
+        font-size: 12pt;
+    }
+    .chat-header img{
+        width: 70px;
+        height: 70px;
+    }
+    .chat-body div{
+        width: 70%;
+    }
+    .chat-body div article{
+        padding: 15px;
+        font-size: 10pt;
+    }
+    .chat-body div img{
+        width: 30px;
+        height: 30px;
+    }
+    .message-form input{
+        height: 30px;
+        font-size: 12pt;
+    }
+    .message-form input::placeholder{
+        font-size: 12pt;
+    }
+    .message-form i{
+        font-size: 18pt;
+    }
+    .label{
+        font-size: 10pt;
+    }
 }
