@@ -38,10 +38,12 @@ export class ChatsComponent implements OnInit, OnDestroy {
         username: new FormControl(''),
     });
     isRequestsOpen = false;
+    openChatParent: Chat | null = null;
+    isChatOpenParent=false;
 
     constructor(
         private userService: UserService,
-        private route: ActivatedRoute
+        private route: ActivatedRoute,
     ) {}
 
     ngOnInit(): void {

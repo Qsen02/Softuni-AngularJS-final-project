@@ -20,7 +20,13 @@
     </section>
     <section class="main-wrapper">
         <section class="chats">
-           <app-chats-user-item [userIdProp]="userId" [chatsProp]="chats"></app-chats-user-item>
+           <app-chats-user-item 
+                [userIdProp]="userId" 
+                [chatsProp]="chats" 
+                [(openChat)]="openChatParent" 
+                [(isChatOpen)]="isChatOpenParent"
+                [(isInit)]="isInit">
+           </app-chats-user-item>
         </section>
         <section class="main-section">
            @if(isInit){
@@ -32,6 +38,8 @@
                     <app-chats-searched-results [userIdProp]="userId" [searchedResultsProp]="searchedResults" [chatsProps]="chats"></app-chats-searched-results>
                 }@else if (isRequestsOpen) {
                     <app-chats-requests [requestsProps]="requests" [chatsProps]="chats"></app-chats-requests>
+                }@else if (isChatOpenParent) {
+                    
                 }
            }
         </section>

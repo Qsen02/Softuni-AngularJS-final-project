@@ -1,6 +1,7 @@
-import { Component, Input } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { imageProfileErrorHandler } from '../../utils/imageErrorHandlers';
 import { Chat } from '../../types/chats';
+import { ChatsAndMessagesService } from '../../services/chats-and-messages.service';
 
 @Component({
     selector: 'app-chats-user-item',
@@ -12,6 +13,25 @@ import { Chat } from '../../types/chats';
 export class ChatsUserItemComponent {
     @Input('userIdProp') userId: string = '';
     @Input('chatsProp') chats: Chat[] = [];
+    @Input() openChat: Chat | null = null;
+    @Output() openChatChange = new EventEmitter<Chat>();
+    @Input() isChatOpen = false;
+    @Output() isChatOpenChange = new EventEmitter<boolean>();
+    @Input() isInit = true;
+    @Output() isInitChange = new EventEmitter<boolean>();
+
+    constructor(private chatsAndMessages: ChatsAndMessagesService) {}
+
+    onOpen(chatId: string) {
+        this.chatsAndMessages.getChatById(chatId).subscribe((chat) => {
+            this.openChat = chat;
+            this.openChatChange.emit(this.openChat);
+            this.isChatOpen = true;
+            this.isChatOpenChange.emit(this.isChatOpen);
+            this.isInit = false;
+            this.isInitChange.emit(this.isInit);
+        });
+    }
 
     onProfileImageError(event: Event) {
         const imageRef = event.target as HTMLImageElement;
