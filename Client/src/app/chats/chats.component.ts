@@ -20,7 +20,7 @@ import { ChatsItemComponent } from './chats-item/chats-item.component';
         ChatsSearchedResultsComponent,
         ChatsUserItemComponent,
         ChatsRequestsComponent,
-        ChatsItemComponent
+        ChatsItemComponent,
     ],
     templateUrl: './chats.component.html',
     styleUrl: './chats.component.css',
@@ -41,11 +41,11 @@ export class ChatsComponent implements OnInit, OnDestroy {
     });
     isRequestsOpen = false;
     openChatParent: Chat | null = null;
-    isChatOpenParent=false;
+    isChatOpenParent = false;
 
     constructor(
         private userService: UserService,
-        private route: ActivatedRoute,
+        private route: ActivatedRoute
     ) {}
 
     ngOnInit(): void {
@@ -80,6 +80,7 @@ export class ChatsComponent implements OnInit, OnDestroy {
                     this.searchedResults = users;
                     this.isLoading = false;
                     this.isRequestsOpen = false;
+                    this.isChatOpenParent = false;
                 },
                 error: (err) => {
                     this.isLoading = false;
@@ -98,6 +99,7 @@ export class ChatsComponent implements OnInit, OnDestroy {
                 this.isRequestsOpen = true;
                 this.isLoading = false;
                 this.isSearched = false;
+                this.isChatOpenParent = false;
             },
             error: () => {
                 this.isLoading = false;

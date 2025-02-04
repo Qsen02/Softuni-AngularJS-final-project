@@ -19,6 +19,10 @@ export class ChatsUserItemComponent {
     @Output() isChatOpenChange = new EventEmitter<boolean>();
     @Input() isInit = true;
     @Output() isInitChange = new EventEmitter<boolean>();
+    @Input() isSearched = false;
+    @Output() isSearchedChange = new EventEmitter<boolean>();
+    @Input() isRequestsOpen = false;
+    @Output() isRequestsOpenChange = new EventEmitter<boolean>();
 
     constructor(private chatsAndMessages: ChatsAndMessagesService) {}
 
@@ -30,6 +34,10 @@ export class ChatsUserItemComponent {
             this.isChatOpenChange.emit(this.isChatOpen);
             this.isInit = false;
             this.isInitChange.emit(this.isInit);
+            this.isSearched = false;
+            this.isSearchedChange.emit(this.isSearched);
+            this.isRequestsOpen = false;
+            this.isRequestsOpenChange.emit(this.isRequestsOpen);
         });
     }
 
