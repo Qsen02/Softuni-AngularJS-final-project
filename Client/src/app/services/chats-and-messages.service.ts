@@ -19,8 +19,11 @@ export class ChatsAndMessagesService {
         return this.http.post<Chat>(`/api/${this.endpoint}`, { _id: userId });
     }
 
-    addMessageToChat(chatId: string, text: string) {
-        return this.http.put<Chat>(
+    addMessageToChat(
+        chatId: string | undefined,
+        text: string | null | undefined
+    ) {
+        return this.http.put<Message>(
             `/api/${this.endpoint}/${chatId}/addMessage`,
             { text: text }
         );

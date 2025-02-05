@@ -20,13 +20,14 @@ async function addMessageToChat(curUser, chatId, message) {
         text: message,
     });
     await newMessage.save();
-    return await Chats.findByIdAndUpdate(
+    await Chats.findByIdAndUpdate(
         chatId,
         {
             $push: { messages: newMessage },
         },
         { new: true }
     );
+    return newMessage.populate("owner_id");
 }
 
 async function editMessage(messageId, text) {

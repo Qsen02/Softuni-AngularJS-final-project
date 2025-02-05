@@ -52,8 +52,8 @@ chatsAndMessagesRouter.put(
             if (result.errors.length) {
                 throw new Error("Your data is not in valid format!");
             }
-            const chat = await addMessageToChat(user,chatId, fields.text);
-            res.json(chat);
+            const newMessage = await addMessageToChat(user,chatId, fields.text);
+            res.json(newMessage);
         } catch (err) {
             return res.status(400).json({ message: err.message });
         }

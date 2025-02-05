@@ -30,7 +30,7 @@
         </div>
     }
 </section>
-<form class="message-form">
-    <input type="text" name="text" placeholder="Write message...">
-    <i class="fa-regular fa-paper-plane"></i>
+<form class="message-form" [formGroup]="addMessageFrom" (ngSubmit)="onAdd()">
+    <input type="text" name="text" placeholder="Write message..." formControlName="text">
+    <button type="submit" [disabled]="addMessageFrom.invalid"><i class="fa-regular fa-paper-plane"></i></button>
 </form>
