@@ -1,4 +1,4 @@
-import { Component, Input, OnDestroy } from '@angular/core';
+import { Component, Input, OnDestroy, OnInit } from '@angular/core';
 import { Chat } from '../../types/chats';
 import { RouterLink } from '@angular/router';
 import { CommonModule } from '@angular/common';
@@ -11,6 +11,7 @@ import {
     Validators,
 } from '@angular/forms';
 import { Subscription } from 'rxjs';
+import { SocketServiceService } from '../../services/socket-service.service';
 
 @Component({
     selector: 'app-chats-item',
@@ -19,7 +20,7 @@ import { Subscription } from 'rxjs';
     templateUrl: './chats-item.component.html',
     styleUrl: './chats-item.component.css',
 })
-export class ChatsItemComponent implements OnDestroy{
+export class ChatsItemComponent implements OnDestroy,OnInit {
     @Input('chatProp') chat: Chat | null = null;
     @Input('userIdProp') userId = '';
 
@@ -29,15 +30,25 @@ export class ChatsItemComponent implements OnDestroy{
 
     addMessageSubscription: Subscription | null = null;
 
-    constructor(private chatAndMessages: ChatsAndMessagesService) {}
+    constructor(
+        private chatAndMessages: ChatsAndMessagesService,
+        private socketService: SocketServiceService
+    ) {}
+
+    ngOnInit(): void {
+        this.socketService.connectSocket();
+        this.socketService.onMessage("chat message").subscribe((message)=>{
+            this.chat?.messages.push(message);
+        })
+    }
 
     onAdd() {
         const text = this.addMessageFrom.value.text;
         this.addMessageSubscription = this.chatAndMessages
             .addMessageToChat(this.chat?._id, text)
             .subscribe((message) => {
-                this.chat?.messages.push(message);
                 this.addMessageFrom.reset();
+                this.socketService.sendMessage("chat message",message);
             });
     }
 
@@ -48,5 +59,6 @@ export class ChatsItemComponent implements OnDestroy{
 
     ngOnDestroy(): void {
         this.addMessageSubscription?.unsubscribe();
+        this.socketService.disconnectSocket();
     }
 }

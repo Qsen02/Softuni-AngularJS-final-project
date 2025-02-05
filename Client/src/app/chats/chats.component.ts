@@ -45,7 +45,7 @@ export class ChatsComponent implements OnInit, OnDestroy {
 
     constructor(
         private userService: UserService,
-        private route: ActivatedRoute
+        private route: ActivatedRoute,
     ) {}
 
     ngOnInit(): void {
@@ -118,3 +118,5 @@ export class ChatsComponent implements OnInit, OnDestroy {
         this.userSubscription?.unsubscribe();
     }
 }
+
+
