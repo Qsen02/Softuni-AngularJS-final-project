@@ -16,7 +16,7 @@ export class ChatsItemComponent {
     @Input('userIdProp') userId = '';
 
      onProfileImageError(event: Event) {
-            const imageRef = event.target as HTMLImageElement;
-            imageProfileErrorHandler(imageRef);
+        const imageRef = event.target as HTMLImageElement;
+        imageProfileErrorHandler(imageRef);
     }
 }

@@ -21,6 +21,7 @@
             }
             <article [ngClass]="(message.owner_id._id == userId) ? 'background-grey' : 'background-darkgrey'">
                 <p>{{message.text}}</p>
+                <p class="flex-end">{{message.created_at | date:'dd.MM.yy  HH:mm'}}</p>
             </article>
         </div>
     }@empty {
