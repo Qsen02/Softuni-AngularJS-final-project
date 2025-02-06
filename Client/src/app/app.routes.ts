@@ -23,6 +23,7 @@ import { ProfileEditComponent } from './user/profile/profile-edit/profile-edit.c
 import { ProfileChangePasswordComponent } from './user/profile/profile-change-password/profile-change-password.component';
 import { ProfileSuccessfullChangedComponent } from './user/profile/profile-successfull-changed/profile-successfull-changed.component';
 import { ChatsComponent } from './chats/chats.component';
+import { ChatsMessageDeleteComponent } from './chats/chats-message-delete/chats-message-delete.component';
 
 export const routes: Routes = [
     { path: "", redirectTo: "home", pathMatch: "full" },
@@ -51,7 +52,8 @@ export const routes: Routes = [
     },
     {
         path: "chats",children:[
-            { path:":userId", component: ChatsComponent}
+            { path:":userId", component: ChatsComponent},
+            { path:":userId/chat/:chatId/message/:messageId/delete", component: ChatsMessageDeleteComponent}
         ]
     },
     { path: "create", component: CreatePostComponent, canActivate: [userGuard] },

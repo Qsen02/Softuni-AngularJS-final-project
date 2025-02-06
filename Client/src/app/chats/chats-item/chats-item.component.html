@@ -18,6 +18,7 @@
         <app-message-item 
             [messageProp]="message" 
             [userIdProp]="userId" 
+            [chatIdProp]="chat?._id"
             [ngClass]="(message?.owner_id?._id == userId) ? 'flex-end' : 'flex-start'">
         </app-message-item>
     }@empty {

@@ -1,8 +1,8 @@
 <div class="message-item">
     @if(isMenuOpened){
         <div class="edit-menu">
-            <a [routerLink]="['/chats',userId,'message',message?._id,'edit']"><p>Edit message</p></a>
-            <a [routerLink]="['/chats',userId,'message',message?._id,'delete']"><p>Delete message</p></a>
+            <a [routerLink]="['/chats',userId,'chat',chatId,'message',message?._id,'edit']"><p>Edit message</p></a>
+            <a [routerLink]="['/chats',userId,'chat',chatId,'message',message?._id,'delete']"><p>Delete message</p></a>
         </div>
     }
     @if(userId!=message?.owner_id?._id){

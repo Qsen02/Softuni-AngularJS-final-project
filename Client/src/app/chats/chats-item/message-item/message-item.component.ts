@@ -11,9 +11,10 @@ import { imageProfileErrorHandler } from '../../../utils/imageErrorHandlers';
     templateUrl: './message-item.component.html',
     styleUrl: './message-item.component.css',
 })
-export class MessageItemComponent implements OnInit{
+export class MessageItemComponent implements OnInit {
     @Input('messageProp') message: Message | null = null;
     @Input('userIdProp') userId = '';
+    @Input('chatIdProp') chatId: string | undefined = '';
     isMenuOpened = false;
 
     ngOnInit(): void {
