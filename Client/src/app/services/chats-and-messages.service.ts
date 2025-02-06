@@ -15,6 +15,10 @@ export class ChatsAndMessagesService {
         return this.http.get<Chat>(`/api/${this.endpoint}/${chatId}`);
     }
 
+    getMessageById(messageId: string|undefined){
+        return this.http.get<Message>(`/api/${this.endpoint}/message/${messageId}`);
+    }
+
     createChat(userId: string | undefined) {
         return this.http.post<Chat>(`/api/${this.endpoint}`, { _id: userId });
     }
