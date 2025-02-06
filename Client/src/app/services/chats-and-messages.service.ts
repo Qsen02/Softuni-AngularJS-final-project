@@ -41,7 +41,7 @@ export class ChatsAndMessagesService {
     }
 
     deleteMessage(chatId: string, messageId: string) {
-        return this.http.delete<Object>(
+        return this.http.delete<Message>(
             `/api/${this.endpoint}/${chatId}/message/${messageId}`
         );
     }

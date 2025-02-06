@@ -33,6 +33,22 @@ export class SocketServiceService {
         });
     }
 
+    deleteMessage(data: Message) {
+        this.socket?.emit('delete message', data);
+    }
+
+    onDeleteMessage(event: string): Observable<Message> {
+        return new Observable((observer) => {
+            this.socket?.on('message deleted', (message) => {
+                observer.next(message);
+            });
+
+            return () => {
+                this.socket?.off(event);
+            };
+        });
+    }
+
     disconnectSocket() {
         this.socket?.disconnect();
     }

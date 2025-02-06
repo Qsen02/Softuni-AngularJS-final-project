@@ -109,8 +109,8 @@ chatsAndMessagesRouter.delete(
         if (!isValidChat) {
             return res.status(404).json({ message: "Resource not found!" });
         }
-        await deleteMessage(messageId, chatId);
-        res.json({ message: "Record was deleted successfully!" });
+        const deletedMessage = await deleteMessage(messageId, chatId);
+        res.json(deletedMessage);
     }
 );
 

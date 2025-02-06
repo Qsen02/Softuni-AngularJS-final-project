@@ -41,8 +41,8 @@ async function editMessage(messageId, text) {
 }
 
 async function deleteMessage(messageId, chatId) {
-    await Messages.findByIdAndDelete(messageId);
     await Chats.findByIdAndUpdate(chatId, { $pull: { messages: messageId } });
+    return await Messages.findByIdAndDelete(messageId);
 }
 
 async function createChat(curUserId, user) {

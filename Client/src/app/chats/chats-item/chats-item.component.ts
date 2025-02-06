@@ -17,11 +17,16 @@ import { MessageItemComponent } from './message-item/message-item.component';
 @Component({
     selector: 'app-chats-item',
     standalone: true,
-    imports: [RouterLink, CommonModule, ReactiveFormsModule,MessageItemComponent],
+    imports: [
+        RouterLink,
+        CommonModule,
+        ReactiveFormsModule,
+        MessageItemComponent,
+    ],
     templateUrl: './chats-item.component.html',
     styleUrl: './chats-item.component.css',
 })
-export class ChatsItemComponent implements OnDestroy,OnInit {
+export class ChatsItemComponent implements OnDestroy, OnInit {
     @Input('chatProp') chat: Chat | null = null;
     @Input('userIdProp') userId = '';
 
@@ -38,9 +43,9 @@ export class ChatsItemComponent implements OnDestroy,OnInit {
 
     ngOnInit(): void {
         this.socketService.connectSocket();
-        this.socketService.onMessage("chat message").subscribe((message)=>{
+        this.socketService.onMessage('chat message').subscribe((message) => {
             this.chat?.messages.push(message);
-        })
+        });
     }
 
     onAdd() {
@@ -49,7 +54,7 @@ export class ChatsItemComponent implements OnDestroy,OnInit {
             .addMessageToChat(this.chat?._id, text)
             .subscribe((message) => {
                 this.addMessageFrom.reset();
-                this.socketService.sendMessage("chat message",message);
+                this.socketService.sendMessage('chat message', message);
             });
     }
 

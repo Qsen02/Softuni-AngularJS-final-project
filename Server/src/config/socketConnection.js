@@ -12,6 +12,9 @@ function socketConnection(httpServer){
         socket.on('chat message', (msg) => {
             io.emit('chat message', msg);
         });
+        socket.on('delete message',(msg)=>{
+            io.emit('message deleted',msg);
+        });
     });
 }
 
