@@ -79,6 +79,11 @@ async function checkMessageId(messageId) {
     return false;
 }
 
+function getMessageById(messageId){
+    const message= Messages.findById(messageId);
+    return message;
+}
+
 module.exports = {
     getChatById,
     deleteMessage,
@@ -87,4 +92,5 @@ module.exports = {
     createChat,
     checkChatId,
     checkMessageId,
+    getMessageById
 };

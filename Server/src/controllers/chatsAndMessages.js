@@ -7,6 +7,7 @@ const {
     checkMessageId,
     editMessage,
     deleteMessage,
+    getMessageById,
 } = require("../services/chatsAndMessages");
 const { checkUserId } = require("../services/user");
 const { isUser } = require("../middlewares.js/guard");
@@ -23,6 +24,16 @@ chatsAndMessagesRouter.get("/:chatId", isUser(), async (req, res) => {
     const chat = await getChatById(chatId).lean();
     res.json(chat);
 });
+
+chatsAndMessagesRouter.get("/message/:messageId",async(req,res)=>{
+    const messageId=req.params.messageId;
+    const isValid=await checkMessageId(messageId);
+    if (!isValid) {
+        return res.status(404).json({ message: "Resource not found!" });
+    }
+    const message=await getMessageById(messageId).lean();
+    res.json(message);
+})
 
 chatsAndMessagesRouter.post("/", isUser(), async (req, res) => {
     const userId = req.body._id;
