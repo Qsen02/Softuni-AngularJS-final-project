@@ -1,0 +1,19 @@
+<div class="modal">
+    <form class="form" [formGroup]="editMessageFrom" (ngSubmit)="onEdit()">
+        <h2>Edit message</h2>
+        <p class="input">
+            <input type="text" name="text" formControlName="text">
+        </p>
+        @if(editMessageFrom.get("text")?.touched){
+            <div>
+                @if(editMessageFrom.get("text")?.errors?.["required"]){
+                    <p class="error">Field must be filled!</p>
+                }
+            </div>
+        }
+        <div class="buttons">
+            <button [disabled]="editMessageFrom.invalid">Edit</button>
+            <button (click)="onCancel()">Cancel</button>
+        </div>
+    </form>
+</div>

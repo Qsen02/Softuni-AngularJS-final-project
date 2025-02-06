@@ -33,7 +33,7 @@ export class ChatsAndMessagesService {
         );
     }
 
-    editMessage(messageId: string, text: string) {
+    editMessage(messageId: string, text: string | null | undefined) {
         return this.http.put<Message>(
             `/api/${this.endpoint}/message/${messageId}`,
             { text: text }

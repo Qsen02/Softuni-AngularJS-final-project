@@ -1,0 +1,22 @@
+.form{
+    width: 40vw;
+}
+
+.form input::placeholder{
+    color: lightgray;
+}
+
+
+.buttons{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap:30px;
+}
+
+@media(max-width:620px){
+    .form{
+        width: 80vw;
+    }
+}

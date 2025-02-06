@@ -24,6 +24,7 @@ import { ProfileChangePasswordComponent } from './user/profile/profile-change-pa
 import { ProfileSuccessfullChangedComponent } from './user/profile/profile-successfull-changed/profile-successfull-changed.component';
 import { ChatsComponent } from './chats/chats.component';
 import { ChatsMessageDeleteComponent } from './chats/chats-message-delete/chats-message-delete.component';
+import { ChatsMessageEditComponent } from './chats/chats-message-edit/chats-message-edit.component';
 
 export const routes: Routes = [
     { path: "", redirectTo: "home", pathMatch: "full" },
@@ -53,7 +54,8 @@ export const routes: Routes = [
     {
         path: "chats",children:[
             { path:":userId", component: ChatsComponent},
-            { path:":userId/chat/:chatId/message/:messageId/delete", component: ChatsMessageDeleteComponent}
+            { path:":userId/chat/:chatId/message/:messageId/delete", component: ChatsMessageDeleteComponent},
+            { path:":userId/chat/:chatId/message/:messageId/edit", component: ChatsMessageEditComponent}
         ]
     },
     { path: "create", component: CreatePostComponent, canActivate: [userGuard] },
