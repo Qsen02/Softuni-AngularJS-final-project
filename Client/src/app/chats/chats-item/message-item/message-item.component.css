@@ -42,6 +42,33 @@
     background-color: rgb(80, 80, 80);
 }
 
+.edit-menu{
+    position: absolute;
+    top:80px;
+    left: -70px;
+    background-color: rgb(80, 80, 80);
+    color: lightgray;
+    display: flex;
+    flex-direction: column;
+    gap:5px;
+    border-radius: 5px;
+    overflow: hidden;
+    font-size: 12pt;
+}
+
+.edit-menu a {
+    padding: 10px;
+    border-bottom: 1px solid grey;
+}
+
+.edit-menu a:hover{
+    background-color: grey;
+}
+
+.edit-menu a:nth-child(2){
+    border: none;
+}
+
 @media(max-width:720px){
     .message-item {
         width: 250px;
@@ -60,6 +87,9 @@
     .message-item i{
         font-size: 18pt;
     }
+    .edit-menu{
+        font-size: 10pt;
+    }
 }
 
 @media(max-width:480px){
@@ -71,5 +101,10 @@
     }
     .message-item i{
         font-size: 16pt;
+    }
+    .edit-menu{
+        font-size: 8pt;
+        top:65px;
+        left: -50px;
     }
 }
