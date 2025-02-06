@@ -22,45 +22,12 @@
     height: 100%;
 }
 
-.chat-body div{
-    width: 50%;
-    display: flex;
-    align-items: center;
-    gap:10px;
-    color:lightgray;
-    padding: 10px;
-}
-
-.chat-body div img{
-    width: 40px;
-    height: 40px;
-    border-radius: 50%;
-}
-
-.chat-body div article{
-    padding: 20px;
-    width: 90%;
-    word-wrap: break-word;
-    border-radius: 30px;
-    display: flex;
-    flex-direction: column;
-    gap:10px;
-}
-
 .flex-end{
     align-self: flex-end;
 }
 
 .flex-start{
     align-self: flex-start;
-}
-
-.background-grey{
-    background-color: grey;
-}
-
-.background-darkgrey{
-    background-color: rgb(80, 80, 80);
 }
 
 .message-form{
@@ -119,17 +86,6 @@
     .chat-header img{
         width: 70px;
         height: 70px;
-    }
-    .chat-body div{
-        width: 70%;
-    }
-    .chat-body div article{
-        padding: 15px;
-        font-size: 10pt;
-    }
-    .chat-body div img{
-        width: 30px;
-        height: 30px;
     }
     .message-form input{
         height: 30px;

@@ -10,30 +10,30 @@ export class SocketServiceService {
     private socket: Socket | null = null;
 
     constructor() {
-        this.socket = io("http://localhost:3000");
+        this.socket = io('http://localhost:3000');
     }
 
-    connectSocket(){
+    connectSocket() {
         this.socket?.connect();
     }
 
-    sendMessage(event:string,data:Message){
-        this.socket?.emit(event,data);
+    sendMessage(event: string, data: Message) {
+        this.socket?.emit(event, data);
     }
 
     onMessage(event: string): Observable<Message> {
         return new Observable((observer) => {
-          this.socket?.on(event, (data) => {
-            observer.next(data);
-          });
-    
-          return () => {
-            this.socket?.off(event);
-          };
-        });
-      }
+            this.socket?.on(event, (data) => {
+                observer.next(data);
+            });
 
-    disconnectSocket(){
+            return () => {
+                this.socket?.off(event);
+            };
+        });
+    }
+
+    disconnectSocket() {
         this.socket?.disconnect();
     }
 }

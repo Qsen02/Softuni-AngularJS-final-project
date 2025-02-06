@@ -1,0 +1,17 @@
+<div class="message-item">
+    @if(isMenuOpened){
+        <div class="edit-menu">
+            <a [routerLink]="['/chats',userId,'message',message?._id,'edit']"><p>Edit message</p></a>
+            <a [routerLink]="['/chats',userId,'message',message?._id,'delete']"><p>Delete message</p></a>
+        </div>
+    }
+    @if(userId!=message?.owner_id?._id){
+        <img src={{message?.owner_id?.profileImage}} alt={{message?.owner_id?.username}} (error)="onProfileImageError($event)">
+    }@else{
+        <i class="fa-solid fa-ellipsis-vertical" (click)="openMenu()"></i>
+    }
+    <article [ngClass]="(message?.owner_id?._id == userId) ? 'background-grey' : 'background-darkgrey'">
+        <p>{{message?.text}}</p>
+        <p class="flex-end">{{message?.created_at | date:'dd.MM.yy  HH:mm'}}</p>
+    </article>
+</div>

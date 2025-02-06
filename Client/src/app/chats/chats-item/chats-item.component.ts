@@ -12,11 +12,12 @@ import {
 } from '@angular/forms';
 import { Subscription } from 'rxjs';
 import { SocketServiceService } from '../../services/socket-service.service';
+import { MessageItemComponent } from './message-item/message-item.component';
 
 @Component({
     selector: 'app-chats-item',
     standalone: true,
-    imports: [RouterLink, CommonModule, ReactiveFormsModule],
+    imports: [RouterLink, CommonModule, ReactiveFormsModule,MessageItemComponent],
     templateUrl: './chats-item.component.html',
     styleUrl: './chats-item.component.css',
 })
