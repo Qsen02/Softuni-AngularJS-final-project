@@ -22,15 +22,6 @@ export class ChatsMessageDeleteComponent implements OnInit, OnDestroy {
 
     ngOnInit(): void {
         this.socketService.connectSocket();
-        const chatId = this.route.snapshot.params['chatId'];
-        this.chatsAndMessageService.getChatById(chatId).subscribe((chat) => {
-            this.chat=chat;
-        });
-        this.socketService
-            .onDeleteMessage('message deleted')
-            .subscribe((message) => {
-                this.chat!.messages=this.chat!.messages.filter(el=>el._id != message._id);
-            });
     }
 
     onDelete() {

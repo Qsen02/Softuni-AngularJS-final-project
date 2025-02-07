@@ -46,6 +46,13 @@ export class ChatsItemComponent implements OnDestroy, OnInit {
         this.socketService.onMessage('chat message').subscribe((message) => {
             this.chat?.messages.push(message);
         });
+        this.socketService
+            .onDeleteMessage('message deleted')
+            .subscribe((message) => {
+                this.chat!.messages = this.chat!.messages.filter(
+                    (el) => el._id != message._id
+                );
+            });
     }
 
     onAdd() {
