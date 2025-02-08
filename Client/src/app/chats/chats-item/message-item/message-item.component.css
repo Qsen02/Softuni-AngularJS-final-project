@@ -69,6 +69,13 @@
     border: none;
 }
 
+.deleted{
+    border: 2px solid grey;
+    border-radius: 30px;
+    padding: 10px 20px 10px 20px;
+    color:lightgrey
+}
+
 @media(max-width:720px){
     .message-item {
         width: 250px;
@@ -89,6 +96,10 @@
     }
     .edit-menu{
         font-size: 10pt;
+    }
+
+    .deleted{
+        padding: 5px 10px 5px 10px;
     }
 }
 

@@ -48,6 +48,21 @@ export class SocketServiceService {
             };
         });
     }
+    updateMessage(data:Message){
+        this.socket?.emit("update message",data);
+    }
+
+    onUpdateMessage(event:string):Observable<Message>{
+        return new Observable((observer)=>{
+            this.socket?.on("message updated",(message)=>{
+                observer.next(message);
+            })
+
+            return ()=>{
+                this.socket?.off(event);
+            }
+        })
+    }
 
     disconnectSocket() {
         this.socket?.disconnect();

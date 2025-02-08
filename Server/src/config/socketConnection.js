@@ -15,6 +15,9 @@ function socketConnection(httpServer){
         socket.on('delete message',(msg)=>{
             io.emit('message deleted',msg);
         });
+        socket.on("update message",(msg)=>{
+            io.emit("message updated",msg);
+        })
     });
 }
 
