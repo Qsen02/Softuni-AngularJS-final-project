@@ -53,6 +53,15 @@ export class ChatsItemComponent implements OnDestroy, OnInit {
                     (el) => el._id != message._id
                 );
             });
+        this.socketService.onUpdateMessage("message updated").subscribe((message)=>{
+            this.chat!.messages = this.chat!.messages.map((el)=> {
+                if(el._id == message._id){
+                    return message;
+                }else{
+                    return el;
+                }
+            });
+        })
     }
 
     onAdd() {

@@ -37,7 +37,7 @@ async function editMessage(messageId, text) {
             $set: { text: text },
         },
         { new: true }
-    );
+    ).populate("owner_id");
 }
 
 async function deleteMessage(messageId, chatId) {
