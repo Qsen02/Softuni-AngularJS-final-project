@@ -9,8 +9,8 @@ function socketConnection(httpServer){
     });
 
     io.on('connection',(socket)=>{
-        socket.on('chat message', (msg) => {
-            io.emit('chat message', msg);
+        socket.on('chat message', (chatId,msg) => {
+            io.emit('chat message', chatId,msg);
         });
         socket.on('delete message',(msg)=>{
             io.emit('message deleted',msg);

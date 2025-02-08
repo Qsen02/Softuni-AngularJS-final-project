@@ -17,14 +17,14 @@ export class SocketServiceService {
         this.socket?.connect();
     }
 
-    sendMessage(event: string, data: Message) {
-        this.socket?.emit(event, data);
+    sendMessage(event: string, chatId: string | undefined, data: Message) {
+        this.socket?.emit(event, chatId, data);
     }
 
-    onMessage(event: string): Observable<Message> {
+    onMessage(event: string): Observable<{ chatId: string; message: Message }> {
         return new Observable((observer) => {
-            this.socket?.on(event, (data) => {
-                observer.next(data);
+            this.socket?.on(event, (chatId, message) => {
+                observer.next({ chatId: chatId, message: message });
             });
 
             return () => {
@@ -48,20 +48,20 @@ export class SocketServiceService {
             };
         });
     }
-    updateMessage(data:Message){
-        this.socket?.emit("update message",data);
+    updateMessage(data: Message) {
+        this.socket?.emit('update message', data);
     }
 
-    onUpdateMessage(event:string):Observable<Message>{
-        return new Observable((observer)=>{
-            this.socket?.on("message updated",(message)=>{
+    onUpdateMessage(event: string): Observable<Message> {
+        return new Observable((observer) => {
+            this.socket?.on('message updated', (message) => {
                 observer.next(message);
-            })
+            });
 
-            return ()=>{
+            return () => {
                 this.socket?.off(event);
-            }
-        })
+            };
+        });
     }
 
     disconnectSocket() {

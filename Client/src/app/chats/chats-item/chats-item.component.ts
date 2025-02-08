@@ -43,9 +43,13 @@ export class ChatsItemComponent implements OnDestroy, OnInit {
 
     ngOnInit(): void {
         this.socketService.connectSocket();
-        this.socketService.onMessage('chat message').subscribe((message) => {
-            this.chat?.messages.push(message);
-        });
+        this.socketService
+            .onMessage('chat message')
+            .subscribe(({ chatId, message }) => {
+                if (this.chat?._id == chatId) {
+                    this.chat?.messages.push(message);
+                }
+            });
         this.socketService
             .onDeleteMessage('message deleted')
             .subscribe((message) => {
@@ -53,15 +57,17 @@ export class ChatsItemComponent implements OnDestroy, OnInit {
                     (el) => el._id != message._id
                 );
             });
-        this.socketService.onUpdateMessage("message updated").subscribe((message)=>{
-            this.chat!.messages = this.chat!.messages.map((el)=> {
-                if(el._id == message._id){
-                    return message;
-                }else{
-                    return el;
-                }
+        this.socketService
+            .onUpdateMessage('message updated')
+            .subscribe((message) => {
+                this.chat!.messages = this.chat!.messages.map((el) => {
+                    if (el._id == message._id) {
+                        return message;
+                    } else {
+                        return el;
+                    }
+                });
             });
-        })
     }
 
     onAdd() {
@@ -70,7 +76,11 @@ export class ChatsItemComponent implements OnDestroy, OnInit {
             .addMessageToChat(this.chat?._id, text)
             .subscribe((message) => {
                 this.addMessageFrom.reset();
-                this.socketService.sendMessage('chat message', message);
+                this.socketService.sendMessage(
+                    'chat message',
+                    this.chat?._id,
+                    message
+                );
             });
     }
 
