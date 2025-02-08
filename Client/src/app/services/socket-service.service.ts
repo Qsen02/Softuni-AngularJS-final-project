@@ -3,6 +3,7 @@ import { io, Socket } from 'socket.io-client';
 import { Message } from '../types/messages';
 import { Observable } from 'rxjs';
 import { Request } from '../types/requests';
+import { enviromentProd } from '../../../enviroment/app.prod';
 
 @Injectable({
     providedIn: 'root',
@@ -11,7 +12,7 @@ export class SocketServiceService {
     private socket: Socket | null = null;
 
     constructor() {
-        this.socket = io('http://localhost:3000');
+        this.socket = io(enviromentProd.apiUrl);
     }
 
     connectSocket() {
