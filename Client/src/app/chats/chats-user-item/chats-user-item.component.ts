@@ -32,6 +32,9 @@ export class ChatsUserItemComponent implements OnInit, OnDestroy {
     @Output() isSearchedChange = new EventEmitter<boolean>();
     @Input() isRequestsOpen = false;
     @Output() isRequestsOpenChange = new EventEmitter<boolean>();
+    @Input("isLoadingProp") isLoading = false;
+    @Input("isErrorProp") isError = false;
+
     isUnreadMessages = false;
     unreadedChatId: string | undefined = '';
     getChatSubscription: Subscription | null = null;
@@ -54,19 +57,27 @@ export class ChatsUserItemComponent implements OnInit, OnDestroy {
     }
 
     onOpen(chatId: string) {
+        this.isLoading = true;
         this.getChatSubscription = this.chatsAndMessages
             .getChatById(chatId)
-            .subscribe((chat) => {
-                this.openChat = chat;
-                this.openChatChange.emit(this.openChat);
-                this.isChatOpen = true;
-                this.isChatOpenChange.emit(this.isChatOpen);
-                this.isInit = false;
-                this.isInitChange.emit(this.isInit);
-                this.isSearched = false;
-                this.isSearchedChange.emit(this.isSearched);
-                this.isRequestsOpen = false;
-                this.isRequestsOpenChange.emit(this.isRequestsOpen);
+            .subscribe({
+                next: (chat) => {
+                    this.openChat = chat;
+                    this.openChatChange.emit(this.openChat);
+                    this.isChatOpen = true;
+                    this.isChatOpenChange.emit(this.isChatOpen);
+                    this.isInit = false;
+                    this.isInitChange.emit(this.isInit);
+                    this.isSearched = false;
+                    this.isSearchedChange.emit(this.isSearched);
+                    this.isRequestsOpen = false;
+                    this.isRequestsOpenChange.emit(this.isRequestsOpen);
+                    this.isLoading = false;
+                },
+                error: () => {
+                    this.isLoading = false;
+                    this.isError = true;
+                },
             });
     }
 

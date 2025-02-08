@@ -20,30 +20,44 @@
     </section>
     <section class="main-wrapper">
         <section class="chats">
-           <app-chats-user-item 
-                [userIdProp]="userId" 
-                [chatsProp]="chats" 
-                [(openChat)]="openChatParent" 
-                [(isChatOpen)]="isChatOpenParent"
-                [(isInit)]="isInit"
-                [(isSearched)]="isSearched"
-                [(isRequestsOpen)]="isRequestsOpen">
-           </app-chats-user-item>
+            @if(isLoadingParent && !isErrorParent){
+                <span class="loader"></span>
+            }@else if(!isErrorParent){
+                <app-chats-user-item 
+                        [userIdProp]="userId" 
+                        [chatsProp]="chats" 
+                        [(openChat)]="openChatParent" 
+                        [(isChatOpen)]="isChatOpenParent"
+                        [(isInit)]="isInit"
+                        [(isSearched)]="isSearched"
+                        [isLoadingProp]="isLoadingParent"
+                        [isErrorProp]="isErrorParent"
+                        [(isRequestsOpen)]="isRequestsOpen">
+                </app-chats-user-item>
+            }
         </section>
         <section class="main-section">
-           @if(isInit){
-            <div class="main-title">
-                <h2>Select chat, send request or search users for chat.</h2>
-            </div>
-           }@else{
-                @if(isSearched){
-                    <app-chats-searched-results [userIdProp]="userId" [searchedResultsProp]="searchedResults" [chatsProps]="chats"></app-chats-searched-results>
-                }@else if (isRequestsOpen) {
-                    <app-chats-requests [requestsProps]="requests" [chatsProps]="chats"></app-chats-requests>
-                }@else if (isChatOpenParent) {
-                    <app-chats-item [chatProp]="openChatParent" [userIdProp]="userId"></app-chats-item>
+            @if(isLoadingParent && !isErrorParent){
+                <span class="loader"></span>
+            }@else if(isErrorParent){
+                <div class="message">
+                    <h2>Something went wrong, please try again later.</h2>
+                </div>
+            }@else{
+                @if(isInit){
+                    <div class="main-title">
+                        <h2>Select chat, send request or search users for chat.</h2>
+                    </div>
+                }@else{
+                    @if(isSearched){
+                        <app-chats-searched-results [userIdProp]="userId" [searchedResultsProp]="searchedResults" [chatsProps]="chats"></app-chats-searched-results>
+                    }@else if (isRequestsOpen) {
+                        <app-chats-requests [requestsProps]="requests" [chatsProps]="chats"></app-chats-requests>
+                    }@else if (isChatOpenParent) {
+                        <app-chats-item [chatProp]="openChatParent" [userIdProp]="userId"></app-chats-item>
+                    }
                 }
-           }
+            }
         </section>
     </section>
 </section>

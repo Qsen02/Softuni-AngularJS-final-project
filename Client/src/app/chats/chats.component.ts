@@ -31,8 +31,8 @@ export class ChatsComponent implements OnInit, OnDestroy {
     requests: Request[] = [];
     chatSubscription: Subscription | null = null;
     userSubscription: Subscription | null = null;
-    isLoading = false;
-    isError = false;
+    isLoadingParent = false;
+    isErrorParent = false;
     isSearched = false;
     searchedResults: User[] = [];
     userId = '';
@@ -51,21 +51,9 @@ export class ChatsComponent implements OnInit, OnDestroy {
     ) {}
 
     ngOnInit(): void {
-        this.socketService.connectSocket();
+        this.isLoadingParent = true;
         const userId = this.route.snapshot.params['userId'];
-        this.chatSubscription = this.userService.getUserById(userId).subscribe({
-            next: (user) => {
-                this.isLoading = true;
-                this.chats = user.chats;
-                this.requests = user.requests;
-                this.isLoading = false;
-                this.userId = userId;
-            },
-            error: () => {
-                this.isLoading = false;
-                this.isError = true;
-            },
-        });
+        this.socketService.connectSocket();
         this.socketService
             .onSendRequest('request sended')
             .subscribe((request) => {
@@ -73,6 +61,18 @@ export class ChatsComponent implements OnInit, OnDestroy {
                     this.requests.push(request);
                 }
             });
+        this.chatSubscription = this.userService.getUserById(userId).subscribe({
+            next: (user) => {
+                this.chats = user.chats;
+                this.requests = user.requests;
+                this.userId = userId;
+                this.isLoadingParent = false;
+            },
+            error: () => {
+                this.isLoadingParent = false;
+                this.isErrorParent = true;
+            },
+        });
     }
 
     onSearch() {
@@ -80,7 +80,7 @@ export class ChatsComponent implements OnInit, OnDestroy {
         if (username == '') {
             username = 'No value';
         }
-        this.isLoading = true;
+        this.isLoadingParent = true;
         this.isInit = false;
         this.userSubscription = this.userService
             .searchUsers(username)
@@ -88,32 +88,32 @@ export class ChatsComponent implements OnInit, OnDestroy {
                 next: (users) => {
                     this.isSearched = true;
                     this.searchedResults = users;
-                    this.isLoading = false;
                     this.isRequestsOpen = false;
                     this.isChatOpenParent = false;
+                    this.isLoadingParent = false;
                 },
                 error: (err) => {
-                    this.isLoading = false;
-                    this.isError = true;
+                    this.isLoadingParent = false;
+                    this.isErrorParent = true;
                 },
             });
     }
 
     openRequests() {
+        this.isLoadingParent = true;
         const userId = this.route.snapshot.params['userId'];
         this.isInit = false;
         this.userSubscription = this.userService.getUserById(userId).subscribe({
             next: (user) => {
-                this.isLoading = true;
                 this.requests = user.requests;
                 this.isRequestsOpen = true;
-                this.isLoading = false;
                 this.isSearched = false;
                 this.isChatOpenParent = false;
+                this.isLoadingParent = false;
             },
             error: () => {
-                this.isLoading = false;
-                this.isError = true;
+                this.isLoadingParent = false;
+                this.isErrorParent = true;
             },
         });
     }
