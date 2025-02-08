@@ -4,6 +4,10 @@ const requestsSchema=new mongoose.Schema({
     sender_id:{
         type:mongoose.SchemaTypes.ObjectId,
         ref:"Users"
+    },
+    receiver_id:{
+        type:mongoose.SchemaTypes.ObjectId,
+        ref:"Users"
     }
 },{timestamps:{createdAt:"created_at"}});
 

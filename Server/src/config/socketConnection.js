@@ -18,6 +18,9 @@ function socketConnection(httpServer){
         socket.on("update message",(msg)=>{
             io.emit("message updated",msg);
         })
+        socket.on("send request",(request)=>{
+            io.emit("request sended",request);
+        })
     });
 }
 

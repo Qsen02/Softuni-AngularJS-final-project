@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { io, Socket } from 'socket.io-client';
 import { Message } from '../types/messages';
 import { Observable } from 'rxjs';
+import { Request } from '../types/requests';
 
 @Injectable({
     providedIn: 'root',
@@ -56,6 +57,22 @@ export class SocketServiceService {
         return new Observable((observer) => {
             this.socket?.on('message updated', (message) => {
                 observer.next(message);
+            });
+
+            return () => {
+                this.socket?.off(event);
+            };
+        });
+    }
+
+    sendRequest(request:Request){
+        this.socket?.emit("send request",request);
+    }
+
+    onSendRequest(event:string):Observable<Request>{
+        return new Observable((observer) => {
+            this.socket?.on('request sended', (request) => {
+                observer.next(request);
             });
 
             return () => {

@@ -5,6 +5,7 @@ const { createChat } = require("./chatsAndMessages");
 async function sendRequest(senderId, receiverId) {
     const newRequest = new Requests({
         sender_id: senderId,
+        receiver_id: receiverId
     });
     await newRequest.save();
     await Users.findByIdAndUpdate(receiverId, {

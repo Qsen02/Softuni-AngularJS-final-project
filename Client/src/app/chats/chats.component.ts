@@ -11,6 +11,7 @@ import { ChatsSearchedResultsComponent } from './chats-searched-results/chats-se
 import { ChatsUserItemComponent } from './chats-user-item/chats-user-item.component';
 import { ChatsRequestsComponent } from './chats-requests/chats-requests.component';
 import { ChatsItemComponent } from './chats-item/chats-item.component';
+import { SocketServiceService } from '../services/socket-service.service';
 
 @Component({
     selector: 'app-chats',
@@ -46,9 +47,11 @@ export class ChatsComponent implements OnInit, OnDestroy {
     constructor(
         private userService: UserService,
         private route: ActivatedRoute,
+        private socketService: SocketServiceService
     ) {}
 
     ngOnInit(): void {
+        this.socketService.connectSocket();
         const userId = this.route.snapshot.params['userId'];
         this.chatSubscription = this.userService.getUserById(userId).subscribe({
             next: (user) => {
@@ -63,6 +66,13 @@ export class ChatsComponent implements OnInit, OnDestroy {
                 this.isError = true;
             },
         });
+        this.socketService
+            .onSendRequest('request sended')
+            .subscribe((request) => {
+                if (userId == request.receiver_id) {
+                    this.requests.push(request);
+                }
+            });
     }
 
     onSearch() {
@@ -116,7 +126,6 @@ export class ChatsComponent implements OnInit, OnDestroy {
     ngOnDestroy(): void {
         this.chatSubscription?.unsubscribe();
         this.userSubscription?.unsubscribe();
+        this.socketService.disconnectSocket();
     }
 }
-
-
