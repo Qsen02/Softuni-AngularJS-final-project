@@ -97,6 +97,22 @@ export class SocketServiceService {
         });
     }
 
+    unreadedMessages(chatId:string | undefined,userId:string){
+        this.socket?.emit("unreaded messages",chatId,userId);
+    }
+
+    onUnreadMessages(event:string):Observable<{chatId:string | undefined,userId:string}>{
+        return new Observable((observer) => {
+            this.socket?.on(event, (chatId,userId) => {
+                observer.next({chatId,userId});
+            });
+
+            return () => {
+                this.socket?.off(event);
+            };
+        });
+    }
+
     disconnectSocket() {
         this.socket?.disconnect();
     }

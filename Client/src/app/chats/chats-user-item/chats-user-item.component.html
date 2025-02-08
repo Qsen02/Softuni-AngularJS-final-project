@@ -1,13 +1,19 @@
 @for (chat of chats; track $index) {
     @if(userId==chat.receiver_id._id){
-        <article class="chat-item" (click)="onOpen(chat._id)">
+        <article class="chat-item" (click)="onOpen(chat._id)" (click)="readMessages()">
             <img src={{chat.requester_id.profileImage}} alt={{chat.requester_id.username}} (error)="onProfileImageError($event)">
             <h3>{{chat.requester_id.username}}</h3>
+            @if(unreadedChatId==chat._id && isUnreadMessages){
+                <div class="balloon"></div>
+            }
         </article>
     }@else{
-        <article class="chat-item" (click)="onOpen(chat._id)">
+        <article class="chat-item" (click)="onOpen(chat._id)" (click)="readMessages()">
             <img src={{chat.receiver_id.profileImage}} alt={{chat.receiver_id.username}} (error)="onProfileImageError($event)">
             <h3>{{chat.receiver_id.username}}</h3>
+            @if(unreadedChatId==chat._id && isUnreadMessages){
+                <div class="balloon"></div>
+            }
         </article>
     }
 }@empty {

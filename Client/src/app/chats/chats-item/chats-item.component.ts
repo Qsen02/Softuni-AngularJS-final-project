@@ -86,6 +86,11 @@ export class ChatsItemComponent implements OnDestroy, OnInit {
                 } else if (this.userId == this.chat?.requester_id._id) {
                     this.socketService.unreadChats(this.chat.receiver_id._id);
                 }
+                if (this.userId == this.chat?.receiver_id._id) {
+                    this.socketService.unreadedMessages(this.chat?._id,this.chat.requester_id._id);
+                } else if (this.userId == this.chat?.requester_id._id) {
+                    this.socketService.unreadedMessages(this.chat?._id,this.chat.receiver_id._id);
+                }
             });
     }
 
