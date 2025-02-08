@@ -40,7 +40,7 @@ export class SocketServiceService {
 
     onDeleteMessage(event: string): Observable<Message> {
         return new Observable((observer) => {
-            this.socket?.on('message deleted', (message) => {
+            this.socket?.on(event, (message) => {
                 observer.next(message);
             });
 
@@ -55,7 +55,7 @@ export class SocketServiceService {
 
     onUpdateMessage(event: string): Observable<Message> {
         return new Observable((observer) => {
-            this.socket?.on('message updated', (message) => {
+            this.socket?.on(event, (message) => {
                 observer.next(message);
             });
 
@@ -71,8 +71,24 @@ export class SocketServiceService {
 
     onSendRequest(event:string):Observable<Request>{
         return new Observable((observer) => {
-            this.socket?.on('request sended', (request) => {
+            this.socket?.on(event, (request) => {
                 observer.next(request);
+            });
+
+            return () => {
+                this.socket?.off(event);
+            };
+        });
+    }
+
+    unreadChats(userId:string){
+        this.socket?.emit("unreaded chats",userId);
+    }
+
+    onUnreadChats(event:string):Observable<string>{
+        return new Observable((observer) => {
+            this.socket?.on(event, (userId) => {
+                observer.next(userId);
             });
 
             return () => {

@@ -21,6 +21,9 @@ function socketConnection(httpServer){
         socket.on("send request",(request)=>{
             io.emit("request sended",request);
         })
+        socket.on("unreaded chats",(userId)=>{
+            io.emit("show chats",userId);
+        })
     });
 }
 

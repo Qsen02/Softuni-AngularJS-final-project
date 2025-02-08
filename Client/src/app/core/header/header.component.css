@@ -61,15 +61,10 @@ header {
     position: absolute;
     top:45px;
     right: 40px;
-    width: 20px;
-    height: 20px;
+    width: 15px;
+    height: 15px;
     background-color: red;
-    color: white;
     border-radius: 50%;
-    font-size: 12pt;
-    display: flex;
-    justify-content: center;
-    align-items: center;
 }
 
 @media (max-width: 1750px) {
@@ -105,9 +100,8 @@ header {
         font-size: 20pt;
     }
     .message-balloon{
-        font-size: 10pt;
-        width: 15px;
-        height: 15px;
+        width: 10px;
+        height: 10px;
         top:47px;
         right: 43px;
     }
