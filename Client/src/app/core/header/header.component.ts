@@ -31,7 +31,7 @@ export class HeaderComponent implements OnInit,OnDestroy{
         const user=this.curUser;
         this.socketService.connectSocket();
         this.socketService.onUnreadChats("show chats").subscribe((userId)=>{
-            if(user?._id==userId){
+            if(user?._id==userId && location.pathname!=`/chats/${userId}`){
                 this.isUndreadChats=true;
             }
         })
