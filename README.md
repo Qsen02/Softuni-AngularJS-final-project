@@ -1,64 +1,12 @@
 # Social media
-Site for posting publications and interact with them like in social media.
+Site for posting publications and interact with them and chat with other people like in social media.
 # Technologies
 -Angular for front-end.
 
 -Express.js and MongoDB for back-end.
-# API Reference
--Base URL: http://localhost:3000
-
--Users:
-
--login (POST)-/users/login
-
--register (POST)-/users/register
-
--logout (GET)-/users/logout
-
--get user by id (GET)-/users/{userId}
-
--get your profile (GET)-/users/me
-
--search users (GET)-/users/search/{query}
-
--edit your profile (PUT)-/users/update/{userId}
-
--change password (PUT)-/users/changePassword/{userId}
-
--get user posts (GET)-/users/{userId}/posts
-
--Posts:
-
--get next posts (GET)-/posts/count/${count}
-
--get post by id (GET)-/posts/{postId}
-
--create post (POST)-/posts
-
--delete post (DELETE)-/posts/{postId}
-
--edit post (PUT)-/posts/{postId}
-
--like post (POST)-/posts/{postId}/like
-
--unlike post (POST)-/posts/{postId}/unlike
-
--Comments:
-
--get comment by id (GET)-/comments/{commentId}
-
--create commment (POST)-/comments/in/{postId}
-
--delete comment (DELETE)-/comments/{commentId}/in/{postId}
-
--edit comment (PUT)-/comments/{commentId}
-
--like comment (POST)-/comments/{commentId}/like
-
--unlike comment (POST)-/comments/{commentId}/unlike
 
 # Features:
--Authenticated users can create posts and edit or delete their own posts. Users can like and comment other users posts and they can search other user profiles.Every user has profile and can edit his profile and change his password too.
+-Authenticated users can create posts and edit or delete their own posts. Users can like and comment other users posts and they can search other user profiles. Every user has profile and can edit his profile and change his password too. They can send requests to other users for chating and send, delete or edit messages in chat.
 
 -Guests only see user profiles and their publications and comments without interacting them with liking or commenting and they can't create or edit and delete posts.
 
@@ -76,5 +24,9 @@ Site for posting publications and interact with them like in social media.
 
 -Post details in profile page
 ![Screenshot 2024-12-02 224013](https://github.com/user-attachments/assets/46eb5c46-23de-4c67-94c7-12cfacc3b51f)
+
+-Chats
+![Screenshot 2025-02-09 112932](https://github.com/user-attachments/assets/a3da4353-4ae6-4b7b-8862-f07d3ca08732)
+
 
 
