@@ -4,6 +4,8 @@ import { Message } from '../types/messages';
 import { Observable } from 'rxjs';
 import { Request } from '../types/requests';
 import { enviromentProd } from '../../../enviroment/app.prod';
+import { enviroment } from '../../../enviroment/app.enviroment';
+import { Chat } from '../types/chats';
 
 @Injectable({
     providedIn: 'root',
@@ -112,6 +114,22 @@ export class SocketServiceService {
                 this.socket?.off(event);
             };
         });
+    }
+
+    acceptRequest(chat:Chat,userId:string){
+        this.socket?.emit("accept request",chat,userId);
+    }
+
+    onAccepRequest(event:string):Observable<{chat:Chat,userId:string}>{
+        return new Observable((observer)=>{
+            this.socket?.on(event,(chat,userId)=>{
+                observer.next({chat:chat,userId:userId});
+            })
+
+            return ()=>{
+                this.socket?.off(event);
+            }
+        })
     }
 
     disconnectSocket() {

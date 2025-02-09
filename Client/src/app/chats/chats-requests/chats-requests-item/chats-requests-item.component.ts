@@ -14,7 +14,7 @@ import { Subscription } from 'rxjs';
     templateUrl: './chats-requests-item.component.html',
     styleUrl: './chats-requests-item.component.css',
 })
-export class ChatsRequestsItemComponent implements OnDestroy {
+export class ChatsRequestsItemComponent implements OnDestroy,OnInit {
     @Input('requestProps') request: Request | null = null;
     @Input('chatsProps') chats: Chat[] = [];
     @Input('requestsProps') requests: Request[] = [];
@@ -24,7 +24,12 @@ export class ChatsRequestsItemComponent implements OnDestroy {
 
     constructor(
         private requestsService: RequestsService,
+        private socketService:SocketServiceService
     ) {}
+
+    ngOnInit(): void {
+        this.socketService.connectSocket();
+    }
 
     onAccept() {
         this.acceptRequestSubscription = this.requestsService
@@ -34,6 +39,7 @@ export class ChatsRequestsItemComponent implements OnDestroy {
                 const index = requestIds.indexOf(request._id);
                 this.requests.splice(index, 1);
                 this.chats.push(chat);
+                this.socketService.acceptRequest(chat,request.sender_id._id);
             });
     }
 
@@ -55,5 +61,6 @@ export class ChatsRequestsItemComponent implements OnDestroy {
     ngOnDestroy(): void {
         this.acceptRequestSubscription?.unsubscribe();
         this.declineRequestSubscription?.unsubscribe();
+        this.socketService.disconnectSocket();
     }
 }

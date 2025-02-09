@@ -61,6 +61,11 @@ export class ChatsComponent implements OnInit, OnDestroy {
                     this.requests.push(request);
                 }
             });
+        this.socketService.onAccepRequest("add chat").subscribe(({chat,userId})=>{
+            if(userId==this.userId){
+                this.chats.push(chat);
+            }
+        })
         this.chatSubscription = this.userService.getUserById(userId).subscribe({
             next: (user) => {
                 this.chats = user.chats;
