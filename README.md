@@ -9,6 +9,8 @@ Site for posting publications and interact with them and chat with other people 
 -Authenticated users can create posts and edit or delete their own posts. Users can like and comment other users posts and they can search other user profiles. Every user has profile and can edit his profile and change his password too. They can send requests to other users for chating and send, delete or edit messages in chat.
 
 -Guests only see user profiles and their publications and comments without interacting them with liking or commenting and they can't create or edit and delete posts.
+# Deployment link
+https://softuni-angularjs-final-project.onrender.com/
 
 # How to start client and server
 -Server: First in config/mongoose add localDB constant in mongoose.connect and next write the command `npm start` or `node server.js` in terminal.
