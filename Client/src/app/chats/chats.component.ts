@@ -43,6 +43,8 @@ export class ChatsComponent implements OnInit, OnDestroy {
     isRequestsOpen = false;
     openChatParent: Chat | null = null;
     isChatOpenParent = false;
+    isLoadingChild = false;
+    isErrorChild = false;
 
     constructor(
         private userService: UserService,

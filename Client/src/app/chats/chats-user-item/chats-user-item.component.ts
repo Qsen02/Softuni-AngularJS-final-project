@@ -32,8 +32,10 @@ export class ChatsUserItemComponent implements OnInit, OnDestroy {
     @Output() isSearchedChange = new EventEmitter<boolean>();
     @Input() isRequestsOpen = false;
     @Output() isRequestsOpenChange = new EventEmitter<boolean>();
-    @Input("isLoadingProp") isLoading = false;
-    @Input("isErrorProp") isError = false;
+    @Input() isLoading = false;
+    @Output() isLoadingChange = new EventEmitter<boolean>();
+    @Input() isError = false;
+    @Output() isErrorChange = new EventEmitter<boolean>();
 
     isUnreadMessages = false;
     unreadedChatId: string | undefined = '';
@@ -58,6 +60,7 @@ export class ChatsUserItemComponent implements OnInit, OnDestroy {
 
     onOpen(chatId: string) {
         this.isLoading = true;
+        this.isLoadingChange.emit(this.isLoading);
         this.getChatSubscription = this.chatsAndMessages
             .getChatById(chatId)
             .subscribe({
@@ -73,10 +76,13 @@ export class ChatsUserItemComponent implements OnInit, OnDestroy {
                     this.isRequestsOpen = false;
                     this.isRequestsOpenChange.emit(this.isRequestsOpen);
                     this.isLoading = false;
+                    this.isLoadingChange.emit(this.isLoading);
                 },
                 error: () => {
                     this.isLoading = false;
+                    this.isLoadingChange.emit(this.isLoading);
                     this.isError = true;
+                    this.isErrorChange.emit(this.isError);
                 },
             });
     }

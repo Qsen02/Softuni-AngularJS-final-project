@@ -30,7 +30,7 @@ export class ChatsSearchedResutsItemComponent implements OnInit, OnDestroy {
 
     checkStats() {
         this.isSended = Boolean(
-            this.item?.requests.find((el) => el.sender_id._id == this.userId)
+            this.item?.requests?.find((el) => el.sender_id._id == this.userId)
         );
         this.isChatExist = Boolean(
             this.chats.find(
