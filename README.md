@@ -19,13 +19,13 @@ https://softuni-angularjs-final-project.onrender.com/
 
 # Screenshots
 -Home
-![Screenshot 2024-12-02 223935](https://github.com/user-attachments/assets/210bb52e-4318-4e38-8db3-1709201c47ea)
+![Screenshot 2025-02-09 140617](https://github.com/user-attachments/assets/db8c6c4c-89a1-45ef-970e-bcc73cfbe8f7)
 
 -Profile page
-![Screenshot 2024-12-02 223956](https://github.com/user-attachments/assets/c3d52d37-c5e9-4238-8f16-64b52cd96b2a)
+![Screenshot 2025-02-09 140513](https://github.com/user-attachments/assets/92445c26-f577-44c9-9a9d-d298d75ef13a)
 
 -Post details in profile page
-![Screenshot 2024-12-02 224013](https://github.com/user-attachments/assets/46eb5c46-23de-4c67-94c7-12cfacc3b51f)
+![Screenshot 2025-02-09 140523](https://github.com/user-attachments/assets/4db8844a-aa48-44f9-935c-eeb65c116e1b)
 
 -Chats
 ![Screenshot 2025-02-09 112932](https://github.com/user-attachments/assets/a3da4353-4ae6-4b7b-8862-f07d3ca08732)
