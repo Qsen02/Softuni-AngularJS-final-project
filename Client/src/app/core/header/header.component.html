@@ -16,7 +16,9 @@
             }
         </ul>
         @if(isLogged){
-        <a [routerLink]="['/chats',curUser?._id]" (click)="readChats()"><i class="fa-regular fa-bell"></i></a>
+        <a [routerLink]="['/chats',curUser?._id]" (click)="readChats()">
+            <i routerLinkActive="active" class="fa-regular fa-bell"></i>
+        </a>
             @if(isUndreadChats){
                 <div class="message-balloon"></div>
             }
