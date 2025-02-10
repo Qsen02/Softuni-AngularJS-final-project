@@ -8,6 +8,7 @@ const {
     editMessage,
     deleteMessage,
     getMessageById,
+    removeUnreadedChatsAndMessages,
 } = require("../services/chatsAndMessages");
 const { checkUserId } = require("../services/user");
 const { isUser } = require("../middlewares.js/guard");
@@ -63,7 +64,8 @@ chatsAndMessagesRouter.put(
             if (result.errors.length) {
                 throw new Error("Your data is not in valid format!");
             }
-            const newMessage = await addMessageToChat(user,chatId, fields.text);
+            const chat=await getChatById(chatId).lean();
+            const newMessage = await addMessageToChat(user,chat, fields.text);
             res.json(newMessage);
         } catch (err) {
             return res.status(400).json({ message: err.message });
@@ -113,6 +115,22 @@ chatsAndMessagesRouter.delete(
         res.json(deletedMessage);
     }
 );
+
+chatsAndMessagesRouter.delete("/unreaded/:chatId/in/:messageId",async(req,res)=>{
+    const chatId=req.params.chatId;
+    const isValidChat=await checkChatId(chatId);
+    const user=req.user;
+    if(!isValidChat){
+        return res.status(404).json({ message: "Resource not found!" });
+    }
+    const messageId=req.params.messageId;
+    const isValidMessage=req.params.messageId;
+    if(!isValidMessage){
+        return res.status(404).json({ message: "Resource not found!" });
+    }
+    await removeUnreadedChatsAndMessages(user._id,chatId,messageId);
+    res.json({message:"Unreaded chats and messages removed successfully!"})
+})
 
 module.exports = {
     chatsAndMessagesRouter,

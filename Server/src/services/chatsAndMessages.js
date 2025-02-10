@@ -3,30 +3,39 @@ const { Messages } = require("../models/messages");
 const { Users } = require("../models/user");
 
 function getChatById(chatId) {
-    const chat = Chats.findById(chatId).populate({
-        path:"messages",
-        model:"Messages",
-        populate:{
-            path:"owner_id",
-            model:"Users"
-        }
-    }).populate("receiver_id").populate("requester_id");
+    const chat = Chats.findById(chatId)
+        .populate({
+            path: "messages",
+            model: "Messages",
+            populate: {
+                path: "owner_id",
+                model: "Users",
+            },
+        })
+        .populate("receiver_id")
+        .populate("requester_id");
     return chat;
 }
 
-async function addMessageToChat(curUser, chatId, message) {
+async function addMessageToChat(curUser, chat, message) {
     const newMessage = new Messages({
         owner_id: curUser._id,
         text: message,
     });
     await newMessage.save();
     await Chats.findByIdAndUpdate(
-        chatId,
+        chat._id,
         {
             $push: { messages: newMessage },
         },
         { new: true }
     );
+    await Users.findByIdAndUpdate(chat.receiver_id, {
+        $push: {
+            unreadedChats: chat._id,
+            unreadedMessages: newMessage._id,
+        },
+    });
     return newMessage.populate("owner_id");
 }
 
@@ -48,7 +57,7 @@ async function deleteMessage(messageId, chatId) {
 async function createChat(curUserId, user) {
     const chat = new Chats({
         requester_id: curUserId,
-        receiver_id:user._id
+        receiver_id: user._id,
     });
     await chat.save();
     await Users.findByIdAndUpdate(user._id, { $push: { chats: chat } });
@@ -79,9 +88,18 @@ async function checkMessageId(messageId) {
     return false;
 }
 
-function getMessageById(messageId){
-    const message= Messages.findById(messageId);
+function getMessageById(messageId) {
+    const message = Messages.findById(messageId);
     return message;
+}
+
+async function removeUnreadedChatsAndMessages(userId, chatId, messageId) {
+    await Users.findByIdAndUpdate(userId, {
+        $pull: {
+            unreadedChats: chatId,
+            unreadedMessages: messageId,
+        },
+    });
 }
 
 module.exports = {
@@ -92,5 +110,6 @@ module.exports = {
     createChat,
     checkChatId,
     checkMessageId,
-    getMessageById
+    getMessageById,
+    removeUnreadedChatsAndMessages
 };

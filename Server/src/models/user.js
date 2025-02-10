@@ -29,6 +29,16 @@ const userSchema=new mongoose.Schema({
         type:[mongoose.SchemaTypes.ObjectId],
         ref:"Requests",
         default:[]
+    },
+    unreadedChats:{
+        type:[mongoose.SchemaTypes.ObjectId],
+        ref:"Chats",
+        default:[]
+    },
+    unreadedMessages:{
+        type:[mongoose.SchemaTypes.ObjectId],
+        ref:"Messages",
+        default:[]
     }
 },{ timestamps: { createdAt: "created_at" } })
 
