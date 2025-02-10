@@ -61,6 +61,7 @@ export class ChatsSearchedResutsItemComponent implements OnInit, OnDestroy {
     }
 
     ngOnDestroy(): void {
+        this.sendRequestSubscription?.unsubscribe();
         this.socketService.disconnectSocket();
     }
 }

@@ -3,6 +3,7 @@ import { ChatsAndMessagesService } from '../../services/chats-and-messages.servi
 import { ActivatedRoute } from '@angular/router';
 import { SocketServiceService } from '../../services/socket-service.service';
 import { Chat } from '../../types/chats';
+import { Subscription } from 'rxjs';
 
 @Component({
     selector: 'app-chats-message-delete',
@@ -13,6 +14,8 @@ import { Chat } from '../../types/chats';
 })
 export class ChatsMessageDeleteComponent implements OnInit, OnDestroy {
     chat: Chat | null = null;
+
+    deleteMessageSubscription: Subscription | null = null;
 
     constructor(
         private chatsAndMessageService: ChatsAndMessagesService,
@@ -27,7 +30,7 @@ export class ChatsMessageDeleteComponent implements OnInit, OnDestroy {
     onDelete() {
         const messageId = this.route.snapshot.params['messageId'];
         const chatId = this.route.snapshot.params['chatId'];
-        this.chatsAndMessageService
+        this.deleteMessageSubscription = this.chatsAndMessageService
             .deleteMessage(chatId, messageId)
             .subscribe((message) => {
                 this.socketService.deleteMessage(message);
@@ -40,6 +43,7 @@ export class ChatsMessageDeleteComponent implements OnInit, OnDestroy {
     }
 
     ngOnDestroy(): void {
+        this.deleteMessageSubscription?.unsubscribe();
         this.socketService.disconnectSocket();
     }
 }
