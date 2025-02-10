@@ -20,7 +20,9 @@
             <i routerLinkActive="active" class="fa-regular fa-bell"></i>
         </a>
             @if(isUndreadChats){
-                <div class="message-balloon"></div>
+                <div class="message-balloon">
+                    <p>{{unreadedChats.length}}</p>
+                </div>
             }
         }
     </nav>

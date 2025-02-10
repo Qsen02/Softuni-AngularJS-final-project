@@ -3,7 +3,6 @@ import { Message } from '../../../types/messages';
 import { CommonModule } from '@angular/common';
 import { RouterLink } from '@angular/router';
 import { imageProfileErrorHandler } from '../../../utils/imageErrorHandlers';
-import { SocketServiceService } from '../../../services/socket-service.service';
 
 @Component({
     selector: 'app-message-item',

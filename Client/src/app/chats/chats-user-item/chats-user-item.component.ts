@@ -11,6 +11,8 @@ import { Chat } from '../../types/chats';
 import { ChatsAndMessagesService } from '../../services/chats-and-messages.service';
 import { SocketServiceService } from '../../services/socket-service.service';
 import { Subscription } from 'rxjs';
+import { Message } from '../../types/messages';
+import { UserService } from '../../services/user.service';
 
 @Component({
     selector: 'app-chats-user-item',
@@ -36,6 +38,7 @@ export class ChatsUserItemComponent implements OnInit, OnDestroy {
     @Output() isLoadingChange = new EventEmitter<boolean>();
     @Input() isError = false;
     @Output() isErrorChange = new EventEmitter<boolean>();
+    unreadedMessages: Message[] | [] = [];
 
     isUnreadMessages = false;
     unreadedChatId: string | undefined = '';
@@ -43,10 +46,14 @@ export class ChatsUserItemComponent implements OnInit, OnDestroy {
 
     constructor(
         private chatsAndMessages: ChatsAndMessagesService,
-        private socketService: SocketServiceService
+        private socketService: SocketServiceService,
+        private userService: UserService
     ) {}
 
     ngOnInit(): void {
+        this.userService.getUserById(this.userId).subscribe((user) => {
+            this.unreadedMessages = user.unreadedMessages;
+        });
         this.socketService.connectSocket();
         this.socketService
             .onUnreadMessages('show messages')

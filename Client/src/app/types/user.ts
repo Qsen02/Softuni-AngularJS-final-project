@@ -1,4 +1,5 @@
 import { Chat } from "./chats"
+import { Message } from "./messages"
 import { Request } from "./requests"
 
 export interface User{
@@ -8,7 +9,9 @@ export interface User{
     password:string,
     profileImage:string,
     chats:Chat[],
-    requests:Request[]
+    requests:Request[],
+    unreadedChats:Chat[],
+    unreadedMessages:Message[]
 }
 
 export interface AuthUser{

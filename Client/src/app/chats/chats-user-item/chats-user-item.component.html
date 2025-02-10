@@ -4,7 +4,9 @@
             <img src={{chat.requester_id.profileImage}} alt={{chat.requester_id.username}} (error)="onProfileImageError($event)">
             <h3>{{chat.requester_id.username}}</h3>
             @if(unreadedChatId==chat._id && isUnreadMessages){
-                <div class="balloon"></div>
+                <div class="balloon">
+                    <p>{{unreadedMessages.length}}<p>
+                </div>
             }
         </article>
     }@else{
@@ -12,7 +14,9 @@
             <img src={{chat.receiver_id.profileImage}} alt={{chat.receiver_id.username}} (error)="onProfileImageError($event)">
             <h3>{{chat.receiver_id.username}}</h3>
             @if(unreadedChatId==chat._id && isUnreadMessages){
-                <div class="balloon"></div>
+                <div class="balloon">
+                    <p>{{unreadedMessages.length}}<p>
+                </div>
             }
         </article>
     }

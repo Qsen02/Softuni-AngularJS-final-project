@@ -14,7 +14,7 @@ export class SocketServiceService {
     private socket: Socket | null = null;
 
     constructor() {
-        this.socket = io(enviroment.apiUrl);
+        this.socket = io(enviromentProd.apiUrl);
     }
 
     connectSocket() {
@@ -68,11 +68,11 @@ export class SocketServiceService {
         });
     }
 
-    sendRequest(request:Request){
-        this.socket?.emit("send request",request);
+    sendRequest(request: Request) {
+        this.socket?.emit('send request', request);
     }
 
-    onSendRequest(event:string):Observable<Request>{
+    onSendRequest(event: string): Observable<Request> {
         return new Observable((observer) => {
             this.socket?.on(event, (request) => {
                 observer.next(request);
@@ -84,14 +84,14 @@ export class SocketServiceService {
         });
     }
 
-    unreadChats(userId:string){
-        this.socket?.emit("unreaded chats",userId);
+    unreadChats(userId: string,chat:Chat) {
+        this.socket?.emit('unreaded chats', userId,chat);
     }
 
-    onUnreadChats(event:string):Observable<string>{
+    onUnreadChats(event: string): Observable<{ userId: string; chat: Chat }> {
         return new Observable((observer) => {
-            this.socket?.on(event, (userId) => {
-                observer.next(userId);
+            this.socket?.on(event, (userId, chat) => {
+                observer.next({ userId: userId, chat: chat });
             });
 
             return () => {
@@ -100,14 +100,16 @@ export class SocketServiceService {
         });
     }
 
-    unreadedMessages(chatId:string | undefined,userId:string){
-        this.socket?.emit("unreaded messages",chatId,userId);
+    unreadedMessages(chatId: string | undefined, userId: string) {
+        this.socket?.emit('unreaded messages', chatId, userId);
     }
 
-    onUnreadMessages(event:string):Observable<{chatId:string | undefined,userId:string}>{
+    onUnreadMessages(
+        event: string
+    ): Observable<{ chatId: string | undefined; userId: string }> {
         return new Observable((observer) => {
-            this.socket?.on(event, (chatId,userId) => {
-                observer.next({chatId,userId});
+            this.socket?.on(event, (chatId, userId) => {
+                observer.next({ chatId, userId });
             });
 
             return () => {
@@ -116,20 +118,20 @@ export class SocketServiceService {
         });
     }
 
-    acceptRequest(chat:Chat,userId:string){
-        this.socket?.emit("accept request",chat,userId);
+    acceptRequest(chat: Chat, userId: string) {
+        this.socket?.emit('accept request', chat, userId);
     }
 
-    onAccepRequest(event:string):Observable<{chat:Chat,userId:string}>{
-        return new Observable((observer)=>{
-            this.socket?.on(event,(chat,userId)=>{
-                observer.next({chat:chat,userId:userId});
-            })
+    onAccepRequest(event: string): Observable<{ chat: Chat; userId: string }> {
+        return new Observable((observer) => {
+            this.socket?.on(event, (chat, userId) => {
+                observer.next({ chat: chat, userId: userId });
+            });
 
-            return ()=>{
+            return () => {
                 this.socket?.off(event);
-            }
-        })
+            };
+        });
     }
 
     disconnectSocket() {

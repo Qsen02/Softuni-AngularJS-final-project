@@ -12,8 +12,22 @@ function getChatById(chatId) {
                 model: "Users",
             },
         })
-        .populate("receiver_id")
-        .populate("requester_id");
+        .populate({
+            path: "receiver_id",
+            model: "Users",
+            populate: [
+                { path: "unreadedChats", model: "Chats" },
+                { path: "unreadedMessages", model: "Messages" },
+            ],
+        })
+        .populate({
+            path: "requester_id",
+            model: "Users",
+            populate: [
+                { path: "unreadedChats", model: "Chats" },
+                { path: "unreadedMessages", model: "Messages" },
+            ],
+        });
     return chat;
 }
 
@@ -22,6 +36,7 @@ async function addMessageToChat(curUser, chat, message) {
         owner_id: curUser._id,
         text: message,
     });
+    console.log(chat.receiver_id, chat.requester_id);
     await newMessage.save();
     await Chats.findByIdAndUpdate(
         chat._id,
@@ -30,12 +45,44 @@ async function addMessageToChat(curUser, chat, message) {
         },
         { new: true }
     );
-    await Users.findByIdAndUpdate(chat.receiver_id, {
-        $push: {
-            unreadedChats: chat._id,
-            unreadedMessages: newMessage._id,
-        },
-    });
+    if (
+        chat.receiver_id.unreadedChats
+            .map((el) => el._id.toString())
+            .includes(chat._id.toString()) ||
+        chat.requester_id.unreadedChats
+            .map((el) => el._id.toString())
+            .includes(chat._id.toString())
+    ) {
+        if (chat.receiver_id == curUser._id) {
+            await Users.findByIdAndUpdate(chat.requester_id, {
+                $push: {
+                    unreadedMessages: newMessage._id,
+                },
+            });
+        } else {
+            await Users.findByIdAndUpdate(chat.receiver_id, {
+                $push: {
+                    unreadedMessages: newMessage._id,
+                },
+            });
+        }
+    } else {
+        if (chat.receiver_id == curUser._id) {
+            await Users.findByIdAndUpdate(chat.requester_id, {
+                $push: {
+                    unreadedChats: chat._id,
+                    unreadedMessages: newMessage._id,
+                },
+            });
+        } else {
+            await Users.findByIdAndUpdate(chat.receiver_id, {
+                $push: {
+                    unreadedChats: chat._id,
+                    unreadedMessages: newMessage._id,
+                },
+            });
+        }
+    }
     return newMessage.populate("owner_id");
 }
 
@@ -96,8 +143,8 @@ function getMessageById(messageId) {
 async function removeUnreadedChatsAndMessages(userId, chatId, messageId) {
     await Users.findByIdAndUpdate(userId, {
         $pull: {
-            unreadedChats: chatId,
             unreadedMessages: messageId,
+            unreadedChats: chatId,
         },
     });
 }
@@ -111,5 +158,5 @@ module.exports = {
     checkChatId,
     checkMessageId,
     getMessageById,
-    removeUnreadedChatsAndMessages
+    removeUnreadedChatsAndMessages,
 };

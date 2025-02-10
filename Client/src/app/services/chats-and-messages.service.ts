@@ -15,8 +15,10 @@ export class ChatsAndMessagesService {
         return this.http.get<Chat>(`/api/${this.endpoint}/${chatId}`);
     }
 
-    getMessageById(messageId: string|undefined){
-        return this.http.get<Message>(`/api/${this.endpoint}/message/${messageId}`);
+    getMessageById(messageId: string | undefined) {
+        return this.http.get<Message>(
+            `/api/${this.endpoint}/message/${messageId}`
+        );
     }
 
     createChat(userId: string | undefined) {
@@ -43,6 +45,12 @@ export class ChatsAndMessagesService {
     deleteMessage(chatId: string, messageId: string) {
         return this.http.delete<Message>(
             `/api/${this.endpoint}/${chatId}/message/${messageId}`
+        );
+    }
+
+    removeUnreadedChatsAndMessages(chatId:string, messageId:string) {
+        return this.http.delete<object>(
+            `/api/${this.endpoint}/unreaded/${chatId}/in/${messageId}`
         );
     }
 }

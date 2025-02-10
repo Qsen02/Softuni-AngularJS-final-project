@@ -3,6 +3,7 @@ import { RouterLink, RouterLinkActive } from '@angular/router';
 import { UserService } from '../../services/user.service';
 import { imageProfileErrorHandler } from '../../utils/imageErrorHandlers';
 import { SocketServiceService } from '../../services/socket-service.service';
+import { Chat } from '../../types/chats';
 
 @Component({
     selector: 'app-header',
@@ -11,7 +12,7 @@ import { SocketServiceService } from '../../services/socket-service.service';
     templateUrl: './header.component.html',
     styleUrl: './header.component.css',
 })
-export class HeaderComponent implements OnInit,OnDestroy{
+export class HeaderComponent implements OnInit, OnDestroy {
     get curUser() {
         return this.userService.getUser();
     }
@@ -20,7 +21,8 @@ export class HeaderComponent implements OnInit,OnDestroy{
         return this.userService.isLogged;
     }
 
-    isUndreadChats=false;
+    isUndreadChats = false;
+    unreadedChats: Chat[] | [] = [];
 
     constructor(
         private userService: UserService,
@@ -28,13 +30,25 @@ export class HeaderComponent implements OnInit,OnDestroy{
     ) {}
 
     ngOnInit(): void {
-        const user=this.curUser;
-        this.socketService.connectSocket();
-        this.socketService.onUnreadChats("show chats").subscribe((userId)=>{
-            if(user?._id==userId && location.pathname!=`/chats/${userId}`){
+        const user = this.curUser;
+        this.userService.getUserById(this.curUser?._id).subscribe((user)=>{
+            this.unreadedChats=user.unreadedChats
+            if(this.unreadedChats.length>0){
                 this.isUndreadChats=true;
             }
         })
+        this.socketService.connectSocket();
+        this.socketService.onUnreadChats('show chats').subscribe(({userId,chat}) => {
+            if (
+                user?._id == userId &&
+                location.pathname != `/chats/${userId}`
+            ) {
+                this.isUndreadChats=true;
+                if(!this.unreadedChats.map(el=>el._id).includes(chat._id)){
+                    // this.unreadedChats.push(chat);
+                }
+            }
+        });
     }
 
     onError(event: Event) {
@@ -42,8 +56,8 @@ export class HeaderComponent implements OnInit,OnDestroy{
         imageProfileErrorHandler(imageRef);
     }
 
-    readChats(){
-        this.isUndreadChats=false;
+    readChats() {
+        this.isUndreadChats = false;
     }
 
     ngOnDestroy(): void {

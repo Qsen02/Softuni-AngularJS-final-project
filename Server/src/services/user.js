@@ -64,7 +64,7 @@ function getUserById(userId) {
                 path: "sender_id",
                 model: "Users",
             },
-        });
+        }).populate("unreadedChats").populate("unreadedMessages");
     return user;
 }
 
