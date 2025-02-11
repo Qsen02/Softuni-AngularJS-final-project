@@ -85,7 +85,7 @@ export class ChatsItemComponent implements OnDestroy, OnInit {
                     this.chat?.receiver_id.unreadedChats
                         .map((el) => el._id)
                         .includes(this.chat._id) ||
-                    this.chat?.receiver_id.unreadedChats
+                    this.chat?.requester_id.unreadedChats
                         .map((el) => el._id)
                         .includes(this.chat._id)
                 ) {

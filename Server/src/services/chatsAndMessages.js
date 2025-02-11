@@ -58,7 +58,7 @@ async function addMessageToChat(curUser, chat, message) {
                     unreadedMessages: newMessage._id,
                 },
             });
-        } else {
+        } else if(chat.requester_id==curUser._id){
             await Users.findByIdAndUpdate(chat.receiver_id, {
                 $push: {
                     unreadedMessages: newMessage._id,
@@ -73,7 +73,7 @@ async function addMessageToChat(curUser, chat, message) {
                     unreadedMessages: newMessage._id,
                 },
             });
-        } else {
+        } else if(chat.requester._id == curUser._id){
             await Users.findByIdAndUpdate(chat.receiver_id, {
                 $push: {
                     unreadedChats: chat._id,

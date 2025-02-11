@@ -49,9 +49,8 @@ export class HeaderComponent implements OnInit, OnDestroy {
                 this.unreadedChats.push(chat);
                 const chatIdsArray=this.unreadedChats.map((el) => el._id);
                 if (!chatIdsArray.includes(chat._id)) {
-                    
+                    this.unreadedChats.push(chat);
                 }
-                console.log(this.unreadedChats);
             }
         });
     }
