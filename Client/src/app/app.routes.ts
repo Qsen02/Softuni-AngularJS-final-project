@@ -53,9 +53,9 @@ export const routes: Routes = [
     },
     {
         path: "chats",children:[
-            { path:":userId", component: ChatsComponent},
-            { path:":userId/chat/:chatId/message/:messageId/delete", component: ChatsMessageDeleteComponent},
-            { path:":userId/chat/:chatId/message/:messageId/edit", component: ChatsMessageEditComponent}
+            { path:":userId", component: ChatsComponent, canActivate: [userGuard]},
+            { path:":userId/chat/:chatId/message/:messageId/delete", component: ChatsMessageDeleteComponent, canActivate: [userGuard]},
+            { path:":userId/chat/:chatId/message/:messageId/edit", component: ChatsMessageEditComponent, canActivate: [userGuard]}
         ]
     },
     { path: "create", component: CreatePostComponent, canActivate: [userGuard] },

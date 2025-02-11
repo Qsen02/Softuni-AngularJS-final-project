@@ -84,19 +84,19 @@ export class ChatsItemComponent implements OnDestroy, OnInit {
                 if (
                     this.chat?.receiver_id.unreadedChats
                         .map((el) => el._id)
-                        .includes(this.chat._id) ||
+                        .includes(this.chat?._id) ||
                     this.chat?.requester_id.unreadedChats
                         .map((el) => el._id)
-                        .includes(this.chat._id)
+                        .includes(this.chat?._id)
                 ) {
                     if (this.userId == this.chat?.receiver_id._id) {
                         this.socketService.unreadChats(
-                            this.chat.requester_id._id,
+                            this.chat?.requester_id._id,
                             this.chat
                         );
                     } else if (this.userId == this.chat?.requester_id._id) {
                         this.socketService.unreadChats(
-                            this.chat.receiver_id._id,
+                            this.chat?.receiver_id._id,
                             this.chat
                         );
                     }
@@ -104,13 +104,13 @@ export class ChatsItemComponent implements OnDestroy, OnInit {
                 if (this.userId == this.chat?.receiver_id._id) {
                     this.socketService.unreadedMessages(
                         this.chat?._id,
-                        this.chat.requester_id._id,
+                        this.chat?.requester_id?._id,
                         message
                     );
                 } else if (this.userId == this.chat?.requester_id._id) {
                     this.socketService.unreadedMessages(
                         this.chat?._id,
-                        this.chat.receiver_id._id,
+                        this.chat?.receiver_id._id,
                         message
                     );
                 }
