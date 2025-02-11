@@ -31,25 +31,27 @@ export class HeaderComponent implements OnInit, OnDestroy {
 
     ngOnInit(): void {
         const user = this.curUser;
-        this.socketService.connectSocket();
-        this.socketService
-            .onUnreadChats('show chats')
-            .subscribe(({ userId, chat }) => {
-                if (
-                    user?._id == userId &&
-                    location.pathname != `/chats/${userId}`
-                ) {
-                    this.isUndreadChats = true;
-                    const chatIdsArray=this.unreadedChats.map((el) => el._id);
-                    if (!chatIdsArray.includes(chat._id)) {
-                        this.unreadedChats.push(chat);
-                    }
-                }
-            });
         this.userService.getUserById(this.curUser?._id).subscribe((user) => {
             this.unreadedChats = user.unreadedChats;
             if (this.unreadedChats.length > 0) {
                 this.isUndreadChats = true;
+            }
+        });
+        this.socketService.connectSocket();
+        this.socketService
+        .onUnreadChats('show chats')
+        .subscribe(({ userId, chat }) => {
+            if (
+                user?._id == userId &&
+                location.pathname != `/chats/${userId}`
+            ) {
+                this.isUndreadChats = true;
+                this.unreadedChats.push(chat);
+                const chatIdsArray=this.unreadedChats.map((el) => el._id);
+                if (!chatIdsArray.includes(chat._id)) {
+                    
+                }
+                console.log(this.unreadedChats);
             }
         });
     }

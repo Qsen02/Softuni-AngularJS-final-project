@@ -14,7 +14,7 @@ export class SocketServiceService {
     private socket: Socket | null = null;
 
     constructor() {
-        this.socket = io(enviroment.apiUrl);
+        this.socket = io(enviromentProd.apiUrl);
     }
 
     connectSocket() {
@@ -91,7 +91,7 @@ export class SocketServiceService {
     onUnreadChats(event: string): Observable<{ userId: string; chat: Chat }> {
         return new Observable((observer) => {
             this.socket?.on(event, (userId, chat) => {
-                observer.next({ userId: userId, chat: chat });
+                observer.next({ userId, chat });
             });
 
             return () => {
@@ -100,16 +100,16 @@ export class SocketServiceService {
         });
     }
 
-    unreadedMessages(chatId: string | undefined, userId: string) {
-        this.socket?.emit('unreaded messages', chatId, userId);
+    unreadedMessages(chatId: string | undefined, userId: string,message:Message) {
+        this.socket?.emit('unreaded messages', chatId, userId,message);
     }
 
     onUnreadMessages(
         event: string
-    ): Observable<{ chatId: string | undefined; userId: string }> {
+    ): Observable<{ chatId: string | undefined; userId: string,message:Message }> {
         return new Observable((observer) => {
-            this.socket?.on(event, (chatId, userId) => {
-                observer.next({ chatId, userId });
+            this.socket?.on(event, (chatId, userId,message) => {
+                observer.next({ chatId, userId, message });
             });
 
             return () => {
@@ -125,7 +125,7 @@ export class SocketServiceService {
     onAccepRequest(event: string): Observable<{ chat: Chat; userId: string }> {
         return new Observable((observer) => {
             this.socket?.on(event, (chat, userId) => {
-                observer.next({ chat: chat, userId: userId });
+                observer.next({ chat, userId });
             });
 
             return () => {
