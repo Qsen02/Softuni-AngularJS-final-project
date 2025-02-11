@@ -46,7 +46,6 @@ export class HeaderComponent implements OnInit, OnDestroy {
                 location.pathname != `/chats/${userId}`
             ) {
                 this.isUndreadChats = true;
-                this.unreadedChats.push(chat);
                 const chatIdsArray=this.unreadedChats.map((el) => el._id);
                 if (!chatIdsArray.includes(chat._id)) {
                     this.unreadedChats.push(chat);
