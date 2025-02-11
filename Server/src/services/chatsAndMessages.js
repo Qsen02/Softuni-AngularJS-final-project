@@ -36,7 +36,6 @@ async function addMessageToChat(curUser, chat, message) {
         owner_id: curUser._id,
         text: message,
     });
-    console.log(chat.receiver_id, chat.requester_id);
     await newMessage.save();
     await Chats.findByIdAndUpdate(
         chat._id,
@@ -140,10 +139,20 @@ function getMessageById(messageId) {
     return message;
 }
 
-async function removeUnreadedChatsAndMessages(userId, chatId, messageId) {
+async function removeUnreadedChatsAndMessages(userId, chatId) {
+    const chat = await Chats.findById(chatId).lean();
+    const chatIds = chat.messages.map((el) => el._id.toString());
+    const user = await Users.findById(userId).lean();
+    const unreadedMessages = user.unreadedMessages.filter((el) =>
+        !chatIds.includes(el._id.toString())
+    );
+    await Users.findByIdAndUpdate(userId, {
+        $set: {
+            unreadedMessages: unreadedMessages,
+        },
+    });
     await Users.findByIdAndUpdate(userId, {
         $pull: {
-            unreadedMessages: messageId,
             unreadedChats: chatId,
         },
     });

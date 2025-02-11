@@ -48,9 +48,9 @@ export class ChatsAndMessagesService {
         );
     }
 
-    removeUnreadedChatsAndMessages(chatId:string, messageId:string) {
+    removeUnreadedChatsAndMessages(chatId:string) {
         return this.http.delete<object>(
-            `/api/${this.endpoint}/unreaded/${chatId}/in/${messageId}`
+            `/api/${this.endpoint}/unreaded/${chatId}`
         );
     }
 }

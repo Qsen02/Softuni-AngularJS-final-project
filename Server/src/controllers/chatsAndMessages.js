@@ -116,19 +116,14 @@ chatsAndMessagesRouter.delete(
     }
 );
 
-chatsAndMessagesRouter.delete("/unreaded/:chatId/in/:messageId",async(req,res)=>{
+chatsAndMessagesRouter.delete("/unreaded/:chatId",async(req,res)=>{
     const chatId=req.params.chatId;
-    const isValidChat=await checkChatId(chatId);
+    const isValid=await checkChatId(chatId);
     const user=req.user;
-    if(!isValidChat){
+    if(!isValid){
         return res.status(404).json({ message: "Resource not found!" });
     }
-    const messageId=req.params.messageId;
-    const isValidMessage=req.params.messageId;
-    if(!isValidMessage){
-        return res.status(404).json({ message: "Resource not found!" });
-    }
-    await removeUnreadedChatsAndMessages(user._id,chatId,messageId);
+    await removeUnreadedChatsAndMessages(user._id,chatId);
     res.json({message:"Unreaded chats and messages removed successfully!"})
 })
 

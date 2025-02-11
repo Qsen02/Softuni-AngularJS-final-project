@@ -38,7 +38,7 @@ export class ChatsUserItemComponent implements OnInit, OnDestroy {
     @Output() isLoadingChange = new EventEmitter<boolean>();
     @Input() isError = false;
     @Output() isErrorChange = new EventEmitter<boolean>();
-    unreadedMessages: Message[] | [] = [];
+    unreadedMessages: Message[] = [];
 
     isUnreadMessages = false;
     unreadedChatId: string | undefined = '';
@@ -53,6 +53,9 @@ export class ChatsUserItemComponent implements OnInit, OnDestroy {
     ngOnInit(): void {
         this.userService.getUserById(this.userId).subscribe((user) => {
             this.unreadedMessages = user.unreadedMessages;
+            if(this.unreadedMessages.length > 0){
+                this.isUnreadMessages=true;
+            }
         });
         this.socketService.connectSocket();
         this.socketService
@@ -92,6 +95,9 @@ export class ChatsUserItemComponent implements OnInit, OnDestroy {
                     this.isErrorChange.emit(this.isError);
                 },
             });
+            if(this.isUnreadMessages){
+                this.chatsAndMessages.removeUnreadedChatsAndMessages(chatId).subscribe();
+            }
     }
 
     readMessages() {
