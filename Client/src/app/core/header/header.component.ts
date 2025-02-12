@@ -58,26 +58,17 @@ export class HeaderComponent implements OnInit, OnDestroy {
             });
         this.socketService.onReadChats('chats readed').subscribe((chat) => {
             this.unreadedChats = this.unreadedChats.filter(
-                (el) => el._id != chat._id
+                (el) => el._id != chat?._id
             );
+            if(this.unreadedChats.length==0){
+                this.isUnreadedChats = false;
+            }
         });
     }
 
     onError(event: Event) {
         const imageRef = event.target as HTMLImageElement;
         imageProfileErrorHandler(imageRef);
-    }
-
-    readChats() {
-        const user = this.curUser;
-        if (
-            this.unreadedChats.length > 0 &&
-            location.pathname != `/chats/${user?._id}`
-        ) {
-            this.isUnreadedChats = true;
-        } else {
-            this.isUnreadedChats = false;
-        }
     }
 
     ngOnDestroy(): void {

@@ -43,6 +43,7 @@ export class ChatsUserItemComponent implements OnInit, OnDestroy {
     isUnreadMessages = false;
     unreadedChatId: string | undefined = '';
     getChatSubscription: Subscription | null = null;
+    getUserSubscription: Subscription | null = null;
 
     constructor(
         private chatsAndMessages: ChatsAndMessagesService,
@@ -51,24 +52,34 @@ export class ChatsUserItemComponent implements OnInit, OnDestroy {
     ) {}
 
     ngOnInit(): void {
-        this.userService.getUserById(this.userId).subscribe((user) => {
-            this.unreadedMessages = user.unreadedMessages;
-            if(this.unreadedMessages.length > 0){
-                this.isUnreadMessages=true;
-            }
-        });
+        this.getUserSubscription = this.userService
+            .getUserById(this.userId)
+            .subscribe((user) => {
+                this.unreadedMessages = user.unreadedMessages;
+                if (this.unreadedMessages.length > 0) {
+                    this.isUnreadMessages = true;
+                } else {
+                    this.isUnreadMessages = false;
+                }
+            });
         this.socketService.connectSocket();
         this.socketService
             .onUnreadMessages('show messages')
-            .subscribe(({ chatId, userId,message }) => {
+            .subscribe(({ chatId, userId, message }) => {
                 if (this.userId == userId) {
                     this.unreadedChatId = chatId;
                     this.isUnreadMessages = true;
-                    this.chatsAndMessages.getChatById(this.unreadedChatId).subscribe((chat)=>{
-                        if(chat.messages.map(el=>el._id).includes(message._id)){
-                            this.unreadedMessages.push(message);
-                        }
-                    })
+                    this.chatsAndMessages
+                        .getChatById(this.unreadedChatId)
+                        .subscribe((chat) => {
+                            if (
+                                chat.messages
+                                    .map((el) => el._id)
+                                    .includes(message._id)
+                            ) {
+                                this.unreadedMessages.push(message);
+                            }
+                        });
                 }
             });
     }
@@ -76,6 +87,16 @@ export class ChatsUserItemComponent implements OnInit, OnDestroy {
     onOpen(chatId: string) {
         this.isLoading = true;
         this.isLoadingChange.emit(this.isLoading);
+        this.getUserSubscription = this.userService
+            .getUserById(this.userId)
+            .subscribe((user) => {
+                this.unreadedMessages = user.unreadedMessages;
+                if (this.unreadedMessages.length > 0) {
+                    this.isUnreadMessages = true;
+                } else {
+                    this.isUnreadMessages = false;
+                }
+            });
         this.getChatSubscription = this.chatsAndMessages
             .getChatById(chatId)
             .subscribe({
@@ -92,6 +113,7 @@ export class ChatsUserItemComponent implements OnInit, OnDestroy {
                     this.isRequestsOpenChange.emit(this.isRequestsOpen);
                     this.isLoading = false;
                     this.isLoadingChange.emit(this.isLoading);
+                    this.socketService.readChats(chat);
                 },
                 error: () => {
                     this.isLoading = false;
@@ -100,15 +122,11 @@ export class ChatsUserItemComponent implements OnInit, OnDestroy {
                     this.isErrorChange.emit(this.isError);
                 },
             });
-            if(this.isUnreadMessages){
-                this.chatsAndMessages.removeUnreadedChatsAndMessages(chatId).subscribe();
-            }
-            this.socketService.readChats(this.openChat);
-    }
-
-    readMessages() {
-        this.isUnreadMessages = false;
-        this.unreadedChatId = '';
+        if (this.isUnreadMessages) {
+            this.chatsAndMessages
+                .removeUnreadedChatsAndMessages(chatId)
+                .subscribe();
+        }
     }
 
     onProfileImageError(event: Event) {

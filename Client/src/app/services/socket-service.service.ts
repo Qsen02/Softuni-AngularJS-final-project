@@ -138,7 +138,7 @@ export class SocketServiceService {
         this.socket?.emit("read chats",chat);
     }
 
-    onReadChats(event: string): Observable<Chat> {
+    onReadChats(event: string): Observable<Chat | null> {
         return new Observable((observer) => {
             this.socket?.on(event, (chat) => {
                 observer.next(chat);
