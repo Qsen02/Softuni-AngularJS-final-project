@@ -134,6 +134,22 @@ export class SocketServiceService {
         });
     }
 
+    readChats(chat: Chat | null){
+        this.socket?.emit("read chats",chat);
+    }
+
+    onReadChats(event: string): Observable<Chat> {
+        return new Observable((observer) => {
+            this.socket?.on(event, (chat) => {
+                observer.next(chat);
+            });
+
+            return () => {
+                this.socket?.off(event);
+            };
+        });
+    }
+
     disconnectSocket() {
         this.socket?.disconnect();
     }

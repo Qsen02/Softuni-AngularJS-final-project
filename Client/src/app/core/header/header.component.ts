@@ -22,7 +22,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
         return this.userService.isLogged;
     }
 
-    isUndreadChats = false;
+    isUnreadedChats = false;
     unreadedChats: Chat[] = [];
     getUserSubscription: Subscription | null = null;
 
@@ -39,7 +39,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
             .subscribe((user) => {
                 this.unreadedChats = user.unreadedChats;
                 if (this.unreadedChats.length > 0) {
-                    this.isUndreadChats = true;
+                    this.isUnreadedChats = true;
                 }
             });
         this.socketService
@@ -49,13 +49,18 @@ export class HeaderComponent implements OnInit, OnDestroy {
                     user?._id == userId &&
                     location.pathname != `/chats/${userId}`
                 ) {
-                    this.isUndreadChats = true;
+                    this.isUnreadedChats = true;
                     const chatIdsArray = this.unreadedChats.map((el) => el._id);
-                    if (!chatIdsArray.includes(chat._id)) {
+                    if (!(chatIdsArray.includes(chat._id)) || chatIdsArray.length == 0) {
                         this.unreadedChats.push(chat);
                     }
                 }
             });
+        this.socketService.onReadChats('chats readed').subscribe((chat) => {
+            this.unreadedChats = this.unreadedChats.filter(
+                (el) => el._id != chat._id
+            );
+        });
     }
 
     onError(event: Event) {
@@ -64,7 +69,15 @@ export class HeaderComponent implements OnInit, OnDestroy {
     }
 
     readChats() {
-        this.isUndreadChats = false;
+        const user = this.curUser;
+        if (
+            this.unreadedChats.length > 0 &&
+            location.pathname != `/chats/${user?._id}`
+        ) {
+            this.isUnreadedChats = true;
+        } else {
+            this.isUnreadedChats = false;
+        }
     }
 
     ngOnDestroy(): void {

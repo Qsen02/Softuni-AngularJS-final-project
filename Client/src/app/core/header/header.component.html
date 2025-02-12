@@ -19,7 +19,7 @@
         <a [routerLink]="['/chats',curUser?._id]" (click)="readChats()">
             <i routerLinkActive="active" class="fa-regular fa-bell"></i>
         </a>
-            @if(isUndreadChats){
+            @if(isUnreadedChats){
                 <div class="message-balloon">
                     <p>{{unreadedChats.length}}</p>
                 </div>
