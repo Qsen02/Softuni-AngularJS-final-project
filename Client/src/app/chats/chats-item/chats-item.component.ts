@@ -75,7 +75,6 @@ export class ChatsItemComponent implements OnDestroy, OnInit {
         this.addMessageSubscription = this.chatAndMessages
             .addMessageToChat(this.chat?._id, text)
             .subscribe((message) => {
-                debugger;
                 this.addMessageFrom.reset();
                 this.socketService.sendMessage(
                     'chat message',
