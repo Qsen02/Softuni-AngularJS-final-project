@@ -4,6 +4,7 @@ import { UserService } from '../../services/user.service';
 import { imageProfileErrorHandler } from '../../utils/imageErrorHandlers';
 import { SocketServiceService } from '../../services/socket-service.service';
 import { Chat } from '../../types/chats';
+import { Subscription } from 'rxjs';
 
 @Component({
     selector: 'app-header',
@@ -23,6 +24,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
 
     isUndreadChats = false;
     unreadedChats: Chat[] = [];
+    getUserSubscription: Subscription | null = null;
 
     constructor(
         private userService: UserService,
@@ -30,28 +32,30 @@ export class HeaderComponent implements OnInit, OnDestroy {
     ) {}
 
     ngOnInit(): void {
-        const user = this.curUser;
-        this.userService.getUserById(this.curUser?._id).subscribe((user) => {
-            this.unreadedChats = user.unreadedChats;
-            if (this.unreadedChats.length > 0) {
-                this.isUndreadChats = true;
-            }
-        });
         this.socketService.connectSocket();
-        this.socketService
-        .onUnreadChats('show chats')
-        .subscribe(({ userId, chat }) => {
-            if (
-                user?._id == userId &&
-                location.pathname != `/chats/${userId}`
-            ) {
-                this.isUndreadChats = true;
-                const chatIdsArray=this.unreadedChats.map((el) => el._id);
-                if (!chatIdsArray.includes(chat._id)) {
-                    this.unreadedChats.push(chat);
+        const user = this.curUser;
+        this.getUserSubscription = this.userService
+            .getUserById(this.curUser?._id)
+            .subscribe((user) => {
+                this.unreadedChats = user.unreadedChats;
+                if (this.unreadedChats.length > 0) {
+                    this.isUndreadChats = true;
                 }
-            }
-        });
+            });
+        this.socketService
+            .onUnreadChats('show chats')
+            .subscribe(({ userId, chat }) => {
+                if (
+                    user?._id == userId &&
+                    location.pathname != `/chats/${userId}`
+                ) {
+                    this.isUndreadChats = true;
+                    const chatIdsArray = this.unreadedChats.map((el) => el._id);
+                    if (!chatIdsArray.includes(chat._id)) {
+                        this.unreadedChats.push(chat);
+                    }
+                }
+            });
     }
 
     onError(event: Event) {
@@ -64,6 +68,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
     }
 
     ngOnDestroy(): void {
+        this.getUserSubscription?.unsubscribe();
         this.socketService.disconnectSocket();
     }
 }
