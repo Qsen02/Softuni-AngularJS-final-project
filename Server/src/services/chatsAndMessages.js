@@ -44,10 +44,11 @@ async function addMessageToChat(curUser, chat, message) {
         },
         { new: true }
     );
-    if (chat.receiver_id._id == curUser._id) {
+    console.log(chat);
+    if (chat.receiver_id._id.toString() == curUser._id.toString()) {
         if (
             chat.requester_id.unreadedChats
-                .map((el) => el._id.toString())
+                ?.map((el) => el?._id.toString())
                 .includes(chat._id.toString())
         ) {
             await Users.findByIdAndUpdate(chat.requester_id._id, {
@@ -66,7 +67,7 @@ async function addMessageToChat(curUser, chat, message) {
     } else {
         if (
             chat.receiver_id._id.unreadedChats
-                .map((el) => el._id.toString())
+                ?.map((el) => el?._id.toString())
                 .includes(chat._id.toString())
         ) {
             await Users.findByIdAndUpdate(chat.receiver_id._id, {
