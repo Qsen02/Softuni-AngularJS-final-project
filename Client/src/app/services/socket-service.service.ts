@@ -100,16 +100,16 @@ export class SocketServiceService {
         });
     }
 
-    unreadedMessages(chatId: string | undefined, userId: string,message:Message) {
-        this.socket?.emit('unreaded messages', chatId, userId,message);
+    unreadedMessages(chatId: string | undefined, userId: string) {
+        this.socket?.emit('unreaded messages', chatId, userId);
     }
 
     onUnreadMessages(
         event: string
-    ): Observable<{ chatId: string | undefined; userId: string,message:Message }> {
+    ): Observable<{ chatId: string | undefined; userId: string}> {
         return new Observable((observer) => {
-            this.socket?.on(event, (chatId, userId,message) => {
-                observer.next({ chatId, userId, message });
+            this.socket?.on(event, (chatId, userId) => {
+                observer.next({ chatId, userId });
             });
 
             return () => {

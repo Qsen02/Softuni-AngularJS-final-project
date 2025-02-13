@@ -3,7 +3,7 @@
         <article class="chat-item" (click)="onOpen(chat._id)">
             <img src={{chat.requester_id.profileImage}} alt={{chat.requester_id.username}} (error)="onProfileImageError($event)">
             <h3>{{chat.requester_id.username}}</h3>
-            @if(unreadedChatId==chat._id && isUnreadMessages){
+            @if(unreadedChatIds.includes(chat._id) && isUnreadedMessages){
                 <div class="balloon">
                     <p>{{unreadedMessages.length}}<p>
                 </div>
@@ -13,10 +13,8 @@
         <article class="chat-item" (click)="onOpen(chat._id)">
             <img src={{chat.receiver_id.profileImage}} alt={{chat.receiver_id.username}} (error)="onProfileImageError($event)">
             <h3>{{chat.receiver_id.username}}</h3>
-            @if(unreadedChatId==chat._id && isUnreadMessages){
-                <div class="balloon">
-                    <p>{{unreadedMessages.length}}<p>
-                </div>
+            @if(unreadedChatIds.includes(chat._id) && isUnreadedMessages){
+                <div class="balloon"></div>
             }
         </article>
     }

@@ -38,10 +38,11 @@ export class ChatsUserItemComponent implements OnInit, OnDestroy {
     @Output() isLoadingChange = new EventEmitter<boolean>();
     @Input() isError = false;
     @Output() isErrorChange = new EventEmitter<boolean>();
-    unreadedMessages: Message[] = [];
-
-    isUnreadMessages = false;
-    unreadedChatId: string | undefined = '';
+    @Input() unreadedMessages: Message[] = [];
+    @Output() unreadedMessagesChange = new EventEmitter<Message[]>();
+    @Input() isUnreadedMessages = false;
+    @Output() isUnreadedMessagesChange = new EventEmitter<boolean>();
+    unreadedChatIds: (string | undefined)[] = [];
     getChatSubscription: Subscription | null = null;
     getUserSubscription: Subscription | null = null;
 
@@ -52,34 +53,27 @@ export class ChatsUserItemComponent implements OnInit, OnDestroy {
     ) {}
 
     ngOnInit(): void {
-        this.getUserSubscription = this.userService
-            .getUserById(this.userId)
-            .subscribe((user) => {
-                this.unreadedMessages = user.unreadedMessages;
-                if (this.unreadedMessages.length > 0) {
-                    this.isUnreadMessages = true;
-                } else {
-                    this.isUnreadMessages = false;
+        const unreadedMessageIds=this.unreadedMessages.map(el=>el._id);
+        this.unreadedChatIds=this.chats.filter((el)=>{
+            const messages:Message[]=[];
+            el.messages.forEach((el)=>{
+                if(unreadedMessageIds.includes(el._id)){
+                    messages.push(el);
                 }
-            });
+            }) 
+            if(messages.length > 0){
+                return el;
+            }
+            return;
+        }).map(el=>el._id);
         this.socketService.connectSocket();
         this.socketService
             .onUnreadMessages('show messages')
-            .subscribe(({ chatId, userId, message }) => {
+            .subscribe(({ chatId, userId }) => {
                 if (this.userId == userId) {
-                    this.unreadedChatId = chatId;
-                    this.isUnreadMessages = true;
-                    this.chatsAndMessages
-                        .getChatById(this.unreadedChatId)
-                        .subscribe((chat) => {
-                            if (
-                                chat.messages
-                                    .map((el) => el._id)
-                                    .includes(message._id)
-                            ) {
-                                this.unreadedMessages.push(message);
-                            }
-                        });
+                    this.unreadedChatIds.push(chatId);
+                    this.isUnreadedMessages = true;
+                    this.isUnreadedMessagesChange.emit(this.isUnreadedMessages);
                 }
             });
     }
@@ -92,9 +86,11 @@ export class ChatsUserItemComponent implements OnInit, OnDestroy {
             .subscribe((user) => {
                 this.unreadedMessages = user.unreadedMessages;
                 if (this.unreadedMessages.length > 0) {
-                    this.isUnreadMessages = true;
+                    this.isUnreadedMessages = true;
+                    this.isUnreadedMessagesChange.emit(this.isUnreadedMessages);
                 } else {
-                    this.isUnreadMessages = false;
+                    this.isUnreadedMessages = false;
+                    this.isUnreadedMessagesChange.emit(this.isUnreadedMessages);
                 }
             });
         this.getChatSubscription = this.chatsAndMessages
@@ -122,7 +118,7 @@ export class ChatsUserItemComponent implements OnInit, OnDestroy {
                     this.isErrorChange.emit(this.isError);
                 },
             });
-        if (this.isUnreadMessages) {
+        if (this.isUnreadedMessages) {
             this.chatsAndMessages
                 .removeUnreadedChatsAndMessages(chatId)
                 .subscribe();

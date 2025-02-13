@@ -12,6 +12,7 @@ import { ChatsUserItemComponent } from './chats-user-item/chats-user-item.compon
 import { ChatsRequestsComponent } from './chats-requests/chats-requests.component';
 import { ChatsItemComponent } from './chats-item/chats-item.component';
 import { SocketServiceService } from '../services/socket-service.service';
+import { Message } from '../types/messages';
 
 @Component({
     selector: 'app-chats',
@@ -45,6 +46,8 @@ export class ChatsComponent implements OnInit, OnDestroy {
     isChatOpenParent = false;
     isLoadingChild = false;
     isErrorChild = false;
+    unreadedMessagesParent:Message[]=[];
+    isUnreadedMessagesParent=false;
 
     constructor(
         private userService: UserService,
@@ -80,6 +83,16 @@ export class ChatsComponent implements OnInit, OnDestroy {
                 this.isErrorParent = true;
             },
         });
+        this.userSubscription = this.userService
+            .getUserById(userId)
+            .subscribe((user) => {
+                this.unreadedMessagesParent = user.unreadedMessages;
+                if (this.unreadedMessagesParent.length > 0) {
+                    this.isUnreadedMessagesParent = true;
+                } else {
+                    this.isUnreadedMessagesParent = false;
+                }
+            });
     }
 
     onSearch() {

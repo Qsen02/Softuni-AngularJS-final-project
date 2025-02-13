@@ -44,7 +44,6 @@ async function addMessageToChat(curUser, chat, message) {
         },
         { new: true }
     );
-    console.log(chat);
     if (chat.receiver_id._id.toString() == curUser._id.toString()) {
         if (
             chat.requester_id.unreadedChats
