@@ -4,9 +4,7 @@
             <img src={{chat.requester_id.profileImage}} alt={{chat.requester_id.username}} (error)="onProfileImageError($event)">
             <h3>{{chat.requester_id.username}}</h3>
             @if(unreadedChatIds.includes(chat._id) && isUnreadedMessages){
-                <div class="balloon">
-                    <p>{{unreadedMessages.length}}<p>
-                </div>
+                <div class="balloon"></div>
             }
         </article>
     }@else{
