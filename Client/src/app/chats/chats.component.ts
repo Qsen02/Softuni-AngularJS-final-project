@@ -77,22 +77,18 @@ export class ChatsComponent implements OnInit, OnDestroy {
                 this.requests = user.requests;
                 this.userId = userId;
                 this.isLoadingParent = false;
-            },
-            error: () => {
-                this.isLoadingParent = false;
-                this.isErrorParent = true;
-            },
-        });
-        this.userSubscription = this.userService
-            .getUserById(userId)
-            .subscribe((user) => {
                 this.unreadedMessagesParent = user.unreadedMessages;
                 if (this.unreadedMessagesParent.length > 0) {
                     this.isUnreadedMessagesParent = true;
                 } else {
                     this.isUnreadedMessagesParent = false;
                 }
-            });
+            },
+            error: () => {
+                this.isLoadingParent = false;
+                this.isErrorParent = true;
+            },
+        });
     }
 
     onSearch() {
