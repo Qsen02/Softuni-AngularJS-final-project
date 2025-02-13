@@ -76,6 +76,9 @@ export class ChatsUserItemComponent implements OnInit, OnDestroy {
                     this.isUnreadedMessagesChange.emit(this.isUnreadedMessages);
                 }
             });
+        this.socketService.onReadMessages("messages readed").subscribe((chatId)=>{
+            this.unreadedChatIds=this.unreadedChatIds.filter((el)=>el==chatId);
+        })
     }
 
     onOpen(chatId: string) {
@@ -122,6 +125,7 @@ export class ChatsUserItemComponent implements OnInit, OnDestroy {
             this.chatsAndMessages
                 .removeUnreadedChatsAndMessages(chatId)
                 .subscribe();
+            this.socketService.readeMessages(chatId);
         }
     }
 
