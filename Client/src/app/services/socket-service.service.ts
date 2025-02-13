@@ -150,6 +150,22 @@ export class SocketServiceService {
         });
     }
 
+    readMessages(chatId: string){
+        this.socket?.emit("read messages",chatId);
+    }
+
+    onReadMessages(event: string): Observable<string>{
+        return new Observable((observer) => {
+            this.socket?.on(event, (chatId) => {
+                observer.next(chatId);
+            });
+
+            return () => {
+                this.socket?.off(event);
+            };
+        });
+    }
+
     disconnectSocket() {
         this.socket?.disconnect();
     }

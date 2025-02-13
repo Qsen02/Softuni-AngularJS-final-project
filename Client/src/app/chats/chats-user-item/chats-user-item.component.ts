@@ -125,7 +125,7 @@ export class ChatsUserItemComponent implements OnInit, OnDestroy {
             this.chatsAndMessages
                 .removeUnreadedChatsAndMessages(chatId)
                 .subscribe();
-            this.socketService.readeMessages(chatId);
+            this.socketService.readMessages(chatId);
         }
     }
 

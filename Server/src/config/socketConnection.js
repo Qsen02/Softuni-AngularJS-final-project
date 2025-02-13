@@ -33,6 +33,9 @@ function socketConnection(httpServer){
         socket.on("read chats",(chat)=>{
             io.emit("chats readed",chat);
         })
+        socket.on("read messages",(chatId)=>{
+            io.emit("messages readed",chatId);
+        })
     });
 }
 
