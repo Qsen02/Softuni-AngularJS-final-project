@@ -95,12 +95,14 @@ export class ChatsItemComponent implements OnDestroy, OnInit {
                 if (this.userId == this.chat?.receiver_id._id) {
                     this.socketService.unreadedMessages(
                         this.chat?._id,
-                        this.chat?.requester_id?._id
+                        this.chat?.requester_id?._id,
+                        message
                     );
                 } else if (this.userId == this.chat?.requester_id._id) {
                     this.socketService.unreadedMessages(
                         this.chat?._id,
-                        this.chat?.receiver_id._id
+                        this.chat?.receiver_id._id,
+                        message
                     );
                 }
             });

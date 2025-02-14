@@ -69,9 +69,11 @@ export class ChatsUserItemComponent implements OnInit, OnDestroy {
         this.socketService.connectSocket();
         this.socketService
             .onUnreadMessages('show messages')
-            .subscribe(({ chatId, userId }) => {
+            .subscribe(({ chatId, userId,message }) => {
                 if (this.userId == userId) {
                     this.unreadedChatIds.push(chatId);
+                    this.unreadedMessages.push(message);
+                    this.unreadedMessagesChange.emit(this.unreadedMessages);
                     this.isUnreadedMessages = true;
                     this.isUnreadedMessagesChange.emit(this.isUnreadedMessages);
                 }

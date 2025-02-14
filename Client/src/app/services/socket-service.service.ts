@@ -84,8 +84,8 @@ export class SocketServiceService {
         });
     }
 
-    unreadChats(userId: string,chat:Chat) {
-        this.socket?.emit('unreaded chats', userId,chat);
+    unreadChats(userId: string, chat: Chat) {
+        this.socket?.emit('unreaded chats', userId, chat);
     }
 
     onUnreadChats(event: string): Observable<{ userId: string; chat: Chat }> {
@@ -100,16 +100,24 @@ export class SocketServiceService {
         });
     }
 
-    unreadedMessages(chatId: string | undefined, userId: string) {
-        this.socket?.emit('unreaded messages', chatId, userId);
+    unreadedMessages(
+        chatId: string | undefined,
+        userId: string,
+        message: Message
+    ) {
+        this.socket?.emit('unreaded messages', chatId, userId, message);
     }
 
     onUnreadMessages(
         event: string
-    ): Observable<{ chatId: string | undefined; userId: string}> {
+    ): Observable<{
+        chatId: string | undefined;
+        userId: string;
+        message: Message;
+    }> {
         return new Observable((observer) => {
-            this.socket?.on(event, (chatId, userId) => {
-                observer.next({ chatId, userId });
+            this.socket?.on(event, (chatId, userId, message) => {
+                observer.next({ chatId, userId, message });
             });
 
             return () => {
@@ -134,8 +142,8 @@ export class SocketServiceService {
         });
     }
 
-    readChats(chat: Chat | null){
-        this.socket?.emit("read chats",chat);
+    readChats(chat: Chat | null) {
+        this.socket?.emit('read chats', chat);
     }
 
     onReadChats(event: string): Observable<Chat | null> {
@@ -150,11 +158,11 @@ export class SocketServiceService {
         });
     }
 
-    readMessages(chatId: string){
-        this.socket?.emit("read messages",chatId);
+    readMessages(chatId: string) {
+        this.socket?.emit('read messages', chatId);
     }
 
-    onReadMessages(event: string): Observable<string>{
+    onReadMessages(event: string): Observable<string> {
         return new Observable((observer) => {
             this.socket?.on(event, (chatId) => {
                 observer.next(chatId);
