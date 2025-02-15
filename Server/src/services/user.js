@@ -56,6 +56,7 @@ function getUserById(userId) {
             populate: [
                 { path: "requester_id", model: "Users" },
                 { path: "receiver_id", model: "Users" },
+                { path: "messages", model: "Messages" },
             ],
         })
         .populate({
@@ -64,7 +65,9 @@ function getUserById(userId) {
                 path: "sender_id",
                 model: "Users",
             },
-        }).populate("unreadedChats").populate("unreadedMessages");
+        })
+        .populate("unreadedChats")
+        .populate("unreadedMessages");
     return user;
 }
 

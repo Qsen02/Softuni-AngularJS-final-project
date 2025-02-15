@@ -53,23 +53,29 @@ export class ChatsUserItemComponent implements OnInit, OnDestroy {
     ) {}
 
     ngOnInit(): void {
-        const unreadedMessageIds=this.unreadedMessages.map(el=>el._id);
-        this.unreadedChatIds=this.chats.filter((el)=>{
-            const messages:Message[]=[];
-            el.messages.forEach((el)=>{
-                if(unreadedMessageIds.includes(el._id)){
-                    messages.push(el);
+        const unreadedMessageIds = this.unreadedMessages.map((el) => el._id);
+        this.unreadedChatIds = this.chats
+            .filter((el) => {
+                const messages: Message[] = [];
+                el.messages.forEach((msg)=>{
+                    if(unreadedMessageIds.includes(msg._id)){
+                        messages.push(msg);
+                    }
+                })
+                if (messages.length > 0) {
+                    return el._id;
                 }
-            }) 
-            if(messages.length > 0){
-                return el;
-            }
-            return;
-        }).map(el=>el._id);
+                return;
+            })
+            .map((el) => el._id);
+        if (this.unreadedMessages.length > 0) {
+            this.isUnreadedMessages = true;
+            this.isUnreadedMessagesChange.emit(this.isUnreadedMessages);
+        }
         this.socketService.connectSocket();
         this.socketService
             .onUnreadMessages('show messages')
-            .subscribe(({ chatId, userId,message }) => {
+            .subscribe(({ chatId, userId, message }) => {
                 if (this.userId == userId) {
                     this.unreadedChatIds.push(chatId);
                     this.unreadedMessages.push(message);
@@ -78,9 +84,13 @@ export class ChatsUserItemComponent implements OnInit, OnDestroy {
                     this.isUnreadedMessagesChange.emit(this.isUnreadedMessages);
                 }
             });
-        this.socketService.onReadMessages("messages readed").subscribe((chatId)=>{
-            this.unreadedChatIds=this.unreadedChatIds.filter((el)=>el!=chatId);
-        })
+        this.socketService
+            .onReadMessages('messages readed')
+            .subscribe((chatId) => {
+                this.unreadedChatIds = this.unreadedChatIds.filter(
+                    (el) => el != chatId
+                );
+            });
     }
 
     onOpen(chatId: string) {
@@ -126,7 +136,7 @@ export class ChatsUserItemComponent implements OnInit, OnDestroy {
         if (this.isUnreadedMessages) {
             this.chatsAndMessages
                 .removeUnreadedChatsAndMessages(chatId)
-                .subscribe(()=>{
+                .subscribe(() => {
                     this.socketService.readMessages(chatId);
                 });
         }
