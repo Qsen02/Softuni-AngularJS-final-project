@@ -99,12 +99,12 @@ async function editMessage(messageId, text) {
 
 async function deleteMessage(messageId, chat, user) {
     await Chats.findByIdAndUpdate(chat._id, { $pull: { messages: messageId } });
-    if (chat.receiver_id != user._id) {
-        await Users.findByIdAndUpdate(chat.receiver_id, {
+    if (chat.receiver_id._id != user._id) {
+        await Users.findByIdAndUpdate(chat.receiver_id._id, {
             $pull: { unreadedMessages: messageId, unreadedChats: chat._id },
         });
-    }else if(chat.requester_id != user._id){
-        await Users.findByIdAndUpdate(chat.requester_id, {
+    }else if(chat.requester_id._id != user._id){
+        await Users.findByIdAndUpdate(chat.requester_id._id, {
             $pull: { unreadedMessages: messageId, unreadedChats: chat._id },
         });
     }
