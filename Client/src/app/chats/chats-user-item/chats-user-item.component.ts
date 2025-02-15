@@ -66,8 +66,7 @@ export class ChatsUserItemComponent implements OnInit, OnDestroy {
                     return el._id;
                 }
                 return;
-            })
-            .map((el) => el._id);
+            }).map((el)=>el._id);
         if (this.unreadedMessages.length > 0) {
             this.isUnreadedMessages = true;
             this.isUnreadedMessagesChange.emit(this.isUnreadedMessages);

@@ -102,6 +102,7 @@ chatsAndMessagesRouter.delete(
     isUser(),
     async (req, res) => {
         const messageId = req.params.messageId;
+        const user=req.user;
         const isValidMessage = await checkMessageId(messageId);
         if (!isValidMessage) {
             return res.status(404).json({ message: "Resource not found!" });
@@ -111,7 +112,8 @@ chatsAndMessagesRouter.delete(
         if (!isValidChat) {
             return res.status(404).json({ message: "Resource not found!" });
         }
-        const deletedMessage = await deleteMessage(messageId, chatId);
+        const chat=await getChatById(chatId).lean();
+        const deletedMessage = await deleteMessage(messageId, chat,user);
         res.json(deletedMessage);
     }
 );
