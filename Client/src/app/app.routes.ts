@@ -27,7 +27,7 @@ import { ChatsMessageDeleteComponent } from './chats/chats-message-delete/chats-
 import { ChatsMessageEditComponent } from './chats/chats-message-edit/chats-message-edit.component';
 
 export const routes: Routes = [
-    { path: "", redirectTo: "/home", pathMatch: "full" },
+    { path: "", redirectTo: "home", pathMatch: "full" },
     {
         path: "home", children: [
             { path: "", component: MainComponent },
