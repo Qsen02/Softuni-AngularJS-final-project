@@ -12,6 +12,8 @@ Site for posting publications and interact with them and chat with other people 
 # Deployment link
 https://softuni-angularjs-final-project.onrender.com/
 
+WARNING: I use free instance of Render and server may take about 50 seconds to start. 
+
 # How to start client and server
 -Server: First in config/mongoose add localDB constant in mongoose.connect and next write the command `npm start` or `node server.js` in terminal.
 
