@@ -19,5 +19,4 @@ export interface AuthUser{
     username:string,
     email:string,
     profileImage:string,
-    accessToken:string
 }

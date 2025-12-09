@@ -106,7 +106,6 @@ export class UserService implements OnDestroy {
             username: username,
             email: email,
             profileImage: profileImage,
-            accessToken: this.user!.accessToken,
         });
     }
 

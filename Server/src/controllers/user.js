@@ -35,7 +35,6 @@ userRouter.post("/register",
                 username: user.username,
                 email: user.email,
                 profileImage: user.profileImage,
-                accessToken: token
             })
         } catch (err) {
             return res.status(400).json({ message: err.message });
@@ -54,13 +53,12 @@ userRouter.post("/login",
             }
             const user = await login(fields.username, fields.password);
             const token = setToken(user);
-            res.cookie("token", token, { httpOnly: true, secure: true, sameSite: "none" });
+            res.cookie("token", token, { httpOnly: true, secure: true, sameSite: "lax" });
             res.json({
                 _id: user._id,
                 username: user.username,
                 email: user.email,
                 profileImage: user.profileImage,
-                accessToken: token
             })
         } catch (err) {
             return res.status(400).json({ message: err.message });
