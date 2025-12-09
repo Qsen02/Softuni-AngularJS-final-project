@@ -29,7 +29,7 @@ userRouter.post("/register",
             }
             const user = await register(fields.username, fields.email, fields.password);
             const token = setToken(user);
-            res.cookie("token", token, { httpOnly: true, secure: true, sameSite: "lax" });
+            res.cookie("token", token, { httpOnly: true, secure: true, sameSite: "none" });
             res.json({
                 _id: user._id,
                 username: user.username,
@@ -53,7 +53,7 @@ userRouter.post("/login",
             }
             const user = await login(fields.username, fields.password);
             const token = setToken(user);
-            res.cookie("token", token, { httpOnly: true, secure: true, sameSite: "lax" });
+            res.cookie("token", token, { httpOnly: true, secure: true, sameSite: "none" });
             res.json({
                 _id: user._id,
                 username: user.username,
