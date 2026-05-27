@@ -13,7 +13,11 @@ function routerConfig(app) {
 
     app.use("/chats",chatsAndMessagesRouter);
 
-    app.use("/requests",requestRouter);
+    app.use("/requests", requestRouter);
+    
+    app.get("/health", (req, res) => {
+        res.status(200).send("OK");
+    });
 
     app.use("*", (req, res) => {
        return res.status(404).json({ message: "Resource not found!" });
